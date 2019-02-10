@@ -64,15 +64,15 @@ final class OutputProcess {
     }
 
     func trimoutput(trim: Trim) -> [String]? {
+        let whitespace: String = "\\ "
         var out = [String]()
         guard self.output != nil else { return nil }
         switch trim {
         case .one:
             for i in 0 ..< self.output!.count {
-                let str = self.output![i].trimmingCharacters(in: .whitespacesAndNewlines)
-                if str.isEmpty == false {
-                    out.append(str)
-                }
+                let substr = String(self.output![i].trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: " ", with: whitespace))
+                let split = substr.components(separatedBy: whitespace).dropFirst()
+                out.append("/" + split.joined(separator: " "))
             }
         case .two:
             for i in 0 ..< self.output!.count {
