@@ -170,12 +170,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
             let indexes = myTableViewFromNotification.selectedRowIndexes
             if let index = indexes.first {
                 guard self.restoretabledata != nil else { return }
-                let split = self.restoretabledata![index].components(separatedBy: " ")
-                if split.count > 1 {
-                    self.remoteCatalog.stringValue = split[1]
-                } else {
-                    self.remoteCatalog.stringValue = self.restoretabledata![index]
-                }
+                self.remoteCatalog.stringValue = self.restoretabledata![index]
                 guard self.remoteCatalog.stringValue.isEmpty == false && self.restorecatalog.stringValue.isEmpty == false else { return }
                 self.commandString.stringValue = self.copyFiles!.getCommandDisplayinView(remotefile: self.remoteCatalog.stringValue, localCatalog: self.restorecatalog.stringValue)
                 self.estimated = false
@@ -277,20 +272,8 @@ extension ViewControllerCopyFiles: NSTableViewDelegate {
             var text: String?
             var cellIdentifier: String?
             guard self.restoretabledata != nil else { return nil }
-            var split = self.restoretabledata![row].components(separatedBy: " ")
-            if tableColumn == tableView.tableColumns[0] {
-                let num = Double(split[0]) ?? 0
-                text = NumberFormatter.localizedString(from: NSNumber(value: num), number: NumberFormatter.Style.decimal)
-                cellIdentifier = "sizeID"
-            }
-            if tableColumn == tableView.tableColumns[1] {
-                if split.count > 1 {
-                    text = split[1]
-                } else {
-                    text = split[0]
-                }
-                cellIdentifier = "fileID"
-            }
+            cellIdentifier = "fileID"
+            text = self.restoretabledata![row]
             if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier!), owner: self) as? NSTableCellView {
                 cell.textField?.stringValue = text ?? ""
                 return cell
