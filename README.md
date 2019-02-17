@@ -4,9 +4,9 @@
 
 This repository is updated for **Xcode 10.2** and **Swift 5**. Both are still in beta and yet not released by Apple. The branch `v1.7.5-fixes` is for updating fixes to the released version of RcloneOSX if the upcoming versions of Xcode 10.2 and Swift 5 takes some time to release.
 
-The project is a adapting [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) utilizing [rclone](https://rclone.org/) for **synchronizing** and **backup** of catalogs and files to a number of cloud services. RcloneOSX utilizes `rclone copy`, `sync`, `move` and `check` commands.
+The project is a adapting [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) utilizing [rclone](https://rclone.org/) for synchronizing and backup of catalogs and files to a number of cloud services. RcloneOSX utilizes `rclone copy`, `sync`, `move` and `check` commands.
 
-RcloneOSX is compiled with support for macOS El Capitan version 10.11 - macOS Mojave version 10.14. The application is implemented in **Swift 5** by using Xcode 10. RcloneOSX require the `rclone` command line utility to be installed. If installed in other directory than `/usr/local/bin`, please change directory by user Configuration in RcloneOSX. RcloneOSX checks if there is a rclone installed in the provided directory.
+RcloneOSX require the `rclone` command line utility to be installed. If installed in other directory than `/usr/local/bin`, please change directory by user Configuration in RcloneOSX. RcloneOSX checks if there is a rclone installed in the provided directory.
 
 Rclone is *rsync for cloud storage*. Even if `rclone` and `rsync` are somewhat equal they are also in many ways different. RcloneOSX is built upon the ideas from RsyncOSX. But it is not easy to clone all functions in RsyncOSX to RcloneOSX. I spend most of my time developing RsyncOSX. From time to time some of the functions are ported to RcloneOSX from RsyncOSX.
 
@@ -14,11 +14,7 @@ I am not an advanced user of `rclone`. My main use of RcloneOSX is  synchronizin
 
 ## Fighting bugs
 
-Fighting bugs are difficult. I am not able to test RcloneOSX for all possible user interactions and use. From time to time I discover new bugs. But I also need support from other users discovering bugs or not expected results. If you discover a bug **please** use the [issues](https://github.com/rsyncOSX/rcloneosx/issues) and report it.  
-
-About signing and notarizing of RcloneOSX see below.
-
-To get an idea of how RcloneOSX is working please see the [intro](https://rsyncosx.github.io/Intro) to RsyncOSX. The operation and menus are mostly equal.
+Fighting bugs are difficult. I am not able to test RcloneOSX for all possible user interactions and use. From time to time I discover new bugs. But I also need support from other users discovering bugs or not expected results. If you discover a bug **please** use the [issues](https://github.com/rsyncOSX/rcloneosx/issues) and report it.
 
 The main view of RcloneOSX.
 ![](images/main1.png)
@@ -27,28 +23,17 @@ Estimation of task for sync completed.
 Sync of task in action.
 ![](images/main3.png)
 
+### Signing and notarizing
+
+The app is signed with my Apple ID developer certificate and [notarized](https://support.apple.com/en-us/HT202491) by Apple. See [signing and notarizing](https://rsyncosx.github.io/Notarized) for info.
+
 ### Application icon
 
 The application icon is created by [Zsolt Sándor](https://github.com/graphis). All rights reserved to Zsolt Sándor.
 
-### Signing and notarizing
-
-The app is signed with my Apple ID developer certificate and [notarized](https://support.apple.com/en-us/HT202491) by Apple. If you have Xcode developer tools installed executing the following command `xcrun stapler validate no.blogspot.rcloneosx rcloneosx.app` will verify the rcloneosx.app.
-```
-xcrun stapler validate no.blogspot.rcloneosx rcloneosx.app
-Processing: /Volumes/Home/thomas/GitHub/RcloneOSX/Build/Products/Release/rcloneosx.app
-The validate action worked!
-```
-This is the message when opening a downloaded version.
-
-![](images/verify.png)
-
-The message is in Norwegian: "Apple har sjekket programmet uten å finne ondsinnet programvare.". The english version of it is: "Apple checked it for malicious software and none was detected.".
-
-
 ### Changelog
 
-Please see [Changelog](https://rsyncosx.github.io/RcloneChangelog)
+The [Changelog](https://rsyncosx.github.io/RcloneChangelog).
 
 ### Compile
 
