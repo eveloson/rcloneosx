@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="abu-zT-Ht4">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="abu-zT-Ht4">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.64"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -301,10 +301,26 @@
                                         </connections>
                                     </button>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="DF30CEC8-5E83-4492-A2E2-AA1DB3FE546F" label="totinfo" paletteLabel="totinfo" toolTip="Execute estimate and quickbackup for all tasks..." image="sum" id="fPK-Uc-572" userLabel="tot">
+                                    <size key="minSize" width="40" height="25"/>
+                                    <size key="maxSize" width="40" height="25"/>
+                                    <button key="view" verticalHuggingPriority="750" id="XCj-hL-mew">
+                                        <rect key="frame" x="1" y="14" width="40" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="sum" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eJc-EZ-CPg">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <connections>
+                                        <segue destination="P3a-J2-odP" kind="show" id="gdh-sg-QH0"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="wiK-ZO-ZDm"/>
                                 <toolbarItem reference="UJ0-tu-K1h"/>
+                                <toolbarItem reference="fPK-Uc-572"/>
                                 <toolbarItem reference="zs6-ub-LOa"/>
                                 <toolbarItem reference="87D-tu-M32"/>
                                 <toolbarItem reference="bjt-yn-atF"/>
@@ -336,7 +352,6 @@
                         <tabViewItem id="O9R-ol-hl4"/>
                         <tabViewItem id="h4C-Bp-4jM"/>
                         <tabViewItem id="upL-Ge-xa0"/>
-                        <tabViewItem id="b4C-24-baw"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="oAg-LW-cIr">
                         <rect key="frame" x="0.0" y="-58" width="450" height="123"/>
@@ -352,7 +367,6 @@
                         <segue destination="3xI-3C-guU" kind="relationship" relationship="tabItems" id="178-o0-nkH"/>
                         <segue destination="lhw-tZ-aSZ" kind="relationship" relationship="tabItems" id="ZCO-uf-G6x"/>
                         <segue destination="Vnt-Io-Ekd" kind="relationship" relationship="tabItems" id="pUe-lb-E2a"/>
-                        <segue destination="P3a-J2-odP" kind="relationship" relationship="tabItems" id="5ok-gU-IHl"/>
                     </connections>
                 </tabViewController>
                 <customObject id="am9-td-Qjg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -3473,11 +3487,11 @@ DQ
             <objects>
                 <viewController title="All profiles" storyboardIdentifier="ViewControllerAllProfilesID" id="P3a-J2-odP" customClass="ViewControllerAllProfiles" customModule="rcloneosx" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="BB9-Q4-0d4">
-                        <rect key="frame" x="0.0" y="0.0" width="1092" height="407"/>
+                        <rect key="frame" x="0.0" y="0.0" width="968" height="407"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView fixedFrame="YES" borderType="groove" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="NBb-1Z-76o">
-                                <rect key="frame" x="144" y="20" width="928" height="330"/>
+                                <rect key="frame" x="20" y="20" width="928" height="330"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" ambiguous="YES" id="Gkk-sZ-tbZ">
                                     <rect key="frame" x="2" y="2" width="924" height="326"/>
@@ -3612,7 +3626,7 @@ DQ
                                 </tableHeaderView>
                             </scrollView>
                             <searchField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NYx-2E-qno">
-                                <rect key="frame" x="144" y="356" width="385" height="22"/>
+                                <rect key="frame" x="20" y="356" width="385" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="FNq-no-erZ">
                                     <font key="font" metaFont="system"/>
@@ -3621,7 +3635,7 @@ DQ
                                 </searchFieldCell>
                             </searchField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CGc-Ip-dwP">
-                                <rect key="frame" x="818" y="354" width="23" height="22"/>
+                                <rect key="frame" x="694" y="354" width="23" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="up" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="0bV-uT-FJx">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -3632,7 +3646,7 @@ DQ
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8RL-7o-HTm">
-                                <rect key="frame" x="142" y="374" width="184" height="17"/>
+                                <rect key="frame" x="18" y="374" width="184" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Number of profiles:" id="8az-aM-vjG">
                                     <font key="font" metaFont="smallSystem"/>
@@ -3641,7 +3655,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZtZ-Fg-fN1">
-                                <rect key="frame" x="847" y="348" width="227" height="17"/>
+                                <rect key="frame" x="723" y="348" width="227" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Select column to sort and filter search..." id="DIi-IY-xRn">
                                     <font key="font" metaFont="smallSystem"/>
@@ -3650,7 +3664,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WvB-Xo-QoB">
-                                <rect key="frame" x="847" y="363" width="227" height="17"/>
+                                <rect key="frame" x="723" y="363" width="227" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Click on arrow to change direction..." id="by7-1E-0Lq">
                                     <font key="font" metaFont="smallSystem"/>
@@ -3669,7 +3683,7 @@ DQ
                 </viewController>
                 <customObject id="JXa-Qa-bGo" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="622" y="185"/>
+            <point key="canvasLocation" x="560" y="184.5"/>
         </scene>
         <!--Logs-->
         <scene sceneID="LvT-7J-u8e">
@@ -4497,11 +4511,12 @@ DQ
     <resources>
         <image name="abort" width="48" height="48"/>
         <image name="backupnow" width="64" height="64"/>
-        <image name="batch" width="48" height="48"/>
+        <image name="batch" width="64" height="64"/>
         <image name="complete" width="48" height="48"/>
         <image name="config" width="64" height="64"/>
-        <image name="quickbackup" width="48" height="48"/>
+        <image name="quickbackup" width="64" height="64"/>
         <image name="report" width="64" height="64"/>
+        <image name="sum" width="48" height="48"/>
         <image name="up" width="256" height="256"/>
     </resources>
 </document>
