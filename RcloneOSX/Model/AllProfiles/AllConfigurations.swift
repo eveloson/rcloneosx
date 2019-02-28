@@ -24,9 +24,9 @@ class AllConfigurations: Sorting {
                 self.allconfigurations = []
             }
             if profile == "Default profile" {
-                configurations = PersistentStorageAPI(profile: nil, forceread: true).getConfigurations()
+                configurations = PersistentStorageAllprofilesAPI(profile: nil).getConfigurations()
             } else {
-                configurations = PersistentStorageAPI(profile: profile, forceread: true).getConfigurations()
+                configurations = PersistentStorageAllprofilesAPI(profile: profile).getConfigurations()
             }
             guard configurations != nil else { return }
             for j in 0 ..< configurations!.count {
@@ -38,7 +38,9 @@ class AllConfigurations: Sorting {
 
     private func setConfigurationsDataSourcecountBackupSnapshot() {
         guard self.allconfigurations != nil else { return }
-        var configurations: [Configuration] = self.allconfigurations!.filter({return ($0.task == ViewControllerReference.shared.sync || $0.task == ViewControllerReference.shared.copy || $0.task == ViewControllerReference.shared.move)})
+        var configurations: [Configuration] = self.allconfigurations!.filter({return ($0.task == ViewControllerReference.shared.sync ||
+            $0.task == ViewControllerReference.shared.copy ||
+            $0.task == ViewControllerReference.shared.move)})
         var data = [NSMutableDictionary]()
         for i in 0 ..< configurations.count {
             if configurations[i].offsiteServer.isEmpty == true {
