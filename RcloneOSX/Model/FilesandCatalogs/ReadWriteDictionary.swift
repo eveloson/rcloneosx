@@ -20,7 +20,7 @@ enum WhatToReadWrite {
     case none
 }
 
-class Readwritefiles {
+class ReadWriteDictionary {
 
     // Name set for schedule, configuration or config
     private var name: String?
@@ -31,7 +31,7 @@ class Readwritefiles {
     // If to use profile, only configurations and schedules to read from profile
     private var useProfile: Bool = false
     // task to do
-    private var task: WhatToReadWrite?
+    private var whattoreadwrite: WhatToReadWrite?
     // Path for configuration files
     private var filepath: String?
     // Set which file to read
@@ -69,7 +69,7 @@ class Readwritefiles {
     }
 
     // Function for reading data from persistent store
-    func getDatafromfile () -> [NSDictionary]? {
+    func readNSDictionaryFromPersistentStore() -> [NSDictionary]? {
         var data = [NSDictionary]()
         guard self.filename != nil && self.key != nil else { return nil }
         let dictionary = NSDictionary(contentsOfFile: self.filename!)
@@ -86,17 +86,16 @@ class Readwritefiles {
     }
 
     // Function for write data to persistent store
-    func writeDatatoPersistentStorage (_ array: [NSDictionary], task: WhatToReadWrite) -> Bool {
-        self.setpreferences(task)
+    func writeNSDictionaryToPersistentStorage(_ array: [NSDictionary]) -> Bool {
         let dictionary = NSDictionary(object: array, forKey: self.key! as NSCopying)
         guard self.filename != nil else { return false }
         return  dictionary.write(toFile: self.filename!, atomically: true)
     }
 
     // Set preferences for which data to read or write
-    private func setpreferences (_ task: WhatToReadWrite) {
-        self.task = task
-        switch self.task! {
+    private func setpreferences (_ whattoreadwrite: WhatToReadWrite) {
+        self.whattoreadwrite = whattoreadwrite
+        switch self.whattoreadwrite! {
         case .schedule:
             self.name = "/scheduleRsync.plist"
             self.key = "Schedule"
@@ -111,13 +110,13 @@ class Readwritefiles {
         }
     }
 
-    init(task: WhatToReadWrite, profile: String?, configpath: String) {
+    init(whattoreadwrite: WhatToReadWrite, profile: String?, configpath: String) {
         self.configpath = configpath
         if profile != nil {
             self.profile = profile
             self.useProfile = true
         }
-        self.setpreferences(task)
+        self.setpreferences(whattoreadwrite)
         self.setnameandpath()
     }
 

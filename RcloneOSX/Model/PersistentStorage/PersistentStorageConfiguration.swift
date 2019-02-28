@@ -5,13 +5,14 @@
 //  Created by Thomas Evensen on 09/12/15.
 //  Copyright © 2015 Thomas Evensen. All rights reserved.
 //
+// swiftlint:disable line_length
 
 import Foundation
 
-final class PersistentStorageConfiguration: Readwritefiles, SetConfigurations {
+final class PersistentStorageConfiguration: ReadWriteDictionary, SetConfigurations {
 
     /// Variable holds all configuration data from persisten storage
-    private var configurationsasdictionary: [NSDictionary]?
+    var configurationsasdictionary: [NSDictionary]?
 
     /// Variable computes max hiddenID used
     /// MaxhiddenID is used when new configurations are added.
@@ -31,12 +32,6 @@ final class PersistentStorageConfiguration: Readwritefiles, SetConfigurations {
         } else {
             return 0
         }
-    }
-
-    /// Function reads configurations from permanent store
-    /// - returns : array of NSDictonarys, return might be nil if configuration is already in memory
-    func readConfigurationsFromPermanentStore() -> [NSDictionary]? {
-        return self.configurationsasdictionary
     }
 
     // Saving Configuration from MEMORY to persistent store
@@ -133,20 +128,20 @@ final class PersistentStorageConfiguration: Readwritefiles, SetConfigurations {
     // Writing configuration to persistent store
     // Configuration is [NSDictionary]
     private func writeToStore (_ array: [NSDictionary]) {
-        if self.writeDatatoPersistentStorage(array, task: .configuration) {
+        if self.writeNSDictionaryToPersistentStorage(array) {
             self.configurationsDelegate?.reloadconfigurationsobject()
         }
     }
 
     init (profile: String?) {
-        super.init(task: .configuration, profile: profile, configpath: ViewControllerReference.shared.configpath)
+        super.init(whattoreadwrite: .configuration, profile: profile, configpath: ViewControllerReference.shared.configpath)
         if self.configurations == nil {
-            self.configurationsasdictionary = self.getDatafromfile()
+            self.configurationsasdictionary = self.readNSDictionaryFromPersistentStore()
         }
     }
 
-    init(profile: String?, forceread: Bool) {
-        super.init(task: .configuration, profile: profile, configpath: ViewControllerReference.shared.configpath)
-        self.configurationsasdictionary = self.getDatafromfile()
+    init (profile: String?, allprofiles: Bool) {
+        super.init(whattoreadwrite: .configuration, profile: profile, configpath: ViewControllerReference.shared.configpath)
+        self.configurationsasdictionary = self.readNSDictionaryFromPersistentStore()
     }
 }
