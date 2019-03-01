@@ -9,7 +9,7 @@
 
 import Foundation
 
-enum WhatRoot {
+enum WhichRoot {
     case profileRoot
     case sshRoot
 }
@@ -27,12 +27,12 @@ protocol Fileerror: class {
     func errormessage(errorstr: String, errortype: Fileerrortype)
 }
 
-protocol Reportfileerror {
+protocol ReportFileerror {
     var errorDelegate: Fileerror? { get }
 }
 
-extension Reportfileerror {
-    weak var errorDelegate: Fileerror? {
+extension ReportFileerror {
+    var errorDelegate: Fileerror? {
         return ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
     }
 
@@ -41,11 +41,11 @@ extension Reportfileerror {
     }
 }
 
-protocol Fileerrormessage {
+protocol FileerrorMessage {
     func errordescription(errortype: Fileerrortype) -> String
 }
 
-extension Fileerrormessage {
+extension FileerrorMessage {
     func errordescription(errortype: Fileerrortype) -> String {
         switch errortype {
         case .openlogfile:
@@ -65,9 +65,9 @@ extension Fileerrormessage {
     }
 }
 
-class Files: Reportfileerror {
+class Files: ReportFileerror {
 
-    var whatroot: WhatRoot?
+    var whatroot: WhichRoot?
     var rootpath: String?
     // config path either
     // ViewControllerReference.shared.configpath or RcloneReference.shared.configpath
@@ -134,7 +134,7 @@ class Files: Reportfileerror {
         }
     }
 
-    init (whatroot: WhatRoot, configpath: String) {
+    init (whatroot: WhichRoot, configpath: String) {
         self.configpath = configpath
         self.whatroot = whatroot
         self.setrootpath()

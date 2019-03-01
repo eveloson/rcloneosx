@@ -47,7 +47,7 @@ protocol AllProfileDetails: class {
     func disablereloadallprofiles()
 }
 
-class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fileerrormessage, Remoterclonesize {
+class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, FileerrorMessage, Remoterclonesize {
 
     // Configurations object
     var configurations: Configurations?
