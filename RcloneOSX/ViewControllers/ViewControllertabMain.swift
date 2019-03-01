@@ -42,6 +42,11 @@ protocol SetProfileinfo: class {
     func setprofile(profile: String, color: NSColor)
 }
 
+protocol AllProfileDetails: class {
+    func enablereloadallprofiles()
+    func disablereloadallprofiles()
+}
+
 class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fileerrormessage, Remoterclonesize {
 
     // Configurations object
@@ -98,6 +103,10 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     weak var estimateupdateDelegate: Updateestimating?
     // used in updating tableview
     var setbatchyesno: Bool = false
+    // Allprofiles view presented
+    var allprofilesview: Bool = false
+    // Delegate for refresh allprofiles if changes in profiles
+    weak var allprofiledetailsDelegate: ReloadTableAllProfiles?
 
     @IBOutlet weak var info: NSTextField!
 
@@ -476,5 +485,8 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         globalMainQueue.async(execute: { () -> Void in
             self.mainTableView.reloadData()
         })
+        if self.allprofilesview {
+            self.allprofiledetailsDelegate?.reloadtable()
+        }
     }
 }

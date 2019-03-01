@@ -10,6 +10,10 @@
 import Foundation
 import Cocoa
 
+protocol ReloadTableAllProfiles: class {
+    func reloadtable()
+}
+
 class ViewControllerAllProfiles: NSViewController, Delay {
 
     // Main tableview
@@ -22,6 +26,8 @@ class ViewControllerAllProfiles: NSViewController, Delay {
     private var column: Int?
     private var filterby: Sortandfilter?
     private var sortedascendigdesending: Bool = true
+
+    weak var allprofiledetailsdelegata: AllProfileDetails?
 
     @IBAction func sortdirection(_ sender: NSButton) {
         if self.sortedascendigdesending == true {
@@ -45,6 +51,18 @@ class ViewControllerAllProfiles: NSViewController, Delay {
 
     override func viewDidAppear() {
         super.viewDidAppear()
+        self.reloadallprofiles()
+        ViewControllerReference.shared.setvcref(viewcontroller: .vcallprofiles, nsviewcontroller: self)
+        self.allprofiledetailsdelegata = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        self.allprofiledetailsdelegata?.enablereloadallprofiles()
+    }
+
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        self.allprofiledetailsdelegata?.disablereloadallprofiles()
+    }
+
+    private func reloadallprofiles() {
         self.allprofiles = AllConfigurations()
         self.sortedascendigdesending = true
         globalMainQueue.async(execute: { () -> Void in
@@ -136,5 +154,11 @@ extension ViewControllerAllProfiles: NSSearchFieldDelegate {
             self.allprofiles = AllConfigurations()
             self.mainTableView.reloadData()
         })
+    }
+}
+
+extension ViewControllerAllProfiles: ReloadTableAllProfiles {
+    func reloadtable() {
+        self.reloadallprofiles()
     }
 }
