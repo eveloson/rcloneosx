@@ -22,4 +22,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             _ = Userconfiguration(userconfigrcloneOSX: userConfiguration)
         }
     }
+
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return true
+    }
+
 }
