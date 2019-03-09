@@ -107,6 +107,8 @@ class ViewControllerReference {
     private var viewControllerRestore: NSViewController?
     // Alloutput
     private var viewControllerAlloutput: NSViewController?
+    // Which tab is active
+    var activetab: ViewController?
     // Initial start
     var initialstart: Int = 0
 
