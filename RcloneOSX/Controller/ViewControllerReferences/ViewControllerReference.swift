@@ -107,6 +107,8 @@ class ViewControllerReference {
     private var viewControllerRestore: NSViewController?
     // Alloutput
     private var viewControllerAlloutput: NSViewController?
+    // Initial start
+    var initialstart: Int = 0
 
     func getvcref(viewcontroller: ViewController) -> NSViewController? {
         switch viewcontroller {
