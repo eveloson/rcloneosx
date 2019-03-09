@@ -123,7 +123,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
                 self.info(num: 7)
                 return
         }
-        self.processtermination = .restore
+        self.configurations!.processtermination = .restore
         self.presentAsSheet(self.restoreViewController!)
     }
 
@@ -133,7 +133,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             return
         }
         if self.index != nil {
-            self.processtermination = .rclonesize
+            self.configurations!.processtermination = .rclonesize
             self.outputprocess = OutputProcess()
             self.working.startAnimation(nil)
             self.estimating.isHidden = false
@@ -148,7 +148,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             self.verifyrclonepath!.norclone()
             return
         }
-        self.processtermination = .remoteinfotask
+        self.configurations!.processtermination = .remoteinfotask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         })
@@ -159,7 +159,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             self.verifyrclonepath!.norclone()
             return
         }
-        self.processtermination = .quicktask
+        self.configurations!.processtermination = .quicktask
         self.configurations!.allowNotifyinMain = false
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
@@ -269,7 +269,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     }
 
     func automaticbackup() {
-        self.processtermination = .automaticbackup
+        self.configurations!.processtermination = .automaticbackup
         self.configurations?.remoteinfotaskworkqueue = RemoteInfoTaskWorkQueue(inbatch: false)
         self.presentAsSheet(self.viewControllerEstimating!)
         self.estimateupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcestimatingtasks) as? ViewControllerEstimatingTasks
@@ -288,7 +288,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         self.configurations!.getConfigurations()[self.index!].task != ViewControllerReference.shared.check else {
             return
         }
-        self.processtermination = .singlequicktask
+        self.configurations!.processtermination = .singlequicktask
         self.working.startAnimation(nil)
         let arguments = self.configurations!.arguments4rclone(index: self.index!, argtype: .arg)
         self.outputprocess = OutputProcess()
@@ -342,6 +342,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             self.view.window?.center()
             ViewControllerReference.shared.initialstart = 1
         }
+         ViewControllerReference.shared.activetab = .vctabmain
         self.configurations!.allowNotifyinMain = true
         if self.configurations!.configurationsDataSourcecount() > 0 {
             globalMainQueue.async(execute: { () -> Void in
@@ -371,7 +372,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
 
     // Single task can be activated by double click from table
     func executeSingleTask() {
-        self.processtermination = .singletask
+        self.configurations!.processtermination = .singletask
         guard ViewControllerReference.shared.norclone == false else {
             self.verifyrclonepath!.norclone()
             return
@@ -391,7 +392,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     }
 
     @IBAction func executeBatch(_ sender: NSToolbarItem) {
-        self.processtermination = .estimatebatchtask
+        self.configurations!.processtermination = .estimatebatchtask
         guard ViewControllerReference.shared.norclone == false else {
             self.verifyrclonepath!.norclone()
             return

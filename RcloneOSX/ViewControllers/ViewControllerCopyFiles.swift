@@ -10,7 +10,7 @@
 import Foundation
 import Cocoa
 
-class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCopyFiles, VcSchedule {
+class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCopyFiles, VcSchedule, VcExecute {
 
     var copyFiles: CopyFiles?
     var rcloneindex: Int?
@@ -33,6 +33,33 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
     @IBOutlet weak var workingRclone: NSProgressIndicator!
     @IBOutlet weak var search: NSSearchField!
     @IBOutlet weak var restorebutton: NSButton!
+
+    var verifyrclonepath: Verifyrclonepath?
+
+    @IBAction func totinfo(_ sender: NSButton) {
+        guard ViewControllerReference.shared.norclone == false else {
+            self.verifyrclonepath!.norclone()
+            return
+        }
+        self.configurations!.processtermination = .remoteinfotask
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerRemoteInfo!)
+        })
+    }
+
+    @IBAction func quickbackup(_ sender: NSButton) {
+        guard ViewControllerReference.shared.norclone == false else {
+            self.verifyrclonepath!.norclone()
+            return
+        }
+        self.openquickbackup()
+    }
+
+    @IBAction func automaticbackup(_ sender: NSButton) {
+        self.configurations!.processtermination = .automaticbackup
+        self.configurations?.remoteinfotaskworkqueue = RemoteInfoTaskWorkQueue(inbatch: false)
+        self.presentAsSheet(self.viewControllerEstimating!)
+    }
 
     // Userconfiguration button
     @IBAction func userconfiguration(_ sender: NSButton) {
@@ -111,6 +138,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
 
     override func viewDidAppear() {
         super.viewDidAppear()
+        ViewControllerReference.shared.activetab = .vccopyfiles
         guard self.diddissappear == false else {
             globalMainQueue.async(execute: { () -> Void in
                 self.rclonetableView.reloadData()
@@ -344,5 +372,15 @@ extension ViewControllerCopyFiles: NewProfile {
 
     func enableProfileMenu() {
         //
+    }
+}
+
+extension ViewControllerCopyFiles: OpenQuickBackup {
+    func openquickbackup() {
+        self.configurations!.processtermination = .quicktask
+        self.configurations!.allowNotifyinMain = false
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerQuickBackup!)
+        })
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import Cocoa
 
-class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSchedule, Delay {
+class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSchedule, Delay, VcExecute {
 
     var storageapi: PersistentStorageAPI?
     var newconfigurations: NewConfigurations?
@@ -32,6 +32,33 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
     @IBOutlet weak var profilInfo: NSTextField!
     @IBOutlet weak var newTableView: NSTableView!
     @IBOutlet weak var cloudService: NSComboBox!
+
+    var verifyrclonepath: Verifyrclonepath?
+
+    @IBAction func totinfo(_ sender: NSButton) {
+        guard ViewControllerReference.shared.norclone == false else {
+            self.verifyrclonepath!.norclone()
+            return
+        }
+        self.configurations!.processtermination = .remoteinfotask
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerRemoteInfo!)
+        })
+    }
+
+    @IBAction func quickbackup(_ sender: NSButton) {
+        guard ViewControllerReference.shared.norclone == false else {
+            self.verifyrclonepath!.norclone()
+            return
+        }
+        self.openquickbackup()
+    }
+
+    @IBAction func automaticbackup(_ sender: NSButton) {
+        self.configurations!.processtermination = .automaticbackup
+        self.configurations?.remoteinfotaskworkqueue = RemoteInfoTaskWorkQueue(inbatch: false)
+        self.presentAsSheet(self.viewControllerEstimating!)
+    }
 
     @IBAction func cleartable(_ sender: NSButton) {
         self.newconfigurations = nil
@@ -78,6 +105,7 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
 
     override func viewDidAppear() {
         super.viewDidAppear()
+        ViewControllerReference.shared.activetab = .vcnewconfigurations
         guard self.diddissappear == false else { return }
         self.loadCloudServices()
         if let profile = self.configurations!.getProfile() {
@@ -181,6 +209,16 @@ extension ViewControllerNewConfigurations: SetProfileinfo {
         globalMainQueue.async(execute: { () -> Void in
             self.profilInfo.stringValue = profile
             self.profilInfo.textColor = color
+        })
+    }
+}
+
+extension ViewControllerNewConfigurations: OpenQuickBackup {
+    func openquickbackup() {
+        self.configurations!.processtermination = .quicktask
+        self.configurations!.allowNotifyinMain = false
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerQuickBackup!)
         })
     }
 }
