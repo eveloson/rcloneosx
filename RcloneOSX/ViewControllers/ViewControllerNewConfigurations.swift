@@ -24,7 +24,6 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
     var diddissappear: Bool = false
 
     @IBOutlet weak var viewParameter4: NSTextField!
-    @IBOutlet weak var viewParameter5: NSTextField!
     @IBOutlet weak var localCatalog: NSTextField!
     @IBOutlet weak var offsiteCatalog: NSTextField!
     @IBOutlet weak var backupID: NSTextField!
@@ -124,9 +123,7 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
     }
 
     private func loadCloudServices() {
-        guard ViewControllerReference.shared.norclone == false else {
-            return
-        }
+        guard ViewControllerReference.shared.norclone == false else { return }
         self.outputprocess = nil
         self.outputprocess = OutputProcess()
         _ = GetCloudServices(outputprocess: self.outputprocess)
