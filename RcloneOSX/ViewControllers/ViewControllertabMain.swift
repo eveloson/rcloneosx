@@ -100,8 +100,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     // Which kind of task
     var processtermination: ProcessTermination?
     // Update view estimating
-    weak var estimateupdateDelegate: Updateestimating?
-    // used in updating tableview
     var setbatchyesno: Bool = false
     // Allprofiles view presented
     var allprofilesview: Bool = false
@@ -272,7 +270,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         self.configurations!.processtermination = .automaticbackup
         self.configurations?.remoteinfotaskworkqueue = RemoteInfoTaskWorkQueue(inbatch: false)
         self.presentAsSheet(self.viewControllerEstimating!)
-        self.estimateupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcestimatingtasks) as? ViewControllerEstimatingTasks
     }
 
     @IBAction func executetasknow(_ sender: NSButton) {

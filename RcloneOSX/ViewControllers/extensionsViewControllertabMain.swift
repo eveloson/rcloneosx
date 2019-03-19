@@ -189,12 +189,14 @@ extension ViewControllertabMain: UpdateProgress {
             self.configurations!.remoteinfotaskworkqueue?.processTermination()
         case .automaticbackup:
             guard self.configurations!.remoteinfotaskworkqueue != nil else { return }
+            weak var estimateupdateDelegate: Updateestimating?
+            estimateupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcestimatingtasks) as? ViewControllerEstimatingTasks
             // compute alle estimates
             if self.configurations!.remoteinfotaskworkqueue!.stackoftasktobeestimated != nil {
                 self.configurations!.remoteinfotaskworkqueue?.processTermination()
-                self.estimateupdateDelegate?.updateProgressbar()
+                estimateupdateDelegate?.updateProgressbar()
             } else {
-                self.estimateupdateDelegate?.dismissview()
+                estimateupdateDelegate?.dismissview()
                 self.configurations!.remoteinfotaskworkqueue?.processTermination()
                 self.configurations!.remoteinfotaskworkqueue?.selectalltaskswithnumbers(deselect: false)
                 self.configurations!.remoteinfotaskworkqueue?.setbackuplist()
@@ -223,10 +225,12 @@ extension ViewControllertabMain: UpdateProgress {
             processterminationDelegate?.processTermination()
         case .estimatebatchtask:
             guard self.configurations!.remoteinfotaskworkqueue != nil else { return }
+            weak var estimateupdateDelegate: Updateestimating?
+            estimateupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcestimatingtasks) as? ViewControllerEstimatingTasks
             // compute alle estimates
             if self.configurations!.remoteinfotaskworkqueue!.stackoftasktobeestimated != nil {
                 self.configurations!.remoteinfotaskworkqueue?.processTermination()
-                self.estimateupdateDelegate?.updateProgressbar()
+                estimateupdateDelegate?.updateProgressbar()
             } else {
                 self.configurations!.remoteinfotaskworkqueue?.processTermination()
                 self.configurations!.processtermination = .batchtask
@@ -353,7 +357,9 @@ extension ViewControllertabMain: Abort {
             self.seterrorinfo(info: "Abort")
             self.rcloneCommand.stringValue = ""
             if self.configurations!.remoteinfotaskworkqueue != nil && self.configurations?.estimatedlist != nil {
-                self.estimateupdateDelegate?.dismissview()
+                weak var localestimateupdateDelegate: Updateestimating?
+                localestimateupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcestimatingtasks) as? ViewControllerEstimatingTasks
+                localestimateupdateDelegate?.dismissview()
                 self.configurations!.remoteinfotaskworkqueue = nil
             }
         } else {
