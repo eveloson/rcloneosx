@@ -97,8 +97,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     // Bool if one or more remote server is offline
     // Ready for execute again
     var readyforexecution: Bool = true
-    // Which kind of task
-    var processtermination: ProcessTermination?
     // Update view estimating
     var setbatchyesno: Bool = false
     // Allprofiles view presented
