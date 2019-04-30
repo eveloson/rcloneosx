@@ -99,6 +99,9 @@
 		E960CB4C1FB091DE0008D12E /* ViewControllertabMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAFE1FB091DD0008D12E /* ViewControllertabMain.swift */; };
 		E960CB4E1FB091DE0008D12E /* NewConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CB001FB091DE0008D12E /* NewConfigurations.swift */; };
 		E960CB501FB091DE0008D12E /* SingleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CB021FB091DE0008D12E /* SingleTask.swift */; };
+		E97CDF2722780C9F007E9F4B /* ConvertConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CDF2422780C9F007E9F4B /* ConvertConfigurations.swift */; };
+		E97CDF2822780C9F007E9F4B /* ConvertSchedules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CDF2522780C9F007E9F4B /* ConvertSchedules.swift */; };
+		E97CDF2922780C9F007E9F4B /* ConvertUserconfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CDF2622780C9F007E9F4B /* ConvertUserconfiguration.swift */; };
 		E99AA3831FAFA28900C1E86A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99AA3821FAFA28900C1E86A /* AppDelegate.swift */; };
 		E99AA3871FAFA28900C1E86A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E99AA3861FAFA28900C1E86A /* Assets.xcassets */; };
 		E99AA38A1FAFA28900C1E86A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E99AA3881FAFA28900C1E86A /* Main.storyboard */; };
@@ -197,6 +200,9 @@
 		E960CAFE1FB091DD0008D12E /* ViewControllertabMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllertabMain.swift; sourceTree = "<group>"; };
 		E960CB001FB091DE0008D12E /* NewConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewConfigurations.swift; sourceTree = "<group>"; };
 		E960CB021FB091DE0008D12E /* SingleTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTask.swift; sourceTree = "<group>"; };
+		E97CDF2422780C9F007E9F4B /* ConvertConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertConfigurations.swift; sourceTree = "<group>"; };
+		E97CDF2522780C9F007E9F4B /* ConvertSchedules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertSchedules.swift; sourceTree = "<group>"; };
+		E97CDF2622780C9F007E9F4B /* ConvertUserconfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertUserconfiguration.swift; sourceTree = "<group>"; };
 		E99AA37F1FAFA28900C1E86A /* rcloneosx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rcloneosx.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E99AA3821FAFA28900C1E86A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E99AA3861FAFA28900C1E86A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -323,6 +329,7 @@
 		E9482D271FB0B1A000AFBB0D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E97CDF2322780BEC007E9F4B /* Conversions */,
 				E9B528C51FB2CE740075CF4D /* ViewControllerReferences */,
 				E9482D2A1FB0B1E100AFBB0D /* Configurations */,
 				E9482D291FB0B1D000AFBB0D /* Schedules */,
@@ -437,6 +444,16 @@
 				E9482D261FB0B10800AFBB0D /* FilesandCatalogs */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E97CDF2322780BEC007E9F4B /* Conversions */ = {
+			isa = PBXGroup;
+			children = (
+				E97CDF2422780C9F007E9F4B /* ConvertConfigurations.swift */,
+				E97CDF2522780C9F007E9F4B /* ConvertSchedules.swift */,
+				E97CDF2622780C9F007E9F4B /* ConvertUserconfiguration.swift */,
+			);
+			path = Conversions;
 			sourceTree = "<group>";
 		};
 		E99AA3761FAFA28900C1E86A = {
@@ -684,6 +701,7 @@
 				E92B18BB2096F83F001DBFAF /* EstimateRemoteInformationTask.swift in Sources */,
 				E960CB341FB091DE0008D12E /* ViewControllerNewConfigurations.swift in Sources */,
 				E9C2029C211BFD8A005E3B11 /* ViewControllerRestore.swift in Sources */,
+				E97CDF2722780C9F007E9F4B /* ConvertConfigurations.swift in Sources */,
 				E960CB431FB091DE0008D12E /* PersistentStorageScheduling.swift in Sources */,
 				E960CB151FB091DE0008D12E /* ViewControllerAbout.swift in Sources */,
 				E960CB451FB091DE0008D12E /* CompleteQuickbackupTask.swift in Sources */,
@@ -706,11 +724,13 @@
 				E9284CF821308B7D006648C1 /* extensionsConfigurations.swift in Sources */,
 				E960CB501FB091DE0008D12E /* SingleTask.swift in Sources */,
 				E960CB2F1FB091DE0008D12E /* OperationFactory.swift in Sources */,
+				E97CDF2922780C9F007E9F4B /* ConvertUserconfiguration.swift in Sources */,
 				E960CB061FB091DE0008D12E /* Rclone.swift in Sources */,
 				E960CB361FB091DE0008D12E /* Configurations.swift in Sources */,
 				E960CB041FB091DE0008D12E /* OutputProcess.swift in Sources */,
 				E923D4CA21305A4600C6BE92 /* Macserialnumber.swift in Sources */,
 				E960CB251FB091DE0008D12E /* ViewControllerInformation.swift in Sources */,
+				E97CDF2822780C9F007E9F4B /* ConvertSchedules.swift in Sources */,
 				E95E8211222813C6000DF831 /* PersistentStorageAllprofilesAPI.swift in Sources */,
 				E960CB2B1FB091DE0008D12E /* SingleTaskWorkQueu.swift in Sources */,
 				E960CB4E1FB091DE0008D12E /* NewConfigurations.swift in Sources */,
