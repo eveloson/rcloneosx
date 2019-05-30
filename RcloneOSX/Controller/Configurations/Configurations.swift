@@ -84,26 +84,14 @@ class Configurations: ReloadTable, SetSchedules {
         return self.configurationsDataSource
     }
 
-    /// Function for getting all Configurations marked as backup (not restore)
+    /// Function for getting all Configurations
     /// - parameter none: none
     /// - returns : Array of NSDictionary
-    func getConfigurationsDataSourcecountBackupOnly() -> [NSMutableDictionary]? {
+    func getConfigurationsDataSourcecountBackup() -> [NSMutableDictionary]? {
         let configurations: [Configuration] = self.configurations!.filter({return ($0.task == ViewControllerReference.shared.copy || $0.task == ViewControllerReference.shared.sync )})
-        var row =  NSMutableDictionary()
         var data = [NSMutableDictionary]()
         for i in 0 ..< configurations.count {
-            row = [
-                "taskCellID": configurations[i].task,
-                "hiddenID": configurations[i].hiddenID,
-                "localCatalogCellID": configurations[i].localCatalog,
-                "offsiteCatalogCellID": configurations[i].offsiteCatalog,
-                "offsiteServerCellID": configurations[i].offsiteServer,
-                "backupIDCellID": configurations[i].backupID,
-                "runDateCellID": configurations[i].dateRun!,
-                "daysID": configurations[i].dayssincelastbackup ?? "",
-                "markdays": configurations[i].markdays,
-                "selectCellID": 0
-            ]
+            let row: NSMutableDictionary = ConvertOneConfig(config: self.configurations![i]).dict
             if (row.value(forKey: "offsiteServerCellID") as? String)?.isEmpty == true {
                 row.setValue("localhost", forKey: "offsiteServerCellID")
             }
@@ -312,7 +300,6 @@ class Configurations: ReloadTable, SetSchedules {
     /// Function is destroying any previous Configurations before loading new and computing new arguments.
     /// - parameter none: none
     private func readconfigurations() {
-        self.configurations = [Configuration]()
         self.argumentAllConfigurations = [ArgumentsOneConfiguration]()
         var store: [Configuration]? = self.storageapi!.getConfigurations()
         guard store != nil else { return }
@@ -323,31 +310,14 @@ class Configurations: ReloadTable, SetSchedules {
         }
         // Then prepare the datasource for use in tableviews as Dictionarys
         var data = [NSMutableDictionary]()
-        self.configurationsDataSource = nil
-        var batch: Int = 0
         for i in 0 ..< self.configurations!.count {
-            if self.configurations![i].batch == "yes" {
-                batch = 1
-            } else {
-                batch = 0
-            }
-            let row: NSMutableDictionary = [
-                "taskCellID": self.configurations![i].task,
-                "batchCellID": batch,
-                "localCatalogCellID": self.configurations![i].localCatalog,
-                "offsiteCatalogCellID": self.configurations![i].offsiteCatalog,
-                "offsiteServerCellID": self.configurations![i].offsiteServer,
-                "backupIDCellID": self.configurations![i].backupID,
-                "runDateCellID": self.configurations![i].dateRun ?? "",
-                "daysID": self.configurations![i].dayssincelastbackup ?? ""
-            ]
-            data.append(row)
+            data.append(ConvertOneConfig(config: self.configurations![i]).dict3)
         }
         self.configurationsDataSource = data
     }
 
     init(profile: String?, viewcontroller: NSViewController) {
-        self.configurations = nil
+       self.configurations = [Configuration]()
         self.argumentAllConfigurations = nil
         self.configurationsDataSource = nil
         self.profile = profile

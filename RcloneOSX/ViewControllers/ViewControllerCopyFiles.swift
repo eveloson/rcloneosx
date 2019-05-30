@@ -220,7 +220,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
                 self.restorebutton.isEnabled = false
                 self.remoteCatalog.stringValue = ""
                 self.rcloneindex = index
-                let hiddenID = self.configurations!.getConfigurationsDataSourcecountBackupOnly()![index].value(forKey: "hiddenID") as? Int ?? -1
+                let hiddenID = self.configurations!.getConfigurationsDataSourcecountBackup()![index].value(forKey: "hiddenID") as? Int ?? -1
                 self.copyFiles = CopyFiles(hiddenID: hiddenID)
                 self.working.startAnimation(nil)
                 self.displayRemoteserver(index: index)
@@ -292,7 +292,7 @@ extension ViewControllerCopyFiles: NSTableViewDataSource {
             self.numberofrows.stringValue = "Number of remote files: " + String(self.restoretabledata!.count)
             return self.restoretabledata!.count
         } else {
-            return self.configurations?.getConfigurationsDataSourcecountBackupOnly()?.count ?? 0
+            return self.configurations?.getConfigurationsDataSourcecountBackup()?.count ?? 0
         }
     }
 }
@@ -311,8 +311,8 @@ extension ViewControllerCopyFiles: NSTableViewDelegate {
                 return cell
             }
         } else {
-            guard row < self.configurations!.getConfigurationsDataSourcecountBackupOnly()!.count else { return nil }
-            let object: NSDictionary = self.configurations!.getConfigurationsDataSourcecountBackupOnly()![row]
+            guard row < self.configurations!.getConfigurationsDataSourcecountBackup()!.count else { return nil }
+            let object: NSDictionary = self.configurations!.getConfigurationsDataSourcecountBackup()![row]
             let cellIdentifier: String = tableColumn!.identifier.rawValue
             if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: cellIdentifier), owner: self) as? NSTableCellView {
                 cell.textField?.stringValue = object.value(forKey: cellIdentifier) as? String ?? ""
