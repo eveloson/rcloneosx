@@ -8,10 +8,20 @@
 
 import Foundation
 
-final class ConvertConfigurations: SetConfigurations {
+struct ConvertConfigurations: SetConfigurations {
 
-    // Function for returning a NSMutabledictionary from a configuration record
-    func convertconfiguration(index: Int) -> NSMutableDictionary {
+    var config: NSMutableDictionary?
+
+    private func checkparameter(param: String?) -> String? {
+        if let parameter = param {
+            guard parameter.isEmpty == false else { return nil }
+            return parameter
+        } else {
+            return nil
+        }
+    }
+
+    init(index: Int) {
         var config: Configuration = self.configurations!.getConfigurations()[index]
         let dict: NSMutableDictionary = [
             "task": config.task,
@@ -59,15 +69,6 @@ final class ConvertConfigurations: SetConfigurations {
         if config.parameter14 != nil {
             dict.setObject(config.parameter14!, forKey: "parameter14" as NSCopying)
         }
-        return dict
-    }
-
-    private func checkparameter(param: String?) -> String? {
-        if let parameter = param {
-            guard parameter.isEmpty == false else { return nil }
-            return parameter
-        } else {
-            return nil
-        }
+        self.config = dict
     }
 }
