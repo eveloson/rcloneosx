@@ -9,10 +9,11 @@
 
 import Foundation
 
-final class ConvertUserconfiguration {
+struct ConvertUserconfiguration {
 
-    // Converting user configuration to array of NSDictionary
-    func convertUserconfiguration() -> [NSDictionary] {
+    var userconfiguration: [NSDictionary]?
+
+    init() {
         var optionalpathrclone: Int?
         var detailedlogging: Int?
         var minimumlogging: Int?
@@ -72,6 +73,6 @@ final class ConvertUserconfiguration {
             dict.setObject("", forKey: "restorePath" as NSCopying)
         }
         array.append(dict)
-        return array
+        self.userconfiguration = array
     }
 }
