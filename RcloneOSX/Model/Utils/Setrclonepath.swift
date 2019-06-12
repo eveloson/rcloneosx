@@ -32,4 +32,18 @@ struct Setrclonepath {
         }
         self.setinfoaboutrcloneDelegate?.setinfoaboutrclone()
     }
+
+    init(path: String) {
+        var path = path
+        if path.isEmpty == false {
+            if path.hasSuffix("/") == false {
+                path += "/"
+                ViewControllerReference.shared.rclonePath = path
+            } else {
+                ViewControllerReference.shared.rclonePath = path
+            }
+        } else {
+            ViewControllerReference.shared.rclonePath = nil
+        }
+    }
 }

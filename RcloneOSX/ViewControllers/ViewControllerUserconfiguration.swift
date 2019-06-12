@@ -41,6 +41,7 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
     @IBAction func close(_ sender: NSButton) {
         if self.dirty {
             // Before closing save changed configuration
+            _ = Setrclonepath(path: self.rclonePath.stringValue)
             self.setRclonePath()
             self.setRestorePath()
             self.setmarknumberofdayssince()
