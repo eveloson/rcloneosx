@@ -403,10 +403,12 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         weak var localprofileinfo: SetProfileinfo?
         if let profile = self.configurations!.getProfile() {
             self.profilInfo.stringValue = "Profile: " + profile
+            self.profilInfo.textColor = setcolor(nsviewcontroller: self, color: .black)
         } else {
             self.profilInfo.stringValue = "Profile: default"
+            self.profilInfo.textColor = setcolor(nsviewcontroller: self, color: .green)
         }
-        self.profilInfo.textColor = setcolor(nsviewcontroller: self, color: .black)
+        
         localprofileinfo = ViewControllerReference.shared.getvcref(viewcontroller: .vcnewconfigurations ) as? ViewControllerNewConfigurations
         localprofileinfo?.setprofile(profile: self.profilInfo.stringValue, color: self.profilInfo.textColor!)
         self.showrclonecommandmainview()
