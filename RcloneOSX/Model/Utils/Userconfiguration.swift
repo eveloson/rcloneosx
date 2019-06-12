@@ -76,11 +76,7 @@ final class Userconfiguration {
         if userconfigrcloneOSX.count > 0 {
             self.readUserconfiguration(dict: userconfigrcloneOSX[0])
         }
-        // If userconfiguration is read from disk update info in main view
-        self.rclonechangedDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-        self.rclonechangedDelegate?.rcloneischanged()
-        // Check for rclone
-        _ = Verifyrclonepath().verifyrclonepath()
+        _ = Setrclonepath()
         _ = RcloneVersionString()
     }
 }

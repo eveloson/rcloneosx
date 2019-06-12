@@ -125,7 +125,7 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
         }
         guard rclonepath != nil else {
             self.noRclone.isHidden = true
-            _ = Verifyrclonepath().verifyrclonepath()
+            _ = Setrclonepath()
             return
         }
         if fileManager.fileExists(atPath: rclonepath!) {

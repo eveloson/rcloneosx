@@ -51,7 +51,7 @@ class ProcessCmd: Delay {
         if let command = self.command {
             task.launchPath = command
         } else {
-            task.launchPath = Verifyrclonepath().rclonepath()
+            task.launchPath = Getrclonepath().rclonepath
         }
         task.arguments = self.arguments
         // Pipe for reading output from Process

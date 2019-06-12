@@ -32,11 +32,9 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
     @IBOutlet weak var newTableView: NSTableView!
     @IBOutlet weak var cloudService: NSComboBox!
 
-    var verifyrclonepath: Verifyrclonepath?
-
     @IBAction func totinfo(_ sender: NSButton) {
         guard ViewControllerReference.shared.norclone == false else {
-            self.verifyrclonepath!.norclone()
+            _ = Norclone()
             return
         }
         self.configurations!.processtermination = .remoteinfotask
@@ -47,7 +45,7 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
 
     @IBAction func quickbackup(_ sender: NSButton) {
         guard ViewControllerReference.shared.norclone == false else {
-            self.verifyrclonepath!.norclone()
+            _ = Norclone()
             return
         }
         self.openquickbackup()

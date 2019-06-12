@@ -20,6 +20,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         storage = PersistentStorageAPI(profile: nil)
         if let userConfiguration =  storage?.getUserconfiguration(readfromstorage: true) {
             _ = Userconfiguration(userconfigrcloneOSX: userConfiguration)
+        } else {
+            _ = RcloneVersionString()
         }
     }
 
