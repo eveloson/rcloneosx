@@ -405,14 +405,24 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         weak var localprofileinfo: SetProfileinfo?
         if let profile = self.configurations!.getProfile() {
             self.profilInfo.stringValue = "Profile: " + profile
-            self.profilInfo.textColor = .white
         } else {
             self.profilInfo.stringValue = "Profile: default"
+        }
+        if self.isDarkMode(view: self.view) {
+            self.profilInfo.textColor = .white
+        } else {
             self.profilInfo.textColor = .black
         }
         localprofileinfo = ViewControllerReference.shared.getvcref(viewcontroller: .vcnewconfigurations ) as? ViewControllerNewConfigurations
         localprofileinfo?.setprofile(profile: self.profilInfo.stringValue, color: self.profilInfo.textColor!)
         self.showrclonecommandmainview()
+    }
+
+    func isDarkMode(view: NSView) -> Bool {
+        if #available(OSX 10.14, *) {
+            return view.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+        }
+        return false
     }
 
     // Setting remote info
