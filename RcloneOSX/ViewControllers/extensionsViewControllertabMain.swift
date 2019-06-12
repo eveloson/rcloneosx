@@ -426,7 +426,7 @@ extension ViewControllertabMain: SingleTaskProgress {
             self.dryRunOrRealRun.isHidden = true
             return
         }
-        self.dryRunOrRealRun.textColor = .red
+        self.dryRunOrRealRun.textColor = setcolor(nsviewcontroller: self, color: .red)
         self.dryRunOrRealRun.isHidden = false
         self.dryRunOrRealRun.stringValue = info
     }
@@ -623,5 +623,52 @@ extension ViewControllertabMain: AllProfileDetails {
     func enablereloadallprofiles() {
         self.allprofilesview = true
         self.allprofiledetailsDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcallprofiles) as? ViewControllerAllProfiles
+    }
+}
+
+enum Color {
+    case red
+    case white
+    case green
+    case black
+}
+
+protocol Setcolor: class {
+    func setcolor(nsviewcontroller: NSViewController, color: Color) -> NSColor
+}
+
+extension Setcolor {
+
+    private func isDarkMode(view: NSView) -> Bool {
+        if #available(OSX 10.14, *) {
+            return view.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+        }
+        return false
+    }
+
+    func setcolor(nsviewcontroller: NSViewController, color: Color) -> NSColor {
+        let darkmode = isDarkMode(view: nsviewcontroller.view)
+        switch color {
+        case .red:
+            return .red
+        case .white:
+            if darkmode {
+                return .white
+            } else {
+                return .black
+            }
+        case .green:
+            if darkmode {
+                return .green
+            } else {
+                return .blue
+            }
+        case .black:
+            if darkmode {
+                return .white
+            } else {
+                return .black
+            }
+        }
     }
 }

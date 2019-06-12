@@ -47,7 +47,7 @@ protocol AllProfileDetails: class {
     func disablereloadallprofiles()
 }
 
-class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, FileerrorMessage, Remoterclonesize {
+class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, FileerrorMessage, Remoterclonesize, Setcolor {
 
     // Configurations object
     var configurations: Configurations?
@@ -406,21 +406,10 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         } else {
             self.profilInfo.stringValue = "Profile: default"
         }
-        if self.isDarkMode(view: self.view) {
-            self.profilInfo.textColor = .white
-        } else {
-            self.profilInfo.textColor = .black
-        }
+        self.profilInfo.textColor = setcolor(nsviewcontroller: self, color: .black)
         localprofileinfo = ViewControllerReference.shared.getvcref(viewcontroller: .vcnewconfigurations ) as? ViewControllerNewConfigurations
         localprofileinfo?.setprofile(profile: self.profilInfo.stringValue, color: self.profilInfo.textColor!)
         self.showrclonecommandmainview()
-    }
-
-    func isDarkMode(view: NSView) -> Bool {
-        if #available(OSX 10.14, *) {
-            return view.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
-        }
-        return false
     }
 
     // Setting remote info

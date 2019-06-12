@@ -17,7 +17,7 @@ enum Work {
     case restore
 }
 
-class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, Index, Abort, Remoterclonesize {
+class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, Index, Abort, Remoterclonesize, Setcolor {
 
     @IBOutlet weak var localCatalog: NSTextField!
     @IBOutlet weak var offsiteCatalog: NSTextField!
@@ -51,7 +51,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, 
         if let index = self.index() {
             self.selecttmptorestore.isEnabled = false
             self.abortandclose = true
-            self.gotit.textColor = .white
+            self.gotit.textColor = setcolor(nsviewcontroller: self, color: .white)
             self.gotit.stringValue = "Getting info, please wait..."
             self.working.startAnimation(nil)
             self.workqueue?.append(.localinfoandnumbertosync)
@@ -75,7 +75,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, 
         let answer = Alerts.dialogOKCancel("Do you REALLY want to start a RESTORE ?", text: "Cancel or OK")
         if answer {
             if let index = self.index() {
-                self.gotit.textColor = .white
+                self.gotit.textColor = setcolor(nsviewcontroller: self, color: .white)
                 self.gotit.stringValue = "Executing restore..."
                 self.restorebutton.isEnabled = false
                 self.abortandclose = true
@@ -110,7 +110,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, 
         self.totalNumberSizebytes.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.bytes/1024), number: NumberFormatter.Style.decimal))
         self.working.stopAnimation(nil)
         self.restorebutton.isEnabled = true
-        self.gotit.textColor = .green
+        self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
         self.gotit.stringValue = "Got it..."
     }
 
@@ -214,7 +214,7 @@ extension ViewControllerRestore: UpdateProgress {
         case .setremotenumbers:
             self.setremoteinfo()
         case .restore:
-            self.gotit.textColor = .green
+            self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
             self.gotit.stringValue = "Restore is completed..."
             self.restoreprogress.isHidden = true
             self.restorecompleted = true
@@ -225,7 +225,7 @@ extension ViewControllerRestore: UpdateProgress {
             self.selecttmptorestore.isEnabled = true
             self.working.stopAnimation(nil)
             self.restorebutton.isEnabled = true
-            self.gotit.textColor = .green
+            self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
             self.gotit.stringValue = "Got it..."
         }
     }
