@@ -20,11 +20,9 @@ protocol Setinfoaboutrclone: class {
 
 final class Displayrclonepath: SetConfigurations {
 
-    weak var verifyrcloneDelegate: Setinfoaboutrclone?
     var rclonepath: String?
 
     init(index: Int, display: RclonecommandDisplay) {
-        self.verifyrcloneDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
         var str: String?
         let config = self.configurations!.getargumentAllConfigurations()[index]
         str = Getrclonepath().rclonepath ?? ""
