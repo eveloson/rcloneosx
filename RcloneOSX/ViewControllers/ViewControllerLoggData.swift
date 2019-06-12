@@ -33,11 +33,9 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
     @IBOutlet weak var info: NSTextField!
     @IBOutlet weak var selectbutton: NSButton!
 
-    var verifyrclonepath: Verifyrclonepath?
-
     @IBAction func totinfo(_ sender: NSButton) {
         guard ViewControllerReference.shared.norclone == false else {
-            self.verifyrclonepath!.norclone()
+            _ = Norclone()
             return
         }
         self.configurations!.processtermination = .remoteinfotask
@@ -48,7 +46,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
 
     @IBAction func quickbackup(_ sender: NSButton) {
         guard ViewControllerReference.shared.norclone == false else {
-            self.verifyrclonepath!.norclone()
+            _ = Norclone()
             return
         }
         self.openquickbackup()

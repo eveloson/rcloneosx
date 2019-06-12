@@ -76,7 +76,7 @@ final class Userconfiguration {
         if userconfigrcloneOSX.count > 0 {
             self.readUserconfiguration(dict: userconfigrcloneOSX[0])
         }
-        _ = Rclonepath()
+        _ = Setrclonepath()
         _ = RcloneVersionString()
     }
 }

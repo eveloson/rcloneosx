@@ -9,7 +9,7 @@
 
 import Foundation
 
-struct Rclonepath {
+struct Setrclonepath {
 
     weak var setinfoaboutrcloneDelegate: Setinfoaboutrclone?
 
@@ -17,19 +17,13 @@ struct Rclonepath {
         self.setinfoaboutrcloneDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
         let fileManager = FileManager.default
         let path: String?
-        // If not in /usr/bin or /usr/local/bin
-        // rclonePath is set if none of the above
+        // If not in /usr/bin or /usr/local/bin, rclonePath is set if none of the above
         if let rclonePath = ViewControllerReference.shared.rclonePath {
             path = rclonePath + ViewControllerReference.shared.rclone
         } else if ViewControllerReference.shared.rcloneopt {
             path = "/usr/local/bin/" + ViewControllerReference.shared.rclone
         } else {
             path = "/usr/bin/" + ViewControllerReference.shared.rclone
-        }
-        guard ViewControllerReference.shared.rcloneopt == true else {
-            ViewControllerReference.shared.norclone = false
-            self.setinfoaboutrcloneDelegate?.setinfoaboutrclone()
-            return
         }
         if fileManager.fileExists(atPath: path!) == false {
             ViewControllerReference.shared.norclone = true

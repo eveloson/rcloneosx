@@ -34,11 +34,9 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
     @IBOutlet weak var search: NSSearchField!
     @IBOutlet weak var restorebutton: NSButton!
 
-    var verifyrclonepath: Verifyrclonepath?
-
     @IBAction func totinfo(_ sender: NSButton) {
         guard ViewControllerReference.shared.norclone == false else {
-            self.verifyrclonepath!.norclone()
+            _ = Norclone()
             return
         }
         self.configurations!.processtermination = .remoteinfotask
@@ -49,7 +47,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
 
     @IBAction func quickbackup(_ sender: NSButton) {
         guard ViewControllerReference.shared.norclone == false else {
-            self.verifyrclonepath!.norclone()
+            _ = Norclone()
             return
         }
         self.openquickbackup()

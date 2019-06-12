@@ -109,8 +109,6 @@ extension ViewControllertabMain: RcloneIsChanged {
         // Update rclone command in display
         self.showrclonecommandmainview()
         self.setinfoaboutrclone()
-        // Setting shortstring
-        self.rcloneversionshort.stringValue = ViewControllerReference.shared.rcloneversionshort ?? ""
     }
 }
 
@@ -506,6 +504,7 @@ extension ViewControllertabMain: Setinfoaboutrclone {
             self.info(num: 3)
         } else {
             self.info(num: 0)
+            self.rcloneversionshort.stringValue = ViewControllerReference.shared.rcloneversionshort ?? ""
         }
     }
 }

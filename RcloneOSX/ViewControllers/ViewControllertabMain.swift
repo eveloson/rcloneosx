@@ -57,7 +57,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     // Reference to batch taskobject
     var batchtasks: BatchTask?
     var dateandtime: Dateandtime?
-    var verifyrclonepath: Verifyrclonepath?
     // Delegate function getting batchTaskObject
     weak var batchtasksDelegate: GetNewBatchTask?
     // Main tableview
@@ -112,7 +111,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             return
         }
         guard ViewControllerReference.shared.norclone == false else {
-            self.verifyrclonepath!.norclone()
+            _ = Norclone()
             return
         }
         guard self.configurations!.getConfigurations()[self.index!].task == ViewControllerReference.shared.sync else {
@@ -125,7 +124,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
 
     @IBAction func getremoteinfo(_ sender: NSButton) {
         guard ViewControllerReference.shared.norclone == false else {
-            self.verifyrclonepath!.norclone()
+            _ = Norclone()
             return
         }
         if self.index != nil {
@@ -141,7 +140,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
 
     @IBAction func totinfo(_ sender: NSButton) {
         guard ViewControllerReference.shared.norclone == false else {
-            self.verifyrclonepath!.norclone()
+            _ = Norclone()
             return
         }
         self.configurations!.processtermination = .remoteinfotask
@@ -152,7 +151,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
 
     @IBAction func quickbackup(_ sender: NSButton) {
         guard ViewControllerReference.shared.norclone == false else {
-            self.verifyrclonepath!.norclone()
+            _ = Norclone()
             return
         }
         self.configurations!.processtermination = .quicktask
@@ -307,9 +306,9 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
                 return
             }
             if self.displaysynccommand.state == .on {
-                self.rcloneCommand.stringValue = self.verifyrclonepath!.displayrclonecommand(index: index, display: .sync)
+                self.rcloneCommand.stringValue = Displayrclonepath(index: index, display: .sync).rclonepath ?? ""
             } else {
-                self.rcloneCommand.stringValue = self.verifyrclonepath!.displayrclonecommand(index: index, display: .restore)
+                self.rcloneCommand.stringValue = Displayrclonepath(index: index, display: .restore).rclonepath ?? ""
             }
         } else {
             self.rcloneCommand.stringValue = ""
@@ -325,7 +324,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         self.mainTableView.target = self
         self.mainTableView.doubleAction = #selector(ViewControllertabMain.tableViewDoubleClick(sender:))
         self.displaysynccommand.state = .on
-        _ = Verifyrclonepath().verifyrclonepath()
+        _ = Setrclonepath()
         // configurations and schedules
         self.createandreloadconfigurations()
         self.createandreloadschedules()
@@ -348,7 +347,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         self.displayProfile()
         self.readyforexecution = true
         if self.dateandtime == nil { self.dateandtime = Dateandtime()}
-        if self.verifyrclonepath == nil { self.verifyrclonepath = Verifyrclonepath()}
     }
 
     override func viewDidDisappear() {
@@ -369,7 +367,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     func executeSingleTask() {
         self.configurations!.processtermination = .singletask
         guard ViewControllerReference.shared.norclone == false else {
-            self.verifyrclonepath!.norclone()
+            _ = Norclone()
             return
         }
         guard self.index != nil else { return }
@@ -389,7 +387,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     @IBAction func executeBatch(_ sender: NSToolbarItem) {
         self.configurations!.processtermination = .estimatebatchtask
         guard ViewControllerReference.shared.norclone == false else {
-            self.verifyrclonepath!.norclone()
+            _ = Norclone()
             return
         }
         self.singletask = nil
