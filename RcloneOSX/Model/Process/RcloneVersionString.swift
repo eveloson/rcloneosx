@@ -11,21 +11,30 @@ import Foundation
 
 final class RcloneVersionString: ProcessCmd {
 
+    var outputprocess: OutputProcess?
+
     init () {
         super.init(command: nil, arguments: ["--version"])
-        let outputprocess = OutputProcess()
+        self.outputprocess = OutputProcess()
         if ViewControllerReference.shared.norclone == false {
-            self.updateDelegate = nil
+            self.updateDelegate = self
             self.executeProcess(outputprocess: outputprocess)
-            self.delayWithSeconds(0.25) {
-                guard outputprocess.getOutput() != nil else { return }
-                guard outputprocess.getOutput()!.count > 0 else { return }
-                ViewControllerReference.shared.rcloneversionshort = outputprocess.getOutput()![0]
-                ViewControllerReference.shared.rcloneversionstring = outputprocess.getOutput()!.joined(separator: "\n")
-                weak var shortstringDelegate: RcloneIsChanged?
-                shortstringDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-                shortstringDelegate?.rcloneischanged()
-            }
         }
+    }
+}
+
+extension RcloneVersionString: UpdateProgress {
+    func processTermination() {
+        guard self.outputprocess?.getOutput() != nil else { return }
+        guard self.outputprocess!.getOutput()!.count > 0 else { return }
+        ViewControllerReference.shared.rcloneversionshort = self.outputprocess!.getOutput()![0]
+        ViewControllerReference.shared.rcloneversionstring = self.outputprocess!.getOutput()!.joined(separator: "\n")
+        weak var shortstringDelegate: RcloneIsChanged?
+        shortstringDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        shortstringDelegate?.rcloneischanged()
+    }
+
+    func fileHandler() {
+        // none
     }
 }
