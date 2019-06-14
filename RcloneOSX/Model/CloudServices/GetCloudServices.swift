@@ -8,22 +8,37 @@
 
 import Foundation
 
-final class GetCloudServices {
+protocol Reloadcloudservices: class {
+    func reloadcloudservices()
+}
 
-    var process: CloudServices?
-    private var arguments: [String]?
+final class GetCloudServices: ProcessCmd {
+
     private var outputprocess: OutputProcess?
+    var cloudservices: [String]?
+    weak var reloadcloudservicesDelegate: Reloadcloudservices?
 
-    private func getCloudServices() {
-        self.process = CloudServices(command: nil, arguments: self.arguments)
-        self.process!.executeProcess(outputprocess: self.outputprocess)
+    init(reloadclass: Reloadcloudservices) {
+        super.init(command: nil, arguments: ["config", "show"])
+        self.reloadcloudservicesDelegate = reloadclass
+        self.outputprocess = OutputProcess()
+        if ViewControllerReference.shared.norclone == false {
+            guard ViewControllerReference.shared.norclone == false else { return }
+            self.updateDelegate = self
+            self.executeProcess(outputprocess: outputprocess)
+        }
+    }
+}
+
+extension GetCloudServices: UpdateProgress {
+    func processTermination() {
+        guard self.outputprocess?.getOutput() != nil else { return }
+        guard self.outputprocess!.getOutput()!.count > 0 else { return }
+        self.cloudservices = self.outputprocess!.trimoutput(trim: .three)!
+        self.reloadcloudservicesDelegate?.reloadcloudservices()
     }
 
-    init(outputprocess: OutputProcess?) {
-        self.outputprocess = outputprocess
-        self.arguments = ["config", "show"]
-        if ViewControllerReference.shared.norclone == false {
-            self.getCloudServices()
-        }
+    func fileHandler() {
+        //
     }
 }
