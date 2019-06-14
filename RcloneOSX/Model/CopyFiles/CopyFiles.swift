@@ -51,36 +51,9 @@ final class CopyFiles: SetConfigurations {
         return self.commandDisplay ?? " "
     }
 
-    private func getRemoteFileList() {
-        self.outputprocess = nil
-        self.outputprocess = OutputProcess()
-        self.arguments = CopyFileArguments(task: .listrclone, config: self.config!, remotefile: nil, localCatalog: nil).getArguments()
-        self.process = CommandCopyFiles(command: nil, arguments: self.arguments)
-        self.process!.executeProcess(outputprocess: self.outputprocess)
-    }
-
-    func setRemoteFileList() {
-        self.files = self.outputprocess?.trimoutput(trim: .one)
-    }
-
-    func filter(search: String?) -> [String] {
-        guard search != nil else {
-            if self.files != nil {
-                return self.files!
-            } else {
-              return [""]
-            }
-        }
-        if search!.isEmpty == false {
-            return self.files!.filter({$0.contains(search!)})
-        } else {
-            return self.files!
-        }
-    }
-
     init (hiddenID: Int) {
         self.index = self.configurations?.getIndex(hiddenID)
         self.config = self.configurations!.getConfigurations()[self.index!]
-        self.getRemoteFileList()
     }
+
   }
