@@ -18,6 +18,7 @@ class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Ind
 
     var index: Int?
     var outputprocess: OutputProcess?
+    var services: GetCloudServices?
 
     // Close and dismiss view
     @IBAction func close(_ sender: NSButton) {
@@ -50,14 +51,14 @@ class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Ind
     }
 
     private func loadCloudServices() {
-        guard ViewControllerReference.shared.norclone == false else { return }
-        self.outputprocess = nil
-        self.outputprocess = OutputProcess()
-        _ = GetCloudServices(outputprocess: self.outputprocess)
+        self.services = GetCloudServices(reloadclass: self)
         self.cloudService.removeAllItems()
-        self.delayWithSeconds(0.5) {
-            self.cloudService.addItems(withObjectValues: self.outputprocess!.trimoutput(trim: .three)!)
-        }
     }
+}
 
+extension ViewControllerEdit: Reloadcloudservices {
+    func reloadcloudservices() {
+        self.cloudService.addItems(withObjectValues: self.services?.cloudservices ?? [""])
+        self.services = nil
+    }
 }

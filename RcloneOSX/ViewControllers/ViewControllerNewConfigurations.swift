@@ -22,6 +22,7 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
     var outputprocess: OutputProcess?
     var rclonecommand: String?
     var diddissappear: Bool = false
+    var services: GetCloudServices?
 
     @IBOutlet weak var viewParameter4: NSTextField!
     @IBOutlet weak var localCatalog: NSTextField!
@@ -104,7 +105,6 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
         super.viewDidAppear()
         ViewControllerReference.shared.activetab = .vcnewconfigurations
         guard self.diddissappear == false else { return }
-        self.loadCloudServices()
         if let profile = self.configurations!.getProfile() {
             self.storageapi = PersistentStorageAPI(profile: profile)
         } else {
@@ -113,6 +113,7 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
         self.setFields()
         self.rclonecommand = self.synccommand
         self.syncradio.state = .on
+        self.loadCloudServices()
     }
 
     override func viewDidDisappear() {
@@ -121,14 +122,8 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
     }
 
     private func loadCloudServices() {
-        guard ViewControllerReference.shared.norclone == false else { return }
-        self.outputprocess = nil
-        self.outputprocess = OutputProcess()
-        _ = GetCloudServices(outputprocess: self.outputprocess)
+        self.services = GetCloudServices(reloadclass: self)
         self.cloudService.removeAllItems()
-        self.delayWithSeconds(0.5) {
-            self.cloudService.addItems(withObjectValues: self.outputprocess!.trimoutput(trim: .three)!)
-        }
     }
 
     private func setFields() {
@@ -215,5 +210,12 @@ extension ViewControllerNewConfigurations: OpenQuickBackup {
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })
+    }
+}
+
+extension ViewControllerNewConfigurations: Reloadcloudservices {
+    func reloadcloudservices() {
+        self.cloudService.addItems(withObjectValues: self.services?.cloudservices ?? [""])
+        self.services = nil
     }
 }
