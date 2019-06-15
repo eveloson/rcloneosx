@@ -34,7 +34,6 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
     @IBOutlet weak var remoteCatalog: NSTextField!
     @IBOutlet weak var restorecatalog: NSTextField!
     @IBOutlet weak var working: NSProgressIndicator!
-    @IBOutlet weak var workingRclone: NSProgressIndicator!
     @IBOutlet weak var search: NSSearchField!
     @IBOutlet weak var restorebutton: NSButton!
 
@@ -99,7 +98,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
         }
         guard self.copyFiles != nil else { return }
         self.restorebutton.isEnabled = false
-        self.workingRclone.startAnimation(nil)
+        self.working.startAnimation(nil)
         if self.estimated == false {
             self.copyFiles!.executeRclone(remotefile: remoteCatalog!.stringValue, localCatalog: restorecatalog!.stringValue, dryrun: true)
             self.estimated = true
@@ -130,7 +129,6 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
         self.rclonetableView.delegate = self
         self.rclonetableView.dataSource = self
         self.working.usesThreadedAnimation = true
-        self.workingRclone.usesThreadedAnimation = true
         self.search.delegate = self
         self.restorecatalog.delegate = self
         self.remoteCatalog.delegate = self
@@ -168,7 +166,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
         let answer = Alerts.dialogOKCancel("Copy single files or directory", text: "Start restore?")
         if answer {
             self.restorebutton.isEnabled = false
-            self.workingRclone.startAnimation(nil)
+            self.working.startAnimation(nil)
             self.copyFiles!.executeRclone(remotefile: self.remoteCatalog!.stringValue, localCatalog: self.restorecatalog!.stringValue, dryrun: false)
         }
     }
@@ -322,7 +320,7 @@ extension ViewControllerCopyFiles: NSTableViewDelegate {
 extension ViewControllerCopyFiles: UpdateProgress {
     func processTermination() {
         self.restorebutton.title = "Restore"
-        self.workingRclone.stopAnimation(nil)
+        self.working.stopAnimation(nil)
         self.presentAsSheet(self.viewControllerInformation!)
         self.restorebutton.isEnabled = true
         self.copyFiles?.process = nil
