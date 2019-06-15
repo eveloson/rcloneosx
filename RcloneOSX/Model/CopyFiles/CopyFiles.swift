@@ -14,11 +14,8 @@ final class CopyFiles: SetConfigurations {
 
     private var index: Int?
     private var config: Configuration?
-    private var files: [String]?
-    private var arguments: [String]?
-    private var command: String?
     private var commandDisplay: String?
-    var process: CommandCopyFiles?
+    var process: ProcessCmd?
     var outputprocess: OutputProcess?
 
     func getOutput() -> [String] {
@@ -31,16 +28,16 @@ final class CopyFiles: SetConfigurations {
     }
 
     func executeRclone(remotefile: String, localCatalog: String, dryrun: Bool) {
+        var arguments: [String]?
         guard self.config != nil else { return }
         if dryrun {
-            self.arguments = CopyFileArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getArgumentsdryRun()
+            arguments = CopyFileArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getArgumentsdryRun()
         } else {
-            self.arguments = CopyFileArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getArguments()
+            arguments = CopyFileArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getArguments()
         }
-        self.command = nil
-        self.outputprocess = nil
         self.outputprocess = OutputProcess()
-        self.process = CommandCopyFiles(command: nil, arguments: self.arguments)
+        self.process = ProcessCmd(command: nil, arguments: arguments)
+        self.process?.updateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles
         self.process!.executeProcess(outputprocess: self.outputprocess)
     }
 
