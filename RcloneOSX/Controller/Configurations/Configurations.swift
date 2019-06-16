@@ -86,8 +86,8 @@ class Configurations: ReloadTable, SetSchedules {
 
     /// Function for getting all Configurations
     /// - parameter none: none
-    /// - returns : Array of NSDictionary
-    func getConfigurationsDataSourcecountBackup() -> [NSMutableDictionary]? {
+    /// - returns : Array of NSMutableDictionary
+    func getConfigurationsSyncandCopy() -> [NSMutableDictionary]? {
         let configurations: [Configuration] = self.configurations!.filter({return ($0.task == ViewControllerReference.shared.copy || $0.task == ViewControllerReference.shared.sync )})
         var data = [NSMutableDictionary]()
         for i in 0 ..< configurations.count {
@@ -311,7 +311,7 @@ class Configurations: ReloadTable, SetSchedules {
         // Then prepare the datasource for use in tableviews as Dictionarys
         var data = [NSMutableDictionary]()
         for i in 0 ..< self.configurations!.count {
-            data.append(ConvertOneConfig(config: self.configurations![i]).dict3)
+            data.append(ConvertOneConfig(config: self.configurations![i]).dict)
         }
         self.configurationsDataSource = data
     }
