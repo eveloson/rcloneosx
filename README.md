@@ -10,7 +10,7 @@ RcloneOSX require the `rclone` command line utility to be installed. If installe
 
 Rclone is *rsync for cloud storage*. Even if `rclone` and `rsync` are somewhat equal they are also in many ways different. RcloneOSX is built upon the ideas from [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX). It is not possible to clone all functions in RsyncOSX to RcloneOSX. I spend most of my time developing RsyncOSX. From time to time some functions are ported to RcloneOSX from RsyncOSX. I am not an advanced user of `rclone`.
 
-My main use of RcloneOSX is synchronizing my GitHub catalogs to Dropbox and Google. Rclone has lot more functions than just synchronizing data. For the moment there are no plans to implement more functions into RcloneOSX.
+*My own* use of RcloneOSX is *synchronizing* my GitHub catalogs to Dropbox and Google. Rclone has lot more functions than just synchronizing data. For the moment there are no plans to implement more functions into RcloneOSX.
 
 ### Fighting bugs
 
