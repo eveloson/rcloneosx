@@ -30,17 +30,14 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
     @IBOutlet weak var profilesTable: NSTableView!
 
     @IBAction func defaultProfile(_ sender: NSButton) {
-        self.useprofile = nil
-        self.newProfileDelegate?.newProfile(profile: self.useprofile)
-        self.copyfilesnewProfileDelegate?.newProfile(profile: nil)
+         _ = Selectprofile(profile: nil)
         self.dismissView()
     }
 
     @IBAction func deleteProfile(_ sender: NSButton) {
         if let useprofile = self.useprofile {
             self.profile?.deleteProfile(profileName: useprofile)
-            self.newProfileDelegate?.newProfile(profile: nil)
-            self.copyfilesnewProfileDelegate?.newProfile(profile: nil)
+             _ = Selectprofile(profile: nil)
         }
         self.dismissView()
     }
@@ -49,8 +46,7 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
     @IBAction func close(_ sender: NSButton) {
         let newprofile = self.newprofile.stringValue
         guard newprofile.isEmpty == false else {
-            self.newProfileDelegate?.newProfile(profile: self.useprofile)
-            self.copyfilesnewProfileDelegate?.newProfile(profile: nil)
+            _ = Selectprofile(profile: self.useprofile)
             self.dismissView()
             return
         }
@@ -59,8 +55,7 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
             self.dismissView()
             return
         }
-        self.newProfileDelegate?.newProfile(profile: newprofile)
-        self.copyfilesnewProfileDelegate?.newProfile(profile: nil)
+        _ = Selectprofile(profile: newprofile)
         self.dismissView()
     }
 

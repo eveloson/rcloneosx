@@ -100,6 +100,7 @@
 		E960CB4E1FB091DE0008D12E /* NewConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CB001FB091DE0008D12E /* NewConfigurations.swift */; };
 		E960CB501FB091DE0008D12E /* SingleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CB021FB091DE0008D12E /* SingleTask.swift */; };
 		E96647C9229FA94900E28DA3 /* ConvertOneConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96647C8229FA94900E28DA3 /* ConvertOneConfig.swift */; };
+		E9733E7922BCCC8400A5A8F9 /* Selectprofile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9733E7822BCCC8400A5A8F9 /* Selectprofile.swift */; };
 		E97CDF2722780C9F007E9F4B /* ConvertConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CDF2422780C9F007E9F4B /* ConvertConfigurations.swift */; };
 		E97CDF2822780C9F007E9F4B /* ConvertSchedules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CDF2522780C9F007E9F4B /* ConvertSchedules.swift */; };
 		E97CDF2922780C9F007E9F4B /* ConvertUserconfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CDF2622780C9F007E9F4B /* ConvertUserconfiguration.swift */; };
@@ -205,6 +206,7 @@
 		E960CB001FB091DE0008D12E /* NewConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewConfigurations.swift; sourceTree = "<group>"; };
 		E960CB021FB091DE0008D12E /* SingleTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTask.swift; sourceTree = "<group>"; };
 		E96647C8229FA94900E28DA3 /* ConvertOneConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertOneConfig.swift; sourceTree = "<group>"; };
+		E9733E7822BCCC8400A5A8F9 /* Selectprofile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selectprofile.swift; sourceTree = "<group>"; };
 		E97CDF2422780C9F007E9F4B /* ConvertConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertConfigurations.swift; sourceTree = "<group>"; };
 		E97CDF2522780C9F007E9F4B /* ConvertSchedules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertSchedules.swift; sourceTree = "<group>"; };
 		E97CDF2622780C9F007E9F4B /* ConvertUserconfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertUserconfiguration.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				E9B8B02222B1031B0063024E /* Setrclonepath.swift */,
 				E9B8B02422B107070063024E /* Getrclonepath.swift */,
 				E9B8B02622B10B620063024E /* Norclone.swift */,
+				E9733E7822BCCC8400A5A8F9 /* Selectprofile.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -758,6 +761,7 @@
 				E960CB281FB091DE0008D12E /* ArgumentsOneConfiguration.swift in Sources */,
 				E931186C1FC2BCC1007D1C1B /* Logging.swift in Sources */,
 				E960CB401FB091DE0008D12E /* ViewControllerRcloneParameters.swift in Sources */,
+				E9733E7922BCCC8400A5A8F9 /* Selectprofile.swift in Sources */,
 				E9E4DCCD21195F7600BB3F93 /* Allschedules.swift in Sources */,
 				E9198C39211DC5EC0071DB3A /* ViewControllerAllOutput.swift in Sources */,
 				E960CB291FB091DE0008D12E /* BatchTask.swift in Sources */,
