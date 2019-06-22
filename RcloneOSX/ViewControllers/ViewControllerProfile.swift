@@ -36,7 +36,7 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
 
     @IBAction func deleteProfile(_ sender: NSButton) {
         if let useprofile = self.useprofile {
-            self.profile?.deleteProfile(profileName: useprofile)
+            self.profile?.deleteProfileDirectory(profileName: useprofile)
              _ = Selectprofile(profile: nil)
         }
         self.dismissView()
@@ -50,7 +50,7 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
             self.dismissView()
             return
         }
-        let success = self.profile?.createProfile(profileName: newprofile)
+        let success = self.profile?.createProfileDirectory(profileName: newprofile)
         guard success == true else {
             self.dismissView()
             return
