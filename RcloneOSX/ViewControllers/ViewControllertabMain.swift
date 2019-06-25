@@ -470,15 +470,15 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
 
     func createandreloadconfigurations() {
         guard self.configurations != nil else {
-            self.configurations = Configurations(profile: nil, viewcontroller: self)
+            self.configurations = Configurations(profile: nil)
             return
         }
         if let profile = self.configurations!.getProfile() {
             self.configurations = nil
-            self.configurations = Configurations(profile: profile, viewcontroller: self)
+            self.configurations = Configurations(profile: profile)
         } else {
             self.configurations = nil
-            self.configurations = Configurations(profile: nil, viewcontroller: self)
+            self.configurations = Configurations(profile: nil)
         }
         globalMainQueue.async(execute: { () -> Void in
             self.mainTableView.reloadData()

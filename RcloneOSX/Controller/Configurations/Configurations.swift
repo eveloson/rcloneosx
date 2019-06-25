@@ -316,8 +316,8 @@ class Configurations: ReloadTable, SetSchedules {
         self.configurationsDataSource = data
     }
 
-    init(profile: String?, viewcontroller: NSViewController) {
-       self.configurations = [Configuration]()
+    init(profile: String?) {
+        self.configurations = [Configuration]()
         self.argumentAllConfigurations = nil
         self.configurationsDataSource = nil
         self.profile = profile
