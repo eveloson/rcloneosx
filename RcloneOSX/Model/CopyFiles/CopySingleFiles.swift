@@ -1,5 +1,5 @@
 //
-//  CopyFiles.swift
+//  CopySingleFiles.swift
 //  rcloneOSX
 //
 //  Created by Thomas Evensen on 12/09/2016.
@@ -10,7 +10,7 @@
 
 import Foundation
 
-final class CopyFiles: SetConfigurations {
+final class CopySingleFiles: SetConfigurations {
 
     private var index: Int?
     private var config: Configuration?
@@ -27,7 +27,7 @@ final class CopyFiles: SetConfigurations {
         self.process!.abortProcess()
     }
 
-    func executeRclone(remotefile: String, localCatalog: String, dryrun: Bool) {
+    func executecopyfiles(remotefile: String, localCatalog: String, dryrun: Bool) {
         var arguments: [String]?
         guard self.config != nil else { return }
         if dryrun {
@@ -44,7 +44,7 @@ final class CopyFiles: SetConfigurations {
     func getCommandDisplayinView(remotefile: String, localCatalog: String) -> String {
         guard self.config != nil else { return "" }
         guard self.index != nil else { return "" }
-        self.commandDisplay = Getrclonepath().rclonepath ?? "" + " " + CopyFileArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getcommandDisplay()
+        self.commandDisplay = CopyFileArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getcommandDisplay()
         return self.commandDisplay ?? " "
     }
 
