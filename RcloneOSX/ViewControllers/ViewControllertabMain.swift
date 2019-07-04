@@ -155,7 +155,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             return
         }
         self.configurations!.processtermination = .quicktask
-        self.configurations!.allowNotifyinMain = false
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })
@@ -337,7 +336,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             ViewControllerReference.shared.initialstart = 1
         }
          ViewControllerReference.shared.activetab = .vctabmain
-        self.configurations!.allowNotifyinMain = true
         if self.configurations!.configurationsDataSourcecount() > 0 {
             globalMainQueue.async(execute: { () -> Void in
                 self.mainTableView.reloadData()
@@ -347,12 +345,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         self.displayProfile()
         self.readyforexecution = true
         if self.dateandtime == nil { self.dateandtime = Dateandtime()}
-    }
-
-    override func viewDidDisappear() {
-        super.viewDidDisappear()
-        // Do not allow notify in Main
-        self.configurations!.allowNotifyinMain = false
     }
 
     // Execute tasks by double click in table
@@ -449,7 +441,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         self.singletask = nil
         self.showrclonecommandmainview()
         self.reloadtabledata()
-        self.configurations!.allowNotifyinMain = true
         self.remoteinfo(reset: true)
     }
 

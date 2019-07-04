@@ -122,6 +122,7 @@
 		E9CB92351FEE29800047F9CA /* ViewControllerQuickBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB92341FEE29800047F9CA /* ViewControllerQuickBackup.swift */; };
 		E9CB92381FEE2A8D0047F9CA /* QuickBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB92371FEE2A8D0047F9CA /* QuickBackup.swift */; };
 		E9D1F1A21FB49DB60099D25C /* GetCloudServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D1F1A11FB49DB60099D25C /* GetCloudServices.swift */; };
+		E9D4FE7322CDC06100BA477E /* Activetab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D4FE7222CDC06100BA477E /* Activetab.swift */; };
 		E9E4DCCD21195F7600BB3F93 /* Allschedules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E4DCCC21195F7600BB3F93 /* Allschedules.swift */; };
 		E9E4DCCF21195FB700BB3F93 /* AllProfilenames.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E4DCCE21195FB700BB3F93 /* AllProfilenames.swift */; };
 /* End PBXBuildFile section */
@@ -229,6 +230,7 @@
 		E9CB92341FEE29800047F9CA /* ViewControllerQuickBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerQuickBackup.swift; sourceTree = "<group>"; };
 		E9CB92371FEE2A8D0047F9CA /* QuickBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickBackup.swift; sourceTree = "<group>"; };
 		E9D1F1A11FB49DB60099D25C /* GetCloudServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCloudServices.swift; sourceTree = "<group>"; };
+		E9D4FE7222CDC06100BA477E /* Activetab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activetab.swift; sourceTree = "<group>"; };
 		E9E4DCCC21195F7600BB3F93 /* Allschedules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allschedules.swift; sourceTree = "<group>"; };
 		E9E4DCCE21195FB700BB3F93 /* AllProfilenames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllProfilenames.swift; sourceTree = "<group>"; };
 		E9FF26F7218D78CB009D2435 /* rcloneosx.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = rcloneosx.entitlements; path = rcloneosx/rcloneosx.entitlements; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				E9B8B02422B107070063024E /* Getrclonepath.swift */,
 				E9B8B02622B10B620063024E /* Norclone.swift */,
 				E9733E7822BCCC8400A5A8F9 /* Selectprofile.swift */,
+				E9D4FE7222CDC06100BA477E /* Activetab.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				E95E8211222813C6000DF831 /* PersistentStorageAllprofilesAPI.swift in Sources */,
 				E960CB2B1FB091DE0008D12E /* SingleTaskWorkQueu.swift in Sources */,
 				E960CB4E1FB091DE0008D12E /* NewConfigurations.swift in Sources */,
+				E9D4FE7322CDC06100BA477E /* Activetab.swift in Sources */,
 				E9CB92381FEE2A8D0047F9CA /* QuickBackup.swift in Sources */,
 				E9A7958B1FBF285300AF8A5F /* ViewControllerCopyFiles.swift in Sources */,
 				E960CB2D1FB091DE0008D12E /* Alerts.swift in Sources */,

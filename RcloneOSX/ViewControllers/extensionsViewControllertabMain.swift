@@ -116,11 +116,10 @@ extension ViewControllertabMain: RcloneIsChanged {
 extension ViewControllertabMain: NewVersionDiscovered {
     // Notifies if new version is discovered
     func notifyNewVersion() {
-        if self.configurations!.allowNotifyinMain {
-            globalMainQueue.async(execute: { () -> Void in
-                self.presentAsSheet(self.newVersionViewController!)
-            })
-        }
+        guard Activetab(viewcontroller: .vctabmain).isactive == true else { return }
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.newVersionViewController!)
+        })
     }
 }
 
@@ -134,9 +133,6 @@ extension ViewControllertabMain: DismissViewController {
             self.displayProfile()
         })
         self.setinfoaboutrclone()
-        if viewcontroller == ViewControllerReference.shared.getvcref(viewcontroller: .vcquickbackup) {
-            self.configurations!.allowNotifyinMain = true
-        }
     }
 }
 
@@ -562,7 +558,6 @@ extension ViewControllertabMain: NewProfile {
 extension ViewControllertabMain: OpenQuickBackup {
     func openquickbackup() {
         self.configurations!.processtermination = .quicktask
-        self.configurations!.allowNotifyinMain = false
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })
