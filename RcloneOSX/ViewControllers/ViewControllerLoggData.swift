@@ -21,8 +21,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
     private var row: NSDictionary?
     private var filterby: Sortandfilter?
     private var index: Int?
-    private var sortedascendigdesending: Bool = true
-    typealias Row = (Int, Int)
+    private var sortedascending: Bool = true
 
     @IBOutlet weak var scheduletable: NSTableView!
     @IBOutlet weak var search: NSSearchField!
@@ -67,13 +66,23 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
     }
 
     @IBAction func sortdirection(_ sender: NSButton) {
-        if self.sortedascendigdesending == true {
-            self.sortedascendigdesending = false
+        if self.sortedascending == true {
+            self.sortedascending = false
             self.sortdirection.image = #imageLiteral(resourceName: "down")
         } else {
-            self.sortedascendigdesending = true
+            self.sortedascending = true
             self.sortdirection.image = #imageLiteral(resourceName: "up")
         }
+        guard self.filterby != nil else { return }
+        switch self.filterby! {
+        case .executedate:
+            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbydate(notsorted: self.scheduleloggdata?.loggdata, sortdirection: self.sortedascending)
+        default:
+            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbystring(notsorted: self.scheduleloggdata?.loggdata, sortby: self.filterby!, sortdirection: self.sortedascending)
+        }
+        globalMainQueue.async(execute: { () -> Void in
+            self.scheduletable.reloadData()
+        })
     }
 
     @IBAction func selectalllogs(_ sender: NSButton) {
@@ -106,13 +115,12 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
         self.scheduletable.delegate = self
         self.scheduletable.dataSource = self
         self.search.delegate = self
         ViewControllerReference.shared.setvcref(viewcontroller: .vcloggdata, nsviewcontroller: self)
         self.sortdirection.image = #imageLiteral(resourceName: "up")
-        self.sortedascendigdesending = true
+        self.sortedascending = true
     }
 
     override func viewDidAppear() {
@@ -121,16 +129,15 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
         self.index = self.index()
         if let index = self.index {
             let hiddenID = self.configurations?.gethiddenID(index: index) ?? -1
-            self.scheduleloggdata = ScheduleLoggData(hiddenID: hiddenID, sortdirection: self.sortedascendigdesending)
+            self.scheduleloggdata = ScheduleLoggData(hiddenID: hiddenID, sortascending: self.sortedascending)
             self.info(num: 1)
         } else {
             self.info(num: 0)
-            self.scheduleloggdata = ScheduleLoggData(sortdirection: self.sortedascendigdesending)
+            self.scheduleloggdata = ScheduleLoggData(sortascending: self.sortedascending)
         }
         globalMainQueue.async(execute: { () -> Void in
             self.scheduletable.reloadData()
         })
-        self.row = nil
     }
 
     override func viewDidDisappear() {
@@ -147,17 +154,15 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
 
 extension ViewControllerLoggData: NSSearchFieldDelegate {
 
-    func controlTextDidChange(_ obj: Notification) {
+    func controlTextDidBeginEditing(_ obj: Notification) {
         self.delayWithSeconds(0.25) {
             let filterstring = self.search.stringValue
+            self.selectbutton.state = .off
             if filterstring.isEmpty {
-                globalMainQueue.async(execute: { () -> Void in
-                    self.scheduleloggdata = ScheduleLoggData(sortdirection: self.sortedascendigdesending)
-                    self.scheduletable.reloadData()
-                })
+                self.reloadtabledata()
             } else {
+                self.scheduleloggdata!.filter(search: filterstring, filterby: self.filterby)
                 globalMainQueue.async(execute: { () -> Void in
-                    self.scheduleloggdata!.filter(search: filterstring, filterby: self.filterby)
                     self.scheduletable.reloadData()
                 })
             }
@@ -166,11 +171,9 @@ extension ViewControllerLoggData: NSSearchFieldDelegate {
 
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
         self.index = nil
-        globalMainQueue.async(execute: { () -> Void in
-            self.scheduletable.reloadData()
-        })
+        self.reloadtabledata()
+        self.selectbutton.state = .off
     }
-
 }
 
 extension ViewControllerLoggData: NSTableViewDataSource {
@@ -186,7 +189,6 @@ extension ViewControllerLoggData: NSTableViewDataSource {
             return self.scheduleloggdata!.loggdata?.count ?? 0
         }
     }
-
 }
 
 extension ViewControllerLoggData: NSTableViewDelegate {
@@ -228,9 +230,9 @@ extension ViewControllerLoggData: NSTableViewDelegate {
             return
         }
         if sortbystring {
-            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbystring(notsorted: self.scheduleloggdata?.loggdata, sortby: self.filterby!, sortdirection: self.sortedascendigdesending)
+            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbystring(notsorted: self.scheduleloggdata?.loggdata, sortby: self.filterby!, sortdirection: self.sortedascending)
         } else {
-            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbyrundate(notsorted: self.scheduleloggdata?.loggdata, sortdirection: self.sortedascendigdesending)
+            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbydate(notsorted: self.scheduleloggdata?.loggdata, sortdirection: self.sortedascending)
         }
         globalMainQueue.async(execute: { () -> Void in
             self.scheduletable.reloadData()
@@ -257,33 +259,16 @@ extension ViewControllerLoggData: NSTableViewDelegate {
 extension ViewControllerLoggData: Reloadandrefresh {
 
     func reloadtabledata() {
-        self.scheduleloggdata = ScheduleLoggData(sortdirection: self.sortedascendigdesending)
+        if let index = self.index {
+            let hiddenID = self.configurations?.gethiddenID(index: index) ?? -1
+            guard hiddenID > -1 else { return }
+            self.scheduleloggdata = ScheduleLoggData(hiddenID: hiddenID, sortascending: self.sortedascending)
+        } else {
+            self.scheduleloggdata = ScheduleLoggData(sortascending: self.sortedascending)
+        }
         globalMainQueue.async(execute: { () -> Void in
             self.scheduletable.reloadData()
         })
-        self.row = nil
-        self.selectedrows.stringValue = "Selected logs:"
-    }
-}
-
-extension ViewControllerLoggData: ReadLoggdata {
-    func readloggdata() {
-        // Triggered after a delete of log rows
-        if Activetab(viewcontroller: .vcloggdata).isactive {
-            self.scheduleloggdata = nil
-            globalMainQueue.async(execute: { () -> Void in
-                self.index = self.index()
-                if let index = self.index {
-                    let hiddenID = self.configurations?.gethiddenID(index: index) ?? -1
-                    self.scheduleloggdata = ScheduleLoggData(hiddenID: hiddenID, sortdirection: self.sortedascendigdesending)
-                    self.info(num: 1)
-                } else {
-                    self.info(num: 0)
-                    self.scheduleloggdata = ScheduleLoggData(sortdirection: self.sortedascendigdesending)
-                }
-                self.scheduletable.reloadData()
-            })
-        }
     }
 }
 
