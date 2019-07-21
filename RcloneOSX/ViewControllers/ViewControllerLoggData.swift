@@ -76,9 +76,9 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
         guard self.filterby != nil else { return }
         switch self.filterby! {
         case .executedate:
-            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbydate(notsorted: self.scheduleloggdata?.loggdata, sortdirection: self.sortedascending)
+            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbydate(notsortedlist: self.scheduleloggdata?.loggdata, sortdirection: self.sortedascending)
         default:
-            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbystring(notsorted: self.scheduleloggdata?.loggdata, sortby: self.filterby!, sortdirection: self.sortedascending)
+            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbystring(notsortedlist: self.scheduleloggdata?.loggdata, sortby: self.filterby!, sortdirection: self.sortedascending)
         }
         globalMainQueue.async(execute: { () -> Void in
             self.scheduletable.reloadData()
@@ -230,9 +230,9 @@ extension ViewControllerLoggData: NSTableViewDelegate {
             return
         }
         if sortbystring {
-            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbystring(notsorted: self.scheduleloggdata?.loggdata, sortby: self.filterby!, sortdirection: self.sortedascending)
+            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbystring(notsortedlist: self.scheduleloggdata?.loggdata, sortby: self.filterby!, sortdirection: self.sortedascending)
         } else {
-            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbydate(notsorted: self.scheduleloggdata?.loggdata, sortdirection: self.sortedascending)
+            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbydate(notsortedlist: self.scheduleloggdata?.loggdata, sortdirection: self.sortedascending)
         }
         globalMainQueue.async(execute: { () -> Void in
             self.scheduletable.reloadData()

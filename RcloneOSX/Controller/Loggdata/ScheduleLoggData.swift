@@ -63,7 +63,7 @@ final class ScheduleLoggData: SetConfigurations, SetSchedules, Sorting {
         if hiddenID != nil {
             data = data.filter({($0.value(forKey: "hiddenID") as? Int)! == hiddenID!})
         }
-        self.loggdata = self.sortbydate(notsorted: data, sortdirection: sortascending)
+        self.loggdata = self.sortbydate(notsortedlist: data, sortdirection: sortascending)
     }
 
     private func allreadAndSortAllLoggdata() {
@@ -78,7 +78,7 @@ final class ScheduleLoggData: SetConfigurations, SetSchedules, Sorting {
                 data.append(dict)
             }
         }
-        self.loggdata = self.sortbydate(notsorted: data, sortdirection: true)
+        self.loggdata = self.sortbydate(notsortedlist: data, sortdirection: true)
     }
 
     let compare: (NSMutableDictionary, NSMutableDictionary) -> Bool = { (number1, number2) in
