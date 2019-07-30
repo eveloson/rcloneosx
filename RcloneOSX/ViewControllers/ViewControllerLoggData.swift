@@ -154,7 +154,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
 
 extension ViewControllerLoggData: NSSearchFieldDelegate {
 
-    func controlTextDidBeginEditing(_ obj: Notification) {
+    func controlTextDidChange(_ obj: Notification) {
         self.delayWithSeconds(0.25) {
             let filterstring = self.search.stringValue
             self.selectbutton.state = .off
@@ -174,6 +174,7 @@ extension ViewControllerLoggData: NSSearchFieldDelegate {
         self.reloadtabledata()
         self.selectbutton.state = .off
     }
+
 }
 
 extension ViewControllerLoggData: NSTableViewDataSource {
