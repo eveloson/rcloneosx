@@ -103,7 +103,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
     @IBAction func deletealllogs(_ sender: NSButton) {
         let answer = Alerts.dialogOKCancel("Delete " + self.selectednumber() + " logrecords?", text: "Cancel or OK")
         if answer {
-            self.deselectRow()
+            self.deselectrow()
             self.schedules?.deleteselectedrows(scheduleloggdata: self.scheduleloggdata)
         }
     }
@@ -146,7 +146,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
         self.selectbutton.state = .off
     }
 
-    private func deselectRow() {
+    private func deselectrow() {
         guard self.index != nil else { return }
         self.scheduletable.deselectRow(self.index!)
     }
@@ -261,11 +261,8 @@ extension ViewControllerLoggData: Reloadandrefresh {
     func reloadtabledata() {
         if let index = self.index {
             let hiddenID = self.configurations?.gethiddenID(index: index) ?? -1
-            if hiddenID > -1 {
-                self.scheduleloggdata = ScheduleLoggData(hiddenID: hiddenID, sortascending: self.sortedascending)
-            } else {
-                self.scheduleloggdata = ScheduleLoggData(sortascending: self.sortedascending)
-            }
+            guard hiddenID > -1 else { return }
+            self.scheduleloggdata = ScheduleLoggData(hiddenID: hiddenID, sortascending: self.sortedascending)
         } else {
             self.scheduleloggdata = ScheduleLoggData(sortascending: self.sortedascending)
         }
