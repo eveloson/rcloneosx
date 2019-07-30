@@ -295,8 +295,8 @@ protocol GetOutput: class {
 }
 
 protocol OutPut {
-    var informationDelegateMain: GetOutput? {get}
-    var informationDelegateCopyFiles: GetOutput? {get}
+    var informationDelegateMain: GetOutput? { get }
+    var informationDelegateCopyFiles: GetOutput? { get }
 }
 
 extension OutPut {
