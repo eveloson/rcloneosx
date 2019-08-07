@@ -23,15 +23,12 @@ extension ViewControllertabMain: NSTableViewDelegate, Attributedestring {
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         if row > self.configurations!.configurationsDataSourcecount() - 1 { return nil }
         let object: NSDictionary = self.configurations!.getConfigurationsDataSource()![row]
-        var celltext: String?
         let markdays: Bool = self.configurations!.getConfigurations()[row].markdays
-        celltext = object[tableColumn!.identifier] as? String
-        if tableColumn!.identifier.rawValue == "batchCellID" {
-            return object[tableColumn!.identifier]
-        } else if markdays == true && tableColumn!.identifier.rawValue == "daysID" {
-            return self.attributedstring(str: celltext!, color: NSColor.red, align: .right)
-        } else if tableColumn!.identifier.rawValue == "offsiteServerCellID", ((object[tableColumn!.identifier] as? String)?.isEmpty)! {
-            return "localhost"
+        let celltext = object[tableColumn!.identifier] as? String
+        if tableColumn!.identifier.rawValue == "daysID" {
+            if markdays {
+                return self.attributedstring(str: celltext!, color: NSColor.red, align: .right)
+            }
         } else if tableColumn!.identifier.rawValue == "statCellID" {
                 if row == self.index {
                     if self.setbatchyesno == false {
@@ -47,10 +44,15 @@ extension ViewControllertabMain: NSTableViewDelegate, Attributedestring {
                 }
 
         } else {
-            return object[tableColumn!.identifier] as? String
+            if tableColumn!.identifier.rawValue == "batchCellID" {
+                return object[tableColumn!.identifier] as? Int
+            } else {
+                return object[tableColumn!.identifier] as? String
+            }
         }
         return nil
     }
+
     // Toggling batch
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
         if self.process != nil {
