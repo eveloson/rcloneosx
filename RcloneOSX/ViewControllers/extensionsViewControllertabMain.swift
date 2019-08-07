@@ -52,6 +52,7 @@ extension ViewControllertabMain: NSTableViewDelegate, Attributedestring {
         }
         return nil
     }
+
     // Toggling batch
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
         if self.process != nil {
