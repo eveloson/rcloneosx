@@ -28,6 +28,8 @@ extension ViewControllertabMain: NSTableViewDelegate, Attributedestring {
         if tableColumn!.identifier.rawValue == "daysID" {
             if markdays {
                 return self.attributedstring(str: celltext!, color: NSColor.red, align: .right)
+            } else {
+                return object[tableColumn!.identifier] as? String
             }
         } else if tableColumn!.identifier.rawValue == "statCellID" {
                 if row == self.index {
