@@ -58,7 +58,6 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
     private func updateProgressbar(_ value: Double) {
         self.progress.doubleValue = value
     }
-
 }
 
 extension ViewControllerProgressProcess: UpdateProgress {
