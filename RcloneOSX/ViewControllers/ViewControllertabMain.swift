@@ -366,8 +366,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             // Dry run
             self.singletask = SingleTask(index: self.index!)
             self.singletask?.executeSingleTask()
-            // Set reference to singleTask object
-            self.configurations!.singleTask = self.singletask
             return
         }
         // Real run

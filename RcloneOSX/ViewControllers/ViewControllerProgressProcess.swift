@@ -30,13 +30,12 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        self.abort.isEnabled = true
         ViewControllerReference.shared.setvcref(viewcontroller: .vcprogressview, nsviewcontroller: self)
-        if let pvc2 = self.configurations!.singleTask {
-            self.countDelegate = pvc2
+        if let pvc = (self.presentingViewController as? ViewControllertabMain)?.singletask {
+            self.countDelegate = pvc
         }
-        self.calculatedNumberOfFiles = self.countDelegate?.maxCount()
         self.initiateProgressbar()
+        self.abort.isEnabled = true
     }
 
     override func viewWillDisappear() {
@@ -50,9 +49,7 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
 
     // Progress bars
     private func initiateProgressbar() {
-        if let calculatedNumberOfFiles = self.calculatedNumberOfFiles {
-            self.progress.maxValue = Double(calculatedNumberOfFiles)
-        }
+        self.progress.maxValue = Double(self.countDelegate?.maxCount() ?? 0)
         self.progress.minValue = 0
         self.progress.doubleValue = 0
         self.progress.startAnimation(self)
