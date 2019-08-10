@@ -29,13 +29,13 @@ class Configurations: ReloadTable, SetSchedules {
     // Initialized during startup
     private var argumentAllConfigurations: [ArgumentsOneConfiguration]?
     // Datasource for NSTableViews
-    private var configurationsDataSource: [NSMutableDictionary]?
+    private var configurationsDataSource: [NSDictionary]?
     // Object for batchQueue data and operations
     private var batchQueue: BatchTaskWorkQueu?
     // backup list from remote info view
     var quickbackuplist: [Int]?
     // Estimated backup list, all backups
-    var estimatedlist: [NSMutableDictionary]?
+    var estimatedlist: [NSDictionary]?
     // remote info tasks
     var remoteinfotaskworkqueue: RemoteInfoTaskWorkQueue?
     // Which kind of task
@@ -75,7 +75,7 @@ class Configurations: ReloadTable, SetSchedules {
     /// as datasource for tableViews
     /// - parameter none: none
     /// - returns : Array of Configurations
-    func getConfigurationsDataSource() -> [NSMutableDictionary]? {
+    func getConfigurationsDataSource() -> [NSDictionary]? {
         return self.configurationsDataSource
     }
 
@@ -87,9 +87,6 @@ class Configurations: ReloadTable, SetSchedules {
         var data = [NSMutableDictionary]()
         for i in 0 ..< configurations.count {
             let row: NSMutableDictionary = ConvertOneConfig(config: self.configurations![i]).dict
-            if (row.value(forKey: "offsiteServerCellID") as? String)?.isEmpty == true {
-                row.setValue("localhost", forKey: "offsiteServerCellID")
-            }
             if self.quickbackuplist != nil {
                 let quickbackup = self.quickbackuplist!.filter({$0 == configurations[i].hiddenID})
                 if quickbackup.count > 0 {
