@@ -11,7 +11,7 @@ import Foundation
 
 struct ConvertUserconfiguration {
 
-    var userconfiguration: [NSDictionary]?
+    var userconfiguration: [NSMutableDictionary]?
 
     init() {
         var optionalpathrclone: Int?
@@ -54,7 +54,7 @@ struct ConvertUserconfiguration {
         } else {
             rclone143 = 0
         }
-        var array = [NSDictionary]()
+        var array = [NSMutableDictionary]()
         marknumberofdayssince = String(ViewControllerReference.shared.marknumberofdayssince)
         let dict: NSMutableDictionary = [
             "optionalpathrclone": optionalpathrclone! as Int,
