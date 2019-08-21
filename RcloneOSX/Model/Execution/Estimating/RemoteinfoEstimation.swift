@@ -168,11 +168,7 @@ extension RemoteinfoEstimation: UpdateProgress {
             record.setValue(self.configurations?.getConfigurations()[self.index!].localCatalog, forKey: "localCatalog")
             record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteCatalog, forKey: "offsiteCatalog")
             record.setValue(self.configurations?.getConfigurations()[self.index!].hiddenID, forKey: "hiddenID")
-            if self.configurations?.getConfigurations()[self.index!].offsiteServer.isEmpty == true {
-                record.setValue("localhost", forKey: "offsiteServer")
-            } else {
-                record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteServer, forKey: "offsiteServer")
-            }
+            record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteServer, forKey: "offsiteServer")
             self.records?.append(record)
             self.configurations?.estimatedlist?.append(record)
         } else {
@@ -186,16 +182,15 @@ extension RemoteinfoEstimation: UpdateProgress {
             self.records![index].setValue(totalNumber, forKey: "totalNumber")
             self.records![index].setValue(totalNumberSizebytes, forKey: "totalNumberSizebytes")
         }
-        self.updateprogressDelegate?.processTermination()
-        guard self.stackoftasktobeestimated != nil else {
+        guard self.stackoftasktobeestimated?.count ?? 0 > 0 else {
+            self.selectalltaskswithnumbers(deselect: false)
+            self.setbackuplist()
             self.startstopProgressIndicatorDelegate?.stop()
             return
         }
+        self.updateprogressDelegate?.processTermination()
         self.outputprocess = OutputProcess()
         self.index = self.stackoftasktobeestimated?.remove(at: 0).1
-        if self.stackoftasktobeestimated?.count == 0 {
-            self.stackoftasktobeestimated = nil
-        }
         if self.estimatefiles {
             self.estimatefiles = false
             _ = RcloneSize(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
