@@ -124,8 +124,6 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
 
     func selectalltaskswithfilestobackup(deselect: Bool) {
         self.selectalltaskswithnumbers(deselect: deselect)
-        self.reloadtableDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcremoteinfo) as? ViewControllerRemoteInfo
-        self.reloadtableDelegate?.reloadtabledata()
         self.enablebackupbuttonDelegate?.enablequickbackupbutton()
     }
 
