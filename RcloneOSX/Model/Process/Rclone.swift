@@ -12,6 +12,10 @@ import Foundation
 
 final class Rclone: ProcessCmd {
 
+    func setdelegate(object: UpdateProgress) {
+        self.updateDelegate = object
+    }
+
     init (arguments: [String]?) {
         super.init(command: nil, arguments: arguments)
         self.updateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain

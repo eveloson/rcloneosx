@@ -55,11 +55,8 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     // Reference to the single taskobject
     var singletask: SingleTask?
     // Reference to batch taskobject
-    var batchtasks: BatchTask?
+    var executebatch: ExecuteBatch?
     var dateandtime: Dateandtime?
-    // Delegate function getting batchTaskObject
-    weak var batchtasksDelegate: GetNewBatchTask?
-    // Main tableview
     @IBOutlet weak var mainTableView: NSTableView!
     // Progressbar indicating work
     @IBOutlet weak var working: NSProgressIndicator!
@@ -262,7 +259,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
 
     func automaticbackup() {
         self.configurations!.processtermination = .automaticbackup
-        self.configurations?.remoteinfotaskworkqueue = RemoteinfoEstimation(inbatch: false)
+        self.configurations?.remoteinfoestimation = RemoteinfoEstimation(inbatch: false)
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
@@ -361,7 +358,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             return
         }
         guard self.index != nil else { return }
-        self.batchtasks = nil
+        self.executebatch = nil
         guard self.singletask != nil else {
             // Dry run
             self.singletask = SingleTask(index: self.index!)
