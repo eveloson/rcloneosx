@@ -10,11 +10,11 @@
 import Foundation
 
 protocol SetRemoteInfo: class {
-    func setremoteinfo(remoteinfotask: RemoteInfoTaskWorkQueue?)
-    func getremoteinfo() -> RemoteInfoTaskWorkQueue?
+    func setremoteinfo(remoteinfotask: RemoteinfoEstimation?)
+    func getremoteinfo() -> RemoteinfoEstimation?
 }
 
-class RemoteInfoTaskWorkQueue: SetConfigurations, Remoterclonesize {
+final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
     // (hiddenID, index)
     // row 0, 2, 4 number of files
     // row 1, 3, 5 remote size
@@ -59,7 +59,7 @@ class RemoteInfoTaskWorkQueue: SetConfigurations, Remoterclonesize {
             self.stackoftasktobeestimated = nil
         }
         self.startstopProgressIndicatorDelegate?.start()
-        _ = EstimateRemoteInformationTask(index: self.index!, outputprocess: self.outputprocess)
+        _ = EstimateremoteInformationOnetask(index: self.index!, outputprocess: self.outputprocess)
     }
 
     func processTermination() {
@@ -69,7 +69,7 @@ class RemoteInfoTaskWorkQueue: SetConfigurations, Remoterclonesize {
         }
         self.count = self.stackoftasktobeestimated?.count
         if self.estimatefiles {
-            let record = RemoteInfoTask(outputprocess: self.outputprocess).record()
+            let record = RemoteinfonumbersOnetask(outputprocess: self.outputprocess).record()
             record.setValue(self.configurations?.getConfigurations()[self.index!].localCatalog, forKey: "localCatalog")
             record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteCatalog, forKey: "offsiteCatalog")
             record.setValue(self.configurations?.getConfigurations()[self.index!].hiddenID, forKey: "hiddenID")
@@ -106,13 +106,13 @@ class RemoteInfoTaskWorkQueue: SetConfigurations, Remoterclonesize {
             _ = RcloneSize(index: self.index!, outputprocess: self.outputprocess)
         } else {
             self.estimatefiles = true
-            _ = EstimateRemoteInformationTask(index: self.index!, outputprocess: self.outputprocess)
+            _ = EstimateremoteInformationOnetask(index: self.index!, outputprocess: self.outputprocess)
         }
     }
 
     func processTermination_inbatch() {
         self.count = self.stackoftasktobeestimated?.count
-        let record = RemoteInfoTask(outputprocess: self.outputprocess).record()
+        let record = RemoteinfonumbersOnetask(outputprocess: self.outputprocess).record()
         record.setValue(self.configurations?.getConfigurations()[self.index!].localCatalog, forKey: "localCatalog")
         record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteCatalog, forKey: "offsiteCatalog")
         record.setValue(self.configurations?.getConfigurations()[self.index!].hiddenID, forKey: "hiddenID")
@@ -133,7 +133,7 @@ class RemoteInfoTaskWorkQueue: SetConfigurations, Remoterclonesize {
         if self.stackoftasktobeestimated?.count == 0 {
             self.stackoftasktobeestimated = nil
         }
-         _ = EstimateRemoteInformationTask(index: self.index!, outputprocess: self.outputprocess)
+         _ = EstimateremoteInformationOnetask(index: self.index!, outputprocess: self.outputprocess)
     }
 
     func setbackuplist(list: [NSMutableDictionary]) {
@@ -211,7 +211,7 @@ class RemoteInfoTaskWorkQueue: SetConfigurations, Remoterclonesize {
     }
 }
 
-extension RemoteInfoTaskWorkQueue: CountEstimating {
+extension RemoteinfoEstimation: CountEstimating {
     func maxCount() -> Int {
         return self.maxnumber ?? 0
     }

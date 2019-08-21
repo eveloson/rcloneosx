@@ -111,9 +111,8 @@ extension ViewControllertabMain: RcloneIsChanged {
 
 // Uuups, new version is discovered
 extension ViewControllertabMain: NewVersionDiscovered {
-    // Notifies if new version is discovered
     func notifyNewVersion() {
-        guard Activetab(viewcontroller: .vctabmain).isactive == true else { return }
+        guard (self.presentingViewController as? ViewControllertabMain) != nil else { return }
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.newVersionViewController!)
         })
@@ -562,11 +561,11 @@ extension ViewControllertabMain: OpenQuickBackup {
 }
 
 extension ViewControllertabMain: SetRemoteInfo {
-    func getremoteinfo() -> RemoteInfoTaskWorkQueue? {
+    func getremoteinfo() -> RemoteinfoEstimation? {
         return self.configurations!.remoteinfotaskworkqueue
     }
 
-    func setremoteinfo(remoteinfotask: RemoteInfoTaskWorkQueue?) {
+    func setremoteinfo(remoteinfotask: RemoteinfoEstimation?) {
         self.configurations!.remoteinfotaskworkqueue = remoteinfotask
     }
 }

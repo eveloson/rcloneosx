@@ -163,7 +163,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, 
 
     private func setNumbers(outputprocess: OutputProcess?) {
         globalMainQueue.async(execute: { () -> Void in
-            let infotask = RemoteInfoTask(outputprocess: outputprocess)
+            let infotask = RemoteinfonumbersOnetask(outputprocess: outputprocess)
             self.transferredNumber.stringValue = infotask.transferredNumber!
         })
     }

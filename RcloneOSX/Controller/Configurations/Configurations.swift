@@ -37,7 +37,7 @@ class Configurations: ReloadTable, SetSchedules {
     // Estimated backup list, all backups
     var estimatedlist: [NSDictionary]?
     // remote info tasks
-    var remoteinfotaskworkqueue: RemoteInfoTaskWorkQueue?
+    var remoteinfotaskworkqueue: RemoteinfoEstimation?
     // Which kind of task
     var processtermination: ProcessTermination?
 
