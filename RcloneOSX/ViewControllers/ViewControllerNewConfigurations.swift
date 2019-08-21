@@ -103,7 +103,6 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        ViewControllerReference.shared.activetab = .vcnewconfigurations
         guard self.diddissappear == false else { return }
         if let profile = self.configurations!.getProfile() {
             self.storageapi = PersistentStorageAPI(profile: profile)

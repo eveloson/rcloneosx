@@ -5,7 +5,7 @@
 //  Created by Thomas Evensen on 03.06.2018.
 //  Copyright © 2018 Thomas Evensen. All rights reserved.
 //
-// swiftlint:disable cyclomatic_complexity function_body_length file_length line_length
+// swiftlint:disable file_length line_length
 
 import Foundation
 import Cocoa
@@ -129,111 +129,6 @@ extension ViewControllertabMain: DismissViewController {
             self.displayProfile()
         })
         self.setinfoaboutrclone()
-    }
-}
-
-// Called when either a terminatopn of Process is
-// discovered or data is availiable in the filehandler
-// See file rcloneProcess.swift.
-extension ViewControllertabMain: UpdateProgress {
-    // Delegate functions called from the Process object
-    // Protocol UpdateProgress two functions, ProcessTermination() and FileHandler()
-    func processTermination() {
-        self.readyforexecution = true
-        if self.configurations!.processtermination == nil {
-            self.configurations!.processtermination = .singlequicktask
-        }
-        switch self.configurations!.processtermination! {
-        case .singletask:
-            guard self.singletask != nil else { return }
-            self.outputprocess = self.singletask!.outputprocess
-            self.process = self.singletask!.process
-            self.singletask!.processTermination()
-        case .batchtask:
-            return
-        case .quicktask:
-            guard ViewControllerReference.shared.completeoperation != nil else { return }
-            ViewControllerReference.shared.completeoperation!.completerunningtask(outputprocess: self.outputprocess)
-            // After logging is done set reference to object = nil
-            ViewControllerReference.shared.completeoperation = nil
-            weak var processterminationDelegate: UpdateProgress?
-            processterminationDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcquickbackup) as? ViewControllerQuickBackup
-            processterminationDelegate?.processTermination()
-        case .singlequicktask:
-            guard self.index != nil else { return }
-            self.seterrorinfo(info: "")
-            self.working.stopAnimation(nil)
-            self.configurations!.setCurrentDateonConfiguration(index: self.index!, outputprocess: self.outputprocess)
-        case .remoteinfotask:
-            return
-        case .automaticbackup:
-           return
-        case .rclonesize:
-            self.remoteinfo(reset: false)
-            self.working.stopAnimation(nil)
-            self.estimating.isHidden = true
-        case .restore:
-            weak var processterminationDelegate: UpdateProgress?
-            processterminationDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
-            processterminationDelegate?.processTermination()
-        case .estimatebatchtask:
-            return
-        }
-
-    }
-
-    // Function is triggered when Process outputs data in filehandler
-    // Process is either in singleRun or batchRun
-    func fileHandler() {
-        weak var outputeverythingDelegate: ViewOutputDetails?
-        if self.configurations!.processtermination == nil {
-            self.configurations!.processtermination = .singlequicktask
-        }
-        switch self.configurations!.processtermination! {
-        case .singletask:
-            guard self.singletask != nil else { return }
-            weak var localprocessupdateDelegate: UpdateProgress?
-            localprocessupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess
-            self.outputprocess = self.singletask!.outputprocess
-            self.process = self.singletask!.process
-            localprocessupdateDelegate?.fileHandler()
-            outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-            if outputeverythingDelegate?.appendnow() ?? false {
-                outputeverythingDelegate?.reloadtable()
-            }
-        case .batchtask:
-            weak var localprocessupdateDelegate: UpdateProgress?
-            localprocessupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcbatch) as? ViewControllerBatch
-            localprocessupdateDelegate?.fileHandler()
-        case .quicktask:
-            weak var localprocessupdateDelegate: UpdateProgress?
-            localprocessupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcquickbackup) as? ViewControllerQuickBackup
-            localprocessupdateDelegate?.fileHandler()
-        case .singlequicktask:
-            outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-            if outputeverythingDelegate?.appendnow() ?? false {
-                outputeverythingDelegate?.reloadtable()
-            }
-        case .remoteinfotask:
-            outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-            if outputeverythingDelegate?.appendnow() ?? false {
-                outputeverythingDelegate?.reloadtable()
-            }
-        case .automaticbackup:
-            return
-        case .rclonesize:
-            return
-        case .restore:
-            weak var localprocessupdateDelegate: UpdateProgress?
-            localprocessupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
-            localprocessupdateDelegate?.fileHandler()
-            outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-            if outputeverythingDelegate?.appendnow() ?? false {
-                outputeverythingDelegate?.reloadtable()
-            }
-        case .estimatebatchtask:
-            return
-        }
     }
 }
 
@@ -459,16 +354,6 @@ extension ViewControllertabMain: Createandreloadconfigurations {
     // func createandreloadconfigurations()
 }
 
-extension ViewControllertabMain: Sendoutputprocessreference {
-    func sendoutputprocessreference(outputprocess: OutputProcess?) {
-        self.outputprocess = outputprocess
-    }
-
-    func sendprocessreference(process: Process?) {
-        self.process = process
-    }
-}
-
 extension  ViewControllertabMain: GetHiddenID {
     func gethiddenID() -> Int? {
         return self.hiddenID
@@ -609,5 +494,15 @@ extension Setcolor {
                 return .black
             }
         }
+    }
+}
+
+extension ViewControllertabMain: SendProcessreference {
+    func sendoutputprocessreference(outputprocess: OutputProcess?) {
+        self.outputprocess = outputprocess
+    }
+
+    func sendprocessreference(process: Process?) {
+        self.process = process
     }
 }

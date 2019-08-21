@@ -127,7 +127,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             self.outputprocess = OutputProcess()
             self.working.startAnimation(nil)
             self.estimating.isHidden = false
-            _ = RcloneSize(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
+            // _ = RcloneSize(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
         } else {
             self.info(num: 1)
         }
@@ -330,7 +330,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             self.view.window?.center()
             ViewControllerReference.shared.initialstart = 1
         }
-         ViewControllerReference.shared.activetab = .vctabmain
         if self.configurations!.configurationsDataSourcecount() > 0 {
             globalMainQueue.async(execute: { () -> Void in
                 self.mainTableView.reloadData()

@@ -182,7 +182,6 @@ extension RemoteinfoEstimation: UpdateProgress {
         _ = EstimateremoteInformationOnetask(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
     }
 
-
     func fileHandler() {
         weak var outputeverythingDelegate: ViewOutputDetails?
         outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain

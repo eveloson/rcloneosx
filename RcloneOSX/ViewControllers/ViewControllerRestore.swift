@@ -35,7 +35,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, 
 
     var outputprocess: OutputProcess?
     var restorecompleted: Bool = false
-    weak var sendprocess: Sendoutputprocessreference?
+    weak var sendprocess: SendProcessreference?
     var diddissappear: Bool = false
     var workqueue: [Work]?
     var abortandclose: Bool = true
@@ -59,10 +59,12 @@ class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, 
             self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
             switch self.selecttmptorestore.state {
             case .on:
-                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, tmprestore: true)
+                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true,
+                                tmprestore: true, updateprogress: self)
             case .off:
                 self.outputprocess = OutputProcess()
-                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, tmprestore: false)
+                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true,
+                               tmprestore: true, updateprogress: self)
             default:
                 return
             }
@@ -84,9 +86,11 @@ class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, 
                 self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
                 switch self.selecttmptorestore.state {
                 case .on:
-                    _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: false, tmprestore: true)
+                    _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: false,
+                                    tmprestore: true, updateprogress: self)
                 case .off:
-                    _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: false, tmprestore: false)
+                    _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: false,
+                                   tmprestore: true, updateprogress: self)
                 default:
                     return
                 }
@@ -147,11 +151,13 @@ class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, 
             if ViewControllerReference.shared.restorePath != nil {
                 self.selecttmptorestore.state = .on
                 _ = self.removework()
-                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, tmprestore: true)
+                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true,
+                                tmprestore: false, updateprogress: self)
             } else {
                 self.selecttmptorestore.state = .off
                 _ = self.removework()
-                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, tmprestore: false)
+                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true,
+                                tmprestore: false, updateprogress: self)
             }
         }
     }

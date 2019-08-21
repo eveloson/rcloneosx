@@ -8,16 +8,17 @@
 
 import Foundation
 
-protocol Sendoutputprocessreference: class {
+protocol SendProcessreference: class {
     func sendprocessreference(process: Process?)
     func sendoutputprocessreference(outputprocess: OutputProcess?)
 }
 
 class OperationFactory {
-
-    var operationDispatch: QuickbackupDispatch?
-
     init() {
-        self.operationDispatch = QuickbackupDispatch(seconds: 0)
+        _ = QuickbackupDispatch()
+    }
+
+    init(updateprogress: UpdateProgress?) {
+        _ = QuickbackupDispatch(updateprogress: updateprogress)
     }
 }

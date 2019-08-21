@@ -36,8 +36,8 @@ class ViewControllerReference {
         return Singleton.instance
     }
 
-    // Temporary storage of the first scheduled task
-    var scheduledTask: NSDictionary?
+    // Reference to the quick backup task
+    var quickbackuptask: NSDictionary?
     // Download URL if new version is avaliable
     var URLnewVersion: String?
     // True if rclone in /usr/local/bin
@@ -106,8 +106,6 @@ class ViewControllerReference {
     private var viewControllerRestore: NSViewController?
     // Alloutput
     private var viewControllerAlloutput: NSViewController?
-    // Which tab is active
-    var activetab: ViewController?
     // Initial start
     var initialstart: Int = 0
 
