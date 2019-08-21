@@ -198,7 +198,7 @@ extension RemoteinfoEstimation: UpdateProgress {
         }
         if self.estimatefiles {
             self.estimatefiles = false
-            _ = RcloneSize(index: self.index!, outputprocess: self.outputprocess)
+            _ = RcloneSize(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
         } else {
             self.estimatefiles = true
             _ = EstimateremoteInformationOnetask(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)

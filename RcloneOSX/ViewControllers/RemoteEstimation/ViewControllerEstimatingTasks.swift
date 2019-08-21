@@ -32,6 +32,7 @@ class ViewControllerEstimatingTasks: NSViewController, Abort, SetConfigurations,
 
     @IBAction func abort(_ sender: NSButton) {
         self.abort()
+        self.closeview()
     }
 
     override func viewDidAppear() {

@@ -98,7 +98,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, 
         if let index = self.index() {
             self.outputprocess = OutputProcess()
             self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
-            _ = RcloneSize(index: index, outputprocess: self.outputprocess)
+            _ = RcloneSize(index: index, outputprocess: self.outputprocess, updateprogress: self)
         }
     }
 
