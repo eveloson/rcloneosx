@@ -247,13 +247,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E92B18B32096F393001DBFAF /* RemoteInformation */ = {
+		E907D33F230D678600DC938F /* RemoteEstimation */ = {
+			isa = PBXGroup;
+			children = (
+				E960CAFC1FB091DD0008D12E /* ViewControllerBatch.swift */,
+				E9062E722097192D00D65748 /* ViewControllerRemoteInfo.swift */,
+				E92B18B82096F643001DBFAF /* ViewControllerEstimatingTasks.swift */,
+			);
+			path = RemoteEstimation;
+			sourceTree = "<group>";
+		};
+		E907D340230D685000DC938F /* Batch */ = {
+			isa = PBXGroup;
+			children = (
+				E960CAD11FB091D60008D12E /* BatchTaskWorkQueu.swift */,
+				E960CADB1FB091D80008D12E /* BatchTask.swift */,
+			);
+			path = Batch;
+			sourceTree = "<group>";
+		};
+		E907D341230D685B00DC938F /* SingleTask */ = {
+			isa = PBXGroup;
+			children = (
+				E960CADD1FB091D90008D12E /* SingleTaskWorkQueu.swift */,
+				E960CB021FB091DE0008D12E /* SingleTask.swift */,
+			);
+			path = SingleTask;
+			sourceTree = "<group>";
+		};
+		E92B18B32096F393001DBFAF /* Estimating */ = {
 			isa = PBXGroup;
 			children = (
 				E92B18B52096F4DE001DBFAF /* RemoteInfoTask.swift */,
 				E92B18B42096F4DE001DBFAF /* RemoteInfoTaskWorkQueue.swift */,
 			);
-			path = RemoteInformation;
+			path = Estimating;
 			sourceTree = "<group>";
 		};
 		E931186A1FC2BCA4007D1C1B /* Logging */ = {
@@ -308,10 +336,10 @@
 		E9482D241FB0AF4C00AFBB0D /* Execution */ = {
 			isa = PBXGroup;
 			children = (
-				E960CADB1FB091D80008D12E /* BatchTask.swift */,
-				E960CAD11FB091D60008D12E /* BatchTaskWorkQueu.swift */,
-				E960CB021FB091DE0008D12E /* SingleTask.swift */,
-				E960CADD1FB091D90008D12E /* SingleTaskWorkQueu.swift */,
+				E92B18B32096F393001DBFAF /* Estimating */,
+				E907D341230D685B00DC938F /* SingleTask */,
+				E907D340230D685000DC938F /* Batch */,
+				E9CB92371FEE2A8D0047F9CA /* QuickBackup.swift */,
 			);
 			path = Execution;
 			sourceTree = "<group>";
@@ -413,11 +441,11 @@
 		E960CB521FB092D40008D12E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E907D33F230D678600DC938F /* RemoteEstimation */,
 				E9BC41E42065184E001DBCC6 /* ViewControllerAllProfiles.swift */,
 				E9A795931FBF2CDA00AF8A5F /* ViewControllerInformationCopyFiles.swift */,
 				E9A795891FBF285300AF8A5F /* ViewControllerCopyFiles.swift */,
 				E960CAC71FB091D50008D12E /* ViewControllerAbout.swift */,
-				E960CAFC1FB091DD0008D12E /* ViewControllerBatch.swift */,
 				E960CAEE1FB091DB0008D12E /* ViewControllerEdit.swift */,
 				E960CAD71FB091D80008D12E /* ViewControllerInformation.swift */,
 				E960CAEF1FB091DB0008D12E /* ViewControllerLoggData.swift */,
@@ -430,8 +458,6 @@
 				E93A8CA320C3BD9B00DFA836 /* extensionsViewControllertabMain.swift */,
 				E960CACF1FB091D60008D12E /* ViewControllerUserconfiguration.swift */,
 				E9CB92341FEE29800047F9CA /* ViewControllerQuickBackup.swift */,
-				E92B18B82096F643001DBFAF /* ViewControllerEstimatingTasks.swift */,
-				E9062E722097192D00D65748 /* ViewControllerRemoteInfo.swift */,
 				E9C2029B211BFD8A005E3B11 /* ViewControllerRestore.swift */,
 				E9198C38211DC5EC0071DB3A /* ViewControllerAllOutput.swift */,
 			);
@@ -441,9 +467,7 @@
 		E960CB531FB092E70008D12E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E92B18B32096F393001DBFAF /* RemoteInformation */,
 				E9BC41E12065175B001DBCC6 /* AllProfiles */,
-				E9CB92361FEE2A720047F9CA /* QuickBackup */,
 				E931186A1FC2BCA4007D1C1B /* Logging */,
 				E9DD810A1FBF3AFE0080FEAD /* OutPut */,
 				E9DD81091FBF3A450080FEAD /* CopyFiles */,
@@ -521,14 +545,6 @@
 				E9E4DCCE21195FB700BB3F93 /* AllProfilenames.swift */,
 			);
 			path = AllProfiles;
-			sourceTree = "<group>";
-		};
-		E9CB92361FEE2A720047F9CA /* QuickBackup */ = {
-			isa = PBXGroup;
-			children = (
-				E9CB92371FEE2A8D0047F9CA /* QuickBackup.swift */,
-			);
-			path = QuickBackup;
 			sourceTree = "<group>";
 		};
 		E9D1F1A01FB49D870099D25C /* CloudServices */ = {
