@@ -259,7 +259,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
 
     func automaticbackup() {
         self.configurations!.processtermination = .automaticbackup
-        self.configurations?.remoteinfoestimation = RemoteinfoEstimation(inbatch: false)
+        self.configurations?.remoteinfoestimation = RemoteinfoEstimation(viewcontroller: self)
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 

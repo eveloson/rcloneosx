@@ -89,7 +89,7 @@ class ViewControllerBatch: NSViewController, SetDismisser, Abort, SetConfigurati
             self.mainTableView.reloadData()
         })
         self.remoteinfotaskDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-        self.remoteinfotask = RemoteinfoEstimation(inbatch: true)
+        self.remoteinfotask = RemoteinfoEstimation(viewcontroller: self)
         self.remoteinfotaskDelegate?.setremoteinfo(remoteinfotask: self.remoteinfotask)
         self.initiateProgressbar()
     }

@@ -76,12 +76,16 @@ class ViewControllerRemoteInfo: NSViewController, SetDismisser, Abort, Setcolor 
     }
 
     @IBAction func selectalltaskswithfilestobackup(_ sender: NSButton) {
-        self.remoteinfotask?.selectalltaskswithfilestobackup(deselect: self.selected)
+        self.remoteinfotask?.selectalltaskswithnumbers(deselect: self.selected)
         if self.selected == true {
             self.selected = false
         } else {
             self.selected = true
         }
+        globalMainQueue.async(execute: { () -> Void in
+            self.mainTableView.reloadData()
+        })
+        self.enableexecutebutton()
     }
 
     // Initial functions viewDidLoad and viewDidAppear
@@ -96,7 +100,7 @@ class ViewControllerRemoteInfo: NSViewController, SetDismisser, Abort, Setcolor 
             self.loaded = true
             self.progress.isHidden = true
         } else {
-            self.remoteinfotask = RemoteinfoEstimation(inbatch: false)
+            self.remoteinfotask = RemoteinfoEstimation(viewcontroller: self)
             self.remoteinfotaskDelegate?.setremoteinfo(remoteinfotask: self.remoteinfotask)
         }
     }

@@ -8,6 +8,7 @@
 // swiftlint:disable line_length
 
 import Foundation
+import Cocoa
 
 protocol SetRemoteInfo: class {
     func setremoteinfo(remoteinfotask: RemoteinfoEstimation?)
@@ -36,7 +37,7 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
         self.stackoftasktobeestimated = [Row]()
         for i in 0 ..< self.configurations!.getConfigurations().count {
             if self.configurations!.getConfigurations()[i].task == ViewControllerReference.shared.sync {
-                if self.inbatch! {
+                if self.inbatch ?? false {
                     if self.configurations!.getConfigurations()[i].batch == 1 {
                         self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
                         self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
@@ -65,16 +66,11 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
         }
     }
 
-    private func startestimation() {
-        guard self.stackoftasktobeestimated!.count > 0 else { return }
-        self.outputprocess = OutputProcess()
-        self.index = self.stackoftasktobeestimated?.remove(at: 0).1
-        self.estimatefiles = true
-        if self.stackoftasktobeestimated?.count == 0 {
-            self.stackoftasktobeestimated = nil
+    func setbackuplist(list: [NSMutableDictionary]) {
+        self.configurations?.quickbackuplist = [Int]()
+        for i in 0 ..< list.count {
+            self.configurations?.quickbackuplist!.append((list[i].value(forKey: "hiddenID") as? Int)!)
         }
-        self.startstopProgressIndicatorDelegate?.start()
-        _ = EstimateremoteInformationOnetask(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
     }
 
     func setbackuplist() {
@@ -89,52 +85,19 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
         }
     }
 
-    func setbackuplist(list: [NSMutableDictionary]) {
-        self.configurations?.quickbackuplist = [Int]()
-        for i in 0 ..< list.count {
-            self.configurations?.quickbackuplist!.append((list[i].value(forKey: "hiddenID") as? Int)!)
-        }
-    }
-
-    func processTermination_inbatch() {
-        self.count = self.stackoftasktobeestimated?.count
-        let record = RemoteinfonumbersOnetask(outputprocess: self.outputprocess).record()
-        record.setValue(self.configurations?.getConfigurations()[self.index!].localCatalog, forKey: "localCatalog")
-        record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteCatalog, forKey: "offsiteCatalog")
-        record.setValue(self.configurations?.getConfigurations()[self.index!].hiddenID, forKey: "hiddenID")
-        if self.configurations?.getConfigurations()[self.index!].offsiteServer.isEmpty == true {
-            record.setValue("localhost", forKey: "offsiteServer")
-        } else {
-            record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteServer, forKey: "offsiteServer")
-        }
-        self.records?.append(record)
-        self.configurations?.estimatedlist?.append(record)
-        self.updateprogressDelegate?.processTermination()
-        guard self.stackoftasktobeestimated != nil else {
-            self.startstopProgressIndicatorDelegate?.stop()
-            return
-        }
+    private func startestimation() {
+        guard self.stackoftasktobeestimated!.count > 0 else { return }
         self.outputprocess = OutputProcess()
         self.index = self.stackoftasktobeestimated?.remove(at: 0).1
-        if self.stackoftasktobeestimated?.count == 0 {
-            self.stackoftasktobeestimated = nil
-        }
+        self.startstopProgressIndicatorDelegate?.start()
         _ = EstimateremoteInformationOnetask(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
     }
 
-    func selectalltaskswithfilestobackup(deselect: Bool) {
-        self.selectalltaskswithnumbers(deselect: deselect)
-        self.enablebackupbuttonDelegate?.enablequickbackupbutton()
-    }
-
-    init(inbatch: Bool) {
-        self.inbatch = inbatch
-        if inbatch {
-            self.updateprogressDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcbatch) as? ViewControllerBatch
-            self.startstopProgressIndicatorDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcbatch) as? ViewControllerBatch
-        } else {
-            self.updateprogressDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcremoteinfo) as? ViewControllerRemoteInfo
-            self.startstopProgressIndicatorDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcremoteinfo) as? ViewControllerRemoteInfo
+    init(viewcontroller: NSViewController?) {
+        self.updateprogressDelegate = viewcontroller as? UpdateProgress
+        self.startstopProgressIndicatorDelegate = viewcontroller as? StartStopProgressIndicator
+        if viewcontroller == ViewControllerReference.shared.getvcref(viewcontroller: .vcbatch) as? ViewControllerBatch {
+            self.inbatch = true
         }
         self.prepareandstartexecutetasks()
         self.records = [NSMutableDictionary]()
@@ -197,6 +160,28 @@ extension RemoteinfoEstimation: UpdateProgress {
             _ = EstimateremoteInformationOnetask(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
         }
     }
+
+    func processTermination_inbatch() {
+        self.count = self.stackoftasktobeestimated?.count
+        let record = RemoteinfonumbersOnetask(outputprocess: self.outputprocess).record()
+        record.setValue(self.configurations?.getConfigurations()[self.index!].localCatalog, forKey: "localCatalog")
+        record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteCatalog, forKey: "offsiteCatalog")
+        record.setValue(self.configurations?.getConfigurations()[self.index!].hiddenID, forKey: "hiddenID")
+        record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteServer, forKey: "offsiteServer")
+        self.records?.append(record)
+        self.configurations?.estimatedlist?.append(record)
+        guard self.stackoftasktobeestimated?.count ?? 0 > 0 else {
+            self.selectalltaskswithnumbers(deselect: false)
+            self.setbackuplist()
+            self.startstopProgressIndicatorDelegate?.stop()
+            return
+        }
+        self.updateprogressDelegate?.processTermination()
+        self.outputprocess = OutputProcess()
+        self.index = self.stackoftasktobeestimated?.remove(at: 0).1
+        _ = EstimateremoteInformationOnetask(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
+    }
+
 
     func fileHandler() {
         weak var outputeverythingDelegate: ViewOutputDetails?

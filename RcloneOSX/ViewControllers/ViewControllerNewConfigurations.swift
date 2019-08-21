@@ -54,7 +54,7 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
 
     @IBAction func automaticbackup(_ sender: NSButton) {
         self.configurations!.processtermination = .automaticbackup
-        self.configurations?.remoteinfoestimation = RemoteinfoEstimation(inbatch: false)
+        self.configurations?.remoteinfoestimation = RemoteinfoEstimation(viewcontroller: self)
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
