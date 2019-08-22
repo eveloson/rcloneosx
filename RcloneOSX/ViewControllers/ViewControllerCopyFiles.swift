@@ -14,7 +14,7 @@ protocol Updateremotefilelist: class {
     func updateremotefilelist()
 }
 
-class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCopyFiles, VcSchedule, VcExecute {
+class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMain {
 
     var copysinglefiles: CopySingleFiles?
     var remotefilelist: Remotefilelist?

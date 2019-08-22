@@ -15,7 +15,7 @@ protocol ReadLoggdata: class {
     func readloggdata()
 }
 
-class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules, Delay, Index, VcExecute {
+class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules, Delay, Index, SetDismisser, VcMain {
 
     private var scheduleloggdata: ScheduleLoggData?
     private var row: NSDictionary?
@@ -278,5 +278,11 @@ extension ViewControllerLoggData: OpenQuickBackup {
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })
+    }
+}
+
+extension ViewControllerLoggData: DismissViewController {
+    func dismiss_view(viewcontroller: NSViewController) {
+        self.dismiss(viewcontroller)
     }
 }

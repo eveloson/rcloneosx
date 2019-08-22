@@ -8,7 +8,7 @@
 import Foundation
 import Cocoa
 
-class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSchedule, Delay, VcExecute {
+class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Delay, VcMain {
 
     var storageapi: PersistentStorageAPI?
     var newconfigurations: NewConfigurations?
