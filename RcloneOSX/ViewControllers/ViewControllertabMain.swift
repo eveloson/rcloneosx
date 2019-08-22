@@ -57,7 +57,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     var executebatch: ExecuteBatch?
     var executetasknow: ExecuteTaskNow?
 
-    var dateandtime: Dateandtime?
     @IBOutlet weak var mainTableView: NSTableView!
     // Progressbar indicating work
     @IBOutlet weak var working: NSProgressIndicator!
@@ -96,6 +95,64 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
 
     @IBOutlet weak var info: NSTextField!
 
+    @IBAction func totinfo(_ sender: NSButton) {
+        guard ViewControllerReference.shared.norclone == false else {
+            _ = Norclone()
+            return
+        }
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerRemoteInfo!)
+        })
+    }
+
+    @IBAction func quickbackup(_ sender: NSButton) {
+        guard ViewControllerReference.shared.norclone == false else {
+            _ = Norclone()
+            return
+        }
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerQuickBackup!)
+        })
+    }
+
+    @IBAction func information(_ sender: NSToolbarItem) {
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerInformation!)
+        })
+    }
+
+    // Abort button
+    @IBAction func abort(_ sender: NSButton) {
+        globalMainQueue.async(execute: { () -> Void in
+            self.abortOperations()
+            self.process = nil
+        })
+    }
+
+    // Userconfig
+    @IBAction func userconfiguration(_ sender: NSToolbarItem) {
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerUserconfiguration!)
+        })
+    }
+
+    // Selecting profiles
+    @IBAction func profiles(_ sender: NSButton) {
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerProfile!)
+        })
+    }
+
+    // Selecting About
+    @IBAction func about (_ sender: NSButton) {
+        self.presentAsModalWindow(self.viewControllerAbout!)
+    }
+
+    // Selecting automatic backup
+    @IBAction func automaticbackup (_ sender: NSButton) {
+        self.presentAsSheet(self.viewControllerEstimating!)
+    }
+
     @IBAction func restore(_ sender: NSButton) {
         guard self.index != nil else {
             self.info(num: 1)
@@ -125,26 +182,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         } else {
             self.info(num: 1)
         }
-    }
-
-    @IBAction func totinfo(_ sender: NSButton) {
-        guard ViewControllerReference.shared.norclone == false else {
-            _ = Norclone()
-            return
-        }
-        globalMainQueue.async(execute: { () -> Void in
-            self.presentAsSheet(self.viewControllerRemoteInfo!)
-        })
-    }
-
-    @IBAction func quickbackup(_ sender: NSButton) {
-        guard ViewControllerReference.shared.norclone == false else {
-            _ = Norclone()
-            return
-        }
-        globalMainQueue.async(execute: { () -> Void in
-            self.presentAsSheet(self.viewControllerQuickBackup!)
-        })
     }
 
     @IBAction func edit(_ sender: NSButton) {
@@ -207,47 +244,10 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     // Menus as Radiobuttons for Edit functions in tabMainView
     func reset() {
         self.outputprocess = nil
-        self.setNumbers(outputprocess: nil)
         self.process = nil
         self.singletask = nil
-    }
-
-    @IBAction func information(_ sender: NSToolbarItem) {
-        globalMainQueue.async(execute: { () -> Void in
-            self.presentAsSheet(self.viewControllerInformation!)
-        })
-    }
-
-    // Abort button
-    @IBAction func abort(_ sender: NSButton) {
-        globalMainQueue.async(execute: { () -> Void in
-            self.abortOperations()
-            self.process = nil
-        })
-    }
-
-    // Userconfig
-    @IBAction func userconfiguration(_ sender: NSToolbarItem) {
-        globalMainQueue.async(execute: { () -> Void in
-            self.presentAsSheet(self.viewControllerUserconfiguration!)
-        })
-    }
-
-    // Selecting profiles
-    @IBAction func profiles(_ sender: NSButton) {
-        globalMainQueue.async(execute: { () -> Void in
-            self.presentAsSheet(self.viewControllerProfile!)
-        })
-    }
-
-    // Selecting About
-    @IBAction func about (_ sender: NSButton) {
-        self.presentAsModalWindow(self.viewControllerAbout!)
-    }
-
-    // Selecting automatic backup
-    @IBAction func automaticbackup (_ sender: NSButton) {
-       self.presentAsSheet(self.viewControllerEstimating!)
+        self.executebatch = nil
+        self.setNumbers(outputprocess: nil)
     }
 
     @IBAction func executetasknow(_ sender: NSButton) {
@@ -318,7 +318,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         }
         self.rcloneischanged()
         self.displayProfile()
-        if self.dateandtime == nil { self.dateandtime = Dateandtime()}
     }
 
     // Execute tasks by double click in table

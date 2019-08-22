@@ -52,19 +52,39 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
             _ = Norclone()
             return
         }
-        self.openquickbackup()
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerQuickBackup!)
+        })
     }
 
-    @IBAction func automaticbackup(_ sender: NSButton) {
-        self.configurations?.remoteinfoestimation = RemoteinfoEstimation(viewcontroller: self)
-        self.presentAsSheet(self.viewControllerEstimating!)
+    @IBAction func information(_ sender: NSToolbarItem) {
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerInformation!)
+        })
     }
 
-    // Userconfiguration button
-    @IBAction func userconfiguration(_ sender: NSButton) {
+    // Userconfig
+    @IBAction func userconfiguration(_ sender: NSToolbarItem) {
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerUserconfiguration!)
         })
+    }
+
+    // Selecting profiles
+    @IBAction func profiles(_ sender: NSButton) {
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerProfile!)
+        })
+    }
+
+    // Selecting About
+    @IBAction func about (_ sender: NSButton) {
+        self.presentAsModalWindow(self.viewControllerAbout!)
+    }
+
+    // Selecting automatic backup
+    @IBAction func automaticbackup (_ sender: NSButton) {
+        self.presentAsSheet(self.viewControllerEstimating!)
     }
 
     // Abort button
