@@ -40,7 +40,7 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
                 if self.inbatch ?? false {
                     if self.configurations!.getConfigurations()[i].batch == 1 {
                         self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
-                        self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
+                        // self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
                     }
                 } else {
                     self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
@@ -120,10 +120,6 @@ extension RemoteinfoEstimation: CountRemoteEstimatingNumberoftasks {
 extension RemoteinfoEstimation: UpdateProgress {
 
     func processTermination() {
-        guard self.inbatch == false else {
-            self.processTermination_inbatch()
-            return
-        }
         self.count = self.stackoftasktobeestimated?.count
         if self.estimatefiles {
             let record = RemoteinfonumbersOnetask(outputprocess: self.outputprocess).record()
@@ -134,14 +130,15 @@ extension RemoteinfoEstimation: UpdateProgress {
             self.records?.append(record)
             self.configurations?.estimatedlist?.append(record)
         } else {
-            guard self.outputprocess?.getOutput()?.count ?? 0 > 0 else { return }
-            let size = self.remoterclonesize(input: self.outputprocess!.getOutput()![0])
-            NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal)
-            let totalNumber = String(NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal))
-            let totalNumberSizebytes = String(NumberFormatter.localizedString(from: NSNumber(value: size?.bytes ?? 0/1024), number: NumberFormatter.Style.decimal))
-            let index = self.records!.count - 1
-            self.records![index].setValue(totalNumber, forKey: "totalNumber")
-            self.records![index].setValue(totalNumberSizebytes, forKey: "totalNumberSizebytes")
+            if self.inbatch ?? false == false {
+                let size = self.remoterclonesize(input: self.outputprocess?.getOutput()?[0] ?? "")
+                NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal)
+                let totalNumber = String(NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal))
+                let totalNumberSizebytes = String(NumberFormatter.localizedString(from: NSNumber(value: size?.bytes ?? 0/1024), number: NumberFormatter.Style.decimal))
+                let index = self.records!.count - 1
+                self.records![index].setValue(totalNumber, forKey: "totalNumber")
+                self.records![index].setValue(totalNumberSizebytes, forKey: "totalNumberSizebytes")
+            }
         }
         guard self.stackoftasktobeestimated?.count ?? 0 > 0 else {
             self.selectalltaskswithnumbers(deselect: false)
@@ -152,6 +149,10 @@ extension RemoteinfoEstimation: UpdateProgress {
         self.updateprogressDelegate?.processTermination()
         self.outputprocess = OutputProcess()
         self.index = self.stackoftasktobeestimated?.remove(at: 0).1
+        if self.inbatch ?? false {
+            // In batch, force another Estimateremote
+            self.estimatefiles = false
+        }
         if self.estimatefiles {
             self.estimatefiles = false
             _ = RcloneSize(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
@@ -159,27 +160,6 @@ extension RemoteinfoEstimation: UpdateProgress {
             self.estimatefiles = true
             _ = EstimateremoteInformationOnetask(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
         }
-    }
-
-    func processTermination_inbatch() {
-        self.count = self.stackoftasktobeestimated?.count
-        let record = RemoteinfonumbersOnetask(outputprocess: self.outputprocess).record()
-        record.setValue(self.configurations?.getConfigurations()[self.index!].localCatalog, forKey: "localCatalog")
-        record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteCatalog, forKey: "offsiteCatalog")
-        record.setValue(self.configurations?.getConfigurations()[self.index!].hiddenID, forKey: "hiddenID")
-        record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteServer, forKey: "offsiteServer")
-        self.records?.append(record)
-        self.configurations?.estimatedlist?.append(record)
-        guard self.stackoftasktobeestimated?.count ?? 0 > 0 else {
-            self.selectalltaskswithnumbers(deselect: false)
-            self.setbackuplist()
-            self.startstopProgressIndicatorDelegate?.stop()
-            return
-        }
-        self.updateprogressDelegate?.processTermination()
-        self.outputprocess = OutputProcess()
-        self.index = self.stackoftasktobeestimated?.remove(at: 0).1
-        _ = EstimateremoteInformationOnetask(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
     }
 
     func fileHandler() {
