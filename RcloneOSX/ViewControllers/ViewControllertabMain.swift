@@ -52,10 +52,11 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     // Configurations object
     var configurations: Configurations?
     var schedules: Schedules?
-    // Reference to the single taskobject
+    // Reference to the taskobjects
     var singletask: SingleTask?
-    // Reference to batch taskobject
     var executebatch: ExecuteBatch?
+    var executetasknow: ExecuteTaskNow?
+
     var dateandtime: Dateandtime?
     @IBOutlet weak var mainTableView: NSTableView!
     // Progressbar indicating work
@@ -88,9 +89,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     var dynamicappend: Bool = false
     // HiddenID task, set when row is selected
     var hiddenID: Int?
-    // Bool if one or more remote server is offline
-    // Ready for execute again
-    var readyforexecution: Bool = true
     // Allprofiles view presented
     var allprofilesview: Bool = false
     // Delegate for refresh allprofiles if changes in profiles
@@ -209,7 +207,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     // Menus as Radiobuttons for Edit functions in tabMainView
     func reset() {
         self.outputprocess = nil
-        self.setNumbers(output: nil)
+        self.setNumbers(outputprocess: nil)
         self.process = nil
         self.singletask = nil
     }
@@ -228,6 +226,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         })
     }
 
+    // Userconfig
     @IBAction func userconfiguration(_ sender: NSToolbarItem) {
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerUserconfiguration!)
@@ -248,12 +247,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
 
     // Selecting automatic backup
     @IBAction func automaticbackup (_ sender: NSButton) {
-        self.automaticbackup()
-    }
-
-    func automaticbackup() {
-        self.configurations?.remoteinfoestimation = RemoteinfoEstimation(viewcontroller: self)
-        self.presentAsSheet(self.viewControllerEstimating!)
+       self.presentAsSheet(self.viewControllerEstimating!)
     }
 
     @IBAction func executetasknow(_ sender: NSButton) {
@@ -269,12 +263,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         self.configurations!.getConfigurations()[self.index!].task != ViewControllerReference.shared.check else {
             return
         }
-        self.working.startAnimation(nil)
-        let arguments = self.configurations!.arguments4rclone(index: self.index!, argtype: .arg)
-        self.outputprocess = OutputProcess()
-        let process = Rclone(arguments: arguments)
-        process.executeProcess(outputprocess: self.outputprocess)
-        self.process = process.getProcess()
+         self.executetasknow = ExecuteTaskNow(index: self.index!)
     }
 
     // Function for display rclone command
@@ -329,16 +318,12 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         }
         self.rcloneischanged()
         self.displayProfile()
-        self.readyforexecution = true
         if self.dateandtime == nil { self.dateandtime = Dateandtime()}
     }
 
     // Execute tasks by double click in table
     @objc(tableViewDoubleClick:) func tableViewDoubleClick(sender: AnyObject) {
-        if self.readyforexecution {
-            self.executeSingleTask()
-        }
-        self.readyforexecution = false
+        self.executeSingleTask()
     }
 
     // Single task can be activated by double click from table
@@ -348,7 +333,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             return
         }
         guard self.index != nil else { return }
-        self.executebatch = nil
         guard self.singletask != nil else {
             // Dry run
             self.singletask = SingleTask(index: self.index!)
@@ -364,8 +348,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             _ = Norclone()
             return
         }
-        self.singletask = nil
-        self.setNumbers(output: nil)
+        self.setNumbers(outputprocess: nil)
         self.deselect()
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerBatch!)
@@ -405,8 +388,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     func tableViewSelectionDidChange(_ notification: Notification) {
         self.seterrorinfo(info: "")
         if self.process != nil { self.abortOperations() }
-        if self.readyforexecution == false { self.abortOperations() }
-        self.readyforexecution = true
         self.info(num: 0)
         let myTableViewFromNotification = (notification.object as? NSTableView)!
         let indexes = myTableViewFromNotification.selectedRowIndexes
@@ -414,7 +395,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             self.index = index
             self.hiddenID = self.configurations!.gethiddenID(index: index)
             self.outputprocess = nil
-            self.setNumbers(output: nil)
+            self.setNumbers(outputprocess: nil)
         } else {
             self.index = nil
         }

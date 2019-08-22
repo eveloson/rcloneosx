@@ -264,13 +264,13 @@ extension ViewControllertabMain: SingleTaskProgress {
 
     // Function for getting numbers out of output object updated when
     // Process object executes the job.
-    func setNumbers(output: OutputProcess?) {
+    func setNumbers(outputprocess: OutputProcess?) {
         globalMainQueue.async(execute: { () -> Void in
-            guard output != nil else {
+            guard outputprocess != nil else {
                 self.totalNumber.stringValue = ""
                 return
             }
-            let number = Numbers(outputprocess: output)
+            let number = Numbers(outputprocess: outputprocess)
             self.totalNumber.stringValue = number.stats()
         })
     }

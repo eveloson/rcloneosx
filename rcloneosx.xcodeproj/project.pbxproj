@@ -47,6 +47,7 @@
 		E92B18B92096F643001DBFAF /* ViewControllerEstimatingTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B18B82096F643001DBFAF /* ViewControllerEstimatingTasks.swift */; };
 		E92B18BB2096F83F001DBFAF /* EstimateremoteInformationOnetask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B18BA2096F83F001DBFAF /* EstimateremoteInformationOnetask.swift */; };
 		E931186C1FC2BCC1007D1C1B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = E931186B1FC2BCC1007D1C1B /* Logging.swift */; };
+		E9338716230E9C0F00FE1B50 /* ExecuteTaskNow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9338715230E9C0F00FE1B50 /* ExecuteTaskNow.swift */; };
 		E93A8CA420C3BD9B00DFA836 /* extensionsViewControllertabMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A8CA320C3BD9B00DFA836 /* extensionsViewControllertabMain.swift */; };
 		E954F7D51FF411A6003DF6C0 /* RcloneVersionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954F7D41FF411A6003DF6C0 /* RcloneVersionString.swift */; };
 		E95E8211222813C6000DF831 /* PersistentStorageAllprofilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E8210222813C6000DF831 /* PersistentStorageAllprofilesAPI.swift */; };
@@ -150,6 +151,7 @@
 		E92B18B82096F643001DBFAF /* ViewControllerEstimatingTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerEstimatingTasks.swift; sourceTree = "<group>"; };
 		E92B18BA2096F83F001DBFAF /* EstimateremoteInformationOnetask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateremoteInformationOnetask.swift; sourceTree = "<group>"; };
 		E931186B1FC2BCC1007D1C1B /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Logging.swift; path = RcloneOSX/Model/Logging/Logging.swift; sourceTree = SOURCE_ROOT; };
+		E9338715230E9C0F00FE1B50 /* ExecuteTaskNow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecuteTaskNow.swift; sourceTree = "<group>"; };
 		E93A8CA320C3BD9B00DFA836 /* extensionsViewControllertabMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionsViewControllertabMain.swift; sourceTree = "<group>"; };
 		E954F7D41FF411A6003DF6C0 /* RcloneVersionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RcloneVersionString.swift; sourceTree = "<group>"; };
 		E95E8210222813C6000DF831 /* PersistentStorageAllprofilesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentStorageAllprofilesAPI.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				E907D341230D685B00DC938F /* SingleTask */,
 				E907D340230D685000DC938F /* Batch */,
 				E9CB92371FEE2A8D0047F9CA /* QuickBackup.swift */,
+				E9338715230E9C0F00FE1B50 /* ExecuteTaskNow.swift */,
 			);
 			path = Execution;
 			sourceTree = "<group>";
@@ -770,6 +773,7 @@
 				E931186C1FC2BCC1007D1C1B /* Logging.swift in Sources */,
 				E960CB401FB091DE0008D12E /* ViewControllerRcloneParameters.swift in Sources */,
 				E9733E7922BCCC8400A5A8F9 /* Selectprofile.swift in Sources */,
+				E9338716230E9C0F00FE1B50 /* ExecuteTaskNow.swift in Sources */,
 				E9E4DCCD21195F7600BB3F93 /* Allschedules.swift in Sources */,
 				E9198C39211DC5EC0071DB3A /* ViewControllerAllOutput.swift in Sources */,
 				E960CB291FB091DE0008D12E /* ExecuteBatch.swift in Sources */,
