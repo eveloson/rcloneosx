@@ -94,6 +94,7 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
     }
 
     init(viewcontroller: NSViewController?) {
+        self.inbatch = false
         self.updateprogressDelegate = viewcontroller as? UpdateProgress
         self.startstopProgressIndicatorDelegate = viewcontroller as? StartStopProgressIndicator
         if viewcontroller == ViewControllerReference.shared.getvcref(viewcontroller: .vcbatch) as? ViewControllerBatch {
@@ -135,10 +136,9 @@ extension RemoteinfoEstimation: UpdateProgress {
         } else {
             guard self.outputprocess?.getOutput()?.count ?? 0 > 0 else { return }
             let size = self.remoterclonesize(input: self.outputprocess!.getOutput()![0])
-            guard size != nil else { return }
-            NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.decimal)
-            let totalNumber = String(NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.decimal))
-            let totalNumberSizebytes = String(NumberFormatter.localizedString(from: NSNumber(value: size!.bytes/1024), number: NumberFormatter.Style.decimal))
+            NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal)
+            let totalNumber = String(NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal))
+            let totalNumberSizebytes = String(NumberFormatter.localizedString(from: NSNumber(value: size?.bytes ?? 0/1024), number: NumberFormatter.Style.decimal))
             let index = self.records!.count - 1
             self.records![index].setValue(totalNumber, forKey: "totalNumber")
             self.records![index].setValue(totalNumberSizebytes, forKey: "totalNumberSizebytes")
