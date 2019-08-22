@@ -48,11 +48,38 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Dela
             _ = Norclone()
             return
         }
-        self.openquickbackup()
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerQuickBackup!)
+        })
     }
 
-    @IBAction func automaticbackup(_ sender: NSButton) {
-        self.configurations?.remoteinfoestimation = RemoteinfoEstimation(viewcontroller: self)
+    @IBAction func information(_ sender: NSToolbarItem) {
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerInformation!)
+        })
+    }
+
+    // Userconfig
+    @IBAction func userconfiguration(_ sender: NSToolbarItem) {
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerUserconfiguration!)
+        })
+    }
+
+    // Selecting profiles
+    @IBAction func profiles(_ sender: NSButton) {
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerProfile!)
+        })
+    }
+
+    // Selecting About
+    @IBAction func about (_ sender: NSButton) {
+        self.presentAsModalWindow(self.viewControllerAbout!)
+    }
+
+    // Selecting automatic backup
+    @IBAction func automaticbackup (_ sender: NSButton) {
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
@@ -80,13 +107,6 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Dela
         } else if self.checkradio.state == .on {
             self.rclonecommand = self.checkcommand
         }
-    }
-
-    // Userconfiguration button
-    @IBAction func userconfiguration(_ sender: NSButton) {
-        globalMainQueue.async(execute: { () -> Void in
-            self.presentAsSheet(self.viewControllerUserconfiguration!)
-        })
     }
 
     override func viewDidLoad() {

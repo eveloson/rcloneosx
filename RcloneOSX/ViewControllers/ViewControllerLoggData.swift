@@ -15,7 +15,7 @@ protocol ReadLoggdata: class {
     func readloggdata()
 }
 
-class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules, Delay, Index, SetDismisser, VcMain {
+class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules, Delay, Index, SetDismisser, VcMain, Abort {
 
     private var scheduleloggdata: ScheduleLoggData?
     private var row: NSDictionary?
@@ -46,11 +46,43 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
             _ = Norclone()
             return
         }
-        self.openquickbackup()
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerQuickBackup!)
+        })
     }
 
-    @IBAction func automaticbackup(_ sender: NSButton) {
-        self.configurations?.remoteinfoestimation = RemoteinfoEstimation(viewcontroller: self)
+    @IBAction func information(_ sender: NSToolbarItem) {
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerInformation!)
+        })
+    }
+
+    // Abort button
+    @IBAction func abort(_ sender: NSButton) {
+        self.abort()
+    }
+
+    // Userconfig
+    @IBAction func userconfiguration(_ sender: NSToolbarItem) {
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerUserconfiguration!)
+        })
+    }
+
+    // Selecting profiles
+    @IBAction func profiles(_ sender: NSButton) {
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerProfile!)
+        })
+    }
+
+    // Selecting About
+    @IBAction func about (_ sender: NSButton) {
+        self.presentAsModalWindow(self.viewControllerAbout!)
+    }
+
+    // Selecting automatic backup
+    @IBAction func automaticbackup (_ sender: NSButton) {
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
