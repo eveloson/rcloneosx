@@ -5,76 +5,10 @@
 //  Created by Thomas Evensen on 28.10.2017.
 //  Copyright © 2017 Thomas Evensen. All rights reserved.
 //
-// swiftlint:disable line_length file_length
+// swiftlint:disable line_length
 
 import Foundation
 import Cocoa
-
-protocol VcSchedule {
-    var storyboard: NSStoryboard? { get }
-    var viewControllerScheduleDetails: NSViewController? { get }
-    var viewControllerUserconfiguration: NSViewController? { get }
-    var viewControllerProfile: NSViewController? { get }
-}
-
-extension VcSchedule {
-    var storyboard: NSStoryboard? {
-        return NSStoryboard(name: "Main", bundle: nil)
-    }
-
-    // Information Schedule details
-    // self.presentViewControllerAsSheet(self.ViewControllerScheduleDetails)
-    var viewControllerScheduleDetails: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardScheduleID")
-            as? NSViewController)!
-    }
-
-    // Userconfiguration
-    // self.presentViewControllerAsSheet(self.ViewControllerUserconfiguration)
-    var viewControllerUserconfiguration: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardUserconfigID")
-            as? NSViewController)!
-    }
-
-    // Profile
-    // self.presentViewControllerAsSheet(self.ViewControllerProfile)
-    var viewControllerProfile: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "ProfileID")
-            as? NSViewController)!
-    }
-}
-
-protocol VcExecute {
-    var storyboard: NSStoryboard? { get }
-}
-
-extension VcExecute {
-
-    var storyboard: NSStoryboard? {
-        return NSStoryboard(name: "Main", bundle: nil)
-    }
-
-    // Remote Info
-    // self.presentViewControllerAsSheet(self.viewControllerQuickBackup)
-    var viewControllerRemoteInfo: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardRemoteInfoID")
-            as? NSViewController)!
-    }
-
-    // Quick backup process
-    // self.presentViewControllerAsSheet(self.viewControllerQuickBackup)
-    var viewControllerQuickBackup: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardQuickBackupID")
-            as? NSViewController)!
-    }
-
-    // Estimating
-    // self.presentViewControllerAsSheet(self.viewControllerEstimating)
-    var viewControllerEstimating: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardEstimatingID")
-            as? NSViewController)!
-    }
-}
 
 protocol VcMain {
     var storyboard: NSStoryboard? { get }
@@ -186,52 +120,40 @@ extension VcMain {
     }
 }
 
-protocol VcCopyFiles {
-    var storyboard: NSStoryboard? { get }
-    var viewControllerInformation: NSViewController? { get }
-    var viewControllerSource: NSViewController? { get }
-}
-
-extension VcCopyFiles {
-    var storyboard: NSStoryboard? {
-        return NSStoryboard(name: "Main", bundle: nil)
-    }
-
-    // Information about rclone output
-    // self.presentViewControllerAsSheet(self.ViewControllerInformation)
-    var viewControllerInformation: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardInformationCopyFilesID") as? NSViewController)!
-    }
-
-    // Source for CopyFiles
-    // self.presentViewControllerAsSheet(self.viewControllerSource)
-    var viewControllerSource: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "CopyFilesID") as? NSViewController)!
-    }
-}
-
 // Protocol for dismissing a viewcontroller
 protocol DismissViewController: class {
     func dismiss_view(viewcontroller: NSViewController)
 }
 protocol SetDismisser {
-    var dismissDelegateMain: DismissViewController? {get}
-    var dismissDelegateNewConfigurations: DismissViewController? {get}
+    var dismissDelegateMain: DismissViewController? { get }
+    var dismissDelegateNewConfigurations: DismissViewController? { get}
+    var dismissDelegateCopyFiles: DismissViewController? { get}
+    var dismissDelegateLoggData: DismissViewController? { get}
 }
 
 extension SetDismisser {
     var dismissDelegateMain: DismissViewController? {
         return ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
     }
+    var dismissDelegateCopyFiles: DismissViewController? {
+        return ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles
+    }
     var dismissDelegateNewConfigurations: DismissViewController? {
         return ViewControllerReference.shared.getvcref(viewcontroller: .vcnewconfigurations) as? ViewControllerNewConfigurations
+    }
+    var dismissDelegateLoggData: DismissViewController? {
+        return ViewControllerReference.shared.getvcref(viewcontroller: .vcloggdata) as? ViewControllerLoggData
     }
 
     func dismissview(viewcontroller: NSViewController, vcontroller: ViewController) {
         if vcontroller == .vctabmain {
             self.dismissDelegateMain?.dismiss_view(viewcontroller: (self as? NSViewController)!)
-        } else {
+        } else if vcontroller == .vccopyfiles {
+            self.dismissDelegateCopyFiles?.dismiss_view(viewcontroller: (self as? NSViewController)!)
+        } else if vcontroller == .vcnewconfigurations {
             self.dismissDelegateNewConfigurations?.dismiss_view(viewcontroller: (self as? NSViewController)!)
+        } else if vcontroller == .vcloggdata {
+            self.dismissDelegateLoggData?.dismiss_view(viewcontroller: (self as? NSViewController)!)
         }
     }
 }

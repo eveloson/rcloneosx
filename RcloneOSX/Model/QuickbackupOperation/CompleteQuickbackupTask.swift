@@ -9,11 +9,8 @@
 
 import Foundation
 
-// Class for completion of Operation objects when Process object termination.
-// The object does also kicks of next scheduled job by setting new waiter time.
 final class CompleteQuickbackupTask: SetConfigurations, SetSchedules {
 
-    weak var taskDelegate: SingleTaskProgress?
     private var date: Date?
     private var dateStart: Date?
     private var dateformatter: DateFormatter?
@@ -24,14 +21,13 @@ final class CompleteQuickbackupTask: SetConfigurations, SetSchedules {
     // Function for finalizing the Scheduled job
     // The Operation object sets reference to the completeScheduledOperation in self.schedules!.operation
     // This function is executed when rsyn process terminates
-    func completerunningtask(outputprocess: OutputProcess?) {
+    func finalizeScheduledJob(outputprocess: OutputProcess?) {
         // Write result to Schedule
         let datestring = self.dateformatter!.string(from: date!)
         let dateStartstring = self.dateformatter!.string(from: dateStart!)
         let number = Numbers(outputprocess: outputprocess)
         let numberstring = number.stats()
         self.schedules!.addresultschedule(self.hiddenID!, dateStart: dateStartstring, result: numberstring, date: datestring, schedule: schedule!)
-        self.taskDelegate?.setNumbers(output: outputprocess)
         self.configurations!.setCurrentDateonConfigurationQuickbackup(index: self.index!, outputprocess: outputprocess)
         self.schedulesDelegate?.reloadschedulesobject()
     }
@@ -43,6 +39,5 @@ final class CompleteQuickbackupTask: SetConfigurations, SetSchedules {
         self.hiddenID = (dict.value(forKey: "hiddenID") as? Int)!
         self.schedule = dict.value(forKey: "schedule") as? String
         self.index = self.configurations!.getIndex(hiddenID!)
-        self.taskDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
     }
 }

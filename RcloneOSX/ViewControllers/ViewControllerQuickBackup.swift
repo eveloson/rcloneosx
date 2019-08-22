@@ -10,6 +10,10 @@
 import Foundation
 import Cocoa
 
+protocol QuickBackupCompleted: class {
+    func quickbackupcompleted()
+}
+
 class ViewControllerQuickBackup: NSViewController, SetDismisser, Abort, Delay, Setcolor {
 
     var seconds: Int?
@@ -42,7 +46,6 @@ class ViewControllerQuickBackup: NSViewController, SetDismisser, Abort, Delay, S
         self.quickbackup = QuickBackup()
     }
 
-    // Initial functions viewDidLoad and viewDidAppear
     override func viewDidLoad() {
         super.viewDidLoad()
         self.inprogresscountDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
@@ -50,7 +53,8 @@ class ViewControllerQuickBackup: NSViewController, SetDismisser, Abort, Delay, S
         self.mainTableView.delegate = self
         self.mainTableView.dataSource = self
         self.working.usesThreadedAnimation = true
-        self.loadtasks()
+        self.completed.isHidden = true
+        self.quickbackup = QuickBackup()
     }
 
     override func viewDidAppear() {
@@ -64,7 +68,7 @@ class ViewControllerQuickBackup: NSViewController, SetDismisser, Abort, Delay, S
         guard self.quickbackup?.sortedlist?.count ?? 0 > 0 else {
             self.completed.isHidden = false
             self.completed.textColor = setcolor(nsviewcontroller: self, color: .green)
-            self.completed.stringValue = "There seems to be nothing to do..."
+            self.completed.stringValue = NSLocalizedString("There seems to be nothing to do...", comment: "Quickbackup")
             self.executing = false
             return
         }
@@ -96,6 +100,7 @@ class ViewControllerQuickBackup: NSViewController, SetDismisser, Abort, Delay, S
         let value = Double((self.inprogresscountDelegate?.inprogressCount())!)
         progress.doubleValue = value
     }
+
 }
 
 extension ViewControllerQuickBackup: NSTableViewDataSource {
@@ -105,6 +110,7 @@ extension ViewControllerQuickBackup: NSTableViewDataSource {
 }
 
 extension ViewControllerQuickBackup: NSTableViewDelegate {
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard self.quickbackup?.sortedlist != nil else { return nil }
         guard row < self.quickbackup!.sortedlist!.count else { return nil }
@@ -136,8 +142,6 @@ extension ViewControllerQuickBackup: NSTableViewDelegate {
 }
 
 extension ViewControllerQuickBackup: Reloadandrefresh {
-
-    // Updates tableview according to progress of batch
     func reloadtabledata() {
         globalMainQueue.async(execute: { () -> Void in
             self.mainTableView.reloadData()
@@ -145,32 +149,22 @@ extension ViewControllerQuickBackup: Reloadandrefresh {
     }
 }
 
-extension ViewControllerQuickBackup: CloseViewError {
-    func closeerror() {
+extension ViewControllerQuickBackup: ReportonandhaltonError {
+    func reportandhaltonerror() {
         self.quickbackup = nil
         self.abort()
         self.working.stopAnimation(nil)
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        self.completed.isHidden = false
+        self.completed.stringValue = "Error"
+        self.completed.textColor = setcolor(nsviewcontroller: self, color: .red)
     }
 }
 
-extension ViewControllerQuickBackup: UpdateProgress {
-
-    func processTermination() {
-        self.quickbackup?.setcompleted()
-        self.quickbackup?.processTermination()
-        guard self.quickbackup?.stackoftasktobeexecuted != nil else {
-            self.completed.isHidden = false
-            self.completed.textColor = setcolor(nsviewcontroller: self, color: .green)
-            self.working.stopAnimation(nil)
-            self.executing = false
-            return
-        }
-    }
-
-    func fileHandler() {
-        globalMainQueue.async(execute: { () -> Void in
-            self.mainTableView.reloadData()
-        })
+extension ViewControllerQuickBackup: QuickBackupCompleted {
+    func quickbackupcompleted() {
+        self.completed.isHidden = false
+        self.completed.textColor = setcolor(nsviewcontroller: self, color: .green)
+        self.working.stopAnimation(nil)
+        self.executing = false
     }
 }

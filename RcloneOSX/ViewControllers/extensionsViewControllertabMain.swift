@@ -5,7 +5,7 @@
 //  Created by Thomas Evensen on 03.06.2018.
 //  Copyright © 2018 Thomas Evensen. All rights reserved.
 //
-// swiftlint:disable cyclomatic_complexity function_body_length file_length line_length
+// swiftlint:disable file_length line_length
 
 import Foundation
 import Cocoa
@@ -56,7 +56,7 @@ extension ViewControllertabMain: NSTableViewDelegate, Attributedestring {
         }
         self.configurations!.enabledisablebatch(row)
         self.singletask = nil
-        self.batchtasks = nil
+        self.executebatch = nil
     }
 }
 
@@ -64,13 +64,7 @@ extension ViewControllertabMain: NSTableViewDelegate, Attributedestring {
 extension ViewControllertabMain: GetOutput {
     // Get information from rclone output.
     func getoutput() -> [String] {
-        if self.outputbatch != nil {
-            return self.outputbatch!.getOutput()
-        } else if self.outputprocess != nil {
-            return self.outputprocess!.trimoutput(trim: .two)!
-        } else {
-            return [""]
-        }
+       return (self.outputprocess?.trimoutput(trim: .two)) ?? []
     }
 }
 
@@ -111,9 +105,8 @@ extension ViewControllertabMain: RcloneIsChanged {
 
 // Uuups, new version is discovered
 extension ViewControllertabMain: NewVersionDiscovered {
-    // Notifies if new version is discovered
     func notifyNewVersion() {
-        guard Activetab(viewcontroller: .vctabmain).isactive == true else { return }
+        guard (self.presentingViewController as? ViewControllertabMain) != nil else { return }
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.newVersionViewController!)
         })
@@ -130,158 +123,6 @@ extension ViewControllertabMain: DismissViewController {
             self.displayProfile()
         })
         self.setinfoaboutrclone()
-    }
-}
-
-extension ViewControllertabMain: DismissViewEstimating {
-    func dismissestimating(viewcontroller: NSViewController) {
-        self.dismiss(viewcontroller)
-    }
-}
-
-// Called when either a terminatopn of Process is
-// discovered or data is availiable in the filehandler
-// See file rcloneProcess.swift.
-extension ViewControllertabMain: UpdateProgress {
-    // Delegate functions called from the Process object
-    // Protocol UpdateProgress two functions, ProcessTermination() and FileHandler()
-    func processTermination() {
-        self.readyforexecution = true
-        if self.configurations!.processtermination == nil {
-            self.configurations!.processtermination = .singlequicktask
-        }
-        switch self.configurations!.processtermination! {
-        case .singletask:
-            guard self.singletask != nil else { return }
-            self.outputprocess = self.singletask!.outputprocess
-            self.process = self.singletask!.process
-            self.singletask!.processTermination()
-        case .batchtask:
-            self.batchtasksDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcbatch) as? ViewControllerBatch
-            self.batchtasks = self.batchtasksDelegate?.getbatchtaskObject()
-            self.outputprocess = self.batchtasks?.outputprocess
-            self.process = self.batchtasks?.process
-            self.batchtasks?.processTermination()
-        case .quicktask:
-            guard ViewControllerReference.shared.completeoperation != nil else { return }
-            ViewControllerReference.shared.completeoperation!.completerunningtask(outputprocess: self.outputprocess)
-            // After logging is done set reference to object = nil
-            ViewControllerReference.shared.completeoperation = nil
-            weak var processterminationDelegate: UpdateProgress?
-            processterminationDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcquickbackup) as? ViewControllerQuickBackup
-            processterminationDelegate?.processTermination()
-        case .singlequicktask:
-            guard self.index != nil else { return }
-            self.seterrorinfo(info: "")
-            self.working.stopAnimation(nil)
-            self.configurations!.setCurrentDateonConfiguration(index: self.index!, outputprocess: self.outputprocess)
-        case .remoteinfotask:
-            guard self.configurations!.remoteinfotaskworkqueue != nil else { return }
-            self.configurations!.remoteinfotaskworkqueue?.processTermination()
-        case .automaticbackup:
-            guard self.configurations!.remoteinfotaskworkqueue != nil else { return }
-            weak var estimateupdateDelegate: Updateestimating?
-            estimateupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcestimatingtasks) as? ViewControllerEstimatingTasks
-            // compute alle estimates
-            if self.configurations!.remoteinfotaskworkqueue!.stackoftasktobeestimated != nil {
-                self.configurations!.remoteinfotaskworkqueue?.processTermination()
-                estimateupdateDelegate?.updateProgressbar()
-            } else {
-                estimateupdateDelegate?.dismissview()
-                self.configurations!.remoteinfotaskworkqueue?.processTermination()
-                self.configurations!.remoteinfotaskworkqueue?.selectalltaskswithnumbers(deselect: false)
-                self.configurations!.remoteinfotaskworkqueue?.setbackuplist()
-                weak var openDelegate: OpenQuickBackup?
-                switch ViewControllerReference.shared.activetab ?? .vctabmain {
-                case .vcnewconfigurations:
-                    openDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcnewconfigurations) as? ViewControllerNewConfigurations
-                case .vctabmain:
-                    openDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-                case .vccopyfiles:
-                    openDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles
-                case .vcloggdata:
-                    openDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcloggdata) as? ViewControllerLoggData
-                default:
-                    openDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-                }
-                openDelegate?.openquickbackup()
-            }
-        case .rclonesize:
-            self.remoteinfo(reset: false)
-            self.working.stopAnimation(nil)
-            self.estimating.isHidden = true
-        case .restore:
-            weak var processterminationDelegate: UpdateProgress?
-            processterminationDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
-            processterminationDelegate?.processTermination()
-        case .estimatebatchtask:
-            guard self.configurations!.remoteinfotaskworkqueue != nil else { return }
-            weak var estimateupdateDelegate: Updateestimating?
-            estimateupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcestimatingtasks) as? ViewControllerEstimatingTasks
-            // compute alle estimates
-            if self.configurations!.remoteinfotaskworkqueue!.stackoftasktobeestimated != nil {
-                self.configurations!.remoteinfotaskworkqueue?.processTermination()
-                estimateupdateDelegate?.updateProgressbar()
-            } else {
-                self.configurations!.remoteinfotaskworkqueue?.processTermination()
-                self.configurations!.processtermination = .batchtask
-            }
-        }
-
-    }
-
-    // Function is triggered when Process outputs data in filehandler
-    // Process is either in singleRun or batchRun
-    func fileHandler() {
-        weak var outputeverythingDelegate: ViewOutputDetails?
-        if self.configurations!.processtermination == nil {
-            self.configurations!.processtermination = .singlequicktask
-        }
-        switch self.configurations!.processtermination! {
-        case .singletask:
-            guard self.singletask != nil else { return }
-            weak var localprocessupdateDelegate: UpdateProgress?
-            localprocessupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess
-            self.outputprocess = self.singletask!.outputprocess
-            self.process = self.singletask!.process
-            localprocessupdateDelegate?.fileHandler()
-            outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-            if outputeverythingDelegate?.appendnow() ?? false {
-                outputeverythingDelegate?.reloadtable()
-            }
-        case .batchtask:
-            weak var localprocessupdateDelegate: UpdateProgress?
-            localprocessupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcbatch) as? ViewControllerBatch
-            localprocessupdateDelegate?.fileHandler()
-        case .quicktask:
-            weak var localprocessupdateDelegate: UpdateProgress?
-            localprocessupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcquickbackup) as? ViewControllerQuickBackup
-            localprocessupdateDelegate?.fileHandler()
-        case .singlequicktask:
-            outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-            if outputeverythingDelegate?.appendnow() ?? false {
-                outputeverythingDelegate?.reloadtable()
-            }
-        case .remoteinfotask:
-            outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-            if outputeverythingDelegate?.appendnow() ?? false {
-                outputeverythingDelegate?.reloadtable()
-            }
-        case .automaticbackup:
-            return
-        case .rclonesize:
-            return
-        case .restore:
-            weak var localprocessupdateDelegate: UpdateProgress?
-            localprocessupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
-            localprocessupdateDelegate?.fileHandler()
-            outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-            if outputeverythingDelegate?.appendnow() ?? false {
-                outputeverythingDelegate?.reloadtable()
-            }
-        case .estimatebatchtask:
-            return
-        }
     }
 }
 
@@ -311,8 +152,8 @@ extension ViewControllertabMain: RcloneError {
             if self.singletask != nil {
                 self.singletask!.error()
             }
-            if self.batchtasks != nil {
-                self.batchtasks!.error()
+            if self.executebatch != nil {
+                self.executebatch!.error()
             }
         })
     }
@@ -347,11 +188,8 @@ extension ViewControllertabMain: Abort {
             // Create workqueu and add abort
             self.seterrorinfo(info: "Abort")
             self.rcloneCommand.stringValue = ""
-            if self.configurations!.remoteinfotaskworkqueue != nil && self.configurations?.estimatedlist != nil {
-                weak var localestimateupdateDelegate: Updateestimating?
-                localestimateupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcestimatingtasks) as? ViewControllerEstimatingTasks
-                localestimateupdateDelegate?.dismissview()
-                self.configurations!.remoteinfotaskworkqueue = nil
+            if self.configurations!.remoteinfoestimation != nil && self.configurations?.estimatedlist != nil {
+                self.configurations!.remoteinfoestimation = nil
             }
         } else {
             self.working.stopAnimation(nil)
@@ -426,13 +264,13 @@ extension ViewControllertabMain: SingleTaskProgress {
 
     // Function for getting numbers out of output object updated when
     // Process object executes the job.
-    func setNumbers(output: OutputProcess?) {
+    func setNumbers(outputprocess: OutputProcess?) {
         globalMainQueue.async(execute: { () -> Void in
-            guard output != nil else {
+            guard outputprocess != nil else {
                 self.totalNumber.stringValue = ""
                 return
             }
-            let number = Numbers(outputprocess: output)
+            let number = Numbers(outputprocess: outputprocess)
             self.totalNumber.stringValue = number.stats()
         })
     }
@@ -452,9 +290,7 @@ extension ViewControllertabMain: GetConfigurationsObject {
 
     // After a write, a reload is forced.
     func reloadconfigurationsobject() {
-        // If batchtask keep configuration object
-        self.batchtasks = self.batchtasksDelegate?.getbatchtaskObject()
-        guard self.batchtasks == nil else {
+        guard self.executebatch == nil else {
             // Batchtask, check if task is completed
             guard self.configurations!.getbatchQueue()?.batchruniscompleted() == false else {
                 self.createandreloadconfigurations()
@@ -469,7 +305,7 @@ extension ViewControllertabMain: GetConfigurationsObject {
 extension ViewControllertabMain: GetSchedulesObject {
     func reloadschedulesobject() {
         // If batchtask scedules object
-        guard self.batchtasks == nil else {
+        guard self.executebatch == nil else {
             // Batchtask, check if task is completed
             guard self.configurations!.getbatchQueue()?.batchruniscompleted() == false else {
                 self.createandreloadschedules()
@@ -512,16 +348,6 @@ extension ViewControllertabMain: Createandreloadconfigurations {
     // func createandreloadconfigurations()
 }
 
-extension ViewControllertabMain: Sendoutputprocessreference {
-    func sendoutputprocessreference(outputprocess: OutputProcess?) {
-        self.outputprocess = outputprocess
-    }
-
-    func sendprocessreference(process: Process?) {
-        self.process = process
-    }
-}
-
 extension  ViewControllertabMain: GetHiddenID {
     func gethiddenID() -> Int? {
         return self.hiddenID
@@ -534,7 +360,6 @@ extension ViewControllertabMain: NewProfile {
     func newProfile(profile: String?) {
         self.process = nil
         self.outputprocess = nil
-        self.outputbatch = nil
         self.singletask = nil
         self.showrclonecommandmainview()
         self.deselect()
@@ -554,7 +379,6 @@ extension ViewControllertabMain: NewProfile {
 
 extension ViewControllertabMain: OpenQuickBackup {
     func openquickbackup() {
-        self.configurations!.processtermination = .quicktask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })
@@ -562,12 +386,12 @@ extension ViewControllertabMain: OpenQuickBackup {
 }
 
 extension ViewControllertabMain: SetRemoteInfo {
-    func getremoteinfo() -> RemoteInfoTaskWorkQueue? {
-        return self.configurations!.remoteinfotaskworkqueue
+    func getremoteinfo() -> RemoteinfoEstimation? {
+        return self.configurations!.remoteinfoestimation
     }
 
-    func setremoteinfo(remoteinfotask: RemoteInfoTaskWorkQueue?) {
-        self.configurations!.remoteinfotaskworkqueue = remoteinfotask
+    func setremoteinfo(remoteinfotask: RemoteinfoEstimation?) {
+        self.configurations!.remoteinfoestimation = remoteinfotask
     }
 }
 
@@ -662,5 +486,15 @@ extension Setcolor {
                 return .black
             }
         }
+    }
+}
+
+extension ViewControllertabMain: SendProcessreference {
+    func sendoutputprocessreference(outputprocess: OutputProcess?) {
+        self.outputprocess = outputprocess
+    }
+
+    func sendprocessreference(process: Process?) {
+        self.process = process
     }
 }

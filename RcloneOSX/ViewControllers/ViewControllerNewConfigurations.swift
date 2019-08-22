@@ -8,7 +8,7 @@
 import Foundation
 import Cocoa
 
-class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSchedule, Delay, VcExecute {
+class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Delay, VcMain {
 
     var storageapi: PersistentStorageAPI?
     var newconfigurations: NewConfigurations?
@@ -38,7 +38,6 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
             _ = Norclone()
             return
         }
-        self.configurations!.processtermination = .remoteinfotask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         })
@@ -53,8 +52,7 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
     }
 
     @IBAction func automaticbackup(_ sender: NSButton) {
-        self.configurations!.processtermination = .automaticbackup
-        self.configurations?.remoteinfotaskworkqueue = RemoteInfoTaskWorkQueue(inbatch: false)
+        self.configurations?.remoteinfoestimation = RemoteinfoEstimation(viewcontroller: self)
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
@@ -103,7 +101,6 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, VcSc
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        ViewControllerReference.shared.activetab = .vcnewconfigurations
         guard self.diddissappear == false else { return }
         if let profile = self.configurations!.getProfile() {
             self.storageapi = PersistentStorageAPI(profile: profile)
@@ -205,7 +202,6 @@ extension ViewControllerNewConfigurations: SetProfileinfo {
 
 extension ViewControllerNewConfigurations: OpenQuickBackup {
     func openquickbackup() {
-        self.configurations!.processtermination = .quicktask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })

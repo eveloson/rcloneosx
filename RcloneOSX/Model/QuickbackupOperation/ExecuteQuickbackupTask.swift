@@ -23,9 +23,8 @@ final class ExecuteQuickbackupTask: SetSchedules, SetConfigurations {
     var arguments: [String]?
     var config: Configuration?
 
-    private func executetask() {
-        // Get the first job of the queue
-        if let dict: NSDictionary = ViewControllerReference.shared.scheduledTask {
+    private func executetask(updateprogress: UpdateProgress?) {
+        if let dict: NSDictionary = ViewControllerReference.shared.quickbackuptask {
             if let hiddenID: Int = dict.value(forKey: "hiddenID") as? Int {
                 let getconfigurations: [Configuration]? = configurations?.getConfigurations()
                 guard getconfigurations != nil else { return }
@@ -34,24 +33,33 @@ final class ExecuteQuickbackupTask: SetSchedules, SetConfigurations {
                 config = configArray[0]
                 if hiddenID >= 0 && config != nil {
                     arguments = RcloneProcessArguments().argumentsRclone(config!, dryRun: false, forDisplay: false)
-                    // Setting reference to finalize the job, finalize job is done when rclonetask ends (in process termination)
+                    // Setting reference to finalize the job, finalize job is done when rsynctask ends (in process termination)
                     ViewControllerReference.shared.completeoperation = CompleteQuickbackupTask(dict: dict)
                     globalMainQueue.async(execute: {
-                        if self.arguments != nil {
-                            weak var sendprocess: Sendoutputprocessreference?
+                        if let arguments = self.arguments {
+                            weak var sendprocess: SendProcessreference?
                             sendprocess = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-                            let process = RcloneScheduled(arguments: self.arguments)
+                            let process = Rclone(arguments: arguments)
+                            if updateprogress != nil {
+                                process.setdelegate(object: updateprogress!)
+                                let sendprocessreference = updateprogress as? SendProcessreference
+                                sendprocessreference?.sendoutputprocessreference(outputprocess: self.outputprocess)
+                            }
                             process.executeProcess(outputprocess: self.outputprocess)
                             sendprocess?.sendprocessreference(process: process.getProcess())
                             sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
                         }
-                     })
+                    })
                 }
             }
         }
     }
 
     init () {
-       self.executetask()
+        self.executetask(updateprogress: nil)
+    }
+
+    init(updateprogress: UpdateProgress?) {
+        self.executetask(updateprogress: updateprogress)
     }
 }

@@ -52,14 +52,12 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     // Configurations object
     var configurations: Configurations?
     var schedules: Schedules?
-    // Reference to the single taskobject
+    // Reference to the taskobjects
     var singletask: SingleTask?
-    // Reference to batch taskobject
-    var batchtasks: BatchTask?
+    var executebatch: ExecuteBatch?
+    var executetasknow: ExecuteTaskNow?
+
     var dateandtime: Dateandtime?
-    // Delegate function getting batchTaskObject
-    weak var batchtasksDelegate: GetNewBatchTask?
-    // Main tableview
     @IBOutlet weak var mainTableView: NSTableView!
     // Progressbar indicating work
     @IBOutlet weak var working: NSProgressIndicator!
@@ -87,15 +85,10 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     var index: Int?
     // Getting output from rclone
     var outputprocess: OutputProcess?
-    // Getting output from batchrun
-    var outputbatch: OutputBatch?
     // Dynamic view of output
     var dynamicappend: Bool = false
     // HiddenID task, set when row is selected
     var hiddenID: Int?
-    // Bool if one or more remote server is offline
-    // Ready for execute again
-    var readyforexecution: Bool = true
     // Allprofiles view presented
     var allprofilesview: Bool = false
     // Delegate for refresh allprofiles if changes in profiles
@@ -116,7 +109,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
                 self.info(num: 7)
                 return
         }
-        self.configurations!.processtermination = .restore
         self.presentAsSheet(self.restoreViewController!)
     }
 
@@ -126,11 +118,10 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             return
         }
         if self.index != nil {
-            self.configurations!.processtermination = .rclonesize
             self.outputprocess = OutputProcess()
             self.working.startAnimation(nil)
             self.estimating.isHidden = false
-            _ = RcloneSize(index: self.index!, outputprocess: self.outputprocess)
+            // _ = RcloneSize(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
         } else {
             self.info(num: 1)
         }
@@ -141,7 +132,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             _ = Norclone()
             return
         }
-        self.configurations!.processtermination = .remoteinfotask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         })
@@ -152,7 +142,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             _ = Norclone()
             return
         }
-        self.configurations!.processtermination = .quicktask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })
@@ -218,7 +207,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     // Menus as Radiobuttons for Edit functions in tabMainView
     func reset() {
         self.outputprocess = nil
-        self.setNumbers(output: nil)
+        self.setNumbers(outputprocess: nil)
         self.process = nil
         self.singletask = nil
     }
@@ -237,6 +226,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         })
     }
 
+    // Userconfig
     @IBAction func userconfiguration(_ sender: NSToolbarItem) {
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerUserconfiguration!)
@@ -257,13 +247,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
 
     // Selecting automatic backup
     @IBAction func automaticbackup (_ sender: NSButton) {
-        self.automaticbackup()
-    }
-
-    func automaticbackup() {
-        self.configurations!.processtermination = .automaticbackup
-        self.configurations?.remoteinfotaskworkqueue = RemoteInfoTaskWorkQueue(inbatch: false)
-        self.presentAsSheet(self.viewControllerEstimating!)
+       self.presentAsSheet(self.viewControllerEstimating!)
     }
 
     @IBAction func executetasknow(_ sender: NSButton) {
@@ -279,13 +263,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         self.configurations!.getConfigurations()[self.index!].task != ViewControllerReference.shared.check else {
             return
         }
-        self.configurations!.processtermination = .singlequicktask
-        self.working.startAnimation(nil)
-        let arguments = self.configurations!.arguments4rclone(index: self.index!, argtype: .arg)
-        self.outputprocess = OutputProcess()
-        let process = Rclone(arguments: arguments)
-        process.executeProcess(outputprocess: self.outputprocess)
-        self.process = process.getProcess()
+         self.executetasknow = ExecuteTaskNow(index: self.index!)
     }
 
     // Function for display rclone command
@@ -333,7 +311,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             self.view.window?.center()
             ViewControllerReference.shared.initialstart = 1
         }
-         ViewControllerReference.shared.activetab = .vctabmain
         if self.configurations!.configurationsDataSourcecount() > 0 {
             globalMainQueue.async(execute: { () -> Void in
                 self.mainTableView.reloadData()
@@ -341,27 +318,21 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         }
         self.rcloneischanged()
         self.displayProfile()
-        self.readyforexecution = true
         if self.dateandtime == nil { self.dateandtime = Dateandtime()}
     }
 
     // Execute tasks by double click in table
     @objc(tableViewDoubleClick:) func tableViewDoubleClick(sender: AnyObject) {
-        if self.readyforexecution {
-            self.executeSingleTask()
-        }
-        self.readyforexecution = false
+        self.executeSingleTask()
     }
 
     // Single task can be activated by double click from table
     func executeSingleTask() {
-        self.configurations!.processtermination = .singletask
         guard ViewControllerReference.shared.norclone == false else {
             _ = Norclone()
             return
         }
         guard self.index != nil else { return }
-        self.batchtasks = nil
         guard self.singletask != nil else {
             // Dry run
             self.singletask = SingleTask(index: self.index!)
@@ -373,13 +344,11 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     }
 
     @IBAction func executeBatch(_ sender: NSToolbarItem) {
-        self.configurations!.processtermination = .estimatebatchtask
         guard ViewControllerReference.shared.norclone == false else {
             _ = Norclone()
             return
         }
-        self.singletask = nil
-        self.setNumbers(output: nil)
+        self.setNumbers(outputprocess: nil)
         self.deselect()
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerBatch!)
@@ -419,8 +388,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     func tableViewSelectionDidChange(_ notification: Notification) {
         self.seterrorinfo(info: "")
         if self.process != nil { self.abortOperations() }
-        if self.readyforexecution == false { self.abortOperations() }
-        self.readyforexecution = true
         self.info(num: 0)
         let myTableViewFromNotification = (notification.object as? NSTableView)!
         let indexes = myTableViewFromNotification.selectedRowIndexes
@@ -428,8 +395,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             self.index = index
             self.hiddenID = self.configurations!.gethiddenID(index: index)
             self.outputprocess = nil
-            self.outputbatch = nil
-            self.setNumbers(output: nil)
+            self.setNumbers(outputprocess: nil)
         } else {
             self.index = nil
         }

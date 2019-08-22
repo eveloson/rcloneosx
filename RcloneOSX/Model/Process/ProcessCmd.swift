@@ -14,18 +14,6 @@ protocol ErrorOutput: class {
     func erroroutput()
 }
 
-enum ProcessTermination {
-    case singletask
-    case batchtask
-    case estimatebatchtask
-    case quicktask
-    case singlequicktask
-    case remoteinfotask
-    case automaticbackup
-    case rclonesize
-    case restore
-}
-
 class ProcessCmd: Delay {
 
     // Number of calculated files to be copied

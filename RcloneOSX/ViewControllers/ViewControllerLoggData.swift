@@ -15,7 +15,7 @@ protocol ReadLoggdata: class {
     func readloggdata()
 }
 
-class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules, Delay, Index, VcExecute {
+class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules, Delay, Index, SetDismisser, VcMain {
 
     private var scheduleloggdata: ScheduleLoggData?
     private var row: NSDictionary?
@@ -36,7 +36,6 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
             _ = Norclone()
             return
         }
-        self.configurations!.processtermination = .remoteinfotask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         })
@@ -51,8 +50,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
     }
 
     @IBAction func automaticbackup(_ sender: NSButton) {
-        self.configurations!.processtermination = .automaticbackup
-        self.configurations?.remoteinfotaskworkqueue = RemoteInfoTaskWorkQueue(inbatch: false)
+        self.configurations?.remoteinfoestimation = RemoteinfoEstimation(viewcontroller: self)
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
@@ -125,7 +123,6 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        ViewControllerReference.shared.activetab = .vcloggdata
         self.index = self.index()
         if let index = self.index {
             let hiddenID = self.configurations?.gethiddenID(index: index) ?? -1
@@ -275,9 +272,14 @@ extension ViewControllerLoggData: Reloadandrefresh {
 
 extension ViewControllerLoggData: OpenQuickBackup {
     func openquickbackup() {
-        self.configurations!.processtermination = .quicktask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })
+    }
+}
+
+extension ViewControllerLoggData: DismissViewController {
+    func dismiss_view(viewcontroller: NSViewController) {
+        self.dismiss(viewcontroller)
     }
 }

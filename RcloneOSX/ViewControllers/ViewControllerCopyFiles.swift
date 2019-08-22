@@ -14,7 +14,7 @@ protocol Updateremotefilelist: class {
     func updateremotefilelist()
 }
 
-class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCopyFiles, VcSchedule, VcExecute {
+class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMain {
 
     var copysinglefiles: CopySingleFiles?
     var remotefilelist: Remotefilelist?
@@ -42,7 +42,6 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
             _ = Norclone()
             return
         }
-        self.configurations!.processtermination = .remoteinfotask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         })
@@ -57,8 +56,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
     }
 
     @IBAction func automaticbackup(_ sender: NSButton) {
-        self.configurations!.processtermination = .automaticbackup
-        self.configurations?.remoteinfotaskworkqueue = RemoteInfoTaskWorkQueue(inbatch: false)
+        self.configurations?.remoteinfoestimation = RemoteinfoEstimation(viewcontroller: self)
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
@@ -137,7 +135,6 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcCop
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        ViewControllerReference.shared.activetab = .vccopyfiles
         guard self.diddissappear == false else {
             globalMainQueue.async(execute: { () -> Void in
                 self.rclonetableView.reloadData()
@@ -365,7 +362,6 @@ extension ViewControllerCopyFiles: NewProfile {
 
 extension ViewControllerCopyFiles: OpenQuickBackup {
     func openquickbackup() {
-        self.configurations!.processtermination = .quicktask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })

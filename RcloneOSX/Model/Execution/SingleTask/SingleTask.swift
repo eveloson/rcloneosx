@@ -1,0 +1,141 @@
+//
+//  NewSingleTask.swift
+//  rcloneOSX
+//
+//  Created by Thomas Evensen on 20.06.2017.
+//  Copyright © 2017 Thomas Evensen. All rights reserved.
+//
+//  SwiftLint: OK 31 July 2017
+//  swiftlint:disable line_length
+
+import Foundation
+
+// Protocols for instruction start/stop progressviewindicator
+protocol StartStopProgressIndicatorSingleTask: class {
+    func startIndicator()
+    func stopIndicator()
+}
+
+// Protocol functions implemented in main view
+protocol SingleTaskProgress: class {
+    func presentViewProgress()
+    func presentViewInformation(outputprocess: OutputProcess)
+    func terminateProgressProcess()
+    func seterrorinfo(info: String)
+    func setNumbers(outputprocess: OutputProcess?)
+    func gettransferredNumber() -> String
+    func gettransferredNumberSizebytes() -> String
+    func getProcessReference(process: Process)
+}
+
+final class SingleTask: SetSchedules, SetConfigurations {
+
+    weak var indicatorDelegate: StartStopProgressIndicatorSingleTask?
+    weak var singletaskDelegate: SingleTaskProgress?
+    weak var setprocessDelegate: SendProcessreference?
+
+    private var index: Int?
+    private var outputprocess: OutputProcess?
+    private var maxcount: Int = 0
+    private var workload: SingleTaskWorkQueu?
+
+    func executeSingleTask() {
+        if self.workload == nil {
+            self.workload = SingleTaskWorkQueu()
+        }
+        switch self.workload!.peek() {
+        case .estimatesinglerun:
+            if let index = self.index {
+                self.indicatorDelegate?.startIndicator()
+                if let arguments = self.configurations?.arguments4rclone(index: index, argtype: .argdryRun) {
+                    let process = Rclone(arguments: arguments)
+                    self.outputprocess = OutputProcess()
+                    process.setdelegate(object: self)
+                    process.executeProcess(outputprocess: self.outputprocess)
+                    self.setprocessDelegate?.sendprocessreference(process: process.getProcess())
+                    self.setprocessDelegate?.sendoutputprocessreference(outputprocess: self.outputprocess)
+                }
+            }
+        case .executesinglerun:
+            if let index = self.index {
+                self.singletaskDelegate?.presentViewProgress()
+                if let arguments = self.configurations?.arguments4rclone(index: index, argtype: .arg) {
+                    let process = Rclone(arguments: arguments)
+                    self.outputprocess = OutputProcess()
+                    process.setdelegate(object: self)
+                    process.executeProcess(outputprocess: self.outputprocess)
+                    self.setprocessDelegate?.sendprocessreference(process: process.getProcess())
+                    self.setprocessDelegate?.sendoutputprocessreference(outputprocess: self.outputprocess)
+                }
+            }
+        case .abort:
+            self.workload = nil
+            self.singletaskDelegate?.seterrorinfo(info: "Abort")
+        case .empty:
+            self.workload = nil
+        default:
+            self.workload = nil
+        }
+    }
+
+    func error() {
+        guard self.workload != nil else { return }
+        self.workload!.error()
+    }
+
+    init(index: Int) {
+        self.index = index
+        self.indicatorDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        self.singletaskDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        self.setprocessDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+    }
+}
+
+extension SingleTask: Count {
+
+    func maxCount() -> Int {
+        return self.maxcount
+    }
+
+    func inprogressCount() -> Int {
+        return (self.outputprocess?.count() ?? 0)
+    }
+}
+
+extension SingleTask: UpdateProgress {
+
+    func processTermination() {
+        if let workload = self.workload {
+            switch workload.pop() {
+            case .estimatesinglerun:
+                self.indicatorDelegate?.stopIndicator()
+                self.singletaskDelegate?.setNumbers(outputprocess: self.outputprocess)
+                self.maxcount = self.outputprocess!.getMaxcount()
+                self.singletaskDelegate?.presentViewInformation(outputprocess: self.outputprocess!)
+            case .error:
+                self.indicatorDelegate?.stopIndicator()
+                self.singletaskDelegate?.presentViewInformation(outputprocess: self.outputprocess!)
+                self.workload = nil
+            case .executesinglerun:
+                self.singletaskDelegate?.terminateProgressProcess()
+                self.singletaskDelegate?.presentViewInformation(outputprocess: self.outputprocess!)
+                self.configurations!.setCurrentDateonConfiguration(index: self.index!, outputprocess: self.outputprocess)
+            case .empty:
+                self.workload = nil
+            default:
+                self.workload = nil
+            }
+        }
+    }
+
+    func fileHandler() {
+        weak var outputeverythingDelegate: ViewOutputDetails?
+        weak var localprocessupdateDelegate: UpdateProgress?
+        localprocessupdateDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess
+        localprocessupdateDelegate?.fileHandler()
+        outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        if outputeverythingDelegate?.appendnow() ?? false {
+            outputeverythingDelegate?.reloadtable()
+        }
+    }
+}
