@@ -64,13 +64,7 @@ extension ViewControllertabMain: NSTableViewDelegate, Attributedestring {
 extension ViewControllertabMain: GetOutput {
     // Get information from rclone output.
     func getoutput() -> [String] {
-        if self.outputbatch != nil {
-            return self.outputbatch!.getOutput()
-        } else if self.outputprocess != nil {
-            return self.outputprocess!.trimoutput(trim: .two)!
-        } else {
-            return [""]
-        }
+       return (self.outputprocess?.trimoutput(trim: .two)) ?? []
     }
 }
 
@@ -366,7 +360,6 @@ extension ViewControllertabMain: NewProfile {
     func newProfile(profile: String?) {
         self.process = nil
         self.outputprocess = nil
-        self.outputbatch = nil
         self.singletask = nil
         self.showrclonecommandmainview()
         self.deselect()
@@ -386,7 +379,6 @@ extension ViewControllertabMain: NewProfile {
 
 extension ViewControllertabMain: OpenQuickBackup {
     func openquickbackup() {
-        self.configurations!.processtermination = .quicktask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })

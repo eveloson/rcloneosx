@@ -42,7 +42,6 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
             _ = Norclone()
             return
         }
-        self.configurations!.processtermination = .remoteinfotask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         })
@@ -57,7 +56,6 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
     }
 
     @IBAction func automaticbackup(_ sender: NSButton) {
-        self.configurations!.processtermination = .automaticbackup
         self.configurations?.remoteinfoestimation = RemoteinfoEstimation(viewcontroller: self)
         self.presentAsSheet(self.viewControllerEstimating!)
     }
@@ -364,7 +362,6 @@ extension ViewControllerCopyFiles: NewProfile {
 
 extension ViewControllerCopyFiles: OpenQuickBackup {
     func openquickbackup() {
-        self.configurations!.processtermination = .quicktask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })

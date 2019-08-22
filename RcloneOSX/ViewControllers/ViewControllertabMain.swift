@@ -84,8 +84,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     var index: Int?
     // Getting output from rclone
     var outputprocess: OutputProcess?
-    // Getting output from batchrun
-    var outputbatch: OutputBatch?
     // Dynamic view of output
     var dynamicappend: Bool = false
     // HiddenID task, set when row is selected
@@ -113,7 +111,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
                 self.info(num: 7)
                 return
         }
-        self.configurations!.processtermination = .restore
         self.presentAsSheet(self.restoreViewController!)
     }
 
@@ -123,7 +120,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             return
         }
         if self.index != nil {
-            self.configurations!.processtermination = .rclonesize
             self.outputprocess = OutputProcess()
             self.working.startAnimation(nil)
             self.estimating.isHidden = false
@@ -138,7 +134,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             _ = Norclone()
             return
         }
-        self.configurations!.processtermination = .remoteinfotask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         })
@@ -149,7 +144,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             _ = Norclone()
             return
         }
-        self.configurations!.processtermination = .quicktask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })
@@ -258,7 +252,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     }
 
     func automaticbackup() {
-        self.configurations!.processtermination = .automaticbackup
         self.configurations?.remoteinfoestimation = RemoteinfoEstimation(viewcontroller: self)
         self.presentAsSheet(self.viewControllerEstimating!)
     }
@@ -276,7 +269,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         self.configurations!.getConfigurations()[self.index!].task != ViewControllerReference.shared.check else {
             return
         }
-        self.configurations!.processtermination = .singlequicktask
         self.working.startAnimation(nil)
         let arguments = self.configurations!.arguments4rclone(index: self.index!, argtype: .arg)
         self.outputprocess = OutputProcess()
@@ -351,7 +343,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
 
     // Single task can be activated by double click from table
     func executeSingleTask() {
-        self.configurations!.processtermination = .singletask
         guard ViewControllerReference.shared.norclone == false else {
             _ = Norclone()
             return
@@ -369,7 +360,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     }
 
     @IBAction func executeBatch(_ sender: NSToolbarItem) {
-        self.configurations!.processtermination = .estimatebatchtask
         guard ViewControllerReference.shared.norclone == false else {
             _ = Norclone()
             return
@@ -424,7 +414,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
             self.index = index
             self.hiddenID = self.configurations!.gethiddenID(index: index)
             self.outputprocess = nil
-            self.outputbatch = nil
             self.setNumbers(output: nil)
         } else {
             self.index = nil

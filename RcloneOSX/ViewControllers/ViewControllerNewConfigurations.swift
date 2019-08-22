@@ -38,7 +38,6 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Dela
             _ = Norclone()
             return
         }
-        self.configurations!.processtermination = .remoteinfotask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         })
@@ -53,7 +52,6 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Dela
     }
 
     @IBAction func automaticbackup(_ sender: NSButton) {
-        self.configurations!.processtermination = .automaticbackup
         self.configurations?.remoteinfoestimation = RemoteinfoEstimation(viewcontroller: self)
         self.presentAsSheet(self.viewControllerEstimating!)
     }
@@ -204,7 +202,6 @@ extension ViewControllerNewConfigurations: SetProfileinfo {
 
 extension ViewControllerNewConfigurations: OpenQuickBackup {
     func openquickbackup() {
-        self.configurations!.processtermination = .quicktask
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })
