@@ -55,8 +55,6 @@ extension ViewControllertabMain: NSTableViewDelegate, Attributedestring {
             self.abortOperations()
         }
         self.configurations!.enabledisablebatch(row)
-        self.singletask = nil
-        self.executebatch = nil
     }
 }
 
@@ -115,7 +113,6 @@ extension ViewControllertabMain: NewVersionDiscovered {
 
 // Dismisser for sheets
 extension ViewControllertabMain: DismissViewController {
-    // Function for dismissing a presented view
     func dismiss_view(viewcontroller: NSViewController) {
         self.dismiss(viewcontroller)
         globalMainQueue.async(execute: { () -> Void in
@@ -128,7 +125,6 @@ extension ViewControllertabMain: DismissViewController {
 
 // Deselect a row
 extension ViewControllertabMain: DeselectRowTable {
-    // deselect a row after row is deleted
     func deselect() {
         guard self.index != nil else { return }
         self.mainTableView.deselectRow(self.index!)

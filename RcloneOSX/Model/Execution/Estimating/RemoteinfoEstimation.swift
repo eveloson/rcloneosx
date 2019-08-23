@@ -40,7 +40,6 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
                 if self.inbatch ?? false {
                     if self.configurations!.getConfigurations()[i].batch == 1 {
                         self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
-                        // self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
                     }
                 } else {
                     self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
@@ -75,11 +74,9 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
 
     func setbackuplist() {
         guard self.records != nil else { return }
+        self.configurations?.quickbackuplist = [Int]()
         for i in 0 ..< self.records!.count {
             if self.records![i].value( forKey: "select") as? Int == 1 {
-                if self.configurations?.quickbackuplist == nil {
-                    self.configurations?.quickbackuplist = [Int]()
-                }
                 self.configurations?.quickbackuplist!.append((self.records![i].value(forKey: "hiddenID") as? Int)!)
             }
         }
@@ -94,7 +91,7 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
     }
 
     init(viewcontroller: NSViewController?) {
-        self.inbatch = false
+        // self.inbatch = false
         self.updateprogressDelegate = viewcontroller as? UpdateProgress
         self.startstopProgressIndicatorDelegate = viewcontroller as? StartStopProgressIndicator
         if viewcontroller == ViewControllerReference.shared.getvcref(viewcontroller: .vcbatch) as? ViewControllerBatch {
