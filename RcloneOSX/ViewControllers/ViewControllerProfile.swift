@@ -31,7 +31,7 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
 
     @IBAction func defaultProfile(_ sender: NSButton) {
          _ = Selectprofile(profile: nil)
-        self.dismissView()
+        self.closeview()
     }
 
     @IBAction func deleteProfile(_ sender: NSButton) {
@@ -39,7 +39,7 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
             self.profile?.deleteProfileDirectory(profileName: useprofile)
              _ = Selectprofile(profile: nil)
         }
-        self.dismissView()
+        self.closeview()
     }
 
     // Use profile or close
@@ -49,20 +49,28 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
             if self.useprofile != nil {
                 _ = Selectprofile(profile: self.useprofile)
             }
-            self.dismissView()
+            self.closeview()
             return
         }
         let success = self.profile?.createProfileDirectory(profileName: newprofile)
         guard success == true else {
-            self.dismissView()
+            self.closeview()
             return
         }
         _ = Selectprofile(profile: newprofile)
-        self.dismissView()
+        self.closeview()
     }
 
-    private func dismissView() {
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+    private func closeview() {
+        if (self.presentingViewController as? ViewControllertabMain) != nil {
+            self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        } else if (self.presentingViewController as? ViewControllerNewConfigurations) != nil {
+            self.dismissview(viewcontroller: self, vcontroller: .vcnewconfigurations)
+        } else if (self.presentingViewController as? ViewControllerCopyFiles) != nil {
+            self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
+        } else if (self.presentingViewController as? ViewControllerLoggData) != nil {
+            self.dismissview(viewcontroller: self, vcontroller: .vcloggdata)
+        }
     }
 
     override func viewDidLoad() {
@@ -79,18 +87,15 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
         self.profile = nil
         self.profile = CatalogProfile()
         self.profilesArray = self.profile!.getDirectorysStrings()
-        self.newProfileDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
-        self.copyfilesnewProfileDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles
         globalMainQueue.async(execute: { () -> Void in
             self.profilesTable.reloadData()
         })
         self.newprofile.stringValue = ""
     }
-
+    
     @objc(tableViewDoubleClick:) func tableViewDoubleClick(sender: AnyObject) {
-        self.newProfileDelegate?.newProfile(profile: self.useprofile)
-        self.copyfilesnewProfileDelegate?.newProfile(profile: nil)
-        self.dismissView()
+        _ = Selectprofile(profile: self.useprofile)
+        self.closeview()
     }
 }
 
