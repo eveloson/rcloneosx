@@ -35,12 +35,19 @@ class ViewControllerEstimatingTasks: NSViewController, Abort, SetConfigurations,
         self.closeview()
     }
 
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        guard self.diddissappear == false else { return }
+    override func viewDidLoad() {
+        super.viewDidLoad()
         ViewControllerReference.shared.setvcref(viewcontroller: .vcestimatingtasks, nsviewcontroller: self)
     }
 
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        guard self.diddissappear == false else { return }
+        self.abort.isEnabled = true
+        self.remoteinfotask = RemoteinfoEstimation(viewcontroller: self)
+        self.initiateProgressbar()
+    }
+    
     override func viewWillDisappear() {
         super.viewWillDisappear()
         self.diddissappear = true
