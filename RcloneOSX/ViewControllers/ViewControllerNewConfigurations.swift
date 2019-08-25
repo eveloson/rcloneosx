@@ -167,8 +167,8 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Dela
             "parameter1": self.rclonecommand ?? ViewControllerReference.shared.copy,
             "parameter2": self.verbose,
             "dryrun": self.dryrun,
-            "dateRun": ""]
-        dict.setValue("no", forKey: "batch")
+            "dateRun": "",
+            "batch": 0]
         dict.setValue(self.localCatalog.stringValue, forKey: "localCatalog")
         dict.setValue(self.offsiteCatalog.stringValue, forKey: "offsiteCatalog")
         self.configurations!.addNewConfigurations(dict)
