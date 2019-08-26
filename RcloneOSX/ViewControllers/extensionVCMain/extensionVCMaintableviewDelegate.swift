@@ -53,6 +53,6 @@ extension ViewControllerMain: NSTableViewDelegate, Attributedestring {
         if self.process != nil {
             self.abortOperations()
         }
-        self.configurations!.enabledisablebatch(row)
+        self.configurations!.togglebatch(row)
     }
 }
