@@ -14,7 +14,7 @@ struct Setrclonepath {
     weak var setinfoaboutrcloneDelegate: Setinfoaboutrclone?
 
     init() {
-        self.setinfoaboutrcloneDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        self.setinfoaboutrcloneDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         let fileManager = FileManager.default
         let path: String?
         // If not in /usr/bin or /usr/local/bin, rclonePath is set if none of the above

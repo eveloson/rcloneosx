@@ -10,14 +10,14 @@
 import Foundation
 import Cocoa
 
-extension ViewControllertabMain: NSTableViewDataSource {
+extension ViewControllerMain: NSTableViewDataSource {
     // Delegate for size of table
     func numberOfRows(in tableView: NSTableView) -> Int {
         return self.configurations?.configurationsDataSourcecount() ?? 0
     }
 }
 
-extension ViewControllertabMain: NSTableViewDelegate, Attributedestring {
+extension ViewControllerMain: NSTableViewDelegate, Attributedestring {
 
     // TableView delegates
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
@@ -59,7 +59,7 @@ extension ViewControllertabMain: NSTableViewDelegate, Attributedestring {
 }
 
 // Get output from rclone command
-extension ViewControllertabMain: GetOutput {
+extension ViewControllerMain: GetOutput {
     // Get information from rclone output.
     func getoutput() -> [String] {
        return (self.outputprocess?.trimoutput(trim: .two)) ?? []
@@ -67,7 +67,7 @@ extension ViewControllertabMain: GetOutput {
 }
 
 // Scheduled task are changed, read schedule again og redraw table
-extension ViewControllertabMain: Reloadandrefresh {
+extension ViewControllerMain: Reloadandrefresh {
     // Refresh tableView in main
     func reloadtabledata() {
         globalMainQueue.async(execute: { () -> Void in
@@ -77,7 +77,7 @@ extension ViewControllertabMain: Reloadandrefresh {
 }
 
 // Parameters to rclone is changed
-extension ViewControllertabMain: RcloneUserParams {
+extension ViewControllerMain: RcloneUserParams {
     // Do a reread of all Configurations
     func rcloneuserparamsupdated() {
         self.showrclonecommandmainview()
@@ -85,14 +85,14 @@ extension ViewControllertabMain: RcloneUserParams {
 }
 
 // Get index of selected row
-extension ViewControllertabMain: GetSelecetedIndex {
+extension ViewControllerMain: GetSelecetedIndex {
     func getindex() -> Int? {
         return self.index
     }
 }
 
 // rclone path is changed, update displayed rclone command
-extension ViewControllertabMain: RcloneIsChanged {
+extension ViewControllerMain: RcloneIsChanged {
     // If row is selected an update rclone command in view
     func rcloneischanged() {
         // Update rclone command in display
@@ -102,9 +102,9 @@ extension ViewControllertabMain: RcloneIsChanged {
 }
 
 // Uuups, new version is discovered
-extension ViewControllertabMain: NewVersionDiscovered {
+extension ViewControllerMain: NewVersionDiscovered {
     func notifyNewVersion() {
-        guard (self.presentingViewController as? ViewControllertabMain) != nil else { return }
+        guard (self.presentingViewController as? ViewControllerMain) != nil else { return }
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.newVersionViewController!)
         })
@@ -112,7 +112,7 @@ extension ViewControllertabMain: NewVersionDiscovered {
 }
 
 // Dismisser for sheets
-extension ViewControllertabMain: DismissViewController {
+extension ViewControllerMain: DismissViewController {
     func dismiss_view(viewcontroller: NSViewController) {
         self.dismiss(viewcontroller)
         globalMainQueue.async(execute: { () -> Void in
@@ -124,7 +124,7 @@ extension ViewControllertabMain: DismissViewController {
 }
 
 // Deselect a row
-extension ViewControllertabMain: DeselectRowTable {
+extension ViewControllerMain: DeselectRowTable {
     func deselect() {
         guard self.index != nil else { return }
         self.mainTableView.deselectRow(self.index!)
@@ -132,7 +132,7 @@ extension ViewControllertabMain: DeselectRowTable {
 }
 
 // If rclone throws any error
-extension ViewControllertabMain: RcloneError {
+extension ViewControllerMain: RcloneError {
     func rcloneerror() {
         // Set on or off in user configuration
         globalMainQueue.async(execute: { () -> Void in
@@ -156,7 +156,7 @@ extension ViewControllertabMain: RcloneError {
 }
 
 // If, for any reason, handling files or directory throws an error
-extension ViewControllertabMain: Fileerror {
+extension ViewControllerMain: Fileerror {
     func errormessage(errorstr: String, errortype: Fileerrortype ) {
         globalMainQueue.async(execute: { () -> Void in
             if errortype == .openlogfile {
@@ -172,7 +172,7 @@ extension ViewControllertabMain: Fileerror {
 }
 
 // Abort task from progressview
-extension ViewControllertabMain: Abort {
+extension ViewControllerMain: Abort {
     // Abort any task, either single- or batch task
     func abortOperations() {
         // Terminates the running process
@@ -198,7 +198,7 @@ extension ViewControllertabMain: Abort {
 
 // Extensions from here are used in either newSingleTask or newBatchTask
 
-extension ViewControllertabMain: StartStopProgressIndicatorSingleTask {
+extension ViewControllerMain: StartStopProgressIndicatorSingleTask {
     func startIndicator() {
         self.working.startAnimation(nil)
         self.estimating.isHidden = false
@@ -210,7 +210,7 @@ extension ViewControllertabMain: StartStopProgressIndicatorSingleTask {
     }
 }
 
-extension ViewControllertabMain: SingleTaskProgress {
+extension ViewControllerMain: SingleTaskProgress {
     func gettransferredNumber() -> String {
         return ""
     }
@@ -272,7 +272,7 @@ extension ViewControllertabMain: SingleTaskProgress {
     }
 }
 
-extension ViewControllertabMain: GetConfigurationsObject {
+extension ViewControllerMain: GetConfigurationsObject {
     func getconfigurationsobject() -> Configurations? {
         guard self.configurations != nil else { return nil }
         return self.configurations
@@ -298,7 +298,7 @@ extension ViewControllertabMain: GetConfigurationsObject {
     }
 }
 
-extension ViewControllertabMain: GetSchedulesObject {
+extension ViewControllerMain: GetSchedulesObject {
     func reloadschedulesobject() {
         // If batchtask scedules object
         guard self.executebatch == nil else {
@@ -323,7 +323,7 @@ extension ViewControllertabMain: GetSchedulesObject {
     }
 }
 
-extension ViewControllertabMain: Setinfoaboutrclone {
+extension ViewControllerMain: Setinfoaboutrclone {
     internal func setinfoaboutrclone() {
         if ViewControllerReference.shared.norclone == true {
             self.info(num: 3)
@@ -334,24 +334,24 @@ extension ViewControllertabMain: Setinfoaboutrclone {
     }
 }
 
-extension ViewControllertabMain: ErrorOutput {
+extension ViewControllerMain: ErrorOutput {
     func erroroutput() {
         self.info(num: 2)
     }
 }
 
-extension ViewControllertabMain: Createandreloadconfigurations {
+extension ViewControllerMain: Createandreloadconfigurations {
     // func createandreloadconfigurations()
 }
 
-extension  ViewControllertabMain: GetHiddenID {
+extension  ViewControllerMain: GetHiddenID {
     func gethiddenID() -> Int? {
         return self.hiddenID
     }
 }
 
 // New profile is loaded.
-extension ViewControllertabMain: NewProfile {
+extension ViewControllerMain: NewProfile {
     // Function is called from profiles when new or default profiles is seleceted
     func newProfile(profile: String?) {
         self.process = nil
@@ -373,7 +373,7 @@ extension ViewControllertabMain: NewProfile {
     }
 }
 
-extension ViewControllertabMain: OpenQuickBackup {
+extension ViewControllerMain: OpenQuickBackup {
     func openquickbackup() {
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
@@ -381,7 +381,7 @@ extension ViewControllertabMain: OpenQuickBackup {
     }
 }
 
-extension ViewControllertabMain: SetRemoteInfo {
+extension ViewControllerMain: SetRemoteInfo {
     func getremoteinfo() -> RemoteinfoEstimation? {
         return self.configurations!.remoteinfoestimation
     }
@@ -391,7 +391,7 @@ extension ViewControllertabMain: SetRemoteInfo {
     }
 }
 
-extension ViewControllertabMain: Count {
+extension ViewControllerMain: Count {
     func maxCount() -> Int {
         guard self.outputprocess != nil else { return 0 }
         return self.outputprocess!.getMaxcount()
@@ -403,7 +403,7 @@ extension ViewControllertabMain: Count {
     }
 }
 
-extension ViewControllertabMain: ViewOutputDetails {
+extension ViewControllerMain: ViewOutputDetails {
     func disableappend() {
         self.dynamicappend = false
     }
@@ -427,7 +427,7 @@ extension ViewControllertabMain: ViewOutputDetails {
     }
 }
 
-extension ViewControllertabMain: AllProfileDetails {
+extension ViewControllerMain: AllProfileDetails {
     func disablereloadallprofiles() {
         self.allprofilesview = false
     }
@@ -485,7 +485,7 @@ extension Setcolor {
     }
 }
 
-extension ViewControllertabMain: SendProcessreference {
+extension ViewControllerMain: SendProcessreference {
     func sendoutputprocessreference(outputprocess: OutputProcess?) {
         self.outputprocess = outputprocess
     }
@@ -493,4 +493,40 @@ extension ViewControllertabMain: SendProcessreference {
     func sendprocessreference(process: Process?) {
         self.process = process
     }
+}
+
+// Protocol for start,stop, complete progressviewindicator
+protocol StartStopProgressIndicator: class {
+    func start()
+    func stop()
+    func complete()
+}
+
+// Protocol for either completion of work or update progress when Process discovers a
+// process termination and when filehandler discover data
+protocol UpdateProgress: class {
+    func processTermination()
+    func fileHandler()
+}
+
+protocol ViewOutputDetails: class {
+    func reloadtable()
+    func appendnow() -> Bool
+    func getalloutput() -> [String]
+    func enableappend()
+    func disableappend()
+}
+
+// Protocol for getting the hiddenID for a configuration
+protocol GetHiddenID: class {
+    func gethiddenID() -> Int?
+}
+
+protocol SetProfileinfo: class {
+    func setprofile(profile: String, color: NSColor)
+}
+
+protocol AllProfileDetails: class {
+    func enablereloadallprofiles()
+    func disablereloadallprofiles()
 }

@@ -11,51 +11,7 @@
 import Foundation
 import Cocoa
 
-// Protocol for start,stop, complete progressviewindicator
-protocol StartStopProgressIndicator: class {
-    func start()
-    func stop()
-    func complete()
-}
-
-// Protocol for either completion of work or update progress when Process discovers a
-// process termination and when filehandler discover data
-protocol UpdateProgress: class {
-    func processTermination()
-    func fileHandler()
-}
-
-protocol ViewOutputDetails: class {
-    func reloadtable()
-    func appendnow() -> Bool
-    func getalloutput() -> [String]
-    func enableappend()
-    func disableappend()
-}
-
-// Protocol for getting the hiddenID for a configuration
-protocol GetHiddenID: class {
-    func gethiddenID() -> Int?
-}
-
-protocol SetProfileinfo: class {
-    func setprofile(profile: String, color: NSColor)
-}
-
-protocol AllProfileDetails: class {
-    func enablereloadallprofiles()
-    func disablereloadallprofiles()
-}
-
-class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, FileerrorMessage, Remoterclonesize, Setcolor {
-
-    // Configurations object
-    var configurations: Configurations?
-    var schedules: Schedules?
-    // Reference to the taskobjects
-    var singletask: SingleTask?
-    var executebatch: ExecuteBatch?
-    var executetasknow: ExecuteTaskNow?
+class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, FileerrorMessage, Remoterclonesize, Setcolor {
 
     @IBOutlet weak var mainTableView: NSTableView!
     // Progressbar indicating work
@@ -66,8 +22,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     // If On result of Dryrun is presented before
     // executing the real run
     @IBOutlet weak var dryRunOrRealRun: NSTextField!
-    // Progressbar scheduled task
-    @IBOutlet weak var executing: NSTextField!
     // total number of files in remote volume
     @IBOutlet weak var totalNumber: NSTextField!
     // total size of files in remote volume
@@ -77,7 +31,15 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     @IBOutlet weak var rcloneversionshort: NSTextField!
     @IBOutlet weak var remoteinfonumber: NSTextField!
     @IBOutlet weak var remoteinfosize: NSTextField!
+    @IBOutlet weak var info: NSTextField!
 
+    // Configurations object
+    var configurations: Configurations?
+    var schedules: Schedules?
+    // Reference to the taskobjects
+    var singletask: SingleTask?
+    var executebatch: ExecuteBatch?
+    var executetasknow: ExecuteTaskNow?
     // Reference to Process task
     var process: Process?
     // Index to selected row, index is set when row is selected
@@ -92,8 +54,6 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
     var allprofilesview: Bool = false
     // Delegate for refresh allprofiles if changes in profiles
     weak var allprofiledetailsDelegate: ReloadTableAllProfiles?
-
-    @IBOutlet weak var info: NSTextField!
 
     @IBAction func totinfo(_ sender: NSButton) {
         guard ViewControllerReference.shared.norclone == false else {
@@ -297,7 +257,7 @@ class ViewControllertabMain: NSViewController, ReloadTable, Deselect, VcMain, Fi
         self.working.usesThreadedAnimation = true
         ViewControllerReference.shared.setvcref(viewcontroller: .vctabmain, nsviewcontroller: self)
         self.mainTableView.target = self
-        self.mainTableView.doubleAction = #selector(ViewControllertabMain.tableViewDoubleClick(sender:))
+        self.mainTableView.doubleAction = #selector(ViewControllerMain.tableViewDoubleClick(sender:))
         self.displaysynccommand.state = .on
         _ = Setrclonepath()
         // configurations and schedules
