@@ -10,7 +10,7 @@
 import Foundation
 import Cocoa
 
-extension ViewControllerMain: SingleTaskProgress {
+extension ViewControllerMain: SingleTaskProcess {
 
     func getProcessReference(process: Process) {
         self.process = process
