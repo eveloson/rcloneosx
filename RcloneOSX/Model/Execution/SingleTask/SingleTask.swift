@@ -23,8 +23,6 @@ protocol SingleTaskProgress: class {
     func terminateProgressProcess()
     func seterrorinfo(info: String)
     func setNumbers(outputprocess: OutputProcess?)
-    func gettransferredNumber() -> String
-    func gettransferredNumberSizebytes() -> String
     func getProcessReference(process: Process)
 }
 
