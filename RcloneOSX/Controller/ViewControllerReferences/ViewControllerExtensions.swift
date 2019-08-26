@@ -133,7 +133,7 @@ protocol SetDismisser {
 
 extension SetDismisser {
     var dismissDelegateMain: DismissViewController? {
-        return ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        return ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
     }
     var dismissDelegateCopyFiles: DismissViewController? {
         return ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles
@@ -169,7 +169,7 @@ protocol Deselect {
 
 extension Deselect {
     var deselectDelegateMain: DeselectRowTable? {
-        return ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        return ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
     }
 
     func deselectrowtable() {
@@ -183,7 +183,7 @@ protocol Index {
 
 extension Index {
     func index() -> Int? {
-        let view = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        let view = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         return view?.getindex()
     }
 }
@@ -207,7 +207,7 @@ protocol Abort {
 
 extension Abort {
     func abort() {
-        let view = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        let view = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         view?.abortOperations()
     }
 }
@@ -223,7 +223,7 @@ protocol OutPut {
 
 extension OutPut {
     var informationDelegateMain: GetOutput? {
-        return ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        return ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
     }
     var informationDelegateCopyFiles: GetOutput? {
         return ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles
@@ -248,7 +248,7 @@ protocol NewRclone {
 
 extension NewRclone {
     func newrclone() {
-        let view = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        let view = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         view?.rcloneischanged()
     }
 }

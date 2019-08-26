@@ -38,7 +38,7 @@ final class ExecuteQuickbackupTask: SetSchedules, SetConfigurations {
                     globalMainQueue.async(execute: {
                         if let arguments = self.arguments {
                             weak var sendprocess: SendProcessreference?
-                            sendprocess = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+                            sendprocess = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
                             let process = Rclone(arguments: arguments)
                             if updateprogress != nil {
                                 process.setdelegate(object: updateprogress!)

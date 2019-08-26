@@ -26,7 +26,7 @@ final class OutputProcess {
     private var startIndex: Int?
     private var endIndex: Int?
     private var maxNumber: Int = 0
-    weak var errorDelegate: ViewControllertabMain?
+    weak var errorDelegate: ViewControllerMain?
 
     func getMaxcount() -> Int {
         if self.trimmedoutput == nil {
@@ -79,7 +79,7 @@ final class OutputProcess {
                 out.append(self.output![i])
                 let error = self.output![i].contains("ERROR")
                 if error {
-                    self.errorDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+                    self.errorDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
                     self.errorDelegate?.rcloneerror()
                 }
             }

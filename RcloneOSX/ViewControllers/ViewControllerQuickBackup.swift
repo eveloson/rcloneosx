@@ -48,7 +48,7 @@ class ViewControllerQuickBackup: NSViewController, SetDismisser, Abort, Delay, S
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.inprogresscountDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        self.inprogresscountDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         ViewControllerReference.shared.setvcref(viewcontroller: .vcquickbackup, nsviewcontroller: self)
         self.mainTableView.delegate = self
         self.mainTableView.dataSource = self

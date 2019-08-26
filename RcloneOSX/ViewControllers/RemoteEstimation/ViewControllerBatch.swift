@@ -88,7 +88,7 @@ class ViewControllerBatch: NSViewController, SetDismisser, Abort, SetConfigurati
         globalMainQueue.async(execute: { () -> Void in
             self.mainTableView.reloadData()
         })
-        self.remoteinfotaskDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        self.remoteinfotaskDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         self.remoteinfotask = RemoteinfoEstimation(viewcontroller: self)
         self.remoteinfotaskDelegate?.setremoteinfo(remoteinfotask: self.remoteinfotask)
         self.initiateProgressbar()

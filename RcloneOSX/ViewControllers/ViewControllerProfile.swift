@@ -5,7 +5,6 @@
 //  Created by Thomas Evensen on 17/10/2016.
 //  Copyright © 2016 Thomas Evensen. All rights reserved.
 //
-//  swiftlint:disable line_length
 
 import Foundation
 import Cocoa
@@ -62,7 +61,7 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
     }
 
     private func closeview() {
-        if (self.presentingViewController as? ViewControllertabMain) != nil {
+        if (self.presentingViewController as? ViewControllerMain) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
         } else if (self.presentingViewController as? ViewControllerNewConfigurations) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vcnewconfigurations)
@@ -92,7 +91,7 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
         })
         self.newprofile.stringValue = ""
     }
-    
+
     @objc(tableViewDoubleClick:) func tableViewDoubleClick(sender: AnyObject) {
         _ = Selectprofile(profile: self.useprofile)
         self.closeview()

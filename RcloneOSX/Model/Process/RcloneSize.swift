@@ -16,7 +16,7 @@ struct Size: Decodable {
 class RcloneSize: SetConfigurations {
 
     init(index: Int, outputprocess: OutputProcess?, updateprogress: UpdateProgress) {
-        let taskDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllertabMain
+        let taskDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         let cloudservice = self.configurations!.getConfigurations()[index].offsiteServer
         let remotepath = self.configurations!.getConfigurations()[index].offsiteCatalog
         let remotetolist = cloudservice + ":" + remotepath + "/"

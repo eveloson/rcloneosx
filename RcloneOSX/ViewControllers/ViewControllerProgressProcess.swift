@@ -31,7 +31,7 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
     override func viewDidAppear() {
         super.viewDidAppear()
         ViewControllerReference.shared.setvcref(viewcontroller: .vcprogressview, nsviewcontroller: self)
-        if let pvc = (self.presentingViewController as? ViewControllertabMain)?.singletask {
+        if let pvc = (self.presentingViewController as? ViewControllerMain)?.singletask {
             self.countDelegate = pvc
         }
         self.initiateProgressbar()
