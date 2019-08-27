@@ -12,6 +12,7 @@ import Foundation
 
 // Protocols for instruction start/stop progressviewindicator
 protocol StartStopProgressIndicatorSingleTask: class {
+    func startIndicatorExecuteTaskNow()
     func startIndicator()
     func stopIndicator()
 }
