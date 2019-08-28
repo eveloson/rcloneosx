@@ -2,6 +2,8 @@
 
 ![](icon/rcloneosx.png)
 
+The [Changelog](https://rsyncosx.github.io/RcloneChangelog).
+
 The project is a adapting [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) utilizing [rclone](https://rclone.org/) for **synchronizing** and **backup** of files to a number of cloud services. RcloneOSX utilizes `rclone copy`, `sync`, `move` and `check` commands.
 
 RcloneOSX is compiled with support for macOS El Capitan version 10.11 - macOS Mojave version 10.14 (and macOS Catalina 10.15 when released). The application is implemented in Swift 5 by using Xcode 10.
@@ -38,10 +40,6 @@ The app is signed with my Apple ID developer certificate and [notarized](https:/
 ### Application icon
 
 The application icon is created by [Zsolt Sándor](https://github.com/graphis). All rights reserved to Zsolt Sándor.
-
-### Changelog
-
-The [Changelog](https://rsyncosx.github.io/RcloneChangelog).
 
 ### Compile
 
