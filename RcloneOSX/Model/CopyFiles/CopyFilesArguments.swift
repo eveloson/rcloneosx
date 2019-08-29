@@ -15,7 +15,7 @@ enum Enumscopyfiles {
     case listrclone
 }
 
-final class CopyFileArguments: SetConfigurations {
+final class CopyFilesArguments: SetConfigurations {
 
     private var arguments: [String]?
     private var argDisplaydryRun: [String]?

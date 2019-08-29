@@ -10,7 +10,6 @@
 import Foundation
 import Cocoa
 
-
 // Get output from rclone command
 extension ViewControllerMain: GetOutput {
     // Get information from rclone output.
@@ -155,7 +154,7 @@ extension ViewControllerMain: StartStopProgressIndicatorSingleTask {
     func startIndicatorExecuteTaskNow() {
         self.working.startAnimation(nil)
     }
-    
+
     func startIndicator() {
         self.working.startAnimation(nil)
         self.estimating.isHidden = false

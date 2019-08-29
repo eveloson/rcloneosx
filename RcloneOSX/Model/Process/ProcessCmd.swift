@@ -34,6 +34,10 @@ class ProcessCmd: Delay {
     // possible error ouput
     weak var possibleerrorDelegate: ErrorOutput?
 
+    func setupdateDelegate(object: UpdateProgress) {
+        self.updateDelegate = object
+    }
+
     func executeProcess (outputprocess: OutputProcess?) {
         // Process
         let task = Process()

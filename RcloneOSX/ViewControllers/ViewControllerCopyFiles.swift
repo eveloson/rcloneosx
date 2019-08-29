@@ -16,7 +16,7 @@ protocol Updateremotefilelist: class {
 
 class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMain {
 
-    var copysinglefiles: CopySingleFiles?
+    var copysinglefiles: CopyFiles?
     var remotefilelist: Remotefilelist?
     var rcloneindex: Int?
     var estimated: Bool = false
@@ -118,10 +118,10 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
         self.restorebutton.isEnabled = false
         self.working.startAnimation(nil)
         if self.estimated == false {
-            self.copysinglefiles!.executecopyfiles(remotefile: remoteCatalog!.stringValue, localCatalog: restorecatalog!.stringValue, dryrun: true)
+            self.copysinglefiles!.executecopyfiles(remotefile: remoteCatalog!.stringValue, localCatalog: restorecatalog!.stringValue, dryrun: true, updateprogress: self)
             self.estimated = true
         } else {
-            self.copysinglefiles!.executecopyfiles(remotefile: remoteCatalog!.stringValue, localCatalog: restorecatalog!.stringValue, dryrun: false)
+            self.copysinglefiles!.executecopyfiles(remotefile: remoteCatalog!.stringValue, localCatalog: restorecatalog!.stringValue, dryrun: false, updateprogress: self)
             self.estimated = false
         }
     }
@@ -184,7 +184,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
         if answer {
             self.restorebutton.isEnabled = false
             self.working.startAnimation(nil)
-            self.copysinglefiles!.executecopyfiles(remotefile: self.remoteCatalog!.stringValue, localCatalog: self.restorecatalog!.stringValue, dryrun: false)
+            self.copysinglefiles!.executecopyfiles(remotefile: self.remoteCatalog!.stringValue, localCatalog: self.restorecatalog!.stringValue, dryrun: false, updateprogress: self)
         }
     }
 
@@ -235,7 +235,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
                 self.remoteCatalog.stringValue = ""
                 self.rcloneindex = index
                 let hiddenID = self.configurations!.getConfigurationsSyncandCopy()![index].value(forKey: "hiddenID") as? Int ?? -1
-                self.copysinglefiles = CopySingleFiles(hiddenID: hiddenID)
+                self.copysinglefiles = CopyFiles(hiddenID: hiddenID)
                 self.remotefilelist = Remotefilelist(hiddenID: hiddenID)
                 self.working.startAnimation(nil)
                 self.displayRemoteserver(index: index)
