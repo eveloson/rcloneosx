@@ -17,7 +17,7 @@ extension ViewControllerMain: NSTableViewDataSource {
 }
 
 extension ViewControllerMain: NSTableViewDelegate, Attributedestring {
-    
+
     // TableView delegates
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         if row > self.configurations!.configurationsDataSourcecount() - 1 { return nil }
@@ -47,7 +47,7 @@ extension ViewControllerMain: NSTableViewDelegate, Attributedestring {
         }
         return nil
     }
-    
+
     // Toggling batch
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
         if self.process != nil {
