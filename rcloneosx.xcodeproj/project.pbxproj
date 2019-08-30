@@ -112,7 +112,6 @@
 		E99AA3871FAFA28900C1E86A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E99AA3861FAFA28900C1E86A /* Assets.xcassets */; };
 		E99AA38A1FAFA28900C1E86A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E99AA3881FAFA28900C1E86A /* Main.storyboard */; };
 		E9A7958B1FBF285300AF8A5F /* ViewControllerCopyFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A795891FBF285300AF8A5F /* ViewControllerCopyFiles.swift */; };
-		E9A795941FBF2CDA00AF8A5F /* ViewControllerInformationCopyFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A795931FBF2CDA00AF8A5F /* ViewControllerInformationCopyFiles.swift */; };
 		E9AEF87E22B3EB210065C1D7 /* Remotefilelist.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AEF87D22B3EB210065C1D7 /* Remotefilelist.swift */; };
 		E9B8B02322B1031B0063024E /* Setrclonepath.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B8B02222B1031B0063024E /* Setrclonepath.swift */; };
 		E9B8B02522B107070063024E /* Getrclonepath.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B8B02422B107070063024E /* Getrclonepath.swift */; };
@@ -221,7 +220,6 @@
 		E99AA3891FAFA28900C1E86A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E99AA38B1FAFA28900C1E86A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9A795891FBF285300AF8A5F /* ViewControllerCopyFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewControllerCopyFiles.swift; path = RcloneOSX/ViewControllers/ViewControllerCopyFiles.swift; sourceTree = SOURCE_ROOT; };
-		E9A795931FBF2CDA00AF8A5F /* ViewControllerInformationCopyFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewControllerInformationCopyFiles.swift; path = RcloneOSX/ViewControllers/ViewControllerInformationCopyFiles.swift; sourceTree = SOURCE_ROOT; };
 		E9AEF87D22B3EB210065C1D7 /* Remotefilelist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Remotefilelist.swift; sourceTree = "<group>"; };
 		E9B8B02222B1031B0063024E /* Setrclonepath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setrclonepath.swift; sourceTree = "<group>"; };
 		E9B8B02422B107070063024E /* Getrclonepath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getrclonepath.swift; sourceTree = "<group>"; };
@@ -454,7 +452,6 @@
 			children = (
 				E907D33F230D678600DC938F /* RemoteEstimation */,
 				E9BC41E42065184E001DBCC6 /* ViewControllerAllProfiles.swift */,
-				E9A795931FBF2CDA00AF8A5F /* ViewControllerInformationCopyFiles.swift */,
 				E9A795891FBF285300AF8A5F /* ViewControllerCopyFiles.swift */,
 				E960CAC71FB091D50008D12E /* ViewControllerAbout.swift */,
 				E960CAEE1FB091DB0008D12E /* ViewControllerEdit.swift */,
@@ -795,7 +792,6 @@
 				E9198C39211DC5EC0071DB3A /* ViewControllerAllOutput.swift in Sources */,
 				E960CB291FB091DE0008D12E /* ExecuteBatch.swift in Sources */,
 				E9B8B02522B107070063024E /* Getrclonepath.swift in Sources */,
-				E9A795941FBF2CDA00AF8A5F /* ViewControllerInformationCopyFiles.swift in Sources */,
 				E8B9506B23183D5E00C743D5 /* CopyFilesArguments.swift in Sources */,
 				E960CB331FB091DE0008D12E /* PersistentStorageUserconfiguration.swift in Sources */,
 				E960CB3E1FB091DE0008D12E /* Schedules.swift in Sources */,
