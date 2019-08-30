@@ -117,9 +117,9 @@ extension ViewControllerAllProfiles: NSTableViewDelegate, Attributedestring {
         case 2:
             self.filterby = .localcatalog
         case 3:
-            self.filterby = .remotecatalog
+            self.filterby = .offsitecatalog
         case 4:
-            self.filterby = .remoteserver
+            self.filterby = .offsiteserver
         case 5:
             self.filterby = .backupid
         case 6, 7:
