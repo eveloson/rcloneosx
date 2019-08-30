@@ -299,9 +299,9 @@ extension Sorting {
         switch sortby {
         case .localcatalog:
             sortstring = "localCatalog"
-        case .remoteserver:
+        case .offsiteserver:
             sortstring = "offsiteServer"
-        case .remotecatalog:
+        case .offsitecatalog:
             sortstring = "offsiteCatalog"
         case .task:
             sortstring = "task"
@@ -328,9 +328,9 @@ extension Sorting {
             return "localCatalog"
         case .profile:
             return "profile"
-        case .remotecatalog:
+        case .offsitecatalog:
             return "offsiteCatalog"
-        case .remoteserver:
+        case .offsiteserver:
             return "offsiteServer"
         case .task:
             return "task"
