@@ -38,7 +38,15 @@ class ViewControllerQuickBackup: NSViewController, SetDismisser, Abort, Delay, S
             self.abort()
             self.working.stopAnimation(nil)
         }
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        if (self.presentingViewController as? ViewControllerMain) != nil {
+            self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        } else if (self.presentingViewController as? ViewControllerNewConfigurations) != nil {
+            self.dismissview(viewcontroller: self, vcontroller: .vcnewconfigurations)
+        } else if (self.presentingViewController as? ViewControllerCopyFiles) != nil {
+            self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
+        } else if (self.presentingViewController as? ViewControllerLoggData) != nil {
+            self.dismissview(viewcontroller: self, vcontroller: .vcloggdata)
+        }
     }
 
     private func loadtasks() {
