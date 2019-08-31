@@ -5,7 +5,6 @@
 //  Created by Thomas Evensen on 20/01/2017.
 //  Copyright © 2017 Thomas Evensen. All rights reserved.
 //
-// swiftlint:disable line_length
 
 import Foundation
 
@@ -20,7 +19,7 @@ final class CompleteQuickbackupTask: SetConfigurations, SetSchedules {
         self.configurations?.setCurrentDateonConfiguration(index: self.index!, outputprocess: outputprocess)
         self.schedulesDelegate?.reloadschedulesobject()
     }
-    
+
     init (dict: NSDictionary) {
         self.hiddenID = (dict.value(forKey: "hiddenID") as? Int)!
         self.index = self.configurations!.getIndex(hiddenID ?? -1)

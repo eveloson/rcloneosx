@@ -31,92 +31,92 @@ extension VcMain {
     // Information about rclone output
     // self.presentViewControllerAsSheet(self.ViewControllerInformation)
     var viewControllerInformation: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardInformationID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "StoryboardInformationID")
+            as? NSViewController)
     }
 
     // Progressbar process
     // self.presentViewControllerAsSheet(self.ViewControllerProgress)
     var viewControllerProgress: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardProgressID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "StoryboardProgressID")
+            as? NSViewController)
     }
 
     // Batch process
     // self.presentViewControllerAsSheet(self.ViewControllerBatch)
     var viewControllerBatch: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardBatchID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "StoryboardBatchID")
+            as? NSViewController)
     }
 
     // Userconfiguration
     // self.presentViewControllerAsSheet(self.ViewControllerUserconfiguration)
     var viewControllerUserconfiguration: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardUserconfigID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "StoryboardUserconfigID")
+            as? NSViewController)
     }
 
     // Rclone userparams
     // self.presentViewControllerAsSheet(self.viewControllerRcloneParams)
     var viewControllerRcloneParams: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardRcloneParamsID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "StoryboardRcloneParamsID")
+            as? NSViewController)
     }
 
     // New version window
     // self.presentViewControllerAsSheet(self.newVersionViewController)
     var newVersionViewController: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardnewVersionID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "StoryboardnewVersionID")
+            as? NSViewController)
     }
 
     // Edit
     // self.presentViewControllerAsSheet(self.editViewController)
     var editViewController: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardEditID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "StoryboardEditID")
+            as? NSViewController)
     }
 
     // Profile
     // self.presentViewControllerAsSheet(self.ViewControllerProfile)
     var viewControllerProfile: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "ProfileID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "ProfileID")
+            as? NSViewController)
     }
 
     // About
     // self.presentViewControllerAsSheet(self.ViewControllerAbout)
     var viewControllerAbout: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "AboutID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "AboutID")
+            as? NSViewController)
     }
 
     // Quick backup process
     // self.presentViewControllerAsSheet(self.viewControllerQuickBackup)
     var viewControllerQuickBackup: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardQuickBackupID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "StoryboardQuickBackupID")
+            as? NSViewController)
     }
 
     // Remote Info
     // self.presentViewControllerAsSheet(self.viewControllerQuickBackup)
     var viewControllerRemoteInfo: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardRemoteInfoID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "StoryboardRemoteInfoID")
+            as? NSViewController)
     }
 
     // Estimating
     // self.presentViewControllerAsSheet(self.viewControllerEstimating)
     var viewControllerEstimating: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardEstimatingID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "StoryboardEstimatingID")
+            as? NSViewController)
     }
 
     // Restore
     // self.presentViewControllerAsSheet(self.restoreViewController)
     var restoreViewController: NSViewController? {
-        return (self.storyboard!.instantiateController(withIdentifier: "StoryboardRestoreID")
-            as? NSViewController)!
+        return (self.storyboard?.instantiateController(withIdentifier: "StoryboardRestoreID")
+            as? NSViewController)
     }
 }
 
