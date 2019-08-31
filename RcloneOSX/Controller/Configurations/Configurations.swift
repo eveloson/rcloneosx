@@ -165,18 +165,7 @@ class Configurations: ReloadTable, SetSchedules {
         let number = Numbers(outputprocess: outputprocess)
         let hiddenID = self.gethiddenID(index: index)
         let numbers = number.stats()
-        self.schedules!.addlogtaskmanuel(hiddenID, result: numbers)
-        let currendate = Date()
-        let dateformatter = Dateandtime().setDateformat()
-        self.configurations![index].dateRun = dateformatter.string(from: currendate)
-        // Saving updated configuration in memory to persistent store
-        self.storageapi!.saveConfigFromMemory()
-        // Call the view and do a refresh of tableView
-        self.reloadtable(vcontroller: .vctabmain)
-        _ = Logging(outputprocess: outputprocess)
-    }
-
-    func setCurrentDateonConfigurationQuickbackup(index: Int, outputprocess: OutputProcess?) {
+        self.schedules!.addlog(hiddenID, result: numbers)
         let currendate = Date()
         let dateformatter = Dateandtime().setDateformat()
         self.configurations![index].dateRun = dateformatter.string(from: currendate)
