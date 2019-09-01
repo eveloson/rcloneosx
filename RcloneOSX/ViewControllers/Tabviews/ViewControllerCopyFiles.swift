@@ -350,12 +350,6 @@ extension ViewControllerCopyFiles: DismissViewController {
     }
 }
 
-extension ViewControllerCopyFiles: GetOutput {
-    func getoutput() -> [String] {
-        return self.copysinglefiles!.getOutput()
-    }
-}
-
 extension ViewControllerCopyFiles: TemporaryRestorePath {
     func temporaryrestorepath() {
         if let restorePath = ViewControllerReference.shared.restorePath {
