@@ -24,7 +24,7 @@ class ViewControllerInformation: NSViewController, SetDismisser, OutPut {
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        self.output = self.getinfo(viewcontroller: .vctabmain)
+        self.output = self.getinfo()
         globalMainQueue.async(execute: { () -> Void in
             self.detailsTable.reloadData()
         })
