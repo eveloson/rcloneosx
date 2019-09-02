@@ -271,9 +271,8 @@ protocol Sorting {
 
 extension Sorting {
     func sortbydate(notsortedlist: [NSMutableDictionary]?, sortdirection: Bool) -> [NSMutableDictionary]? {
-        guard notsortedlist != nil else { return nil }
         let dateformatter = Dateandtime().setDateformat()
-        let sorted = notsortedlist!.sorted { (dict1, dict2) -> Bool in
+        let sorted = notsortedlist?.sorted { (dict1, dict2) -> Bool in
             let date1localized = dateformatter.date(from: (dict1.value(forKey: "dateExecuted") as? String) ?? "")
             if let date2localized = dateformatter.date(from: (dict2.value(forKey: "dateExecuted") as? String) ?? "") {
                 if date1localized?.timeIntervalSince(date2localized) ?? -1 > 0 {
@@ -289,7 +288,6 @@ extension Sorting {
     }
 
     func sortbystring(notsortedlist: [NSMutableDictionary]?, sortby: Sortandfilter, sortdirection: Bool) -> [NSMutableDictionary]? {
-        guard notsortedlist != nil else { return nil }
         let sortstring = self.filterbystring(filterby: sortby)
         let sorted = notsortedlist?.sorted { (dict1, dict2) -> Bool in
             if (dict1.value(forKey: sortstring) as? String) ?? "" > (dict2.value(forKey: sortstring) as? String) ?? "" {
