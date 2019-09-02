@@ -329,7 +329,7 @@ extension Sorting {
         case .backupid:
             return "backupID"
         case .numberofdays:
-            return ""
+            return "daysID"
         case .executedate:
             return "dateExecuted"
         }
