@@ -71,7 +71,7 @@ class ViewControllerAbout: NSViewController, SetDismisser {
     override func viewDidAppear() {
         super.viewDidAppear()
         self.downloadbutton.isEnabled = false
-        self.checkfornewversion = Checkfornewversion(inMain: false)
+        self.checkfornewversion = Checkfornewversion()
         if let version = self.checkfornewversion!.rcloneOSXversion() {
             self.version.stringValue = "RcloneOSX ver: " + version
         }
