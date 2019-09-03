@@ -261,7 +261,6 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         self.mainTableView.target = self
         self.mainTableView.doubleAction = #selector(ViewControllerMain.tableViewDoubleClick(sender:))
         self.displaysynccommand.state = .on
-        _ = Setrclonepath()
         // configurations and schedules
         self.createandreloadconfigurations()
         self.createandreloadschedules()
