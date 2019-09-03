@@ -196,6 +196,8 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
             self.info.stringValue = "No rclone in path..."
         case 4:
             self.info.stringValue = "⌘A to abort or wait..."
+        case 5:
+            self.info.stringValue = "New version is available - see About"
         default:
             self.info.stringValue = ""
         }
@@ -270,6 +272,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         if ViewControllerReference.shared.initialstart == 0 {
             self.view.window?.center()
             ViewControllerReference.shared.initialstart = 1
+            _ = Checkfornewversion()
         }
         if self.configurations!.configurationsDataSourcecount() > 0 {
             globalMainQueue.async(execute: { () -> Void in

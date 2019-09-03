@@ -56,9 +56,8 @@ extension ViewControllerMain: RcloneIsChanged {
 // Uuups, new version is discovered
 extension ViewControllerMain: NewVersionDiscovered {
     func notifyNewVersion() {
-        guard (self.presentingViewController as? ViewControllerMain) != nil else { return }
         globalMainQueue.async(execute: { () -> Void in
-            self.presentAsSheet(self.newVersionViewController!)
+            self.info(num: 5)
         })
     }
 }
@@ -222,7 +221,6 @@ extension ViewControllerMain: Setinfoaboutrclone {
         if ViewControllerReference.shared.norclone == true {
             self.info(num: 3)
         } else {
-            self.info(num: 0)
             self.rcloneversionshort.stringValue = ViewControllerReference.shared.rcloneversionshort ?? ""
         }
     }
