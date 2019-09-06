@@ -8,7 +8,7 @@
 import Foundation
 import Cocoa
 
-class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Delay, VcMain {
+class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Delay, VcMain, Checkforrclone {
 
     var storageapi: PersistentStorageAPI?
     var newconfigurations: NewConfigurations?
@@ -34,20 +34,14 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Dela
     @IBOutlet weak var cloudService: NSComboBox!
 
     @IBAction func totinfo(_ sender: NSButton) {
-        guard ViewControllerReference.shared.norclone == false else {
-            _ = Norclone()
-            return
-        }
+       guard self.checkforrclone() == false else { return }
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         })
     }
 
     @IBAction func quickbackup(_ sender: NSButton) {
-        guard ViewControllerReference.shared.norclone == false else {
-            _ = Norclone()
-            return
-        }
+       guard self.checkforrclone() == false else { return }
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })

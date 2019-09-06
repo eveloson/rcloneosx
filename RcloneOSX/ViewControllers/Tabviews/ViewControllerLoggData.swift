@@ -15,7 +15,7 @@ protocol ReadLoggdata: class {
     func readloggdata()
 }
 
-class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules, Delay, Index, SetDismisser, VcMain, Abort {
+class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules, Delay, Index, SetDismisser, VcMain, Abort, Checkforrclone {
 
     private var scheduleloggdata: ScheduleLoggData?
     private var row: NSDictionary?
@@ -32,20 +32,14 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
     @IBOutlet weak var selectbutton: NSButton!
 
     @IBAction func totinfo(_ sender: NSButton) {
-        guard ViewControllerReference.shared.norclone == false else {
-            _ = Norclone()
-            return
-        }
+       guard self.checkforrclone() == false else { return }
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         })
     }
 
     @IBAction func quickbackup(_ sender: NSButton) {
-        guard ViewControllerReference.shared.norclone == false else {
-            _ = Norclone()
-            return
-        }
+       guard self.checkforrclone() == false else { return }
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })
