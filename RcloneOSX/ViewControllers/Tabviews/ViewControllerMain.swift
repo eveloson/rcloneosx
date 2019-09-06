@@ -6,12 +6,12 @@
 //  Created by Thomas Evensen on 19/08/2016.
 //  Copyright © 2016 Thomas Evensen. All rights reserved.
 //
-//  swiftlint:disable  file_length line_length type_body_length
+//  swiftlint:disable line_length type_body_length
 
 import Foundation
 import Cocoa
 
-class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, FileerrorMessage, Remoterclonesize, Setcolor {
+class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, FileerrorMessage, Remoterclonesize, Setcolor, Checkforrclone {
 
     @IBOutlet weak var mainTableView: NSTableView!
     // Progressbar indicating work
@@ -56,20 +56,14 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     weak var allprofiledetailsDelegate: ReloadTableAllProfiles?
 
     @IBAction func totinfo(_ sender: NSButton) {
-        guard ViewControllerReference.shared.norclone == false else {
-            _ = Norclone()
-            return
-        }
+       guard self.checkforrclone() == false else { return }
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         })
     }
 
     @IBAction func quickbackup(_ sender: NSButton) {
-        guard ViewControllerReference.shared.norclone == false else {
-            _ = Norclone()
-            return
-        }
+       guard self.checkforrclone() == false else { return }
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })
@@ -118,10 +112,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
             self.info(num: 1)
             return
         }
-        guard ViewControllerReference.shared.norclone == false else {
-            _ = Norclone()
-            return
-        }
+       guard self.checkforrclone() == false else { return }
         guard self.configurations!.getConfigurations()[self.index!].task == ViewControllerReference.shared.sync else {
                 self.info(num: 7)
                 return
@@ -130,10 +121,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     }
 
     @IBAction func getremoteinfo(_ sender: NSButton) {
-        guard ViewControllerReference.shared.norclone == false else {
-            _ = Norclone()
-            return
-        }
+       guard self.checkforrclone() == false else { return }
         if self.index != nil {
             self.outputprocess = OutputProcess()
             self.working.startAnimation(nil)
@@ -289,10 +277,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
 
     // Single task can be activated by double click from table
     func executeSingleTask() {
-        guard ViewControllerReference.shared.norclone == false else {
-            _ = Norclone()
-            return
-        }
+       guard self.checkforrclone() == false else { return }
         guard self.index != nil else { return }
         guard self.singletask != nil else {
             // Dry run
@@ -305,10 +290,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     }
 
     @IBAction func executeBatch(_ sender: NSToolbarItem) {
-        guard ViewControllerReference.shared.norclone == false else {
-            _ = Norclone()
-            return
-        }
+       guard self.checkforrclone() == false else { return }
         self.setNumbers(outputprocess: nil)
         self.deselect()
         globalMainQueue.async(execute: { () -> Void in

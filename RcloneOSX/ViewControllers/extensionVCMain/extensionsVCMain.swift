@@ -377,6 +377,21 @@ extension Setcolor {
     }
 }
 
+protocol Checkforrclone: class {
+    func checkforrclone() -> Bool
+}
+
+extension Checkforrclone {
+    func checkforrclone() -> Bool {
+        if ViewControllerReference.shared.norclone == true {
+            _ = Norclone()
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
 extension ViewControllerMain: SendProcessreference {
     func sendoutputprocessreference(outputprocess: OutputProcess?) {
         self.outputprocess = outputprocess
