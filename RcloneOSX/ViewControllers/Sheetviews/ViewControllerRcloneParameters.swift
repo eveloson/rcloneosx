@@ -66,7 +66,7 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
         } else {
             self.storageapi = PersistentStorageAPI(profile: nil)
         }
-        var configurations: [Configuration] = self.configurations!.getConfigurations()
+        let configurations: [Configuration] = self.configurations!.getConfigurations()
         if let index = self.index() {
             // Create RcloneParameters object and load initial parameters
             self.parameters = RcloneParameters(config: configurations[index])
