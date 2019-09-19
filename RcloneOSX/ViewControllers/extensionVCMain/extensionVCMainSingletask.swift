@@ -24,7 +24,7 @@ extension ViewControllerMain: SingleTaskProcess {
 
     func presentViewInformation(outputprocess: OutputProcess?) {
         self.outputprocess = outputprocess
-        if self.dynamicappend {
+        if self.appendnow() {
             globalMainQueue.async(execute: { () -> Void in
                 self.mainTableView.reloadData()
             })

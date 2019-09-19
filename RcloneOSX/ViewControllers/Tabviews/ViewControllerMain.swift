@@ -46,8 +46,6 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     var index: Int?
     // Getting output from rclone
     var outputprocess: OutputProcess?
-    // Dynamic view of output
-    var dynamicappend: Bool = false
     // HiddenID task, set when row is selected
     var hiddenID: Int?
 
