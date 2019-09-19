@@ -22,7 +22,7 @@ extension ViewControllerMain: SingleTaskProcess {
         })
     }
 
-    func presentViewInformation(outputprocess: OutputProcess) {
+    func presentViewInformation(outputprocess: OutputProcess?) {
         self.outputprocess = outputprocess
         if self.dynamicappend {
             globalMainQueue.async(execute: { () -> Void in

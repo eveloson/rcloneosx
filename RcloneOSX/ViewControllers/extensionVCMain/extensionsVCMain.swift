@@ -246,9 +246,7 @@ extension  ViewControllerMain: GetHiddenID {
 extension ViewControllerMain: NewProfile {
     // Function is called from profiles when new or default profiles is seleceted
     func newProfile(profile: String?) {
-        self.process = nil
-        self.outputprocess = nil
-        self.singletask = nil
+        self.reset()
         self.showrclonecommandmainview()
         self.deselect()
         // Read configurations and Scheduledata
