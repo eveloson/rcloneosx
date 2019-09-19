@@ -294,13 +294,6 @@ extension ViewControllerMain: Count {
 }
 
 extension ViewControllerMain: ViewOutputDetails {
-    func disableappend() {
-        self.dynamicappend = false
-    }
-
-    func enableappend() {
-        self.dynamicappend = true
-    }
 
     func getalloutput() -> [String] {
         return self.outputprocess?.getrawOutput() ?? []
@@ -313,7 +306,11 @@ extension ViewControllerMain: ViewOutputDetails {
     }
 
     func appendnow() -> Bool {
-        return self.dynamicappend
+         if ViewControllerReference.shared.getvcref(viewcontroller: .vcalloutput) != nil {
+            return true
+         } else {
+            return false
+        }
     }
 }
 
@@ -407,8 +404,6 @@ protocol ViewOutputDetails: class {
     func reloadtable()
     func appendnow() -> Bool
     func getalloutput() -> [String]
-    func enableappend()
-    func disableappend()
 }
 
 // Protocol for getting the hiddenID for a configuration

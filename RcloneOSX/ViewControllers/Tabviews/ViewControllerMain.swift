@@ -1,8 +1,4 @@
 //
-//  ViewControllertabMain.swift
-//  rcloneOSXver30
-//  The Main ViewController.
-//
 //  Created by Thomas Evensen on 19/08/2016.
 //  Copyright © 2016 Thomas Evensen. All rights reserved.
 //
@@ -46,8 +42,6 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     var index: Int?
     // Getting output from rclone
     var outputprocess: OutputProcess?
-    // Dynamic view of output
-    var dynamicappend: Bool = false
     // HiddenID task, set when row is selected
     var hiddenID: Int?
 
