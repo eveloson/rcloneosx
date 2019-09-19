@@ -50,10 +50,6 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     var dynamicappend: Bool = false
     // HiddenID task, set when row is selected
     var hiddenID: Int?
-    // Allprofiles view presented
-    var allprofilesview: Bool = false
-    // Delegate for refresh allprofiles if changes in profiles
-    weak var allprofiledetailsDelegate: ReloadTableAllProfiles?
 
     @IBAction func totinfo(_ sender: NSButton) {
        guard self.checkforrclone() == false else { return }
@@ -376,8 +372,8 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         globalMainQueue.async(execute: { () -> Void in
             self.mainTableView.reloadData()
         })
-        if self.allprofilesview {
-            self.allprofiledetailsDelegate?.reloadtable()
+        if let reloadDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcallprofiles) as? ViewControllerAllProfiles {
+            reloadDelegate.reloadtable()
         }
     }
 }

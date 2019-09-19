@@ -27,8 +27,6 @@ class ViewControllerAllProfiles: NSViewController, Delay {
     private var filterby: Sortandfilter?
     private var sortascending: Bool = true
 
-    weak var allprofiledetailsdelegata: AllProfileDetails?
-
     @IBAction func sortdirection(_ sender: NSButton) {
         if self.sortascending == true {
             self.sortascending = false
@@ -63,13 +61,11 @@ class ViewControllerAllProfiles: NSViewController, Delay {
         super.viewDidAppear()
         self.reloadallprofiles()
         ViewControllerReference.shared.setvcref(viewcontroller: .vcallprofiles, nsviewcontroller: self)
-        self.allprofiledetailsdelegata = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
-        self.allprofiledetailsdelegata?.enablereloadallprofiles()
     }
 
     override func viewDidDisappear() {
         super.viewDidDisappear()
-        self.allprofiledetailsdelegata?.disablereloadallprofiles()
+        ViewControllerReference.shared.setvcref(viewcontroller: .vcallprofiles, nsviewcontroller: self)
     }
 
     private func reloadallprofiles() {

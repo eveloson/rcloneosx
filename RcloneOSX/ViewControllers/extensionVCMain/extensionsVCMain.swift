@@ -317,17 +317,6 @@ extension ViewControllerMain: ViewOutputDetails {
     }
 }
 
-extension ViewControllerMain: AllProfileDetails {
-    func disablereloadallprofiles() {
-        self.allprofilesview = false
-    }
-
-    func enablereloadallprofiles() {
-        self.allprofilesview = true
-        self.allprofiledetailsDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcallprofiles) as? ViewControllerAllProfiles
-    }
-}
-
 enum Color {
     case red
     case white
@@ -429,9 +418,4 @@ protocol GetHiddenID: class {
 
 protocol SetProfileinfo: class {
     func setprofile(profile: String, color: NSColor)
-}
-
-protocol AllProfileDetails: class {
-    func enablereloadallprofiles()
-    func disablereloadallprofiles()
 }
