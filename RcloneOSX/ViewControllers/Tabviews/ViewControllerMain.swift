@@ -42,8 +42,6 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     var index: Int?
     // Getting output from rclone
     var outputprocess: OutputProcess?
-    // HiddenID task, set when row is selected
-    var hiddenID: Int?
 
     @IBAction func totinfo(_ sender: NSButton) {
        guard self.checkforrclone() == false else { return }
@@ -145,23 +143,22 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     }
 
     @IBAction func delete(_ sender: NSButton) {
-        self.reset()
-        guard self.hiddenID != nil else {
+        guard self.index != nil else {
             self.info(num: 1)
             return
         }
-        let answer = Alerts.dialogOKCancel("Delete selected task?", text: "Cancel or OK")
-        if answer {
-            if self.hiddenID != nil {
+        if let hiddenID = self.configurations?.gethiddenID(index: self.index!) {
+            let answer = Alerts.dialogOKCancel("Delete selected task?", text: "Cancel or OK")
+            if answer {
                 // Delete Configurations and Schedules by hiddenID
-                self.configurations!.deleteConfigurationsByhiddenID(hiddenID: self.hiddenID!)
-                self.schedules!.deletescheduleonetask(hiddenID: self.hiddenID!)
+                self.configurations!.deleteConfigurationsByhiddenID(hiddenID: hiddenID)
+                self.schedules!.deletescheduleonetask(hiddenID: hiddenID)
                 self.deselect()
-                self.hiddenID = nil
                 self.index = nil
                 self.reloadtabledata()
             }
         }
+        self.reset()
     }
 
     func info(num: Int) {
@@ -190,10 +187,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     }
 
     @IBAction func executetasknow(_ sender: NSButton) {
-        guard self.hiddenID != nil else {
-            self.info(num: 1)
-            return
-        }
+        guard self.checkforrclone() == false else { return }
         guard self.index != nil else {
             self.info(num: 1)
             return
@@ -314,26 +308,6 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.decimal)
         self.remoteinfonumber.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.decimal))
         self.remoteinfosize.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.bytes/1024), number: NumberFormatter.Style.decimal))
-    }
-
-    // setting which table row is selected
-    func tableViewSelectionDidChange(_ notification: Notification) {
-        self.seterrorinfo(info: "")
-        if self.process != nil { self.abortOperations() }
-        self.info(num: 0)
-        let myTableViewFromNotification = (notification.object as? NSTableView)!
-        let indexes = myTableViewFromNotification.selectedRowIndexes
-        if let index = indexes.first {
-            self.index = index
-            self.hiddenID = self.configurations!.gethiddenID(index: index)
-            self.setNumbers(outputprocess: nil)
-        } else {
-            self.index = nil
-        }
-        self.reset()
-        self.showrclonecommandmainview()
-        self.reloadtabledata()
-        self.remoteinfo(reset: true)
     }
 
     func createandreloadschedules() {

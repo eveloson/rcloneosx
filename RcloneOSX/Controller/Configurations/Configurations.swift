@@ -269,7 +269,7 @@ class Configurations: ReloadTable, SetSchedules {
         return index
     }
 
-    func gethiddenID (index: Int) -> Int {
+    func gethiddenID(index: Int) -> Int {
         guard index < (self.configurations?.count ?? -1) else { return -1 }
         return self.configurations![index].hiddenID
     }

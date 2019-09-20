@@ -237,8 +237,13 @@ extension ViewControllerMain: Createandreloadconfigurations {
 }
 
 extension  ViewControllerMain: GetHiddenID {
-    func gethiddenID() -> Int? {
-        return self.hiddenID
+    func gethiddenID() -> Int {
+       guard self.index != nil else { return -1 }
+        if let hiddenID = self.configurations?.gethiddenID(index: self.index!) {
+            return hiddenID
+        } else {
+            return -1
+        }
     }
 }
 
@@ -254,12 +259,6 @@ extension ViewControllerMain: NewProfile {
         self.schedules = self.createschedulesobject(profile: profile)
         self.displayProfile()
         self.reloadtabledata()
-    }
-
-    func enableProfileMenu() {
-        globalMainQueue.async(execute: { () -> Void in
-            self.displayProfile()
-        })
     }
 }
 
@@ -408,7 +407,7 @@ protocol ViewOutputDetails: class {
 
 // Protocol for getting the hiddenID for a configuration
 protocol GetHiddenID: class {
-    func gethiddenID() -> Int?
+    func gethiddenID() -> Int
 }
 
 protocol SetProfileinfo: class {
