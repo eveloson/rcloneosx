@@ -362,10 +362,6 @@ extension ViewControllerCopyFiles: NewProfile {
             self.restoretableView.reloadData()
         })
     }
-
-    func enableProfileMenu() {
-        //
-    }
 }
 
 extension ViewControllerCopyFiles: OpenQuickBackup {

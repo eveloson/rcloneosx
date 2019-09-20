@@ -12,7 +12,6 @@ import Cocoa
 // Protocol for adding new profiles
 protocol NewProfile: class {
     func newProfile(profile: String?)
-    func enableProfileMenu()
 }
 
 class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, Delay {
