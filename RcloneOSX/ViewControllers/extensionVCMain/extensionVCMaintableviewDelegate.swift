@@ -55,4 +55,23 @@ extension ViewControllerMain: NSTableViewDelegate, Attributedestring {
         }
         self.configurations!.togglebatch(row)
     }
+
+    // setting which table row is selected
+      func tableViewSelectionDidChange(_ notification: Notification) {
+          self.seterrorinfo(info: "")
+          if self.process != nil { self.abortOperations() }
+          self.info(num: 0)
+          let myTableViewFromNotification = (notification.object as? NSTableView)!
+          let indexes = myTableViewFromNotification.selectedRowIndexes
+          if let index = indexes.first {
+              self.index = index
+              self.setNumbers(outputprocess: nil)
+          } else {
+              self.index = nil
+          }
+          self.reset()
+          self.showrclonecommandmainview()
+          self.reloadtabledata()
+          self.remoteinfo(reset: true)
+      }
 }
