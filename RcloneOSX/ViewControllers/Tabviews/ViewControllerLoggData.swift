@@ -172,6 +172,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
     private func deselectrow() {
         guard self.index != nil else { return }
         self.scheduletable.deselectRow(self.index!)
+        self.index = self.index()
     }
 }
 
