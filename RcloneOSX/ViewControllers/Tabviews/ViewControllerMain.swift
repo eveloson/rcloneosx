@@ -44,14 +44,14 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     var outputprocess: OutputProcess?
 
     @IBAction func totinfo(_ sender: NSButton) {
-       guard self.checkforrclone() == false else { return }
+        guard self.checkforrclone() == false else { return }
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         })
     }
 
     @IBAction func quickbackup(_ sender: NSButton) {
-       guard self.checkforrclone() == false else { return }
+        guard self.checkforrclone() == false else { return }
         globalMainQueue.async(execute: { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         })
@@ -109,7 +109,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     }
 
     @IBAction func getremoteinfo(_ sender: NSButton) {
-       guard self.checkforrclone() == false else { return }
+        guard self.checkforrclone() == false else { return }
         if self.index != nil {
             self.outputprocess = OutputProcess()
             self.working.startAnimation(nil)
