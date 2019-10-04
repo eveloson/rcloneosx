@@ -3,20 +3,22 @@
 <plist version="1.0">
 <dict>
 	<key>1.7.0</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.3/RcloneOSX-1.9.3.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.4/RcloneOSX-1.9.4.dmg</string>
 	<key>1.7.1</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.3/RcloneOSX-1.9.3.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.4/RcloneOSX-1.9.4.dmg</string>
 	<key>1.7.5</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.3/RcloneOSX-1.9.3.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.4/RcloneOSX-1.9.4.dmg</string>
 	<key>1.8.0</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.3/RcloneOSX-1.9.3.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.4/RcloneOSX-1.9.4.dmg</string>
 	<key>1.8.1</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.3/RcloneOSX-1.9.3.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.4/RcloneOSX-1.9.4.dmg</string>
 	<key>1.9.0</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.3/RcloneOSX-1.9.3.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.4/RcloneOSX-1.9.4.dmg</string>
 	<key>1.9.1</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.3/RcloneOSX-1.9.3.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.4/RcloneOSX-1.9.4.dmg</string>
 	<key>1.9.2</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.3/RcloneOSX-1.9.3.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.4/RcloneOSX-1.9.4.dmg</string>
+	<key>1.9.3</key>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v1.9.4/RcloneOSX-1.9.4.dmg</string>
 </dict>
 </plist>
