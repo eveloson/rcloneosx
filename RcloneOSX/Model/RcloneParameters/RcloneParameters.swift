@@ -25,7 +25,7 @@ class RcloneParameters {
         }
     }
 
-    func setParameters2To14(_ config: Configuration, dryRun: Bool, forDisplay: Bool) {
+    func setParameters2To14(config: Configuration, dryRun: Bool, forDisplay: Bool) {
         if config.parameter2 != nil {
             self.appendParameter(parameter: config.parameter2!, forDisplay: forDisplay)
         }
@@ -74,7 +74,7 @@ class RcloneParameters {
         return  "--suffix=" + formatter.string(from: Date())
     }
 
-    func dryrunparameter(_ config: Configuration, forDisplay: Bool) {
+    func dryrunparameter(config: Configuration, forDisplay: Bool) {
         let dryrun: String = config.dryrun
         self.arguments!.append(dryrun)
         if forDisplay {self.arguments!.append(" ")}
@@ -87,30 +87,6 @@ class RcloneParameters {
                 self.arguments!.append(" ")
             }
         }
-    }
-
-    func argumentsRclonerestore(_ config: Configuration, dryRun: Bool, forDisplay: Bool) -> [String] {
-        self.localCatalog = nil
-        self.offsiteCatalog = config.offsiteCatalog
-        self.offsiteServer = config.offsiteServer
-        self.remoteargs = self.offsiteServer! + ":" + self.offsiteCatalog!
-        self.appendParameter(parameter: ViewControllerReference.shared.copy, forDisplay: forDisplay)
-        self.appendParameter(parameter: self.remoteargs!, forDisplay: forDisplay)
-        self.appendParameter(parameter: "--verbose", forDisplay: forDisplay)
-        if dryRun {
-           self.dryrunparameter(config, forDisplay: forDisplay)
-        }
-        return self.arguments!
-    }
-
-    func argumentsRclonelistfile(_ config: Configuration) -> [String] {
-        self.localCatalog = nil
-        self.offsiteCatalog = config.offsiteCatalog
-        self.offsiteServer = config.offsiteServer
-        self.remoteargs = self.offsiteServer! + ":" + self.offsiteCatalog!
-        self.appendParameter(parameter: "ls", forDisplay: false)
-        self.appendParameter(parameter: self.remoteargs!, forDisplay: false)
-        return self.arguments!
     }
 
     init () {

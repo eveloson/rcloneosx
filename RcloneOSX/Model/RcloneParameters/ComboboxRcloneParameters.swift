@@ -22,7 +22,7 @@ struct ComboboxRcloneParameters {
      }
 
      // Returns Int value of argument
-     private func indexofrcloneparameter (argument: String) -> Int {
+     private func indexofrcloneparameter(argument: String) -> Int {
         var index: Int = -1
         loop : for i in 0 ..< SuffixstringsRcloneParameters().rcloneArguments.count where argument == SuffixstringsRcloneParameters().rcloneArguments[i].0 {
             index = i
@@ -32,7 +32,7 @@ struct ComboboxRcloneParameters {
      }
 
      // Split an rclone argument into argument and value
-     private func split (str: String) -> [String] {
+     private func split(str: String) -> [String] {
          let argument: String?
          let value: String?
          var split = str.components(separatedBy: "=")

@@ -35,22 +35,21 @@ struct ArgumentsOneConfiguration {
     init(config: Configuration) {
         // All arguments for rclone is computed, two sets. One for dry-run and one for real run.
         // the parameter forDisplay = true computes arguments to display in view.
-        self.arg = ArgumentsSynchronize(config: config).argumentssynchronize(config: config, dryRun: false, forDisplay: false)
-         self.argDisplay = ArgumentsSynchronize(config: config).argumentssynchronize(config: config, dryRun: false, forDisplay: true)
-         self.argdryRun = ArgumentsSynchronize(config: config).argumentssynchronize(config: config, dryRun: true, forDisplay: false)
-         self.argdryRunDisplay = ArgumentsSynchronize(config: config).argumentssynchronize(config: config, dryRun: true, forDisplay: true)
+        self.arg = ArgumentsSynchronize(config: config).argumentssynchronize(dryRun: false, forDisplay: false)
+        self.argDisplay = ArgumentsSynchronize(config: config).argumentssynchronize(dryRun: false, forDisplay: true)
+        self.argdryRun = ArgumentsSynchronize(config: config).argumentssynchronize(dryRun: true, forDisplay: false)
+        self.argdryRunDisplay = ArgumentsSynchronize(config: config).argumentssynchronize(dryRun: true, forDisplay: true)
         // Restore path
-        self.restore =  ArgumentsRestore(config: config).argumentsrestore(config: config, dryRun: false, forDisplay: false, tmprestore: false)
-        self.restoredryRun = ArgumentsRestore(config: config).argumentsrestore(config: config, dryRun: true, forDisplay: false, tmprestore: false)
-        self.restoreDisplay = ArgumentsRestore(config: config).argumentsrestore(config: config, dryRun: false, forDisplay: true, tmprestore: false)
-        self.restoredryRunDisplay = ArgumentsRestore(config: config).argumentsrestore(config: config, dryRun: true, forDisplay: true, tmprestore: false)
+        self.restore =  ArgumentsRestore(config: config).argumentsrestore(dryRun: false, forDisplay: false, tmprestore: false)
+        self.restoredryRun = ArgumentsRestore(config: config).argumentsrestore(dryRun: true, forDisplay: false, tmprestore: false)
+        self.restoreDisplay = ArgumentsRestore(config: config).argumentsrestore(dryRun: false, forDisplay: true, tmprestore: false)
+        self.restoredryRunDisplay = ArgumentsRestore(config: config).argumentsrestore(dryRun: true, forDisplay: true, tmprestore: false)
         // Temporary restore path
-        self.tmprestore = ArgumentsRestore(config: config).argumentsrestore(config: config, dryRun: false, forDisplay: false, tmprestore: true)
-        self.tmprestoredryRun = ArgumentsRestore(config: config).argumentsrestore(config: config, dryRun: true, forDisplay: false, tmprestore: true)
-
-        self.argslistRemotefiles = RcloneProcessArguments().argumentsRclonelistfile(config)
-        self.argsRestorefiles = RcloneProcessArguments().argumentsRclonerestore(config, dryRun: false, forDisplay: false)
-        self.argsRestorefilesdryRun = RcloneProcessArguments().argumentsRclonerestore(config, dryRun: true, forDisplay: false)
-        self.argsRestorefilesdryRunDisplay = RcloneProcessArguments().argumentsRclonerestore(config, dryRun: true, forDisplay: true)
+        self.tmprestore = ArgumentsRestore(config: config).argumentsrestore(dryRun: false, forDisplay: false, tmprestore: true)
+        self.tmprestoredryRun = ArgumentsRestore(config: config).argumentsrestore(dryRun: true, forDisplay: false, tmprestore: true)
+        self.argslistRemotefiles = ArgumentsOther(config: config).argumentsrclonelistfile()
+        self.argsRestorefiles = ArgumentsOther(config: config).argumentsrclonerestore(dryRun: false, forDisplay: false)
+        self.argsRestorefilesdryRun = ArgumentsOther(config: config).argumentsrclonerestore(dryRun: true, forDisplay: false)
+        self.argsRestorefilesdryRunDisplay = ArgumentsOther(config: config).argumentsrclonerestore(dryRun: true, forDisplay: true)
     }
 }

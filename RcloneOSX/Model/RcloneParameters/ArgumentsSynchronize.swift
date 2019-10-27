@@ -12,18 +12,18 @@ final class ArgumentsSynchronize: RcloneParameters {
 
     var config: Configuration?
 
-    func argumentssynchronize(config: Configuration, dryRun: Bool, forDisplay: Bool) -> [String] {
-        self.localCatalog = config.localCatalog
-        self.offsiteCatalog = config.offsiteCatalog
-        self.offsiteServer = config.offsiteServer
+    func argumentssynchronize(dryRun: Bool, forDisplay: Bool) -> [String] {
+        self.localCatalog = self.config!.localCatalog
+        self.offsiteCatalog = self.config!.offsiteCatalog
+        self.offsiteServer = self.config!.offsiteServer
         if self.offsiteServer!.isEmpty == false {
-            if config.localCatalog.isEmpty == true {
+            if self.config!.localCatalog.isEmpty == true {
                 self.remoteargs = self.offsiteServer! + ":"
             } else {
                 self.remoteargs = self.offsiteServer! + ":" + self.offsiteCatalog!
             }
         }
-        self.rclonecommand(config: config, dryRun: dryRun, forDisplay: forDisplay)
+        self.rclonecommand(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
         if self.localCatalog?.isEmpty == false {
             self.arguments!.append(self.localCatalog!)
         }
@@ -34,16 +34,16 @@ final class ArgumentsSynchronize: RcloneParameters {
         } else {
             if forDisplay {self.arguments!.append(" ")}
             self.arguments!.append(remoteargs!)
-            if config.localCatalog.isEmpty == true {
+            if self.config!.localCatalog.isEmpty == true {
                 if forDisplay {self.arguments!.append(" ")}
                 self.arguments!.append(self.offsiteCatalog ?? "")
             }
             if forDisplay {self.arguments!.append(" ")}
         }
         if dryRun {
-            self.dryrunparameter(config, forDisplay: forDisplay)
+            self.dryrunparameter(config: self.config!, forDisplay: forDisplay)
         }
-        self.setParameters2To14(config, dryRun: dryRun, forDisplay: forDisplay)
+        self.setParameters2To14(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
         return self.arguments!
     }
 

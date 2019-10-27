@@ -12,22 +12,22 @@ final class ArgumentsRestore: RcloneParameters {
 
     var config: Configuration?
 
-    func argumentsrestore(config: Configuration, dryRun: Bool, forDisplay: Bool, tmprestore: Bool) -> [String] {
+    func argumentsrestore(dryRun: Bool, forDisplay: Bool, tmprestore: Bool) -> [String] {
         if tmprestore == false {
-            self.localCatalog = config.localCatalog
+            self.localCatalog = self.config!.localCatalog
         } else {
             self.localCatalog = ViewControllerReference.shared.restorePath ?? ""
         }
-        self.offsiteCatalog = config.offsiteCatalog
-        self.offsiteServer = config.offsiteServer
+        self.offsiteCatalog = self.config!.offsiteCatalog
+        self.offsiteServer = self.config!.offsiteServer
         if self.offsiteServer!.isEmpty == false {
-            if config.localCatalog.isEmpty == true {
+            if self.config!.localCatalog.isEmpty == true {
                 self.remoteargs = self.offsiteServer! + ":"
             } else {
                 self.remoteargs = self.offsiteServer! + ":" + self.offsiteCatalog!
             }
         }
-        self.rclonecommand(config: config, dryRun: dryRun, forDisplay: forDisplay)
+        self.rclonecommand(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
         if self.offsiteServer!.isEmpty {
             if forDisplay {self.arguments!.append(" ")}
             self.arguments!.append(self.offsiteCatalog!)
@@ -35,7 +35,7 @@ final class ArgumentsRestore: RcloneParameters {
         } else {
             if forDisplay {self.arguments!.append(" ")}
             self.arguments!.append(remoteargs!)
-            if config.localCatalog.isEmpty == true {
+            if self.config!.localCatalog.isEmpty == true {
                 if forDisplay {self.arguments!.append(" ")}
                 self.arguments!.append(self.offsiteCatalog ?? "")
             }
@@ -45,9 +45,9 @@ final class ArgumentsRestore: RcloneParameters {
             self.arguments!.append(self.localCatalog!)
         }
         if dryRun {
-            self.dryrunparameter(config, forDisplay: forDisplay)
+            self.dryrunparameter(config: self.config!, forDisplay: forDisplay)
         }
-        self.setParameters2To14(config, dryRun: dryRun, forDisplay: forDisplay)
+        self.setParameters2To14(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
         return self.arguments!
     }
 
