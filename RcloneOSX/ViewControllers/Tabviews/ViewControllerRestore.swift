@@ -42,9 +42,12 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
         let answer = Alerts.dialogOKCancel("Do you REALLY want to start a RESTORE ?", text: "Cancel or OK")
         if answer {
             if let index = self.index {
+                self.workqueue = [Work]()
+                self.workqueue?.append(.restore)
                 self.gotit.textColor = setcolor(nsviewcontroller: self, color: .white)
                 self.gotit.stringValue = "Executing restore..."
                 self.restorebutton.isEnabled = false
+                self.estimatebutton.isEnabled = false
                 self.outputprocess = OutputProcess()
                 globalMainQueue.async(execute: { () -> Void in
                     self.presentAsSheet(self.viewControllerProgress!)
@@ -90,6 +93,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
         self.restoretable.dataSource = self
         ViewControllerReference.shared.setvcref(viewcontroller: .vcrestore, nsviewcontroller: self)
         self.sendprocess = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
+        self.gotit.isHidden = true
     }
 
     override func viewDidAppear() {
@@ -106,21 +110,18 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
     }
 
     private func settmp() {
-           let setuserconfig: String = NSLocalizedString(" ... set in User configuration ...", comment: "Restore")
-           self.tmprestore.stringValue = ViewControllerReference.shared.restorePath ?? setuserconfig
-           if (ViewControllerReference.shared.restorePath ?? "").isEmpty == true {
-               self.selecttmptorestore.state = .off
-           } else {
-                self.selecttmptorestore.state = .on
-           }
+        let setuserconfig: String = NSLocalizedString(" ... set in User configuration ...", comment: "Restore")
+        self.tmprestore.stringValue = ViewControllerReference.shared.restorePath ?? setuserconfig
+        if (ViewControllerReference.shared.restorePath ?? "").isEmpty == true {
+            self.selecttmptorestore.state = .off
+        } else {
+            self.selecttmptorestore.state = .on
        }
+   }
 
     private func setNumbers(outputprocess: OutputProcess?) {
         self.maxcount = outputprocess?.getMaxcount() ?? 0
-        globalMainQueue.async(execute: { () -> Void in
-            let infotask = RemoteinfonumbersOnetask(outputprocess: outputprocess)
-            self.transferredNumber.stringValue = infotask.transferredNumber!
-        })
+        self.transferredNumber.stringValue = String(self.maxcount)
     }
 
     @IBAction func prepareforrestore(_ sender: NSButton) {
@@ -168,18 +169,20 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
        }
 
        // setting which table row is selected
-       func tableViewSelectionDidChange(_ notification: Notification) {
-           let myTableViewFromNotification = (notification.object as? NSTableView)!
-           let indexes = myTableViewFromNotification.selectedRowIndexes
-           if let index = indexes.first {
-               self.estimatebutton.isEnabled = true
-               self.index = index
-           } else {
-               self.estimatebutton.isEnabled = false
-               self.index = nil
-           }
-           self.restorebutton.isEnabled = false
-       }
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        let myTableViewFromNotification = (notification.object as? NSTableView)!
+        let indexes = myTableViewFromNotification.selectedRowIndexes
+        if let index = indexes.first {
+            self.estimatebutton.isEnabled = true
+            self.index = index
+        } else {
+            self.estimatebutton.isEnabled = false
+            self.index = nil
+        }
+        self.restorebutton.isEnabled = false
+        self.workqueue = nil
+        self.gotit.isHidden = true
+    }
 }
 
 extension ViewControllerRestore: NSTableViewDataSource {
@@ -200,7 +203,7 @@ extension ViewControllerRestore: NSTableViewDelegate {
 
 extension ViewControllerRestore: UpdateProgress {
     func processTermination() {
-        switch self.removework() ?? .setremotenumbers {
+        switch self.removework() ?? .localinfoandnumbertosync {
         case .getremotenumbers:
             self.setNumbers(outputprocess: self.outputprocess)
             self.getremotenumbers()
@@ -214,12 +217,21 @@ extension ViewControllerRestore: UpdateProgress {
             self.restorebutton.isEnabled = true
             self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
             self.gotit.stringValue = "Got it..."
-        default:
-            return
+        case .restore:
+            if let vc = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess {
+                vc.processTermination()
+            }
+            self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
+            self.gotit.stringValue = "Got it..."
         }
     }
 
     func fileHandler() {
+        weak var outputeverythingDelegate: ViewOutputDetails?
+        outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
+        if outputeverythingDelegate?.appendnow() ?? false {
+            outputeverythingDelegate?.reloadtable()
+        }
         if let vc = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess {
             vc.fileHandler()
         }

@@ -184,7 +184,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="rcloneosx" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-348" y="-290"/>
+            <point key="canvasLocation" x="-373" y="-454"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="GeT-NB-lhy">
@@ -346,7 +346,7 @@
                 </windowController>
                 <customObject id="Rv5-yv-lsc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-341" y="-41"/>
+            <point key="canvasLocation" x="-394" y="-84"/>
         </scene>
         <!--Tab View Controller-->
         <scene sceneID="Hwe-jL-WAZ">
@@ -378,7 +378,7 @@
                 </tabViewController>
                 <customObject id="am9-td-Qjg" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-318" y="357"/>
+            <point key="canvasLocation" x="-326" y="339"/>
         </scene>
         <!--Execute-->
         <scene sceneID="84s-6a-t0v">
@@ -821,7 +821,7 @@
                 </viewController>
                 <customObject id="aBq-uD-wbZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1099" y="1241.5"/>
+            <point key="canvasLocation" x="-1099" y="1242"/>
         </scene>
         <!--Add-->
         <scene sceneID="Djw-1M-Bvf">
@@ -1204,17 +1204,17 @@
             <objects>
                 <viewController title="Details about files" storyboardIdentifier="StoryboardInformationID" id="ceM-Kt-SJU" customClass="ViewControllerInformation" customModule="rcloneosx" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="KBL-J8-CuF">
-                        <rect key="frame" x="0.0" y="0.0" width="696" height="295"/>
+                        <rect key="frame" x="0.0" y="0.0" width="696" height="271"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKB-vU-qrp">
-                                <rect key="frame" x="20" y="61" width="656" height="46"/>
+                                <rect key="frame" x="20" y="61" width="656" height="190"/>
                                 <clipView key="contentView" id="fsy-MR-0hH">
-                                    <rect key="frame" x="1" y="0.0" width="654" height="45"/>
+                                    <rect key="frame" x="1" y="0.0" width="654" height="189"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" rowSizeStyle="automatic" headerView="miE-cF-Mpr" viewBased="YES" id="Iah-yC-nuy">
-                                            <rect key="frame" x="0.0" y="0.0" width="654" height="22"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="654" height="166"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -4276,9 +4276,9 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ix4-Uw-eDi">
-                                <rect key="frame" x="925" y="356" width="85" height="32"/>
+                                <rect key="frame" x="930" y="357" width="84" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Esitmate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4JI-zZ-wDw">
+                                <buttonCell key="cell" type="push" title="Estimate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4JI-zZ-wDw">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -4303,7 +4303,7 @@ DQ
                 </viewController>
                 <customObject id="wIk-Vh-hZv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1210" y="-223.5"/>
+            <point key="canvasLocation" x="-2229" y="723.5"/>
         </scene>
         <!--All output-->
         <scene sceneID="c2Q-I2-MbT">
@@ -4314,13 +4314,13 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvg-tG-A4K">
-                                <rect key="frame" x="20" y="20" width="762" height="183"/>
+                                <rect key="frame" x="20" y="20" width="762" height="137"/>
                                 <clipView key="contentView" id="NTB-w9-9Se">
-                                    <rect key="frame" x="1" y="0.0" width="760" height="182"/>
+                                    <rect key="frame" x="1" y="0.0" width="760" height="136"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="FqJ-r3-W02" viewBased="YES" id="5cn-Ow-2Tv">
-                                            <rect key="frame" x="0.0" y="0.0" width="760" height="159"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="760" height="113"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -4394,7 +4394,7 @@ DQ
                 </viewController>
                 <customObject id="UZV-9V-UKD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2096" y="724"/>
+            <point key="canvasLocation" x="-1208" y="64"/>
         </scene>
     </scenes>
     <resources>

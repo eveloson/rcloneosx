@@ -162,7 +162,7 @@ class RcloneProcessArguments {
         if tmprestore == false {
             self.localCatalog = config.localCatalog
         } else {
-            self.localCatalog = "placeholder temporary"
+            self.localCatalog = ViewControllerReference.shared.restorePath ?? ""
         }
         self.offsiteCatalog = config.offsiteCatalog
         self.offsiteServer = config.offsiteServer
