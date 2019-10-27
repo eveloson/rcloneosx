@@ -17,7 +17,7 @@ enum Work {
     case restore
 }
 
-class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, Index, Abort, Remoterclonesize, Setcolor {
+class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, Remoterclonesize, Setcolor {
 
     @IBOutlet weak var localCatalog: NSTextField!
     @IBOutlet weak var offsiteCatalog: NSTextField!
@@ -39,12 +39,21 @@ class ViewControllerRestore: NSViewController, SetConfigurations, SetDismisser, 
     var diddissappear: Bool = false
     var workqueue: [Work]?
     var abortandclose: Bool = true
-
-    // Close and dismiss view
-    @IBAction func close(_ sender: NSButton) {
-        if self.abortandclose { self.abort() }
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
-    }
+    
+    /*
+     @IBAction func restore(_ sender: NSButton) {
+          guard self.index != nil else {
+              self.info(num: 1)
+              return
+          }
+         guard self.checkforrclone() == false else { return }
+          guard self.configurations!.getConfigurations()[self.index!].task == ViewControllerReference.shared.sync else {
+                  self.info(num: 7)
+                  return
+          }
+          //
+      }
+     */
 
     @IBAction func dotmprestore(_ sender: NSButton) {
         guard self.tmprestore.stringValue.isEmpty == false else { return }
@@ -240,5 +249,14 @@ extension ViewControllerRestore: UpdateProgress {
         if self.workqueue?.count == 1 {
             self.updateProgressbar(Double(self.outputprocess!.count()))
         }
+    }
+}
+
+extension ViewControllerRestore: DismissViewController {
+    func dismiss_view(viewcontroller: NSViewController) {
+        self.dismiss(viewcontroller)
+        globalMainQueue.async(execute: { () -> Void in
+            // self.restoretable.reloadData()
+        })
     }
 }

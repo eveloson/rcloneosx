@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="abu-zT-Ht4">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="abu-zT-Ht4">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -356,12 +356,13 @@
                         <tabViewItem identifier="" id="Hmf-Kp-gkK"/>
                         <tabViewItem id="O9R-ol-hl4"/>
                         <tabViewItem id="h4C-Bp-4jM"/>
+                        <tabViewItem id="ybJ-do-gFa"/>
                         <tabViewItem id="upL-Ge-xa0"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="oAg-LW-cIr">
                         <rect key="frame" x="0.0" y="-58" width="450" height="123"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <font key="font" metaFont="message"/>
+                        <font key="font" metaFont="system"/>
                         <connections>
                             <outlet property="delegate" destination="CHy-OK-nPY" id="Rrr-bL-GPy"/>
                         </connections>
@@ -371,6 +372,7 @@
                         <segue destination="egt-C3-u4G" kind="relationship" relationship="tabItems" id="aeQ-Av-AbY"/>
                         <segue destination="3xI-3C-guU" kind="relationship" relationship="tabItems" id="178-o0-nkH"/>
                         <segue destination="lhw-tZ-aSZ" kind="relationship" relationship="tabItems" id="ZCO-uf-G6x"/>
+                        <segue destination="BOc-qK-ti2" kind="relationship" relationship="tabItems" id="thV-bF-xMd"/>
                         <segue destination="Vnt-Io-Ekd" kind="relationship" relationship="tabItems" id="pUe-lb-E2a"/>
                     </connections>
                 </tabViewController>
@@ -394,14 +396,14 @@
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="BZN-Ba-N1e" id="gd0-mk-eEg">
                                             <rect key="frame" x="0.0" y="0.0" width="929" height="246"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="taskCellID" width="46.703125" minWidth="40" maxWidth="1000" id="AkJ-MA-346">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Task">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -414,7 +416,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="statCellID" width="40" minWidth="40" maxWidth="1000" id="HhQ-Rv-1JO">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Stat">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -423,7 +425,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="batchCellID" editable="NO" width="40.06640625" minWidth="10" maxWidth="3.4028234663852886e+38" id="Byb-kM-Mpk" userLabel="Batch">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Batch">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -435,7 +437,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="localCatalogCellID" width="207.97265625" minWidth="40" maxWidth="1000" id="35g-px-ZH6">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Local catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -448,7 +450,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteCatalogCellID" width="147.98828125" minWidth="10" maxWidth="3.4028234663852886e+38" id="zzK-ZO-wvj">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remote catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -461,7 +463,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteServerCellID" width="101.3515625" minWidth="10" maxWidth="3.4028234663852886e+38" id="fAL-TO-qxo" userLabel="Offsite server">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Cloud service">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -474,7 +476,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="backupIDCellID" width="136.4453125" minWidth="10" maxWidth="3.4028234663852886e+38" id="pql-cs-AEK" userLabel="ID">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="ID">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -487,7 +489,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="daysID" width="55.58203125" minWidth="10" maxWidth="3.4028234663852886e+38" id="g4n-Dj-ZBa" userLabel="Days">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="right" title="Days">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -500,7 +502,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="runDateCellID" width="126.08203125" minWidth="10" maxWidth="3.4028234663852886e+38" id="qvy-yX-V6C">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Last run">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -539,18 +541,18 @@
                                     <constraint firstAttribute="height" constant="63" id="lqq-qg-pnM"/>
                                 </constraints>
                                 <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="qVQ-W3-TCJ">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gg2-se-FkF">
-                                <rect key="frame" x="141" y="388" width="265" height="17"/>
+                                <rect key="frame" x="141" y="388" width="264" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="kfI-gI-uea"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Profile :" id="60W-M7-Vqr">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -581,7 +583,7 @@
                                     <constraint firstAttribute="height" constant="17" id="o7K-N3-zVR"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="rcloneversionshort" id="jVU-dN-OuF">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -628,9 +630,9 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ihh-RL-unb">
-                                <rect key="frame" x="420" y="388" width="275" height="17"/>
+                                <rect key="frame" x="419" y="388" width="276" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Double click  on row or shortcut ⌘R to execute task" id="ZcE-hI-Fdm">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -642,7 +644,7 @@
                                     <constraint firstAttribute="height" constant="22" id="DjV-Qt-pD1"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" bezelStyle="round" id="cJR-3g-k9z">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -650,7 +652,7 @@
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ANf-OB-UtX">
                                 <rect key="frame" x="502" y="26" width="77" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="cmo-Ui-X0I">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -662,7 +664,7 @@
                                     <constraint firstAttribute="width" constant="77" id="bYg-qa-fvn"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="vr8-1y-FYb">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -687,7 +689,7 @@
                                         <textField verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IFg-Xf-ODx">
                                             <rect key="frame" x="22" y="8" width="223" height="22"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" bezelStyle="round" id="FR9-kG-Y79">
-                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="font" metaFont="message" size="11"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -706,7 +708,7 @@
                                     <constraint firstAttribute="height" constant="17" id="GBx-IJ-Tjn"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Size (kB):" id="ANp-rW-Rai">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -717,30 +719,11 @@
                                     <constraint firstAttribute="height" constant="14" id="fAL-x1-vbc"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Number: " id="QQQ-Jf-T57">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vug-tb-c1T">
-                                <rect key="frame" x="35" y="145" width="85" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Restore" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Cde-VK-LhR">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="restore:" target="egt-C3-u4G" id="etJ-HE-2jn"/>
-                                </connections>
-                            </button>
-                            <box fixedFrame="YES" title="Restore" translatesAutoresizingMaskIntoConstraints="NO" id="Jud-0A-h9l">
-                                <rect key="frame" x="17" y="138" width="113" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <view key="contentView" id="1sj-2d-hcS">
-                                    <rect key="frame" x="3" y="3" width="107" height="37"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                            </box>
                             <box fixedFrame="YES" title="Process info" translatesAutoresizingMaskIntoConstraints="NO" id="95g-rM-8Og">
                                 <rect key="frame" x="17" y="304" width="113" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -765,7 +748,7 @@
                                             <rect key="frame" x="-2" y="26" width="111" height="16"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="status" id="0kY-TR-Wtk">
-                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="font" metaFont="label" size="12"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -885,16 +868,16 @@
                                     <rect key="frame" x="2" y="2" width="864" height="148"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="Wc3-b4-xOt" id="ytY-cn-Iq7">
+                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="Wc3-b4-xOt" id="ytY-cn-Iq7">
                                             <rect key="frame" x="0.0" y="0.0" width="864" height="125"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="task" width="65" minWidth="10" maxWidth="3.4028234663852886e+38" id="Fd7-v3-h8m" userLabel="Task">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Command">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -907,7 +890,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="localCatalog" width="330.109375" minWidth="40" maxWidth="1000" id="1xL-86-DnF">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Local catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -920,7 +903,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteCatalog" width="259.98828125" minWidth="10" maxWidth="3.4028234663852886e+38" id="oqO-Td-7wg">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remote catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -933,7 +916,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteServer" width="86.3515625" minWidth="10" maxWidth="3.4028234663852886e+38" id="GF9-Lf-PIQ" userLabel="Offsite server">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Cloud service">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -946,7 +929,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="backupID" width="99.9453125" minWidth="10" maxWidth="3.4028234663852886e+38" id="E9g-tP-EaI" userLabel="ID">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="ID">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -1021,7 +1004,7 @@
                                             <rect key="frame" x="267" y="60" width="165" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Required " id="Wmd-vt-cwI">
-                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="font" metaFont="label" size="12"/>
                                                 <color key="textColor" name="knobColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -1030,7 +1013,7 @@
                                             <rect key="frame" x="267" y="37" width="165" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Optional" id="dti-GW-qCA">
-                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="font" metaFont="label" size="12"/>
                                                 <color key="textColor" name="knobColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -1039,7 +1022,7 @@
                                             <rect key="frame" x="-2" y="13" width="389" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" alignment="center" title="Cloud service cannot be empty..." id="pjm-IB-uRV">
-                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="font" metaFont="label" size="12"/>
                                                 <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -1067,7 +1050,7 @@
                                             <rect key="frame" x="268" y="-49" width="165" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Required if remote server" id="znZ-ht-M5x">
-                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="font" metaFont="label" size="12"/>
                                                 <color key="textColor" name="knobColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -1076,7 +1059,7 @@
                                             <rect key="frame" x="268" y="-80" width="165" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Optional" id="WVf-5Q-8C4">
-                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="font" metaFont="label" size="12"/>
                                                 <color key="textColor" name="knobColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -1085,7 +1068,7 @@
                                             <rect key="frame" x="415" y="38" width="70" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Required" id="w6i-hq-pcc">
-                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="font" metaFont="label" size="12"/>
                                                 <color key="textColor" name="knobColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -1190,7 +1173,7 @@
                                 <rect key="frame" x="868" y="1" width="205" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Profile :" id="dTX-H7-8VC">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1220,26 +1203,26 @@
         <scene sceneID="GIT-ED-d2h">
             <objects>
                 <viewController title="Details about files" storyboardIdentifier="StoryboardInformationID" id="ceM-Kt-SJU" customClass="ViewControllerInformation" customModule="rcloneosx" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="KBL-J8-CuF">
-                        <rect key="frame" x="0.0" y="0.0" width="696" height="319"/>
+                    <view key="view" misplaced="YES" id="KBL-J8-CuF">
+                        <rect key="frame" x="0.0" y="0.0" width="696" height="295"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKB-vU-qrp">
-                                <rect key="frame" x="20" y="61" width="656" height="238"/>
+                                <rect key="frame" x="20" y="61" width="656" height="190"/>
                                 <clipView key="contentView" id="fsy-MR-0hH">
-                                    <rect key="frame" x="1" y="0.0" width="654" height="237"/>
+                                    <rect key="frame" x="1" y="0.0" width="654" height="189"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" rowSizeStyle="automatic" headerView="miE-cF-Mpr" viewBased="YES" id="Iah-yC-nuy">
-                                            <rect key="frame" x="0.0" y="0.0" width="654" height="214"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" rowSizeStyle="automatic" headerView="miE-cF-Mpr" viewBased="YES" id="Iah-yC-nuy">
+                                            <rect key="frame" x="0.0" y="0.0" width="654" height="166"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="outputID" width="651" minWidth="40" maxWidth="1000" id="DDM-6v-WfN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="files copied">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1366,16 +1349,16 @@ DQ
                                     <rect key="frame" x="2" y="2" width="734" height="237"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="rdl-MF-1ux" viewBased="YES" id="kSO-Cu-8vE">
+                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="rdl-MF-1ux" viewBased="YES" id="kSO-Cu-8vE">
                                             <rect key="frame" x="0.0" y="0.0" width="734" height="212"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="taskCellID" width="81" minWidth="40" maxWidth="1000" id="VO5-kH-zbP">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Task">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1408,7 +1391,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="percentCellID" width="47" minWidth="40" maxWidth="1000" id="XRn-nb-Ail" userLabel="Percent">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="%">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1427,7 +1410,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="localCatalogCellID" width="232.97265625" minWidth="40" maxWidth="1000" id="3w9-4S-tzr">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Local catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1460,7 +1443,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteCatalogCellID" width="244" minWidth="10" maxWidth="3.4028234663852886e+38" id="btB-wN-qab">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Remote catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -1493,7 +1476,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteServerCellID" width="109.3515625" minWidth="10" maxWidth="3.4028234663852886e+38" id="IyM-vf-gcV" userLabel="Offsite server">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Remote server">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -1942,7 +1925,7 @@ DQ
                                 <rect key="frame" x="-2" y="216" width="307" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Version :" id="q8z-Ku-oKx">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1962,7 +1945,7 @@ DQ
                                 <rect key="frame" x="-2" y="268" width="307" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="copyright" id="I48-tD-2H3">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -2002,7 +1985,7 @@ DQ
                                 <rect key="frame" x="-2" y="250" width="307" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="icon" id="Vnu-mV-aob">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -2034,7 +2017,7 @@ DQ
                                 <rect key="frame" x="-2" y="233" width="307" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="All rights reserved." id="jNb-oN-kSC">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -2516,16 +2499,16 @@ DQ
                                     <rect key="frame" x="1" y="0.0" width="180" height="124"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Jgh-3N-39f" viewBased="YES" id="re6-1I-n0D">
+                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Jgh-3N-39f" viewBased="YES" id="re6-1I-n0D">
                                             <rect key="frame" x="0.0" y="0.0" width="180" height="101"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="profilesID" width="177" minWidth="40" maxWidth="1000" id="241-VI-fhB">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Double click to select or Default">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2589,26 +2572,26 @@ DQ
         <scene sceneID="YH7-XV-N0K">
             <objects>
                 <viewController title="Details about files" storyboardIdentifier="StoryboardInformationCopyFilesID" id="e5v-pd-xF9" customClass="ViewControllerInformationCopyFiles" customModule="rcloneosx" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="3Ax-tq-zyy">
-                        <rect key="frame" x="0.0" y="0.0" width="696" height="319"/>
+                    <view key="view" misplaced="YES" id="3Ax-tq-zyy">
+                        <rect key="frame" x="0.0" y="0.0" width="696" height="296"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4X9-KY-aBa">
-                                <rect key="frame" x="20" y="61" width="656" height="238"/>
+                                <rect key="frame" x="20" y="61" width="656" height="192"/>
                                 <clipView key="contentView" id="HKd-3b-GtA">
-                                    <rect key="frame" x="1" y="0.0" width="654" height="237"/>
+                                    <rect key="frame" x="1" y="0.0" width="654" height="191"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" headerView="T8q-fs-lHu" viewBased="YES" id="PdL-Om-6AF">
-                                            <rect key="frame" x="0.0" y="0.0" width="654" height="214"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" headerView="T8q-fs-lHu" viewBased="YES" id="PdL-Om-6AF">
+                                            <rect key="frame" x="0.0" y="0.0" width="654" height="168"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="outputID" width="651" minWidth="40" maxWidth="1000" id="Icw-Qm-VbA">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="files copied">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2695,10 +2678,10 @@ DQ
             </objects>
             <point key="canvasLocation" x="-2143" y="164"/>
         </scene>
-        <!--Copy files-->
+        <!--Files-->
         <scene sceneID="qCw-vW-Vuu">
             <objects>
-                <viewController title="Copy files" storyboardIdentifier="ViewControllerCopyFiles" id="lhw-tZ-aSZ" customClass="ViewControllerCopyFiles" customModule="rcloneosx" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Files" storyboardIdentifier="ViewControllerCopyFiles" id="lhw-tZ-aSZ" customClass="ViewControllerCopyFiles" customModule="rcloneosx" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ycd-4M-6Lb">
                         <rect key="frame" x="0.0" y="0.0" width="1092" height="407"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2710,16 +2693,16 @@ DQ
                                     <rect key="frame" x="1" y="0.0" width="593" height="254"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="Fpi-VP-DYW" viewBased="YES" id="7Ch-Yf-yLQ">
+                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="Fpi-VP-DYW" viewBased="YES" id="7Ch-Yf-yLQ">
                                             <rect key="frame" x="0.0" y="0.0" width="593" height="231"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="files" width="590" minWidth="40" maxWidth="1000" id="opx-FI-hLg">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Select file or catalog to restore (and double click to copy in one go)">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2807,7 +2790,7 @@ DQ
                                 <rect key="frame" x="489" y="26" width="571" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="j80-76-GIg">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -2877,7 +2860,7 @@ DQ
                                 <rect key="frame" x="795" y="378" width="170" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Number of remote files: 0 " id="98g-gR-DSr">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -2894,7 +2877,7 @@ DQ
                                 <rect key="frame" x="477" y="85" width="595" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="zVY-uR-P17">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -2906,16 +2889,16 @@ DQ
                                     <rect key="frame" x="1" y="0.0" width="447" height="184"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="rFD-rU-Sf3" viewBased="YES" id="kZV-bb-ShA">
+                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="rFD-rU-Sf3" viewBased="YES" id="kZV-bb-ShA">
                                             <rect key="frame" x="0.0" y="0.0" width="447" height="159"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="taskCellID" width="81" minWidth="40" maxWidth="1000" id="851-kr-zu8">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Task">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2948,7 +2931,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="localCatalogCellID" width="273" minWidth="40" maxWidth="1000" id="8wU-MX-5ya">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Local catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2981,7 +2964,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteServerCellID" width="84" minWidth="40" maxWidth="1000" id="vKo-Cs-6zf" userLabel="server">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Remote server">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3080,16 +3063,16 @@ DQ
                                     <rect key="frame" x="2" y="2" width="450" height="237"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="xfF-yy-yNe" id="5H0-sI-bwz">
+                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="xfF-yy-yNe" id="5H0-sI-bwz">
                                             <rect key="frame" x="0.0" y="0.0" width="450" height="214"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="taskCellID" width="80.703125" minWidth="40" maxWidth="1000" id="cfg-Pw-ooM">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Task">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3102,7 +3085,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="localCatalogCellID" width="258.97265625" minWidth="40" maxWidth="1000" id="8W7-Rt-VZy">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Local catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3115,7 +3098,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteServerCellID" width="101.3515625" minWidth="10" maxWidth="3.4028234663852886e+38" id="b1U-NW-rkf" userLabel="Offsite server">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Cloud service">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3203,16 +3186,16 @@ DQ
                                     <rect key="frame" x="2" y="2" width="765" height="237"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="qH0-lA-uJp" viewBased="YES" id="JWD-2N-h5C">
+                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="qH0-lA-uJp" viewBased="YES" id="JWD-2N-h5C">
                                             <rect key="frame" x="0.0" y="0.0" width="765" height="212"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="taskCellID" width="90" minWidth="40" maxWidth="1000" id="mSV-kc-HYn">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Task">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3245,7 +3228,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="percentCellID" width="44" minWidth="40" maxWidth="1000" id="Ail-jQ-U9x" userLabel="Percent">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="%">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3264,7 +3247,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="localCatalogCellID" width="231.47265625" minWidth="40" maxWidth="1000" id="wmk-61-wif">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Local catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3297,7 +3280,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteCatalogCellID" width="231.98828125" minWidth="10" maxWidth="3.4028234663852886e+38" id="8lG-Xg-ZWM">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remote catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3330,7 +3313,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteServerCellID" width="91" minWidth="10" maxWidth="3.4028234663852886e+38" id="6oF-AN-PW4" userLabel="Offsite server">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Cloud service">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3363,7 +3346,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="daysID" width="58.58203125" minWidth="10" maxWidth="3.4028234663852886e+38" id="m2B-fZ-F82" userLabel="Days">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="right" title="Days">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3452,16 +3435,16 @@ DQ
                                     <rect key="frame" x="2" y="2" width="924" height="344"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="vUL-J0-hPQ" id="qNH-mB-w6x">
+                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="vUL-J0-hPQ" id="qNH-mB-w6x">
                                             <rect key="frame" x="0.0" y="0.0" width="924" height="321"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="profile" width="122.703125" minWidth="40" maxWidth="1000" id="YQw-eh-vaw" userLabel="Profile">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Profile">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3474,7 +3457,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="task" width="65.703125" minWidth="40" maxWidth="1000" id="TZp-M4-A9t">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Task">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3487,7 +3470,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="localCatalog" width="198.97265625" minWidth="40" maxWidth="1000" id="kRZ-fS-Ikk">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Local catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3500,7 +3483,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteCatalog" width="186.98828125" minWidth="10" maxWidth="3.4028234663852886e+38" id="952-hQ-go8">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remote catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3513,7 +3496,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteServer" width="87" minWidth="10" maxWidth="3.4028234663852886e+38" id="qzl-fQ-4tH" userLabel="Offsite server">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Cloud service">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3526,7 +3509,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="backupID" width="64.4453125" minWidth="10" maxWidth="3.4028234663852886e+38" id="edg-LT-Uic" userLabel="BackupID">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Backup ID">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3539,7 +3522,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="daysID" width="48.58203125" minWidth="10" maxWidth="3.4028234663852886e+38" id="ACQ-MV-gb6" userLabel="Days">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="right" title="Days">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3552,7 +3535,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="dateExecuted" width="124.08203125" minWidth="10" maxWidth="3.4028234663852886e+38" id="huf-Ff-v8u">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Last run">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3604,7 +3587,7 @@ DQ
                                 <rect key="frame" x="445" y="376" width="184" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Number of configurations:" id="8az-aM-vjG">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -3637,16 +3620,16 @@ DQ
                                     <rect key="frame" x="2" y="2" width="1048" height="314"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="fJb-pq-eay" id="JaD-tB-eVG">
+                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="fJb-pq-eay" id="JaD-tB-eVG">
                                             <rect key="frame" x="0.0" y="0.0" width="1048" height="291"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="task" width="68.5" minWidth="10" maxWidth="3.4028234663852886e+38" id="zq6-FL-T1e" userLabel="task">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Task">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3659,7 +3642,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="deleteCellID" width="66" minWidth="10" maxWidth="3.4028234663852886e+38" id="gMu-Ae-lr9">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Delete log">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3671,7 +3654,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="backupID" width="89.5" minWidth="10" maxWidth="3.4028234663852886e+38" id="mNI-CG-Awh">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Backup ID">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3684,7 +3667,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="localCatalog" width="289.5" minWidth="10" maxWidth="3.4028234663852886e+38" id="nO4-qI-84y" userLabel="localCataloc">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Local catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3697,7 +3680,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteServer" width="128" minWidth="10" maxWidth="3.4028234663852886e+38" id="Liq-Ih-sBU" userLabel="offsiteServer">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Cloud service">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3710,7 +3693,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="dateExecuted" width="131.75" minWidth="10" maxWidth="3.4028234663852886e+38" id="kSO-Yi-x5x">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Date executed">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3723,7 +3706,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="resultExecuted" width="246.33203125" minWidth="10" maxWidth="3.4028234663852886e+38" id="Pfc-ck-Xwz">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Result">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3764,7 +3747,7 @@ DQ
                                 <rect key="frame" x="861" y="387" width="134" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Number of logs:" id="Kph-0t-pn6">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -3773,7 +3756,7 @@ DQ
                                 <rect key="frame" x="20" y="20" width="619" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="wZ1-z8-HXv">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -3804,7 +3787,7 @@ DQ
                                 <rect key="frame" x="856" y="371" width="139" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Selected logs: 0" id="Az5-g2-uSa">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -3938,7 +3921,7 @@ DQ
                                 <rect key="frame" x="547" y="298" width="143" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Select column to sort ..." id="Ew0-dC-jpZ">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -3950,16 +3933,16 @@ DQ
                                     <rect key="frame" x="2" y="2" width="664" height="237"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="5AR-1g-h8Y" id="JmE-5l-Gdz">
+                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="5AR-1g-h8Y" id="JmE-5l-Gdz">
                                             <rect key="frame" x="0.0" y="0.0" width="664" height="214"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="localCatalog" width="202.47265625" minWidth="40" maxWidth="1000" id="mZF-cC-1CW">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Local catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3972,7 +3955,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="select" editable="NO" width="42" minWidth="10" maxWidth="3.4028234663852886e+38" id="a5f-ud-yfF" userLabel="Select">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Select">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3984,7 +3967,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteCatalog" width="107.98828125" minWidth="10" maxWidth="3.4028234663852886e+38" id="Bfl-bZ-1pf">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Remote catalog">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -3997,7 +3980,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="offsiteServer" width="84" minWidth="10" maxWidth="3.4028234663852886e+38" id="Wtv-ix-Aq4" userLabel="Remote server">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Cloud service">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -4010,7 +3993,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="transferredNumber" width="44" minWidth="10" maxWidth="3.4028234663852886e+38" id="RKR-sw-jqj" userLabel="transferredNumber">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="right" title="Files ">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -4023,7 +4006,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="totalNumber" width="69" minWidth="10" maxWidth="3.4028234663852886e+38" id="G3h-PZ-ENG" userLabel="totalNumber">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="right" title="Total num">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -4036,7 +4019,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="totalNumberSizebytes" width="92" minWidth="10" maxWidth="3.4028234663852886e+38" id="SQZ-Le-MPW" userLabel="totalNumberSizebytes">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="right" title="Total size (kB)">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </tableHeaderCell>
@@ -4083,16 +4066,16 @@ DQ
             </objects>
             <point key="canvasLocation" x="150" y="2617"/>
         </scene>
-        <!--View Controller Restore-->
+        <!--Restore-->
         <scene sceneID="Vi4-KR-JOB">
             <objects>
-                <viewController storyboardIdentifier="StoryboardRestoreID" id="BOc-qK-ti2" customClass="ViewControllerRestore" customModule="rcloneosx" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Restore" storyboardIdentifier="StoryboardRestoreID" id="BOc-qK-ti2" customClass="ViewControllerRestore" customModule="rcloneosx" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="OQG-Mc-VIe">
-                        <rect key="frame" x="0.0" y="0.0" width="740" height="250"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1092" height="407"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8KP-H3-jDb">
-                                <rect key="frame" x="152" y="193" width="274" height="22"/>
+                                <rect key="frame" x="152" y="350" width="274" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" bezelStyle="round" id="iWq-jf-qaB">
                                     <font key="font" metaFont="system"/>
@@ -4104,7 +4087,7 @@ DQ
                                 </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EtS-js-eIA">
-                                <rect key="frame" x="151" y="170" width="275" height="22"/>
+                                <rect key="frame" x="151" y="327" width="275" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" bezelStyle="round" id="A2j-Qv-rnh">
                                     <font key="font" metaFont="system"/>
@@ -4113,7 +4096,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="peT-iB-TGx">
-                                <rect key="frame" x="151" y="147" width="131" height="22"/>
+                                <rect key="frame" x="151" y="304" width="131" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" bezelStyle="round" id="Auk-La-wQV">
                                     <font key="font" metaFont="system"/>
@@ -4125,7 +4108,7 @@ DQ
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9vo-Xh-522">
-                                <rect key="frame" x="54" y="197" width="89" height="17"/>
+                                <rect key="frame" x="54" y="354" width="89" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Local catalog:" id="x4u-9n-CXy">
                                     <font key="font" metaFont="system"/>
@@ -4134,7 +4117,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZGX-KN-wi8">
-                                <rect key="frame" x="24" y="150" width="118" height="17"/>
+                                <rect key="frame" x="24" y="307" width="118" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Remote server:" id="fMy-3h-DPx">
                                     <font key="font" metaFont="system"/>
@@ -4143,7 +4126,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vb3-jb-tBY">
-                                <rect key="frame" x="24" y="127" width="118" height="17"/>
+                                <rect key="frame" x="24" y="284" width="118" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="ID:" id="miH-n6-MzF">
                                     <font key="font" metaFont="system"/>
@@ -4152,7 +4135,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nSh-6S-eAa">
-                                <rect key="frame" x="151" y="124" width="131" height="22"/>
+                                <rect key="frame" x="151" y="281" width="131" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" bezelStyle="round" id="RWu-t2-b1M">
                                     <font key="font" metaFont="system"/>
@@ -4161,7 +4144,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="teK-fp-AiN">
-                                <rect key="frame" x="24" y="174" width="118" height="17"/>
+                                <rect key="frame" x="24" y="331" width="118" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Remote catalog:" id="VcQ-Fu-zGh">
                                     <font key="font" metaFont="system"/>
@@ -4169,19 +4152,8 @@ DQ
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jkB-wa-n13">
-                                <rect key="frame" x="652" y="13" width="74" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9I0-gZ-kJq">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="close:" target="BOc-qK-ti2" id="2p6-JV-hLC"/>
-                                </connections>
-                            </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RO6-3S-IJB">
-                                <rect key="frame" x="493" y="135" width="101" height="17"/>
+                                <rect key="frame" x="493" y="292" width="101" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Number of files:" id="vl8-RF-rMw">
                                     <font key="font" metaFont="system"/>
@@ -4190,7 +4162,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="US4-2z-BVD">
-                                <rect key="frame" x="529" y="112" width="65" height="17"/>
+                                <rect key="frame" x="529" y="269" width="65" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Total size:" id="pNN-Hm-x2G">
                                     <font key="font" metaFont="system"/>
@@ -4199,7 +4171,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y3d-yB-9yH">
-                                <rect key="frame" x="452" y="197" width="142" height="17"/>
+                                <rect key="frame" x="452" y="354" width="142" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Files to be transferred:" id="EWG-jt-wEa">
                                     <font key="font" metaFont="system"/>
@@ -4208,7 +4180,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ztf-67-Cbf">
-                                <rect key="frame" x="600" y="193" width="110" height="22"/>
+                                <rect key="frame" x="600" y="350" width="110" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" bezelStyle="round" id="ELT-ZH-gef">
                                     <font key="font" metaFont="system"/>
@@ -4217,7 +4189,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jrt-Ff-crt">
-                                <rect key="frame" x="602" y="132" width="108" height="22"/>
+                                <rect key="frame" x="602" y="289" width="108" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" bezelStyle="round" id="lHF-wI-ywF">
                                     <font key="font" metaFont="system"/>
@@ -4226,7 +4198,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4kd-st-qYK">
-                                <rect key="frame" x="603" y="109" width="107" height="22"/>
+                                <rect key="frame" x="603" y="266" width="107" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="right" bezelStyle="round" id="1EP-3x-sZd">
                                     <font key="font" metaFont="system"/>
@@ -4235,7 +4207,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SNe-XI-6NQ">
-                                <rect key="frame" x="56" y="46" width="95" height="18"/>
+                                <rect key="frame" x="56" y="203" width="95" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Select tmp: " bezelStyle="regularSquare" imagePosition="right" state="on" inset="2" id="F4e-Ln-sH1">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -4246,7 +4218,7 @@ DQ
                                 </connections>
                             </button>
                             <box fixedFrame="YES" title="Files" translatesAutoresizingMaskIntoConstraints="NO" id="Afb-Wf-mdj">
-                                <rect key="frame" x="445" y="181" width="278" height="54"/>
+                                <rect key="frame" x="445" y="338" width="278" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="Hp2-2c-rf3">
                                     <rect key="frame" x="3" y="3" width="272" height="36"/>
@@ -4254,7 +4226,7 @@ DQ
                                 </view>
                             </box>
                             <box fixedFrame="YES" title="Task info" translatesAutoresizingMaskIntoConstraints="NO" id="mmw-b9-wCu">
-                                <rect key="frame" x="17" y="95" width="420" height="140"/>
+                                <rect key="frame" x="17" y="252" width="420" height="140"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="PYK-pU-VkQ">
                                     <rect key="frame" x="3" y="3" width="414" height="122"/>
@@ -4262,11 +4234,11 @@ DQ
                                 </view>
                             </box>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="IQF-E7-Ym0">
-                                <rect key="frame" x="631" y="22" width="16" height="16"/>
+                                <rect key="frame" x="631" y="179" width="16" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f9q-gT-hng">
-                                <rect key="frame" x="447" y="22" width="178" height="17"/>
+                                <rect key="frame" x="447" y="179" width="178" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Getting info, please wait..." id="xKj-as-Q8D">
                                     <font key="font" metaFont="system"/>
@@ -4275,7 +4247,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2M8-b4-fYB">
-                                <rect key="frame" x="152" y="44" width="271" height="22"/>
+                                <rect key="frame" x="152" y="201" width="271" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="80m-Jf-nRe">
                                     <font key="font" metaFont="system"/>
@@ -4284,7 +4256,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <box fixedFrame="YES" title="Restore to tmp catalog" translatesAutoresizingMaskIntoConstraints="NO" id="3hg-gp-Gk4">
-                                <rect key="frame" x="17" y="33" width="420" height="52"/>
+                                <rect key="frame" x="17" y="190" width="420" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="AIL-Qh-rQS">
                                     <rect key="frame" x="3" y="3" width="414" height="34"/>
@@ -4292,7 +4264,7 @@ DQ
                                 </view>
                             </box>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ky9-gC-UfI">
-                                <rect key="frame" x="652" y="41" width="74" height="32"/>
+                                <rect key="frame" x="652" y="198" width="74" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Restore" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7Rn-Nl-oPb">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -4303,7 +4275,7 @@ DQ
                                 </connections>
                             </button>
                             <box fixedFrame="YES" title="Remote numbers" translatesAutoresizingMaskIntoConstraints="NO" id="oPZ-oZ-efY">
-                                <rect key="frame" x="445" y="95" width="278" height="84"/>
+                                <rect key="frame" x="445" y="252" width="278" height="84"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="0Ld-jZ-XJT">
                                     <rect key="frame" x="3" y="3" width="272" height="66"/>
@@ -4311,7 +4283,7 @@ DQ
                                 </view>
                             </box>
                             <progressIndicator hidden="YES" wantsLayer="YES" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Apg-ZV-93i">
-                                <rect key="frame" x="467" y="49" width="162" height="20"/>
+                                <rect key="frame" x="467" y="206" width="162" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </progressIndicator>
                         </subviews>
@@ -4334,32 +4306,32 @@ DQ
                 </viewController>
                 <customObject id="wIk-Vh-hZv" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1973" y="2094"/>
+            <point key="canvasLocation" x="622" y="-341"/>
         </scene>
         <!--All output-->
         <scene sceneID="c2Q-I2-MbT">
             <objects>
                 <viewController title="All output" id="aqQ-Xa-aOg" customClass="ViewControllerAllOutput" customModule="rcloneosx" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="EyG-hR-cTd">
-                        <rect key="frame" x="0.0" y="0.0" width="802" height="407"/>
+                    <view key="view" misplaced="YES" id="EyG-hR-cTd">
+                        <rect key="frame" x="0.0" y="0.0" width="802" height="384"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvg-tG-A4K">
-                                <rect key="frame" x="20" y="20" width="762" height="367"/>
+                                <rect key="frame" x="20" y="20" width="762" height="321"/>
                                 <clipView key="contentView" id="NTB-w9-9Se">
-                                    <rect key="frame" x="1" y="0.0" width="760" height="366"/>
+                                    <rect key="frame" x="1" y="0.0" width="760" height="320"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="FqJ-r3-W02" viewBased="YES" id="5cn-Ow-2Tv">
-                                            <rect key="frame" x="0.0" y="0.0" width="760" height="343"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="FqJ-r3-W02" viewBased="YES" id="5cn-Ow-2Tv">
+                                            <rect key="frame" x="0.0" y="0.0" width="760" height="297"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
                                                 <tableColumn identifier="outputID" width="757" minWidth="40" maxWidth="1000" id="Jf0-Lo-PMZ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="All output">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="message" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>

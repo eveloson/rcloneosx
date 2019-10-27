@@ -95,19 +95,6 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
-    @IBAction func restore(_ sender: NSButton) {
-        guard self.index != nil else {
-            self.info(num: 1)
-            return
-        }
-       guard self.checkforrclone() == false else { return }
-        guard self.configurations!.getConfigurations()[self.index!].task == ViewControllerReference.shared.sync else {
-                self.info(num: 7)
-                return
-        }
-        self.presentAsSheet(self.restoreViewController!)
-    }
-
     @IBAction func getremoteinfo(_ sender: NSButton) {
         guard self.checkforrclone() == false else { return }
         if self.index != nil {
