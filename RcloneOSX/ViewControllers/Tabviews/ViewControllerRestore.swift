@@ -17,7 +17,7 @@ enum Work {
     case restore
 }
 
-class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, Remoterclonesize, Setcolor {
+class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesize, Setcolor, VcMain {
 
     @IBOutlet weak var restoretable: NSTableView!
     @IBOutlet weak var working: NSProgressIndicator!
@@ -37,44 +37,19 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, 
     var diddissappear: Bool = false
     var workqueue: [Work]?
     var abortandclose: Bool = true
-
-    @IBAction func dotmprestore(_ sender: NSButton) {
-        guard self.tmprestore.stringValue.isEmpty == false else { return }
-        if let index = self.index() {
-            self.selecttmptorestore.isEnabled = false
-            self.abortandclose = true
-            self.gotit.textColor = setcolor(nsviewcontroller: self, color: .white)
-            self.gotit.stringValue = "Getting info, please wait..."
-            self.working.startAnimation(nil)
-            self.workqueue?.append(.localinfoandnumbertosync)
-            self.outputprocess = OutputProcess()
-            self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
-            switch self.selecttmptorestore.state {
-            case .on:
-                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true,
-                                tmprestore: true, updateprogress: self)
-            case .off:
-                self.outputprocess = OutputProcess()
-                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true,
-                               tmprestore: true, updateprogress: self)
-            default:
-                return
-            }
-        } else {
-            self.gotit.stringValue = "Well, this did not work ..."
-        }
-    }
+    var index: Int?
 
     @IBAction func restore(_ sender: NSButton) {
         let answer = Alerts.dialogOKCancel("Do you REALLY want to start a RESTORE ?", text: "Cancel or OK")
         if answer {
-            if let index = self.index() {
+            if let index = self.index {
                 self.gotit.textColor = setcolor(nsviewcontroller: self, color: .white)
                 self.gotit.stringValue = "Executing restore..."
                 self.restorebutton.isEnabled = false
-                self.abortandclose = true
-                self.initiateProgressbar()
                 self.outputprocess = OutputProcess()
+                globalMainQueue.async(execute: { () -> Void in
+                    self.presentAsSheet(self.viewControllerProgress!)
+                })
                 self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
                 switch self.selecttmptorestore.state {
                 case .on:
@@ -91,7 +66,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, 
     }
 
     private func getremotenumbers() {
-        if let index = self.index() {
+        if let index = self.index {
             self.outputprocess = OutputProcess()
             self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
             _ = RcloneSize(index: index, outputprocess: self.outputprocess, updateprogress: self)
@@ -121,15 +96,25 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, 
     override func viewDidAppear() {
         super.viewDidAppear()
         guard self.diddissappear == false else { return }
-       self.restorebutton.isEnabled = false
-       self.estimatebutton.isEnabled = false
-       // self.settmp()
+        self.restorebutton.isEnabled = false
+        self.estimatebutton.isEnabled = false
+        self.settmp()
     }
 
     override func viewDidDisappear() {
         super.viewDidDisappear()
         self.diddissappear = true
     }
+
+    private func settmp() {
+           let setuserconfig: String = NSLocalizedString(" ... set in User configuration ...", comment: "Restore")
+           self.tmprestore.stringValue = ViewControllerReference.shared.restorePath ?? setuserconfig
+           if (ViewControllerReference.shared.restorePath ?? "").isEmpty == true {
+               self.selecttmptorestore.state = .off
+           } else {
+                self.selecttmptorestore.state = .on
+           }
+       }
 
     private func setNumbers(outputprocess: OutputProcess?) {
         globalMainQueue.async(execute: { () -> Void in
@@ -139,26 +124,23 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, 
     }
 
     @IBAction func prepareforrestore(_ sender: NSButton) {
-        if let index = self.index() {
-            guard self.workqueue == nil && self.outputprocess == nil else { return }
-                   _ = self.removework()
-                   self.restorebutton.isEnabled = false
-            self.tmprestore.stringValue = ViewControllerReference.shared.restorePath ?? " ... set in User configuration ..."
-            if ViewControllerReference.shared.restorePath == nil {
-                self.selecttmptorestore.isEnabled = false
-            }
+        if let index = self.index {
+            _ = self.removework()
+            self.gotit.textColor = setcolor(nsviewcontroller: self, color: .white)
+            self.gotit.stringValue = "Getting info, please wait..."
+            self.gotit.isHidden = false
+            self.estimatebutton.isEnabled = false
             self.working.startAnimation(nil)
             self.outputprocess = OutputProcess()
             self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
-            if ViewControllerReference.shared.restorePath != nil {
-                self.selecttmptorestore.state = .on
+            if ViewControllerReference.shared.restorePath != nil && self.selecttmptorestore.state == .on {
                 _ = self.removework()
-                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, tmprestore: false, updateprogress: self) }
-            else {
+                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, tmprestore: true, updateprogress: self)
+            } else {
                 self.selecttmptorestore.state = .off
                 _ = self.removework()
                 _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, tmprestore: false, updateprogress: self)
-                   }
+            }
         }
     }
 
@@ -180,6 +162,25 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, 
         let work = self.workqueue!.remove(at: index)
         return work
     }
+
+    @IBAction func toggletmprestore(_ sender: NSButton) {
+           self.estimatebutton.isEnabled = true
+           self.restorebutton.isEnabled = false
+       }
+
+       // setting which table row is selected
+       func tableViewSelectionDidChange(_ notification: Notification) {
+           let myTableViewFromNotification = (notification.object as? NSTableView)!
+           let indexes = myTableViewFromNotification.selectedRowIndexes
+           if let index = indexes.first {
+               self.estimatebutton.isEnabled = true
+               self.index = index
+           } else {
+               self.estimatebutton.isEnabled = false
+               self.index = nil
+           }
+           self.restorebutton.isEnabled = false
+       }
 
     // Progressbar restore
     private func initiateProgressbar() {
@@ -254,7 +255,7 @@ extension ViewControllerRestore: DismissViewController {
     func dismiss_view(viewcontroller: NSViewController) {
         self.dismiss(viewcontroller)
         globalMainQueue.async(execute: { () -> Void in
-            // self.restoretable.reloadData()
+            self.restoretable.reloadData()
         })
     }
 }
