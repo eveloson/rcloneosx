@@ -8,144 +8,112 @@
 
 import Foundation
 
-final class RcloneParameters {
+class RcloneParameters {
 
-    // Tuple for rclone argument and value
-    typealias Argument = (String, Int)
-    // Static initial arguments, DO NOT change order
-    private let rcloneArguments: [Argument] = [
-        ("user", 1),
-        ("delete", 0),
-        ("--backup-dir", 1),
-        ("--bwlimit", 1),
-        ("--transfers", 1),
-        ("--exclude", 1),
-        ("--exclude-from", 1),
-        ("--no-traverse", 0),
-        ("--no-gzip-encoding", 0),
-        ("--suffix", 1)]
+    var arguments: [String]?
+    var localCatalog: String?
+    var offsiteCatalog: String?
+    var offsiteUsername: String?
+    var offsiteServer: String?
+    var remoteargs: String?
+    let suffixstringdate = "--suffix=date"
 
-    let suffixstringdate = "date"
-    private var comboBoxValues: [String]?
-    private var config: Configuration?
-
-    func getComboBoxValues() -> [String] {
-        return self.comboBoxValues ?? [""]
-    }
-
-    func getRcloneParameter(indexComboBox: Int, value: String?) -> String {
-        guard  indexComboBox < self.rcloneArguments.count && indexComboBox > -1 else { return "" }
-        switch self.rcloneArguments[indexComboBox].1 {
-        case 0:
-            if self.rcloneArguments[indexComboBox].0 == self.rcloneArguments[1].0 {
-                return ""
-            } else {
-                return  self.rcloneArguments[indexComboBox].0
-            }
-        case 1:
-            guard value != nil else { return "" }
-            if self.rcloneArguments[indexComboBox].0 != self.rcloneArguments[0].0 {
-                return self.rcloneArguments[indexComboBox].0 + "=" + value!
-            } else {
-                return value!
-            }
-        default:
-            return  ""
+    // Brute force, check every parameter, not special elegant, but it works
+    func rclonecommand(config: Configuration, dryRun: Bool, forDisplay: Bool) {
+        if config.parameter1 != nil {
+            self.appendParameter(parameter: config.parameter1!, forDisplay: forDisplay)
         }
     }
 
-    // Returns Int value of argument
-    private func indexofrcloneparameter (_ argument: String) -> Int {
-        var index: Int = -1
-        loop : for i in 0 ..< self.rcloneArguments.count where argument == self.rcloneArguments[i].0 {
-            index = i
-            break loop
+    func setParameters2To14(_ config: Configuration, dryRun: Bool, forDisplay: Bool) {
+        if config.parameter2 != nil {
+            self.appendParameter(parameter: config.parameter2!, forDisplay: forDisplay)
         }
-        return index
-    }
-
-    // Split an rclone argument into argument and value
-    private func split (_ str: String) -> [String] {
-        let argument: String?
-        let value: String?
-        var split = str.components(separatedBy: "=")
-        argument = String(split[0])
-        if split.count > 1 {
-            if split.count > 2 {
-                split.remove(at: 0)
-                value = split.joined(separator: "=")
-            } else {
-                value = String(split[1])
-            }
-        } else {
-            value = argument
+        if config.parameter3 != nil {
+            self.appendParameter(parameter: config.parameter3!, forDisplay: forDisplay)
         }
-        return [argument!, value!]
-    }
-
-    func indexandvaluercloneparameter(_ parameter: String?) -> (Int, String) {
-        guard parameter != nil else { return (0, "") }
-        let splitstr: [String] = self.split(parameter!)
-        guard splitstr.count > 1 else { return (0, "")}
-        let argument = splitstr[0]
-        let value = splitstr[1]
-        var returnvalue: String?
-        var returnindex: Int?
-        if argument != value && self.indexofrcloneparameter(argument) >= 0 {
-            returnvalue = value
-            returnindex =  self.indexofrcloneparameter(argument)
-        } else {
-            if self.indexofrcloneparameter(splitstr[0]) >= 0 {
-                returnvalue = "\"" + argument + "\" " + "no arguments"
+        if config.parameter4 != nil {
+            self.appendParameter(parameter: config.parameter4!, forDisplay: forDisplay)
+        }
+        if config.parameter5 != nil {
+            self.appendParameter(parameter: config.parameter5!, forDisplay: forDisplay)
+        }
+        if config.parameter6 != nil {
+            self.appendParameter(parameter: config.parameter6!, forDisplay: forDisplay)
+        }
+        if config.parameter8 != nil {
+            self.appendParameter(parameter: config.parameter8!, forDisplay: forDisplay)
+        }
+        if config.parameter9 != nil {
+            self.appendParameter(parameter: config.parameter9!, forDisplay: forDisplay)
+        }
+        if config.parameter10 != nil {
+            self.appendParameter(parameter: config.parameter10!, forDisplay: forDisplay)
+        }
+        if config.parameter11 != nil {
+            self.appendParameter(parameter: config.parameter11!, forDisplay: forDisplay)
+        }
+        if config.parameter12 != nil {
+            self.appendParameter(parameter: config.parameter12!, forDisplay: forDisplay)
+        }
+        if config.parameter13 != nil {
+            self.appendParameter(parameter: config.parameter13!, forDisplay: forDisplay)
+        }
+        if config.parameter14 != nil {
+            if config.parameter14! == self.suffixstringdate {
+                self.appendParameter(parameter: self.setdatesuffixlocalhost(), forDisplay: forDisplay)
             } else {
-                if argument == value {
-                    returnvalue = value
-                } else {
-                    returnvalue = argument + "=" + value
-                }
-            }
-            if argument != value && self.indexofrcloneparameter(argument) >= 0 {
-                returnindex =  self.indexofrcloneparameter(argument)
-            } else {
-                if self.indexofrcloneparameter(splitstr[0]) >= 0 {
-                    returnindex = self.indexofrcloneparameter(argument)
-                } else {
-                    returnindex = 0
-                }
+                 self.appendParameter(parameter: config.parameter14!, forDisplay: forDisplay)
             }
         }
-        return (returnindex!, returnvalue!)
     }
 
-    func getrcloneparameter (rcloneparameternumber: Int) -> (Int, String) {
-        var indexandvalue: (Int, String)?
-        guard self.config != nil else { return (0, "")}
-        switch rcloneparameternumber {
-        case 8:
-           indexandvalue = self.indexandvaluercloneparameter(self.config!.parameter8)
-        case 9:
-            indexandvalue = self.indexandvaluercloneparameter(self.config!.parameter9)
-        case 10:
-            indexandvalue = self.indexandvaluercloneparameter(self.config!.parameter10)
-        case 11:
-            indexandvalue = self.indexandvaluercloneparameter(self.config!.parameter11)
-        case 12:
-            indexandvalue = self.indexandvaluercloneparameter(self.config!.parameter12)
-        case 13:
-            indexandvalue = self.indexandvaluercloneparameter(self.config!.parameter13)
-        case 14:
-            indexandvalue = self.indexandvaluercloneparameter(self.config!.parameter14)
-        default:
-            return (0, "")
-        }
-        return indexandvalue!
+    func setdatesuffixlocalhost() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "-yyyy-MM-dd"
+        return  "--suffix=" + formatter.string(from: Date())
     }
 
-    init(config: Configuration) {
-        self.config = config
-        self.comboBoxValues = [String]()
-        for i in 0 ..< self.rcloneArguments.count {
-            self.comboBoxValues!.append(self.rcloneArguments[i].0)
+    func dryrunparameter(_ config: Configuration, forDisplay: Bool) {
+        let dryrun: String = config.dryrun
+        self.arguments!.append(dryrun)
+        if forDisplay {self.arguments!.append(" ")}
+    }
+
+    func appendParameter (parameter: String, forDisplay: Bool) {
+        if parameter.count > 1 {
+            self.arguments!.append(parameter)
+            if forDisplay {
+                self.arguments!.append(" ")
+            }
         }
+    }
+
+    func argumentsRclonerestore(_ config: Configuration, dryRun: Bool, forDisplay: Bool) -> [String] {
+        self.localCatalog = nil
+        self.offsiteCatalog = config.offsiteCatalog
+        self.offsiteServer = config.offsiteServer
+        self.remoteargs = self.offsiteServer! + ":" + self.offsiteCatalog!
+        self.appendParameter(parameter: ViewControllerReference.shared.copy, forDisplay: forDisplay)
+        self.appendParameter(parameter: self.remoteargs!, forDisplay: forDisplay)
+        self.appendParameter(parameter: "--verbose", forDisplay: forDisplay)
+        if dryRun {
+           self.dryrunparameter(config, forDisplay: forDisplay)
+        }
+        return self.arguments!
+    }
+
+    func argumentsRclonelistfile(_ config: Configuration) -> [String] {
+        self.localCatalog = nil
+        self.offsiteCatalog = config.offsiteCatalog
+        self.offsiteServer = config.offsiteServer
+        self.remoteargs = self.offsiteServer! + ":" + self.offsiteCatalog!
+        self.appendParameter(parameter: "ls", forDisplay: false)
+        self.appendParameter(parameter: self.remoteargs!, forDisplay: false)
+        return self.arguments!
+    }
+
+    init () {
+        self.arguments = [String]()
     }
 }

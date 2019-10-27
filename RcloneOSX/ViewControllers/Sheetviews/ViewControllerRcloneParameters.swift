@@ -66,28 +66,35 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
         } else {
             self.storageapi = PersistentStorageAPI(profile: nil)
         }
-        let configurations: [Configuration] = self.configurations!.getConfigurations()
         if let index = self.index() {
             // Create RcloneParameters object and load initial parameters
-            self.parameters = RcloneParameters(config: configurations[index])
-            self.comboBoxValues = parameters!.getComboBoxValues()
+            let configurations: [Configuration] = self.configurations!.getConfigurations()
+            let param = ComboboxRcloneParameters(config: configurations[index])
+            self.comboBoxValues = param.getComboBoxValues()
             self.param1.stringValue = configurations[index].parameter1 ?? ""
             self.param2.stringValue = configurations[index].parameter2 ?? ""
             // There are seven user seleected rclone parameters
-            self.initcombox(combobox: self.combo8, index: self.parameters!.getrcloneparameter(rcloneparameternumber: 8).0)
-            self.param8.stringValue = self.parameters!.getrcloneparameter(rcloneparameternumber: 8).1
-            self.initcombox(combobox: self.combo9, index: self.parameters!.getrcloneparameter(rcloneparameternumber: 9).0)
-            self.param9.stringValue = self.parameters!.getrcloneparameter(rcloneparameternumber: 9).1
-            self.initcombox(combobox: self.combo10, index: self.parameters!.getrcloneparameter(rcloneparameternumber: 10).0)
-            self.param10.stringValue = self.parameters!.getrcloneparameter(rcloneparameternumber: 10).1
-            self.initcombox(combobox: self.combo11, index: self.parameters!.getrcloneparameter(rcloneparameternumber: 11).0)
-            self.param11.stringValue = self.parameters!.getrcloneparameter(rcloneparameternumber: 11).1
-            self.initcombox(combobox: self.combo12, index: self.parameters!.getrcloneparameter(rcloneparameternumber: 12).0)
-            self.param12.stringValue = self.parameters!.getrcloneparameter(rcloneparameternumber: 12).1
-            self.initcombox(combobox: self.combo13, index: self.parameters!.getrcloneparameter(rcloneparameternumber: 13).0)
-            self.param13.stringValue = self.parameters!.getrcloneparameter(rcloneparameternumber: 13).1
-            self.initcombox(combobox: self.combo14, index: self.parameters!.getrcloneparameter(rcloneparameternumber: 14).0)
-            self.param14.stringValue = self.parameters!.getrcloneparameter(rcloneparameternumber: 14).1
+            let value8 = param.getParameter(rcloneparameternumber: 8).0
+            self.initcombox(combobox: self.combo8, index: value8)
+            self.param8.stringValue = param.getParameter(rcloneparameternumber: 8).1
+            let value9 = param.getParameter(rcloneparameternumber: 9).0
+            self.initcombox(combobox: self.combo9, index: value9)
+            self.param9.stringValue = param.getParameter(rcloneparameternumber: 9).1
+            let value10 = param.getParameter(rcloneparameternumber: 10).0
+            self.initcombox(combobox: self.combo10, index: value10)
+            self.param10.stringValue = param.getParameter(rcloneparameternumber: 10).1
+            let value11 = param.getParameter(rcloneparameternumber: 11).0
+            self.initcombox(combobox: self.combo11, index: value11)
+            self.param11.stringValue = param.getParameter(rcloneparameternumber: 11).1
+            let value12 = param.getParameter(rcloneparameternumber: 12).0
+            self.initcombox(combobox: self.combo12, index: value12)
+            self.param12.stringValue = param.getParameter(rcloneparameternumber: 12).1
+            let value13 = param.getParameter(rcloneparameternumber: 13).0
+            self.initcombox(combobox: self.combo13, index: value13)
+            self.param13.stringValue = param.getParameter(rcloneparameternumber: 13).1
+            let value14 = param.getParameter(rcloneparameternumber: 14).0
+            self.initcombox(combobox: self.combo14, index: value14)
+            self.param14.stringValue = param.getParameter(rcloneparameternumber: 14).1
         }
         self.backupbutton.state = .off
         self.suffixdatebutton.state = .off
@@ -103,21 +110,21 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
         var configurations: [Configuration] = self.configurations!.getConfigurations()
         guard configurations.count > 0 else { return }
         if let index = self.index() {
-            configurations[index].parameter8 = self.parameters!.getRcloneParameter(indexComboBox:
+            let param = SetRcloneParameter()
+            configurations[index].parameter8 = param.setrcloneparameter(indexComboBox:
                 self.combo8.indexOfSelectedItem, value: getValue(value: self.param8.stringValue))
-            configurations[index].parameter9 = self.parameters!.getRcloneParameter(indexComboBox:
+            configurations[index].parameter9 = param.setrcloneparameter(indexComboBox:
                 self.combo9.indexOfSelectedItem, value: getValue(value: self.param9.stringValue))
-            configurations[index].parameter10 = self.parameters!.getRcloneParameter(indexComboBox:
+            configurations[index].parameter10 = param.setrcloneparameter(indexComboBox:
                 self.combo10.indexOfSelectedItem, value: getValue(value: self.param10.stringValue))
-            configurations[index].parameter11 = self.parameters!.getRcloneParameter(indexComboBox:
+            configurations[index].parameter11 = param.setrcloneparameter(indexComboBox:
                 self.combo11.indexOfSelectedItem, value: getValue(value: self.param11.stringValue))
-            configurations[index].parameter12 = self.parameters!.getRcloneParameter(indexComboBox:
+            configurations[index].parameter12 = param.setrcloneparameter(indexComboBox:
                 self.combo12.indexOfSelectedItem, value: getValue(value: self.param12.stringValue))
-            configurations[index].parameter13 = self.parameters!.getRcloneParameter(indexComboBox:
+            configurations[index].parameter13 = param.setrcloneparameter(indexComboBox:
                 self.combo13.indexOfSelectedItem, value: getValue(value: self.param13.stringValue))
-            configurations[index].parameter14 = self.parameters!.getRcloneParameter(indexComboBox:
+            configurations[index].parameter14 = param.setrcloneparameter(indexComboBox:
                 self.combo14.indexOfSelectedItem, value: getValue(value: self.param14.stringValue))
-            self.configurations!.updateConfigurations(configurations[index], index: index)
             self.userparamsupdatedDelegate?.rcloneuserparamsupdated()
         }
         self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
@@ -126,7 +133,7 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
     // There are eight comboboxes
     // All eight are initalized during ViewDidLoad and
     // the correct index is set.
-    private func initcombox (combobox: NSComboBox, index: Int) {
+    private func initcombox(combobox: NSComboBox, index: Int) {
         combobox.removeAllItems()
         combobox.addItems(withObjectValues: self.comboBoxValues)
         combobox.selectItem(at: index)
@@ -150,7 +157,7 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
             let offsiteServer = self.configurations!.getResourceConfiguration(hiddenID, resource: .offsiteServer)
             let backup = offsiteServer + ":" + remoteCatalog + "_backup"
             self.param13.stringValue = backup
-            self.initcombox(combobox: self.combo13, index: (self.parameters!.indexandvaluercloneparameter("--backup-dir").0))
+            self.initcombox(combobox: self.combo13, index: (ComboboxRcloneParameters(config: nil).indexandvaluercloneparameter(parameter: "--backup-dir").0))
         case .off:
             self.initcombox(combobox: self.combo13, index: (0))
             self.param13.stringValue = ""
@@ -163,7 +170,7 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
         switch self.suffixdatebutton.state {
         case .on:
             self.param14.stringValue = self.parameters!.suffixstringdate
-            self.initcombox(combobox: self.combo14, index: (self.parameters!.indexandvaluercloneparameter("--suffix").0))
+            self.initcombox(combobox: self.combo14, index: (ComboboxRcloneParameters(config: nil).indexandvaluercloneparameter(parameter: "--suffix").0))
         case .off:
             self.initcombox(combobox: self.combo14, index: (0))
             self.param14.stringValue = ""

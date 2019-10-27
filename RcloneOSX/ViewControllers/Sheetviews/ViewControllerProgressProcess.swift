@@ -23,15 +23,15 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
     @IBOutlet weak var abort: NSButton!
 
     @IBAction func abort(_ sender: NSButton) {
-         switch self.countDelegate {
-            case is ViewControllerMain:
-                self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
-            case is ViewControllerCopyFiles:
-                self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
-            case is ViewControllerRestore:
-                self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
-            default:
-                return
+        switch self.countDelegate {
+        case is ViewControllerMain:
+            self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        case is ViewControllerCopyFiles:
+            self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
+        case is ViewControllerRestore:
+            self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
+        default:
+            return
         }
         self.abort()
     }
