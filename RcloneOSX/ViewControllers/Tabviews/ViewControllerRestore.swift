@@ -32,11 +32,11 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
     @IBOutlet weak var estimatebutton: NSButton!
 
     var outputprocess: OutputProcess?
-    var restorecompleted: Bool = false
     weak var sendprocess: SendProcessreference?
     var diddissappear: Bool = false
     var workqueue: [Work]?
     var index: Int?
+    var maxcount: Int = 0
 
     @IBAction func restore(_ sender: NSButton) {
         let answer = Alerts.dialogOKCancel("Do you REALLY want to start a RESTORE ?", text: "Cancel or OK")
@@ -116,6 +116,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
        }
 
     private func setNumbers(outputprocess: OutputProcess?) {
+        self.maxcount = outputprocess?.getMaxcount() ?? 0
         globalMainQueue.async(execute: { () -> Void in
             let infotask = RemoteinfonumbersOnetask(outputprocess: outputprocess)
             self.transferredNumber.stringValue = infotask.transferredNumber!
@@ -147,7 +148,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
         // Initialize
         guard self.workqueue != nil else {
             self.workqueue = [Work]()
-            // self.workqueue?.append(.restore)
             self.workqueue?.append(.setremotenumbers)
             self.workqueue?.append(.getremotenumbers)
             self.workqueue?.append(.localinfoandnumbertosync)
@@ -180,18 +180,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
            }
            self.restorebutton.isEnabled = false
        }
-
-    // Progressbar restore
-    private func initiateProgressbar() {
-        let size = self.remoterclonesize(input: self.outputprocess!.getOutput()![0])
-        let calculatedNumberOfFiles = NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.none)
-        
-    }
-
-    private func updateProgressbar(_ value: Double) {
-        
-    }
-
 }
 
 extension ViewControllerRestore: NSTableViewDataSource {
@@ -218,10 +206,6 @@ extension ViewControllerRestore: UpdateProgress {
             self.getremotenumbers()
         case .setremotenumbers:
             self.setremoteinfo()
-        case .restore:
-            self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
-            self.gotit.stringValue = "Restore is completed..."
-            self.restorecompleted = true
         case .localinfoandnumbertosync:
             self.setNumbers(outputprocess: self.outputprocess)
             guard ViewControllerReference.shared.restorePath != nil else { return }
@@ -230,12 +214,14 @@ extension ViewControllerRestore: UpdateProgress {
             self.restorebutton.isEnabled = true
             self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
             self.gotit.stringValue = "Got it..."
+        default:
+            return
         }
     }
 
     func fileHandler() {
-        if self.workqueue?.count == 1 {
-            self.updateProgressbar(Double(self.outputprocess!.count()))
+        if let vc = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess {
+            vc.fileHandler()
         }
     }
 }
@@ -246,5 +232,21 @@ extension ViewControllerRestore: DismissViewController {
         globalMainQueue.async(execute: { () -> Void in
             self.restoretable.reloadData()
         })
+    }
+}
+
+extension ViewControllerRestore: Count {
+    func maxCount() -> Int {
+        return self.maxcount
+    }
+
+    func inprogressCount() -> Int {
+        return self.outputprocess?.count() ?? 0
+    }
+}
+
+extension ViewControllerRestore: TemporaryRestorePath {
+    func temporaryrestorepath() {
+        self.settmp()
     }
 }
