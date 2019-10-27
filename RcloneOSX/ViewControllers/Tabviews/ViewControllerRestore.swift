@@ -36,7 +36,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
     weak var sendprocess: SendProcessreference?
     var diddissappear: Bool = false
     var workqueue: [Work]?
-    var abortandclose: Bool = true
     var index: Int?
 
     @IBAction func restore(_ sender: NSButton) {
@@ -148,7 +147,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
         // Initialize
         guard self.workqueue != nil else {
             self.workqueue = [Work]()
-            self.workqueue?.append(.restore)
+            // self.workqueue?.append(.restore)
             self.workqueue?.append(.setremotenumbers)
             self.workqueue?.append(.getremotenumbers)
             self.workqueue?.append(.localinfoandnumbertosync)
@@ -207,22 +206,12 @@ extension ViewControllerRestore: NSTableViewDelegate {
    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         guard row < self.configurations!.getConfigurationsSyncandCopy()!.count  else { return nil }
         let object: NSDictionary = self.configurations!.getConfigurationsSyncandCopy()![row]
-        switch tableColumn!.identifier.rawValue {
-        case "offsiteServerCellID":
-            if (object[tableColumn!.identifier] as? String)!.isEmpty {
-                return "localhost"
-            } else {
-                return object[tableColumn!.identifier] as? String
-            }
-        default:
-            return object[tableColumn!.identifier] as? String
-        }
+        return object[tableColumn!.identifier] as? String
     }
 }
 
 extension ViewControllerRestore: UpdateProgress {
     func processTermination() {
-        self.abortandclose = false
         switch self.removework() ?? .setremotenumbers {
         case .getremotenumbers:
             self.setNumbers(outputprocess: self.outputprocess)
