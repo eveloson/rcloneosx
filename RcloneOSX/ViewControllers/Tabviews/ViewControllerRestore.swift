@@ -19,19 +19,17 @@ enum Work {
 
 class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, Remoterclonesize, Setcolor {
 
-    @IBOutlet weak var localCatalog: NSTextField!
-    @IBOutlet weak var offsiteCatalog: NSTextField!
-    @IBOutlet weak var offsiteServer: NSTextField!
-    @IBOutlet weak var backupID: NSTextField!
+    @IBOutlet weak var restoretable: NSTableView!
     @IBOutlet weak var working: NSProgressIndicator!
     @IBOutlet weak var gotit: NSTextField!
+
     @IBOutlet weak var transferredNumber: NSTextField!
     @IBOutlet weak var totalNumber: NSTextField!
     @IBOutlet weak var totalNumberSizebytes: NSTextField!
-    @IBOutlet weak var restoreprogress: NSProgressIndicator!
     @IBOutlet weak var restorebutton: NSButton!
     @IBOutlet weak var tmprestore: NSTextField!
     @IBOutlet weak var selecttmptorestore: NSButton!
+    @IBOutlet weak var estimatebutton: NSButton!
 
     var outputprocess: OutputProcess?
     var restorecompleted: Bool = false
@@ -39,21 +37,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, 
     var diddissappear: Bool = false
     var workqueue: [Work]?
     var abortandclose: Bool = true
-    
-    /*
-     @IBAction func restore(_ sender: NSButton) {
-          guard self.index != nil else {
-              self.info(num: 1)
-              return
-          }
-         guard self.checkforrclone() == false else { return }
-          guard self.configurations!.getConfigurations()[self.index!].task == ViewControllerReference.shared.sync else {
-                  self.info(num: 7)
-                  return
-          }
-          //
-      }
-     */
 
     @IBAction func dotmprestore(_ sender: NSButton) {
         guard self.tmprestore.stringValue.isEmpty == false else { return }
@@ -129,6 +112,8 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.restoretable.delegate = self
+        self.restoretable.dataSource = self
         ViewControllerReference.shared.setvcref(viewcontroller: .vcrestore, nsviewcontroller: self)
         self.sendprocess = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
     }
@@ -136,39 +121,9 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, 
     override func viewDidAppear() {
         super.viewDidAppear()
         guard self.diddissappear == false else { return }
-        guard self.workqueue == nil && self.outputprocess == nil else { return }
-        _ = self.removework()
-        self.restorebutton.isEnabled = false
-        self.localCatalog.stringValue = ""
-        self.offsiteCatalog.stringValue = ""
-        self.offsiteServer.stringValue = ""
-        self.backupID.stringValue = ""
-        self.restoreprogress.isHidden = true
-        if let index = self.index() {
-            let config: Configuration = self.configurations!.getConfigurations()[index]
-            self.localCatalog.stringValue = config.localCatalog
-            self.offsiteCatalog.stringValue = config.offsiteCatalog
-            self.offsiteServer.stringValue = config.offsiteServer
-            self.backupID.stringValue = config.backupID
-            self.tmprestore.stringValue = ViewControllerReference.shared.restorePath ?? " ... set in User configuration ..."
-            if ViewControllerReference.shared.restorePath == nil {
-                self.selecttmptorestore.isEnabled = false
-            }
-            self.working.startAnimation(nil)
-            self.outputprocess = OutputProcess()
-            self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
-            if ViewControllerReference.shared.restorePath != nil {
-                self.selecttmptorestore.state = .on
-                _ = self.removework()
-                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true,
-                                tmprestore: false, updateprogress: self)
-            } else {
-                self.selecttmptorestore.state = .off
-                _ = self.removework()
-                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true,
-                                tmprestore: false, updateprogress: self)
-            }
-        }
+       self.restorebutton.isEnabled = false
+       self.estimatebutton.isEnabled = false
+       // self.settmp()
     }
 
     override func viewDidDisappear() {
@@ -181,6 +136,30 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, 
             let infotask = RemoteinfonumbersOnetask(outputprocess: outputprocess)
             self.transferredNumber.stringValue = infotask.transferredNumber!
         })
+    }
+
+    @IBAction func prepareforrestore(_ sender: NSButton) {
+        if let index = self.index() {
+            guard self.workqueue == nil && self.outputprocess == nil else { return }
+                   _ = self.removework()
+                   self.restorebutton.isEnabled = false
+            self.tmprestore.stringValue = ViewControllerReference.shared.restorePath ?? " ... set in User configuration ..."
+            if ViewControllerReference.shared.restorePath == nil {
+                self.selecttmptorestore.isEnabled = false
+            }
+            self.working.startAnimation(nil)
+            self.outputprocess = OutputProcess()
+            self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
+            if ViewControllerReference.shared.restorePath != nil {
+                self.selecttmptorestore.state = .on
+                _ = self.removework()
+                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, tmprestore: false, updateprogress: self) }
+            else {
+                self.selecttmptorestore.state = .off
+                _ = self.removework()
+                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, tmprestore: false, updateprogress: self)
+                   }
+        }
     }
 
     private func removework() -> Work? {
@@ -204,19 +183,40 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Index, Abort, 
 
     // Progressbar restore
     private func initiateProgressbar() {
-        self.restoreprogress.isHidden = false
         let size = self.remoterclonesize(input: self.outputprocess!.getOutput()![0])
         let calculatedNumberOfFiles = NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.none)
-        self.restoreprogress.maxValue = Double(calculatedNumberOfFiles) ?? 0
-        self.restoreprogress.minValue = 0
-        self.restoreprogress.doubleValue = 0
-        self.restoreprogress.startAnimation(self)
+        
     }
 
     private func updateProgressbar(_ value: Double) {
-        self.restoreprogress.doubleValue = value
+        
     }
 
+}
+
+extension ViewControllerRestore: NSTableViewDataSource {
+
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return self.configurations?.getConfigurationsSyncandCopy()?.count ?? 0
+    }
+}
+
+extension ViewControllerRestore: NSTableViewDelegate {
+
+   func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        guard row < self.configurations!.getConfigurationsSyncandCopy()!.count  else { return nil }
+        let object: NSDictionary = self.configurations!.getConfigurationsSyncandCopy()![row]
+        switch tableColumn!.identifier.rawValue {
+        case "offsiteServerCellID":
+            if (object[tableColumn!.identifier] as? String)!.isEmpty {
+                return "localhost"
+            } else {
+                return object[tableColumn!.identifier] as? String
+            }
+        default:
+            return object[tableColumn!.identifier] as? String
+        }
+    }
 }
 
 extension ViewControllerRestore: UpdateProgress {
@@ -231,9 +231,7 @@ extension ViewControllerRestore: UpdateProgress {
         case .restore:
             self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
             self.gotit.stringValue = "Restore is completed..."
-            self.restoreprogress.isHidden = true
             self.restorecompleted = true
-            self.restoreprogress.isHidden = true
         case .localinfoandnumbertosync:
             self.setNumbers(outputprocess: self.outputprocess)
             guard ViewControllerReference.shared.restorePath != nil else { return }
