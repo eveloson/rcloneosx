@@ -346,10 +346,10 @@
 			isa = PBXGroup;
 			children = (
 				E960CAC01FB091D40008D12E /* RcloneParameters.swift */,
-				E980F9A823660B0C00B2C3CF /* ArgumentsRestore.swift */,
 				E980F9AA23660BE700B2C3CF /* ComboboxRcloneParameters.swift */,
 				E980F9AC23660C5600B2C3CF /* SuffixstringsRcloneParameters.swift */,
 				E980F9AE2366120C00B2C3CF /* SetRcloneParameter.swift */,
+				E980F9A823660B0C00B2C3CF /* ArgumentsRestore.swift */,
 				E980F9B02366163200B2C3CF /* ArgumentsSynchronize.swift */,
 				E9FE2383236623C20046E02C /* ArgumentsOther.swift */,
 			);

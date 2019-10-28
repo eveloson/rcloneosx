@@ -25,7 +25,7 @@ protocol GetSelecetedIndex: class {
 class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDismisser, Index {
 
     var storageapi: PersistentStorageAPI?
-    var parameters: RcloneParameters?
+    // var parameters: RcloneParameters?
     weak var userparamsupdatedDelegate: RcloneUserParams?
     var comboBoxValues = [String]()
     var diddissappear: Bool = false
@@ -169,7 +169,7 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
     @IBAction func suffixdate(_ sender: NSButton) {
         switch self.suffixdatebutton.state {
         case .on:
-            self.param14.stringValue = self.parameters!.suffixstringdate
+            self.param14.stringValue = SuffixstringsRcloneParameters().suffixstringdate
             self.initcombox(combobox: self.combo14, index: (ComboboxRcloneParameters(config: nil).indexandvaluercloneparameter(parameter: "--suffix").0))
         case .off:
             self.initcombox(combobox: self.combo14, index: (0))

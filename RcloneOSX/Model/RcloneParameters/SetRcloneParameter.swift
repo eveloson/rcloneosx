@@ -37,5 +37,4 @@ struct SetRcloneParameter {
     init() {
        self.rcloneArguments = SuffixstringsRcloneParameters().rcloneArguments
     }
-
 }

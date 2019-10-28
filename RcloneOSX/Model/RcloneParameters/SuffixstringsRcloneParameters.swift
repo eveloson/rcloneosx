@@ -9,6 +9,7 @@
 import Foundation
 
 struct SuffixstringsRcloneParameters {
+    let suffixstringdate = "--suffix=date"
     // Tuple for rclone argument and value
     typealias Argument = (String, Int)
     // Static initial arguments, DO NOT change order
