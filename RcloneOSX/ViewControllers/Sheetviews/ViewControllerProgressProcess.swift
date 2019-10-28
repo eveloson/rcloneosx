@@ -83,6 +83,8 @@ extension ViewControllerProgressProcess: UpdateProgress {
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
         case is ViewControllerCopyFiles:
             self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
+        case is ViewControllerRestore:
+            self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
         default:
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
         }
