@@ -120,8 +120,10 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
    }
 
     private func setNumbers(outputprocess: OutputProcess?) {
-        self.maxcount = outputprocess?.getMaxcount() ?? 0
-        self.transferredNumber.stringValue = String(self.maxcount)
+         globalMainQueue.async(execute: { () -> Void in
+            let infotask = RemoteinfonumbersOnetask(outputprocess: outputprocess)
+            self.transferredNumber.stringValue = infotask.transferredNumber!
+        })
     }
 
     @IBAction func prepareforrestore(_ sender: NSButton) {
@@ -164,9 +166,10 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
     }
 
     @IBAction func toggletmprestore(_ sender: NSButton) {
-           self.estimatebutton.isEnabled = true
-           self.restorebutton.isEnabled = false
-       }
+        self.estimatebutton.isEnabled = true
+        self.restorebutton.isEnabled = false
+        self.workqueue = nil
+    }
 
        // setting which table row is selected
     func tableViewSelectionDidChange(_ notification: Notification) {
