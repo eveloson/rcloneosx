@@ -75,6 +75,7 @@ class RcloneParameters {
 
     func dryrunparameter(config: Configuration, forDisplay: Bool) {
         let dryrun: String = config.dryrun
+        if forDisplay {self.arguments!.append(" ")}
         self.arguments!.append(dryrun)
         if forDisplay {self.arguments!.append(" ")}
     }
