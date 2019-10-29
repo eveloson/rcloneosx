@@ -17,8 +17,8 @@ final class ArgumentsOther: RcloneParameters {
         self.offsiteCatalog = self.config!.offsiteCatalog
         self.offsiteServer = self.config!.offsiteServer
         self.remoteargs = self.offsiteServer! + ":" + self.offsiteCatalog!
-        self.appendParameter(parameter: "ls", forDisplay: false)
-        self.appendParameter(parameter: self.remoteargs!, forDisplay: false)
+        self.appendparameter(parameter: "ls", forDisplay: false)
+        self.appendparameter(parameter: self.remoteargs!, forDisplay: false)
         return self.arguments!
     }
 
@@ -27,9 +27,9 @@ final class ArgumentsOther: RcloneParameters {
         self.offsiteCatalog = self.config!.offsiteCatalog
         self.offsiteServer = self.config!.offsiteServer
         self.remoteargs = self.offsiteServer! + ":" + self.offsiteCatalog!
-        self.appendParameter(parameter: ViewControllerReference.shared.copy, forDisplay: forDisplay)
-        self.appendParameter(parameter: self.remoteargs!, forDisplay: forDisplay)
-        self.appendParameter(parameter: "--verbose", forDisplay: forDisplay)
+        self.appendparameter(parameter: ViewControllerReference.shared.copy, forDisplay: forDisplay)
+        self.appendparameter(parameter: self.remoteargs!, forDisplay: forDisplay)
+        self.appendparameter(parameter: "--verbose", forDisplay: forDisplay)
         if dryRun {
             self.dryrunparameter(config: self.config!, forDisplay: forDisplay)
         }

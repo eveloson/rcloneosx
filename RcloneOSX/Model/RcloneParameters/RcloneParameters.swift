@@ -20,49 +20,49 @@ class RcloneParameters {
     // Brute force, check every parameter, not special elegant, but it works
     func rclonecommand(config: Configuration, dryRun: Bool, forDisplay: Bool) {
         if config.parameter1 != nil {
-            self.appendParameter(parameter: config.parameter1!, forDisplay: forDisplay)
+            self.appendparameter(parameter: config.parameter1!, forDisplay: forDisplay)
         }
     }
 
     func setParameters2To14(config: Configuration, dryRun: Bool, forDisplay: Bool) {
         if config.parameter2 != nil {
-            self.appendParameter(parameter: config.parameter2!, forDisplay: forDisplay)
+            self.appendparameter(parameter: config.parameter2!, forDisplay: forDisplay)
         }
         if config.parameter3 != nil {
-            self.appendParameter(parameter: config.parameter3!, forDisplay: forDisplay)
+            self.appendparameter(parameter: config.parameter3!, forDisplay: forDisplay)
         }
         if config.parameter4 != nil {
-            self.appendParameter(parameter: config.parameter4!, forDisplay: forDisplay)
+            self.appendparameter(parameter: config.parameter4!, forDisplay: forDisplay)
         }
         if config.parameter5 != nil {
-            self.appendParameter(parameter: config.parameter5!, forDisplay: forDisplay)
+            self.appendparameter(parameter: config.parameter5!, forDisplay: forDisplay)
         }
         if config.parameter6 != nil {
-            self.appendParameter(parameter: config.parameter6!, forDisplay: forDisplay)
+            self.appendparameter(parameter: config.parameter6!, forDisplay: forDisplay)
         }
         if config.parameter8 != nil {
-            self.appendParameter(parameter: config.parameter8!, forDisplay: forDisplay)
+            self.appendparameter(parameter: config.parameter8!, forDisplay: forDisplay)
         }
         if config.parameter9 != nil {
-            self.appendParameter(parameter: config.parameter9!, forDisplay: forDisplay)
+            self.appendparameter(parameter: config.parameter9!, forDisplay: forDisplay)
         }
         if config.parameter10 != nil {
-            self.appendParameter(parameter: config.parameter10!, forDisplay: forDisplay)
+            self.appendparameter(parameter: config.parameter10!, forDisplay: forDisplay)
         }
         if config.parameter11 != nil {
-            self.appendParameter(parameter: config.parameter11!, forDisplay: forDisplay)
+            self.appendparameter(parameter: config.parameter11!, forDisplay: forDisplay)
         }
         if config.parameter12 != nil {
-            self.appendParameter(parameter: config.parameter12!, forDisplay: forDisplay)
+            self.appendparameter(parameter: config.parameter12!, forDisplay: forDisplay)
         }
         if config.parameter13 != nil {
-            self.appendParameter(parameter: config.parameter13!, forDisplay: forDisplay)
+            self.appendparameter(parameter: config.parameter13!, forDisplay: forDisplay)
         }
         if config.parameter14 != nil {
             if config.parameter14! == SuffixstringsRcloneParameters().suffixstringdate {
-                self.appendParameter(parameter: self.setdatesuffixlocalhost(), forDisplay: forDisplay)
+                self.appendparameter(parameter: self.setdatesuffixlocalhost(), forDisplay: forDisplay)
             } else {
-                 self.appendParameter(parameter: config.parameter14!, forDisplay: forDisplay)
+                 self.appendparameter(parameter: config.parameter14!, forDisplay: forDisplay)
             }
         }
     }
@@ -80,7 +80,7 @@ class RcloneParameters {
         }
     }
 
-    func offisteparameter(config: Configuration, forDisplay: Bool) {
+    func offsiteparameter(config: Configuration, forDisplay: Bool) {
         if self.offsiteServer!.isEmpty {
             if forDisplay {self.arguments!.append(" ")}
             self.arguments!.append(self.offsiteCatalog!)
@@ -109,7 +109,7 @@ class RcloneParameters {
         if forDisplay {self.arguments!.append(" ")}
     }
 
-    func appendParameter (parameter: String, forDisplay: Bool) {
+    func appendparameter (parameter: String, forDisplay: Bool) {
         if parameter.count > 1 {
             self.arguments!.append(parameter)
             if forDisplay {

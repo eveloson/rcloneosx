@@ -18,7 +18,7 @@ final class ArgumentsSynchronize: RcloneParameters {
         if self.localCatalog?.isEmpty == false {
                    self.arguments!.append(self.localCatalog!)
                }
-        self.offisteparameter(config: self.config!, forDisplay: forDisplay)
+        self.offsiteparameter(config: self.config!, forDisplay: forDisplay)
         if dryRun {
             self.dryrunparameter(config: self.config!, forDisplay: forDisplay)
         }
