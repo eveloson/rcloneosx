@@ -63,8 +63,6 @@
 			<string>sync</string>
 			<key>parameter13</key>
 			<string>--backup-dir=dropbox:GitHuB_backup</string>
-			<key>parameter14</key>
-			<string>--suffix=date</string>
 			<key>parameter2</key>
 			<string>--verbose</string>
 			<key>parameter3</key>

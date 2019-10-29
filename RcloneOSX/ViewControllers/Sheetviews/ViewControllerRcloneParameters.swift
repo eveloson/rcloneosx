@@ -125,6 +125,7 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
                 self.combo13.indexOfSelectedItem, value: getValue(value: self.param13.stringValue))
             configurations[index].parameter14 = param.setrcloneparameter(indexComboBox:
                 self.combo14.indexOfSelectedItem, value: getValue(value: self.param14.stringValue))
+            self.configurations!.updateConfigurations(configurations[index], index: index)
             self.userparamsupdatedDelegate?.rcloneuserparamsupdated()
         }
         self.dismissview(viewcontroller: self, vcontroller: .vctabmain)

@@ -39,10 +39,17 @@ class RcloneosxTests: XCTestCase, SetConfigurations {
                        "Arguments should be equal")
     }
 
-    func testargumentsdryrun1() {
+    func testargumentsrealrun0() {
+        let arguments = ["sync", "/Users/thomas/Documents", "localencrypt:",
+                         "--verbose", "--exclude-from=/Users/thomas/excludersync/exclude_rclone.txt"]
+        XCTAssertEqual(arguments, self.configurations?.arguments4rclone(index: 0, argtype: .arg),
+                       "Arguments should be equal")
+    }
+
+    func testargumentsrealrun1() {
         let arguments = ["sync", "/Users/thomas/GitHub", "dropbox:GitHub", "--verbose",
                          "--exclude-from=/Users/thomas/excludersync/exclude_rclone.txt",
-                         "--backup-dir=dropbox:GitHuB_backup", "--suffix=-2019-10-29"]
+                         "--backup-dir=dropbox:GitHuB_backup"]
         XCTAssertEqual(arguments, self.configurations?.arguments4rclone(index: 1, argtype: .arg),
                        "Arguments should be equal")
     }
