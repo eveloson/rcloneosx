@@ -19,9 +19,7 @@ final class ArgumentsRestore: RcloneParameters {
            self.localCatalog = ViewControllerReference.shared.restorePath ?? ""
         }
         self.offsiteparameter(config: self.config!, forDisplay: forDisplay)
-        if self.localCatalog?.isEmpty == false {
-            self.arguments!.append(self.localCatalog!)
-        }
+        self.appendparameter(parameter: self.localCatalog, forDisplay: forDisplay)
         if dryRun {
             self.dryrunparameter(config: self.config!, forDisplay: forDisplay)
         }

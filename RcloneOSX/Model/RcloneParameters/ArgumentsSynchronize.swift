@@ -15,9 +15,7 @@ final class ArgumentsSynchronize: RcloneParameters {
     func argumentssynchronize(dryRun: Bool, forDisplay: Bool) -> [String] {
         self.rclonecommand(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
         self.remoteparameter(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
-        if self.localCatalog?.isEmpty == false {
-                   self.arguments!.append(self.localCatalog!)
-               }
+        self.appendparameter(parameter: self.localCatalog, forDisplay: forDisplay)
         self.offsiteparameter(config: self.config!, forDisplay: forDisplay)
         if dryRun {
             self.dryrunparameter(config: self.config!, forDisplay: forDisplay)

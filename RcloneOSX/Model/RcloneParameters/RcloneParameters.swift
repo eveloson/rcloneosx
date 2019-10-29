@@ -109,11 +109,12 @@ class RcloneParameters {
         if forDisplay {self.arguments!.append(" ")}
     }
 
-    func appendparameter (parameter: String, forDisplay: Bool) {
-        if parameter.count > 1 {
-            self.arguments!.append(parameter)
+    func appendparameter (parameter: String?, forDisplay: Bool) {
+        if parameter != nil {
+            guard parameter?.count ?? -1 > 0 else { return }
+            self.arguments?.append(parameter!)
             if forDisplay {
-                self.arguments!.append(" ")
+                self.arguments?.append(" ")
             }
         }
     }
