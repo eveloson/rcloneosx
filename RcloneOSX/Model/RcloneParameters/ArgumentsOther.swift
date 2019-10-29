@@ -11,7 +11,7 @@ import Foundation
 final class ArgumentsOther: RcloneParameters {
 
     var config: Configuration?
-    
+
     func argumentsrclonelistfile() -> [String] {
         self.localCatalog = nil
         self.offsiteCatalog = self.config!.offsiteCatalog
@@ -35,7 +35,7 @@ final class ArgumentsOther: RcloneParameters {
         }
         return self.arguments!
     }
-    
+
     init(config: Configuration?) {
         super.init()
         self.config = config

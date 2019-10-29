@@ -13,33 +13,12 @@ final class ArgumentsSynchronize: RcloneParameters {
     var config: Configuration?
 
     func argumentssynchronize(dryRun: Bool, forDisplay: Bool) -> [String] {
-        self.localCatalog = self.config!.localCatalog
-        self.offsiteCatalog = self.config!.offsiteCatalog
-        self.offsiteServer = self.config!.offsiteServer
-        if self.offsiteServer!.isEmpty == false {
-            if self.config!.localCatalog.isEmpty == true {
-                self.remoteargs = self.offsiteServer! + ":"
-            } else {
-                self.remoteargs = self.offsiteServer! + ":" + self.offsiteCatalog!
-            }
-        }
         self.rclonecommand(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
+        self.remoteparameter(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
         if self.localCatalog?.isEmpty == false {
-            self.arguments!.append(self.localCatalog!)
-        }
-        if self.offsiteServer!.isEmpty {
-            if forDisplay {self.arguments!.append(" ")}
-            self.arguments!.append(self.offsiteCatalog!)
-            if forDisplay {self.arguments!.append(" ")}
-        } else {
-            if forDisplay {self.arguments!.append(" ")}
-            self.arguments!.append(remoteargs!)
-            if self.config!.localCatalog.isEmpty == true {
-                if forDisplay {self.arguments!.append(" ")}
-                self.arguments!.append(self.offsiteCatalog ?? "")
-            }
-            if forDisplay {self.arguments!.append(" ")}
-        }
+                   self.arguments!.append(self.localCatalog!)
+               }
+        self.offisteparameter(config: self.config!, forDisplay: forDisplay)
         if dryRun {
             self.dryrunparameter(config: self.config!, forDisplay: forDisplay)
         }

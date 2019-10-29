@@ -5,7 +5,7 @@
 //  Created by Thomas Evensen on 03/10/2016.
 //  Copyright © 2016 Thomas Evensen. All rights reserved.
 //
-
+// swiftlint:disable cyclomatic_complexity
 import Foundation
 
 class RcloneParameters {
@@ -64,6 +64,35 @@ class RcloneParameters {
             } else {
                  self.appendParameter(parameter: config.parameter14!, forDisplay: forDisplay)
             }
+        }
+    }
+
+    func remoteparameter(config: Configuration, dryRun: Bool, forDisplay: Bool) {
+        self.localCatalog = config.localCatalog
+        self.offsiteCatalog = config.offsiteCatalog
+        self.offsiteServer = config.offsiteServer
+        if self.offsiteServer!.isEmpty == false {
+            if config.localCatalog.isEmpty == true {
+                self.remoteargs = self.offsiteServer! + ":"
+            } else {
+                self.remoteargs = self.offsiteServer! + ":" + self.offsiteCatalog!
+            }
+        }
+    }
+
+    func offisteparameter(config: Configuration, forDisplay: Bool) {
+        if self.offsiteServer!.isEmpty {
+            if forDisplay {self.arguments!.append(" ")}
+            self.arguments!.append(self.offsiteCatalog!)
+            if forDisplay {self.arguments!.append(" ")}
+        } else {
+            if forDisplay {self.arguments!.append(" ")}
+            self.arguments!.append(remoteargs!)
+            if config.localCatalog.isEmpty == true {
+                if forDisplay {self.arguments!.append(" ")}
+                self.arguments!.append(self.offsiteCatalog ?? "")
+            }
+            if forDisplay {self.arguments!.append(" ")}
         }
     }
 
