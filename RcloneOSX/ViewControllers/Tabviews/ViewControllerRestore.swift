@@ -17,7 +17,7 @@ enum Work {
     case restore
 }
 
-class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesize, Setcolor, VcMain {
+class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesize, Setcolor, VcMain, Checkforrclone {
 
     @IBOutlet weak var restoretable: NSTableView!
     @IBOutlet weak var working: NSProgressIndicator!
@@ -37,6 +37,50 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
     var workqueue: [Work]?
     var index: Int?
     var maxcount: Int = 0
+
+    @IBAction func totinfo(_ sender: NSButton) {
+        guard self.checkforrclone() == false else { return }
+         globalMainQueue.async(execute: { () -> Void in
+             self.presentAsSheet(self.viewControllerRemoteInfo!)
+         })
+     }
+
+     @IBAction func quickbackup(_ sender: NSButton) {
+        guard self.checkforrclone() == false else { return }
+         globalMainQueue.async(execute: { () -> Void in
+             self.presentAsSheet(self.viewControllerQuickBackup!)
+         })
+     }
+
+     @IBAction func information(_ sender: NSToolbarItem) {
+         globalMainQueue.async(execute: { () -> Void in
+             self.presentAsSheet(self.viewControllerInformation!)
+         })
+     }
+
+     // Userconfig
+     @IBAction func userconfiguration(_ sender: NSToolbarItem) {
+         globalMainQueue.async(execute: { () -> Void in
+             self.presentAsSheet(self.viewControllerUserconfiguration!)
+         })
+     }
+
+     // Selecting profiles
+     @IBAction func profiles(_ sender: NSButton) {
+         globalMainQueue.async(execute: { () -> Void in
+             self.presentAsSheet(self.viewControllerProfile!)
+         })
+     }
+
+     // Selecting About
+     @IBAction func about (_ sender: NSButton) {
+         self.presentAsModalWindow(self.viewControllerAbout!)
+     }
+
+     // Selecting automatic backup
+     @IBAction func automaticbackup (_ sender: NSButton) {
+         self.presentAsSheet(self.viewControllerEstimating!)
+     }
 
     @IBAction func restore(_ sender: NSButton) {
         let answer = Alerts.dialogOKCancel("Do you REALLY want to start a RESTORE ?", text: "Cancel or OK")
