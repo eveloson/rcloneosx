@@ -31,20 +31,26 @@ class RcloneosxTests: XCTestCase, SetConfigurations {
         XCTAssertEqual(count, 4, "Should be equal to 4")
     }
 
-    func testargumentsdryrun() {
-        let arguments = ["--archive", "--verbose", "--compress", "--delete", "-e", "ssh -p 22", "--exclude=.git",
-                         "--backup", "--backup-dir=../backup_XCTest", "--suffix=_$(date +%Y-%m-%d.%H.%M)", "--dry-run",
-                         "--stats", "/Users/thomas/XCTest/", "thomas@10.0.0.57:/backup2/RsyncOSX/XCTest/"]
+    func testargumentsdryrun0() {
+        let arguments = ["sync", "/Users/thomas/Documents", "localencrypt:",
+                         "--dry-run", "--verbose",
+                         "--exclude-from=/Users/thomas/excludersync/exclude_rclone.txt"]
         XCTAssertEqual(arguments, self.configurations?.arguments4rclone(index: 0, argtype: .argdryRun),
                        "Arguments should be equal")
     }
 
-    func testargumentsrealrun() {
-        let arguments = ["--archive", "--verbose", "--compress", "--delete", "-e", "ssh -p 22", "--exclude=.git",
-                         "--backup", "--backup-dir=../backup_XCTest", "--suffix=_$(date +%Y-%m-%d.%H.%M)",
-                         "--stats", "/Users/thomas/XCTest/", "thomas@web:~/XCTest/"]
+    func testargumentsdryrun1() {
+        let arguments = ["sync", "/Users/thomas/GitHub", "dropbox:GitHub", "--verbose",
+                         "--exclude-from=/Users/thomas/excludersync/exclude_rclone.txt",
+                         "--backup-dir=dropbox:GitHuB_backup", "--suffix=-2019-10-29"]
         XCTAssertEqual(arguments, self.configurations?.arguments4rclone(index: 1, argtype: .arg),
                        "Arguments should be equal")
     }
 
+    func testargumentsdryrun3() {
+        let arguments = ["sync", "/Users/thomas/Source", "local:/Users/thomas/Destination",
+                         "--dry-run", "--verbose"]
+        XCTAssertEqual(arguments, self.configurations?.arguments4rclone(index: 3, argtype: .argdryRun),
+                       "Arguments should be equal")
+    }
 }
