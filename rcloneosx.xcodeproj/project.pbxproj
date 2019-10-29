@@ -124,6 +124,7 @@
 		E9BC41E52065184F001DBCC6 /* ViewControllerAllProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BC41E42065184E001DBCC6 /* ViewControllerAllProfiles.swift */; };
 		E9C2029C211BFD8A005E3B11 /* ViewControllerRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C2029B211BFD8A005E3B11 /* ViewControllerRestore.swift */; };
 		E9C2029E211BFE1A005E3B11 /* RestoreTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C2029D211BFE1A005E3B11 /* RestoreTask.swift */; };
+		E9C68A152368AB2C00CBA2F5 /* rcloneosxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C68A142368AB2C00CBA2F5 /* rcloneosxTests.swift */; };
 		E9CB92351FEE29800047F9CA /* ViewControllerQuickBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB92341FEE29800047F9CA /* ViewControllerQuickBackup.swift */; };
 		E9CB92381FEE2A8D0047F9CA /* QuickBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB92371FEE2A8D0047F9CA /* QuickBackup.swift */; };
 		E9D1F1A21FB49DB60099D25C /* GetCloudServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D1F1A11FB49DB60099D25C /* GetCloudServices.swift */; };
@@ -134,6 +135,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		E9107CB221254B9C0030305B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E99AA3771FAFA28900C1E86A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E99AA37E1FAFA28900C1E86A;
+			remoteInfo = rcloneosx;
+		};
+		E9C68A172368AB2C00CBA2F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E99AA3771FAFA28900C1E86A /* Project object */;
 			proxyType = 1;
@@ -237,6 +245,9 @@
 		E9BC41E42065184E001DBCC6 /* ViewControllerAllProfiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerAllProfiles.swift; sourceTree = "<group>"; };
 		E9C2029B211BFD8A005E3B11 /* ViewControllerRestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerRestore.swift; sourceTree = "<group>"; };
 		E9C2029D211BFE1A005E3B11 /* RestoreTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreTask.swift; sourceTree = "<group>"; };
+		E9C68A122368AB2C00CBA2F5 /* rcloneosxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rcloneosxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9C68A142368AB2C00CBA2F5 /* rcloneosxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rcloneosxTests.swift; sourceTree = "<group>"; };
+		E9C68A162368AB2C00CBA2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9CB92341FEE29800047F9CA /* ViewControllerQuickBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerQuickBackup.swift; sourceTree = "<group>"; };
 		E9CB92371FEE2A8D0047F9CA /* QuickBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickBackup.swift; sourceTree = "<group>"; };
 		E9D1F1A11FB49DB60099D25C /* GetCloudServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCloudServices.swift; sourceTree = "<group>"; };
@@ -248,6 +259,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		E99AA37C1FAFA28900C1E86A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9C68A0F2368AB2C00CBA2F5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -540,6 +558,7 @@
 			children = (
 				E9FF26F7218D78CB009D2435 /* rcloneosx.entitlements */,
 				E99AA3811FAFA28900C1E86A /* RcloneOSX */,
+				E9C68A132368AB2C00CBA2F5 /* rcloneosxTests */,
 				E99AA3801FAFA28900C1E86A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -548,6 +567,7 @@
 			isa = PBXGroup;
 			children = (
 				E99AA37F1FAFA28900C1E86A /* rcloneosx.app */,
+				E9C68A122368AB2C00CBA2F5 /* rcloneosxTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -584,6 +604,15 @@
 				E9E4DCCE21195FB700BB3F93 /* AllProfilenames.swift */,
 			);
 			path = AllProfiles;
+			sourceTree = "<group>";
+		};
+		E9C68A132368AB2C00CBA2F5 /* rcloneosxTests */ = {
+			isa = PBXGroup;
+			children = (
+				E9C68A142368AB2C00CBA2F5 /* rcloneosxTests.swift */,
+				E9C68A162368AB2C00CBA2F5 /* Info.plist */,
+			);
+			path = rcloneosxTests;
 			sourceTree = "<group>";
 		};
 		E9D1F1A01FB49D870099D25C /* CloudServices */ = {
@@ -633,13 +662,31 @@
 			productReference = E99AA37F1FAFA28900C1E86A /* rcloneosx.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E9C68A112368AB2C00CBA2F5 /* rcloneosxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9C68A1B2368AB2C00CBA2F5 /* Build configuration list for PBXNativeTarget "rcloneosxTests" */;
+			buildPhases = (
+				E9C68A0E2368AB2C00CBA2F5 /* Sources */,
+				E9C68A0F2368AB2C00CBA2F5 /* Frameworks */,
+				E9C68A102368AB2C00CBA2F5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E9C68A182368AB2C00CBA2F5 /* PBXTargetDependency */,
+			);
+			name = rcloneosxTests;
+			productName = rcloneosxTests;
+			productReference = E9C68A122368AB2C00CBA2F5 /* rcloneosxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		E99AA3771FAFA28900C1E86A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
+				LastSwiftUpdateCheck = 1110;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Thomas Evensen";
 				TargetAttributes = {
@@ -660,6 +707,11 @@
 							};
 						};
 					};
+					E9C68A112368AB2C00CBA2F5 = {
+						CreatedOnToolsVersion = 11.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = E99AA37E1FAFA28900C1E86A;
+					};
 				};
 			};
 			buildConfigurationList = E99AA37A1FAFA28900C1E86A /* Build configuration list for PBXProject "RcloneOSX" */;
@@ -678,6 +730,7 @@
 				E99AA37E1FAFA28900C1E86A /* rcloneosx */,
 				E9107CAD21254B6A0030305B /* rcloneosx-dmg */,
 				E991A16C218D7D70007A92AE /* rcloneosx-dmg-notarize */,
+				E9C68A112368AB2C00CBA2F5 /* rcloneosxTests */,
 			);
 		};
 /* End PBXProject section */
@@ -689,6 +742,13 @@
 			files = (
 				E99AA3871FAFA28900C1E86A /* Assets.xcassets in Resources */,
 				E99AA38A1FAFA28900C1E86A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9C68A102368AB2C00CBA2F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,6 +899,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E9C68A0E2368AB2C00CBA2F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9C68A152368AB2C00CBA2F5 /* rcloneosxTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -846,6 +914,11 @@
 			isa = PBXTargetDependency;
 			target = E99AA37E1FAFA28900C1E86A /* rcloneosx */;
 			targetProxy = E9107CB221254B9C0030305B /* PBXContainerItemProxy */;
+		};
+		E9C68A182368AB2C00CBA2F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E99AA37E1FAFA28900C1E86A /* rcloneosx */;
+			targetProxy = E9C68A172368AB2C00CBA2F5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1054,6 +1127,45 @@
 			};
 			name = Release;
 		};
+		E9C68A192368AB2C00CBA2F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 93M47F4H9T;
+				INFOPLIST_FILE = rcloneosxTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = no.blogspot.rsyncosx.rcloneosxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rcloneosx.app/Contents/MacOS/rcloneosx";
+			};
+			name = Debug;
+		};
+		E9C68A1A2368AB2C00CBA2F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 93M47F4H9T;
+				INFOPLIST_FILE = rcloneosxTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = no.blogspot.rsyncosx.rcloneosxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rcloneosx.app/Contents/MacOS/rcloneosx";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1089,6 +1201,15 @@
 			buildConfigurations = (
 				E99AA3901FAFA28900C1E86A /* Debug */,
 				E99AA3911FAFA28900C1E86A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E9C68A1B2368AB2C00CBA2F5 /* Build configuration list for PBXNativeTarget "rcloneosxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9C68A192368AB2C00CBA2F5 /* Debug */,
+				E9C68A1A2368AB2C00CBA2F5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
