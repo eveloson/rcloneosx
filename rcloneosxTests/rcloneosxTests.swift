@@ -28,7 +28,7 @@ class RcloneosxTests: XCTestCase, SetConfigurations {
 
     func testnumberofconfigurations() {
         let count = self.configurations?.getConfigurations().count
-        XCTAssertEqual(count, 3, "Should be equal to 3")
+        XCTAssertEqual(count, 4, "Should be equal to 4")
     }
 
     func testargumentsdryrun() {
