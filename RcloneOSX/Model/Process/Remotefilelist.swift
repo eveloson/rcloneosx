@@ -14,7 +14,6 @@ class Remotefilelist: ProcessCmd, SetConfigurations {
 
     var outputprocess: OutputProcess?
     var config: Configuration?
-    var argumentsobject: CopyFilesArguments?
     var remotefilelist: [String]?
     weak var setremotefilelistDelegate: Updateremotefilelist?
 
@@ -23,8 +22,7 @@ class Remotefilelist: ProcessCmd, SetConfigurations {
         let index = self.configurations?.getIndex(hiddenID) ?? -1
         self.config = self.configurations!.getConfigurations()[index]
         self.outputprocess = OutputProcess()
-        self.argumentsobject = CopyFilesArguments(task: .listrclone, config: self.config!, remotefile: nil, localCatalog: nil)
-        self.arguments = self.argumentsobject!.getArguments()
+        self.arguments = CopyFilesArguments(task: .listrclone, config: self.config!, remotefile: nil, localCatalog: nil).getArguments()
         self.command = nil
         self.updateDelegate = self
         self.setremotefilelistDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles

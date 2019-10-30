@@ -16,16 +16,22 @@ final class RestoreTask: SetConfigurations {
         if dryrun {
             if tmprestore {
                 self.arguments = self.configurations!.arguments4tmprestore(index: index, argtype: .argdryRun)
-                let lastindex = self.arguments!.count - 1
-                self.arguments![lastindex] = ViewControllerReference.shared.restorePath ?? ""
+                // We have to check if remote (offsite) catalog is empty or not
+                let config = self.configurations!.getConfigurations()[index]
+                if config.offsiteCatalog.isEmpty {
+                    self.arguments?.insert(ViewControllerReference.shared.restorePath ?? "", at: 2)
+                }
             } else {
+                // Do a restore from destination to source
                 self.arguments = self.configurations!.arguments4restore(index: index, argtype: .argdryRun)
             }
         } else {
             if tmprestore {
                 self.arguments = self.configurations!.arguments4tmprestore(index: index, argtype: .arg)
-                let lastindex = self.arguments!.count - 1
-                self.arguments![lastindex] = ViewControllerReference.shared.restorePath ?? ""
+                let config = self.configurations!.getConfigurations()[index]
+                if config.offsiteCatalog.isEmpty {
+                    self.arguments?.insert(ViewControllerReference.shared.restorePath ?? "", at: 2)
+                }
             } else {
                 self.arguments = self.configurations!.arguments4restore(index: index, argtype: .arg)
             }

@@ -15,7 +15,6 @@ import Foundation
 
 struct ArgumentsOneConfiguration {
 
-    var config: Configuration?
     var arg: [String]?
     var argdryRun: [String]?
     var argDisplay: [String]?
@@ -34,25 +33,24 @@ struct ArgumentsOneConfiguration {
     var tmprestoredryRun: [String]?
 
     init(config: Configuration) {
-        // The configuration
-        self.config = config
         // All arguments for rclone is computed, two sets. One for dry-run and one for real run.
         // the parameter forDisplay = true computes arguments to display in view.
-        self.arg = RcloneProcessArguments().argumentsRclone(config, dryRun: false, forDisplay: false)
-        self.argDisplay = RcloneProcessArguments().argumentsRclone(config, dryRun: false, forDisplay: true)
-        self.argdryRun = RcloneProcessArguments().argumentsRclone(config, dryRun: true, forDisplay: false)
-        self.argdryRunDisplay = RcloneProcessArguments().argumentsRclone(config, dryRun: true, forDisplay: true)
-        self.argslistRemotefiles = RcloneProcessArguments().argumentsRclonelistfile(config)
-        self.argsRestorefiles = RcloneProcessArguments().argumentsRclonerestore(config, dryRun: false, forDisplay: false)
-        self.argsRestorefilesdryRun = RcloneProcessArguments().argumentsRclonerestore(config, dryRun: true, forDisplay: false)
-        self.argsRestorefilesdryRunDisplay = RcloneProcessArguments().argumentsRclonerestore(config, dryRun: true, forDisplay: true)
-        // Restore path
-        self.restore = RcloneProcessArguments().argumentsRestore(config, dryRun: false, forDisplay: false, tmprestore: false)
-        self.restoredryRun = RcloneProcessArguments().argumentsRestore(config, dryRun: true, forDisplay: false, tmprestore: false)
-        self.restoreDisplay = RcloneProcessArguments().argumentsRestore(config, dryRun: false, forDisplay: true, tmprestore: false)
-        self.restoredryRunDisplay = RcloneProcessArguments().argumentsRestore(config, dryRun: true, forDisplay: true, tmprestore: false)
+        self.arg = ArgumentsSynchronize(config: config).argumentssynchronize(dryRun: false, forDisplay: false)
+        self.argDisplay = ArgumentsSynchronize(config: config).argumentssynchronize(dryRun: false, forDisplay: true)
+        self.argdryRun = ArgumentsSynchronize(config: config).argumentssynchronize(dryRun: true, forDisplay: false)
+        self.argdryRunDisplay = ArgumentsSynchronize(config: config).argumentssynchronize(dryRun: true, forDisplay: true)
+        // Restore destination
+        self.restore =  ArgumentsRestore(config: config).argumentsrestore(dryRun: false, forDisplay: false, tmprestore: false)
+        self.restoredryRun = ArgumentsRestore(config: config).argumentsrestore(dryRun: true, forDisplay: false, tmprestore: false)
+        self.restoreDisplay = ArgumentsRestore(config: config).argumentsrestore(dryRun: false, forDisplay: true, tmprestore: false)
+        self.restoredryRunDisplay = ArgumentsRestore(config: config).argumentsrestore(dryRun: true, forDisplay: true, tmprestore: false)
         // Temporary restore path
-        self.tmprestore = RcloneProcessArguments().argumentsRestore(config, dryRun: false, forDisplay: false, tmprestore: true)
-        self.tmprestoredryRun = RcloneProcessArguments().argumentsRestore(config, dryRun: true, forDisplay: false, tmprestore: true)
+        self.tmprestore = ArgumentsRestore(config: config).argumentsrestore(dryRun: false, forDisplay: false, tmprestore: true)
+        self.tmprestoredryRun = ArgumentsRestore(config: config).argumentsrestore(dryRun: true, forDisplay: false, tmprestore: true)
+        self.argslistRemotefiles = ArgumentsListFiles(config: config).argumentsrclonelistfile()
+        // Restore single files or catalogs
+        self.argsRestorefiles = ArgumentsRestoreSinglefiles(config: config).argumentsrclonerestore(dryRun: false, forDisplay: false)
+        self.argsRestorefilesdryRun = ArgumentsRestoreSinglefiles(config: config).argumentsrclonerestore(dryRun: true, forDisplay: false)
+        self.argsRestorefilesdryRunDisplay = ArgumentsRestoreSinglefiles(config: config).argumentsrclonerestore(dryRun: true, forDisplay: true)
     }
 }

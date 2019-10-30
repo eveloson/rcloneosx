@@ -5,6 +5,7 @@
 //  Created by Thomas Evensen on 24/08/2016.
 //  Copyright © 2016 Thomas Evensen. All rights reserved.
 //
+// swiftlint:disable line_length
 
 import Cocoa
 
@@ -23,6 +24,16 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
     @IBOutlet weak var abort: NSButton!
 
     @IBAction func abort(_ sender: NSButton) {
+        switch self.countDelegate {
+        case is ViewControllerMain:
+            self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        case is ViewControllerCopyFiles:
+            self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
+        case is ViewControllerRestore:
+            self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
+        default:
+            return
+        }
         self.abort()
     }
 
@@ -33,6 +44,10 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
         ViewControllerReference.shared.setvcref(viewcontroller: .vcprogressview, nsviewcontroller: self)
         if let pvc = (self.presentingViewController as? ViewControllerMain)?.singletask {
             self.countDelegate = pvc
+        } else if (self.presentingViewController as? ViewControllerCopyFiles) != nil {
+            self.countDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles
+        } else if (self.presentingViewController as? ViewControllerRestore) != nil {
+            self.countDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
         }
         self.initiateProgressbar()
         self.abort.isEnabled = true
@@ -64,7 +79,16 @@ extension ViewControllerProgressProcess: UpdateProgress {
 
     func processTermination() {
         self.stopProgressbar()
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        switch self.countDelegate {
+        case is ViewControllerMain:
+            self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        case is ViewControllerCopyFiles:
+            self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
+        case is ViewControllerRestore:
+            self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
+        default:
+            self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        }
     }
 
     func fileHandler() {
