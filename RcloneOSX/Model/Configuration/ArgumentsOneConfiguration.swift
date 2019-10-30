@@ -39,7 +39,7 @@ struct ArgumentsOneConfiguration {
         self.argDisplay = ArgumentsSynchronize(config: config).argumentssynchronize(dryRun: false, forDisplay: true)
         self.argdryRun = ArgumentsSynchronize(config: config).argumentssynchronize(dryRun: true, forDisplay: false)
         self.argdryRunDisplay = ArgumentsSynchronize(config: config).argumentssynchronize(dryRun: true, forDisplay: true)
-        // Restore path
+        // Restore destination
         self.restore =  ArgumentsRestore(config: config).argumentsrestore(dryRun: false, forDisplay: false, tmprestore: false)
         self.restoredryRun = ArgumentsRestore(config: config).argumentsrestore(dryRun: true, forDisplay: false, tmprestore: false)
         self.restoreDisplay = ArgumentsRestore(config: config).argumentsrestore(dryRun: false, forDisplay: true, tmprestore: false)
@@ -47,9 +47,10 @@ struct ArgumentsOneConfiguration {
         // Temporary restore path
         self.tmprestore = ArgumentsRestore(config: config).argumentsrestore(dryRun: false, forDisplay: false, tmprestore: true)
         self.tmprestoredryRun = ArgumentsRestore(config: config).argumentsrestore(dryRun: true, forDisplay: false, tmprestore: true)
-        self.argslistRemotefiles = ArgumentsOther(config: config).argumentsrclonelistfile()
-        self.argsRestorefiles = ArgumentsOther(config: config).argumentsrclonerestore(dryRun: false, forDisplay: false)
-        self.argsRestorefilesdryRun = ArgumentsOther(config: config).argumentsrclonerestore(dryRun: true, forDisplay: false)
-        self.argsRestorefilesdryRunDisplay = ArgumentsOther(config: config).argumentsrclonerestore(dryRun: true, forDisplay: true)
+        self.argslistRemotefiles = ArgumentsListFiles(config: config).argumentsrclonelistfile()
+        // Restore single files or catalogs
+        self.argsRestorefiles = ArgumentsRestoreSinglefiles(config: config).argumentsrclonerestore(dryRun: false, forDisplay: false)
+        self.argsRestorefilesdryRun = ArgumentsRestoreSinglefiles(config: config).argumentsrclonerestore(dryRun: true, forDisplay: false)
+        self.argsRestorefilesdryRunDisplay = ArgumentsRestoreSinglefiles(config: config).argumentsrclonerestore(dryRun: true, forDisplay: true)
     }
 }

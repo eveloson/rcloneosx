@@ -24,7 +24,7 @@ final class ArgumentsRestore: RcloneParameters {
             self.dryrunparameter(config: self.config!, forDisplay: forDisplay)
         }
         self.setParameters2To14(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
-        return self.arguments!
+        return self.arguments ?? [""] 
     }
 
     init(config: Configuration?) {
