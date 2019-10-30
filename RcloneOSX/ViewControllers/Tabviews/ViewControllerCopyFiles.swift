@@ -22,14 +22,13 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
     var estimated: Bool = false
     private var restoretabledata: [String]?
     var diddissappear: Bool = false
-    private var maxcount: Int = 0
     var outputprocess: OutputProcess?
+    private var maxcount: Int = 0
 
     @IBOutlet weak var numberofrows: NSTextField!
     @IBOutlet weak var server: NSTextField!
     @IBOutlet weak var rcatalog: NSTextField!
     @IBOutlet weak var info: NSTextField!
-
     @IBOutlet weak var restoretableView: NSTableView!
     @IBOutlet weak var rclonetableView: NSTableView!
     @IBOutlet weak var commandString: NSTextField!
@@ -106,7 +105,8 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
 
     // Do the work
     @IBAction func restore(_ sender: NSButton) {
-        guard self.remoteCatalog.stringValue.isEmpty == false && self.restorecatalog.stringValue.isEmpty == false else {
+        guard self.remoteCatalog.stringValue.isEmpty == false &&
+            self.restorecatalog.stringValue.isEmpty == false else {
             self.info(num: 3)
             return
         }
@@ -118,6 +118,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
             self.estimated = true
             self.outputprocess = self.copyfiles?.outputprocess
         } else {
+            self.presentAsSheet(self.viewControllerProgress!)
             self.copyfiles!.executecopyfiles(remotefile: remoteCatalog!.stringValue, localCatalog: restorecatalog!.stringValue, dryrun: false, updateprogress: self)
             self.estimated = false
         }
@@ -399,7 +400,6 @@ extension ViewControllerCopyFiles: Count {
     }
 
     func inprogressCount() -> Int {
-        guard self.copyfiles?.outputprocess != nil else { return 0 }
-        return self.copyfiles!.outputprocess!.count()
+        return self.copyfiles?.outputprocess?.count() ?? 0
     }
 }
