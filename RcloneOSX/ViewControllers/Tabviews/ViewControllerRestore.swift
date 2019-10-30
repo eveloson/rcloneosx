@@ -252,6 +252,7 @@ extension ViewControllerRestore: UpdateProgress {
     func processTermination() {
         switch self.removework() ?? .localinfoandnumbertosync {
         case .getremotenumbers:
+            self.maxcount = self.outputprocess?.getMaxcount() ?? 0
             self.setNumbers(outputprocess: self.outputprocess)
             self.getremotenumbers()
         case .setremotenumbers:
