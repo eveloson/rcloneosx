@@ -17,7 +17,7 @@ enum Work {
     case restore
 }
 
-class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesize, Setcolor, VcMain, Checkforrclone {
+class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesize, Setcolor, VcMain, Checkforrclone, Abort {
 
     @IBOutlet weak var restoretable: NSTableView!
     @IBOutlet weak var working: NSProgressIndicator!
@@ -81,6 +81,15 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
      @IBAction func automaticbackup (_ sender: NSButton) {
          self.presentAsSheet(self.viewControllerEstimating!)
      }
+
+    // Abort button
+    @IBAction func abort(_ sender: NSButton) {
+        self.working.stopAnimation(nil)
+        self.estimatebutton.isEnabled = true
+        self.restorebutton.isEnabled = false
+        self.workqueue = nil
+        self.abort()
+    }
 
     @IBAction func restore(_ sender: NSButton) {
         let answer = Alerts.dialogOKCancel("Do you REALLY want to start a RESTORE ?", text: "Cancel or OK")
