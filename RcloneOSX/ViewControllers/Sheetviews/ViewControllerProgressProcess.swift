@@ -56,6 +56,7 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
     override func viewWillDisappear() {
         super.viewWillDisappear()
         self.stopProgressbar()
+        ViewControllerReference.shared.setvcref(viewcontroller: .vcprogressview, nsviewcontroller: nil)
     }
 
     private func stopProgressbar() {
