@@ -47,7 +47,7 @@ class RcloneosxTests: XCTestCase, SetConfigurations {
     }
 
     func testargumentsrealrun1() {
-        let arguments = ["sync", "/Users/thomas/GitHub", "dropbox:GitHub", "--verbose",
+        let arguments = ["sync", "/Users/thomas/GitHub", "dropbox:GitHuB", "--verbose",
                          "--exclude-from=/Users/thomas/excludersync/exclude_rclone.txt",
                          "--backup-dir=dropbox:GitHuB_backup"]
         XCTAssertEqual(arguments, self.configurations?.arguments4rclone(index: 1, argtype: .arg),
