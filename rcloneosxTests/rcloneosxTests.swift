@@ -15,6 +15,7 @@ class RcloneosxTests: XCTestCase, SetConfigurations {
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         _ = Selectprofile(profile: "XCTest")
+        ViewControllerReference.shared.restorePath = "/temporaryrestore"
     }
 
     override func tearDown() {
@@ -58,6 +59,19 @@ class RcloneosxTests: XCTestCase, SetConfigurations {
         let arguments = ["sync", "/Users/thomas/Source", "local:/Users/thomas/Destination",
                          "--dry-run", "--verbose"]
         XCTAssertEqual(arguments, self.configurations?.arguments4rclone(index: 3, argtype: .argdryRun),
+                       "Arguments should be equal")
+    }
+
+    func testargumentsrestore3() {
+        let arguments = ["sync", "local:/Users/thomas/Destination", "/Users/thomas/Source",
+                         "--dry-run", "--verbose"]
+        XCTAssertEqual(arguments, self.configurations?.arguments4restore(index: 3, argtype: .argdryRun),
+                       "Arguments should be equal")
+    }
+
+    func testargumentsrestoretmp3() {
+        let arguments = ["sync", "local:/Users/thomas/Destination", "/temporaryrestore", "--verbose"]
+        XCTAssertEqual(arguments, self.configurations?.arguments4tmprestore(index: 3, argtype: .arg),
                        "Arguments should be equal")
     }
 }

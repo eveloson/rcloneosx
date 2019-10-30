@@ -84,7 +84,6 @@ class RcloneParameters {
         if self.offsiteServer!.isEmpty {
             if forDisplay {self.arguments!.append(" ")}
             self.arguments!.append(self.offsiteCatalog!)
-            if forDisplay {self.arguments!.append(" ")}
         } else {
             if forDisplay {self.arguments!.append(" ")}
             self.arguments!.append(remoteargs!)
