@@ -319,3 +319,11 @@ extension ViewControllerRestore: TemporaryRestorePath {
         self.settmp()
     }
 }
+
+extension ViewControllerRestore: OpenQuickBackup {
+    func openquickbackup() {
+        globalMainQueue.async(execute: { () -> Void in
+            self.presentAsSheet(self.viewControllerQuickBackup!)
+        })
+    }
+}
