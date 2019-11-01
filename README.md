@@ -14,6 +14,10 @@ Rclone is *rsync for cloud storage*. Even if `rclone` and `rsync` are somewhat e
 
 My own use of RcloneOSX is **synchronizing** my GitHub catalogs to Dropbox and Google. Rclone has lot more functions than just synchronizing data. For the moment there are no plans to implement more functions into RcloneOSX.
 
+### Application icon
+
+The application icon is created by [Zsolt Sándor](https://github.com/graphis). All rights reserved to Zsolt Sándor.
+
 ### Signing and notarizing
 
 The app is signed with my Apple ID developer certificate and [notarized](https://support.apple.com/en-us/HT202491) by Apple. See [signing and notarizing](https://rsyncosx.github.io/Notarized) for info.
@@ -32,14 +36,6 @@ Estimation of task for sync completed.
 ![](images/main2.png)
 Sync of task in action.
 ![](images/main3.png)
-
-### Signing and notarizing
-
-The app is signed with my Apple ID developer certificate and [notarized](https://support.apple.com/en-us/HT202491) by Apple. See [signing and notarizing](https://rsyncosx.github.io/Notarized) for info.
-
-### Application icon
-
-The application icon is created by [Zsolt Sándor](https://github.com/graphis). All rights reserved to Zsolt Sándor.
 
 ### Compile
 
