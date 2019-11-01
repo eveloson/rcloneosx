@@ -11,11 +11,10 @@ import Foundation
 
 final class PersistentStorageConfiguration: ReadWriteDictionary, SetConfigurations {
 
-    /// Variable holds all configuration data from persisten storage
     var configurationsasdictionary: [NSDictionary]?
 
-    /// Variable computes max hiddenID used
-    /// MaxhiddenID is used when new configurations are added.
+    // Variable computes max hiddenID used
+    // MaxhiddenID is used when new configurations are added.
     private var maxhiddenID: Int {
         // Reading Configurations from memory
         let store: [Configuration] = self.configurations!.getConfigurations()

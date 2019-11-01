@@ -150,6 +150,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
     override func viewDidAppear() {
         super.viewDidAppear()
         self.index = self.index()
+        self.scheduleloggdata = nil
         if let index = self.index {
             let hiddenID = self.configurations?.gethiddenID(index: index) ?? -1
             self.scheduleloggdata = ScheduleLoggData(hiddenID: hiddenID, sortascending: self.sortedascending)
