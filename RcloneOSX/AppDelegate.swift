@@ -13,8 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Read user configuration
-        let storage = PersistentStorageUserconfiguration()
-        if let userconfiguration =  storage.readuserconfiguration() {
+        if let userconfiguration = PersistentStorageUserconfiguration().readuserconfiguration() {
             _ = Userconfiguration(userconfigrcloneOSX: userconfiguration)
         } else {
             _ = RcloneVersionString()
