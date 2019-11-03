@@ -12,11 +12,10 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        var storage: PersistentStorageAPI?
         // Read user configuration
-        storage = PersistentStorageAPI(profile: nil)
-        if let userConfiguration =  storage?.getUserconfiguration(readfromstorage: true) {
-            _ = Userconfiguration(userconfigrcloneOSX: userConfiguration)
+        let storage = PersistentStorageUserconfiguration()
+        if let userconfiguration =  storage.readuserconfiguration() {
+            _ = Userconfiguration(userconfigrcloneOSX: userconfiguration)
         } else {
             _ = RcloneVersionString()
         }
