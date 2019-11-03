@@ -12,18 +12,16 @@ import Cocoa
 
 class Schedules: ScheduleWriteLoggData {
 
-    var profile: String?
-
     // Return reference to Schedule data
     // self.Schedule is privat data
     func getSchedule() -> [ConfigurationSchedule] {
         return self.schedules ?? []
     }
 
-    /// Function deletes all Schedules by hiddenID. Invoked when Configurations are
-    /// deleted. When a Configuration are deleted all tasks connected to
-    /// Configuration has to  be deleted.
-    /// - parameter hiddenID : hiddenID for task
+    // Function deletes all Schedules by hiddenID. Invoked when Configurations are
+    // deleted. When a Configuration are deleted all tasks connected to
+    // Configuration has to  be deleted.
+    // - parameter hiddenID : hiddenID for task
     func deletescheduleonetask(hiddenID: Int) {
         var delete: Bool = false
         for i in 0 ..< self.schedules!.count where self.schedules![i].hiddenID == hiddenID {
@@ -33,7 +31,7 @@ class Schedules: ScheduleWriteLoggData {
             delete = true
         }
         if delete {
-            self.storageapi!.saveScheduleFromMemory()
+            _ = PersistentStorageScheduling(profile: self.profile).savescheduleInMemoryToPersistentStore()
             // Send message about refresh tableView
             self.reloadtable(vcontroller: .vctabmain)
         }
@@ -57,7 +55,7 @@ class Schedules: ScheduleWriteLoggData {
     // Function for reading all jobs for schedule and all history of past executions.
     // Schedules are stored in self.schedules. Schedules are sorted after hiddenID.
     private func readschedules() {
-        let store: [ConfigurationSchedule]? = self.storageapi!.getScheduleandhistory(nolog: false)
+        let store: [ConfigurationSchedule]? = PersistentStorageScheduling(profile: self.profile).getScheduleandhistory(nolog: false)
         guard store != nil else { return }
         var data = [ConfigurationSchedule]()
         for i in 0 ..< store!.count where store![i].logrecords.isEmpty == false {
@@ -75,10 +73,9 @@ class Schedules: ScheduleWriteLoggData {
         self.schedules = data
     }
 
-    init(profile: String?) {
-        super.init()
+    override init(profile: String?) {
+        super.init(profile: profile)
         self.profile = profile
-        self.storageapi = PersistentStorageAPI(profile: self.profile)
         self.readschedules()
     }
 }
