@@ -11,11 +11,10 @@ import Foundation
 
 final class PersistentStorageConfiguration: ReadWriteDictionary, SetConfigurations {
 
-    /// Variable holds all configuration data from persisten storage
     var configurationsasdictionary: [NSDictionary]?
 
-    /// Variable computes max hiddenID used
-    /// MaxhiddenID is used when new configurations are added.
+    // Variable computes max hiddenID used
+    // MaxhiddenID is used when new configurations are added.
     private var maxhiddenID: Int {
         // Reading Configurations from memory
         let store: [Configuration] = self.configurations!.getConfigurations()
@@ -34,6 +33,18 @@ final class PersistentStorageConfiguration: ReadWriteDictionary, SetConfiguratio
         }
     }
 
+    // Read configurations from persisten store
+      func getConfigurations() -> [Configuration]? {
+          let read = PersistentStorageConfiguration(profile: self.profile)
+          guard read.configurationsasdictionary != nil else { return nil}
+          var Configurations = [Configuration]()
+          for dict in read.configurationsasdictionary! {
+              let conf = Configuration(dictionary: dict)
+              Configurations.append(conf)
+          }
+          return Configurations
+      }
+
     // Saving Configuration from MEMORY to persistent store
     // Reads Configurations from MEMORY and saves to persistent Store
     func saveconfigInMemoryToPersistentStore() {
@@ -46,12 +57,12 @@ final class PersistentStorageConfiguration: ReadWriteDictionary, SetConfiguratio
             }
         }
         // Write array to persistent store
-        self.writeToStore(array)
+        self.writeToStore(array: array)
     }
 
     // Add new configuration in memory to permanent storage
     // NB : Function does NOT store Configurations to persistent store
-    func newConfigurations (_ dict: NSMutableDictionary) {
+    func newConfigurations (dict: NSMutableDictionary) {
         var array = [NSDictionary]()
         // Get existing configurations from memory
         let configs: [Configuration] = self.configurations!.getConfigurations()
@@ -64,11 +75,12 @@ final class PersistentStorageConfiguration: ReadWriteDictionary, SetConfiguratio
         dict.setObject(self.maxhiddenID + 1, forKey: "hiddenID" as NSCopying)
         array.append(dict)
         self.configurations!.appendconfigurationstomemory(dict: array[array.count - 1])
+        self.saveconfigInMemoryToPersistentStore()
     }
 
     // Writing configuration to persistent store
     // Configuration is [NSDictionary]
-    private func writeToStore (_ array: [NSDictionary]) {
+    private func writeToStore (array: [NSDictionary]) {
         if self.writeNSDictionaryToPersistentStorage(array) {
             self.configurationsDelegate?.reloadconfigurationsobject()
         }

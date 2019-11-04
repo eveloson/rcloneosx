@@ -12,9 +12,9 @@ import Cocoa
 
 class ScheduleWriteLoggData: SetConfigurations, ReloadTable, Deselect {
 
-    var storageapi: PersistentStorageAPI?
     var schedules: [ConfigurationSchedule]?
     typealias Row = (Int, Int)
+    var profile: String?
 
     func deleteselectedrows(scheduleloggdata: ScheduleLoggData?) {
         guard scheduleloggdata?.loggdata != nil else { return }
@@ -40,7 +40,7 @@ class ScheduleWriteLoggData: SetConfigurations, ReloadTable, Deselect {
         for i in 0 ..< deletes.count {
             self.schedules![deletes[i].0].logrecords.remove(at: deletes[i].1)
         }
-        self.storageapi!.saveScheduleFromMemory()
+        _ = PersistentStorageScheduling(profile: self.profile).savescheduleInMemoryToPersistentStore()
         self.reloadtable(vcontroller: .vcloggdata)
     }
 
@@ -61,7 +61,7 @@ class ScheduleWriteLoggData: SetConfigurations, ReloadTable, Deselect {
                 inserted = self.addlognew(hiddenID, result: result, date: date)
             }
             if inserted {
-                self.storageapi!.saveScheduleFromMemory()
+                 _ = PersistentStorageScheduling(profile: self.profile).savescheduleInMemoryToPersistentStore()
                 self.deselectrowtable()
             }
         }
@@ -98,9 +98,10 @@ class ScheduleWriteLoggData: SetConfigurations, ReloadTable, Deselect {
         self.schedules!.append(newSchedule)
         loggadded = true
         return loggadded
-        }
+    }
 
-    init() {
+    init(profile: String?) {
+        self.profile = profile
         self.schedules = [ConfigurationSchedule]()
     }
 }

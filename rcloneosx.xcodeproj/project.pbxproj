@@ -97,7 +97,6 @@
 		E960CB431FB091DE0008D12E /* PersistentStorageScheduling.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAF51FB091DC0008D12E /* PersistentStorageScheduling.swift */; };
 		E960CB451FB091DE0008D12E /* CompleteQuickbackupTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAF71FB091DC0008D12E /* CompleteQuickbackupTask.swift */; };
 		E960CB461FB091DE0008D12E /* CatalogProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAF81FB091DD0008D12E /* CatalogProfile.swift */; };
-		E960CB481FB091DE0008D12E /* PersistentStorageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAFA1FB091DD0008D12E /* PersistentStorageAPI.swift */; };
 		E960CB491FB091DE0008D12E /* QuickbackupDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAFB1FB091DD0008D12E /* QuickbackupDispatch.swift */; };
 		E960CB4A1FB091DE0008D12E /* ViewControllerBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAFC1FB091DD0008D12E /* ViewControllerBatch.swift */; };
 		E960CB4C1FB091DE0008D12E /* ViewControllerMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAFE1FB091DD0008D12E /* ViewControllerMain.swift */; };
@@ -217,7 +216,6 @@
 		E960CAF51FB091DC0008D12E /* PersistentStorageScheduling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentStorageScheduling.swift; sourceTree = "<group>"; };
 		E960CAF71FB091DC0008D12E /* CompleteQuickbackupTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteQuickbackupTask.swift; sourceTree = "<group>"; };
 		E960CAF81FB091DD0008D12E /* CatalogProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogProfile.swift; sourceTree = "<group>"; };
-		E960CAFA1FB091DD0008D12E /* PersistentStorageAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistentStorageAPI.swift; sourceTree = "<group>"; };
 		E960CAFB1FB091DD0008D12E /* QuickbackupDispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickbackupDispatch.swift; sourceTree = "<group>"; };
 		E960CAFC1FB091DD0008D12E /* ViewControllerBatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerBatch.swift; sourceTree = "<group>"; };
 		E960CAFE1FB091DD0008D12E /* ViewControllerMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerMain.swift; sourceTree = "<group>"; };
@@ -487,7 +485,6 @@
 			isa = PBXGroup;
 			children = (
 				E95E8210222813C6000DF831 /* PersistentStorageAllprofilesAPI.swift */,
-				E960CAFA1FB091DD0008D12E /* PersistentStorageAPI.swift */,
 				E960CAEA1FB091DA0008D12E /* PersistentStorageConfiguration.swift */,
 				E960CAF51FB091DC0008D12E /* PersistentStorageScheduling.swift */,
 				E960CAE51FB091DA0008D12E /* PersistentStorageUserconfiguration.swift */,
@@ -821,7 +818,6 @@
 				E980F9B12366163200B2C3CF /* ArgumentsSynchronize.swift in Sources */,
 				E960CB1F1FB091DE0008D12E /* BatchTaskWorkQueu.swift in Sources */,
 				E914B77421311C1400FFE398 /* extensionsSchedules.swift in Sources */,
-				E960CB481FB091DE0008D12E /* PersistentStorageAPI.swift in Sources */,
 				E960CB491FB091DE0008D12E /* QuickbackupDispatch.swift in Sources */,
 				E960CB2C1FB091DE0008D12E /* Userconfiguration.swift in Sources */,
 				E960CB111FB091DE0008D12E /* Configuration.swift in Sources */,
