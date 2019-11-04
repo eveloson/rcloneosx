@@ -10,7 +10,6 @@ import Cocoa
 
 class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Delay, VcMain, Checkforrclone {
 
-    var storageapi: PersistentStorageAPI?
     var newconfigurations: NewConfigurations?
     var tabledata: [NSMutableDictionary]?
     let copycommand: String = ViewControllerReference.shared.copy
@@ -116,11 +115,6 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Dela
     override func viewDidAppear() {
         super.viewDidAppear()
         guard self.diddissappear == false else { return }
-        if let profile = self.configurations!.getProfile() {
-            self.storageapi = PersistentStorageAPI(profile: profile)
-        } else {
-            self.storageapi = PersistentStorageAPI(profile: nil)
-        }
         self.setFields()
         self.rclonecommand = self.synccommand
         self.syncradio.state = .on

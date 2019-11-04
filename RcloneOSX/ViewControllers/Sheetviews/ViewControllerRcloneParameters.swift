@@ -24,7 +24,6 @@ protocol GetSelecetedIndex: class {
 
 class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDismisser, Index {
 
-    var storageapi: PersistentStorageAPI?
     // var parameters: RcloneParameters?
     weak var userparamsupdatedDelegate: RcloneUserParams?
     var comboBoxValues = [String]()
@@ -61,11 +60,6 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
     override func viewDidAppear() {
         super.viewDidAppear()
         guard self.diddissappear == false else { return }
-        if let profile = self.configurations!.getProfile() {
-            self.storageapi = PersistentStorageAPI(profile: profile)
-        } else {
-            self.storageapi = PersistentStorageAPI(profile: nil)
-        }
         if let index = self.index() {
             // Create RcloneParameters object and load initial parameters
             let configurations: [Configuration] = self.configurations!.getConfigurations()
