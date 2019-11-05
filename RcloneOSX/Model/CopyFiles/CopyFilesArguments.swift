@@ -57,7 +57,7 @@ final class CopyFilesArguments: SetConfigurations {
     init (task: Enumscopyfiles, config: Configuration, remotefile: String?, localCatalog: String?) {
         self.remotefile = remotefile
         self.localCatalog = localCatalog
-        let index = self.configurations?.getIndex(config.hiddenID)
+        let index = self.configurations?.getIndex(hiddenID: config.hiddenID)
         switch task {
         case .restorerclone:
             self.arguments = self.configurations?.arguments4rclone(index: index!, argtype: .argrestore)

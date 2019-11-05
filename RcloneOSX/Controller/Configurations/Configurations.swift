@@ -149,7 +149,7 @@ class Configurations: ReloadTable, SetSchedules {
 
     /// Function is adding new Configurations to existing in memory.
     /// - parameter dict : new record configuration
-    func appendconfigurationstomemory (dict: NSDictionary) {
+    func appendconfigurationstomemory(dict: NSDictionary) {
         let config = Configuration(dictionary: dict)
         self.configurations!.append(config)
     }
@@ -159,7 +159,7 @@ class Configurations: ReloadTable, SetSchedules {
     /// Function also notifies Execute view to refresh data
     /// in tableView.
     /// - parameter index: index of Configuration to update
-    func setCurrentDateonConfiguration (index: Int, outputprocess: OutputProcess?) {
+    func setCurrentDateonConfiguration(index: Int, outputprocess: OutputProcess?) {
         let number = Numbers(outputprocess: outputprocess)
         let hiddenID = self.gethiddenID(index: index)
         let numbers = number.stats()
@@ -178,7 +178,7 @@ class Configurations: ReloadTable, SetSchedules {
     /// then saves updated Configurations from memory to persistent store
     /// - parameter config: updated configuration
     /// - parameter index: index to Configuration to replace by config
-    func updateConfigurations (_ config: Configuration, index: Int) {
+    func updateConfigurations (config: Configuration, index: Int) {
         self.configurations![index] = config
         _ = PersistentStorageConfiguration(profile: self.profile).saveconfigInMemoryToPersistentStore()
     }
@@ -187,8 +187,8 @@ class Configurations: ReloadTable, SetSchedules {
     /// then saves updated Configurations from memory to persistent store.
     /// Function computes index by hiddenID.
     /// - parameter hiddenID: hiddenID which is unique for every Configuration
-    func deleteConfigurationsByhiddenID (hiddenID: Int) {
-        let index = self.getIndex(hiddenID)
+    func deleteConfigurationsByhiddenID(hiddenID: Int) {
+        let index = self.getIndex(hiddenID: hiddenID)
         self.configurations!.remove(at: index)
         _ = PersistentStorageConfiguration(profile: self.profile).saveconfigInMemoryToPersistentStore()
     }
@@ -208,15 +208,11 @@ class Configurations: ReloadTable, SetSchedules {
         self.reloadtable(vcontroller: .vctabmain)
     }
 
-    // Create batchQueue
-    func createbatchQueue() {
-        self.batchQueue = BatchTaskWorkQueu(configurations: self)
-    }
-
     /// Function return the reference to object holding data and methods
     /// for batch execution of Configurations.
     /// - returns : reference to to object holding data and methods
     func getbatchQueue() -> BatchTaskWorkQueu? {
+        self.batchQueue = BatchTaskWorkQueu(configurations: self)
         return self.batchQueue
     }
 
@@ -231,11 +227,11 @@ class Configurations: ReloadTable, SetSchedules {
     }
 
     // Add new configurations
-    func addNewConfigurations(_ dict: NSMutableDictionary) {
+    func addNewConfigurations(dict: NSMutableDictionary) {
         _ = PersistentStorageConfiguration(profile: self.profile).newConfigurations(dict: dict)
     }
 
-    func getResourceConfiguration(_ hiddenID: Int, resource: ResourceInConfiguration) -> String {
+    func getResourceConfiguration(hiddenID: Int, resource: ResourceInConfiguration) -> String {
         let result = self.configurations!.filter({return ($0.hiddenID == hiddenID)})
         guard result.count > 0 else { return "" }
         switch resource {
@@ -258,7 +254,7 @@ class Configurations: ReloadTable, SetSchedules {
         }
     }
 
-    func getIndex(_ hiddenID: Int) -> Int {
+    func getIndex(hiddenID: Int) -> Int {
         var index: Int = -1
         loop: for i in 0 ..< self.configurations!.count where self.configurations![i].hiddenID == hiddenID {
             index = i
@@ -298,8 +294,8 @@ class Configurations: ReloadTable, SetSchedules {
         self.configurations = [Configuration]()
         self.argumentAllConfigurations = nil
         self.configurationsDataSource = nil
+        self.batchQueue = nil
         self.profile = profile
         self.readconfigurations()
-        self.createbatchQueue()
     }
 }

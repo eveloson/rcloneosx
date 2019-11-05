@@ -119,7 +119,7 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
                 self.combo13.indexOfSelectedItem, value: getValue(value: self.param13.stringValue))
             configurations[index].parameter14 = param.setrcloneparameter(indexComboBox:
                 self.combo14.indexOfSelectedItem, value: getValue(value: self.param14.stringValue))
-            self.configurations!.updateConfigurations(configurations[index], index: index)
+            self.configurations!.updateConfigurations(config: configurations[index], index: index)
             self.userparamsupdatedDelegate?.rcloneuserparamsupdated()
         }
         self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
@@ -148,8 +148,8 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
         switch self.backupbutton.state {
         case .on:
             let hiddenID = self.configurations!.gethiddenID(index: (self.index())!)
-            let remoteCatalog = self.configurations!.getResourceConfiguration(hiddenID, resource: .remoteCatalog)
-            let offsiteServer = self.configurations!.getResourceConfiguration(hiddenID, resource: .offsiteServer)
+            let remoteCatalog = self.configurations!.getResourceConfiguration(hiddenID: hiddenID, resource: .remoteCatalog)
+            let offsiteServer = self.configurations!.getResourceConfiguration(hiddenID: hiddenID, resource: .offsiteServer)
             let backup = offsiteServer + ":" + remoteCatalog + "_backup"
             self.param13.stringValue = backup
             self.initcombox(combobox: self.combo13, index: (ComboboxRcloneParameters(config: nil).indexandvaluercloneparameter(parameter: "--backup-dir").0))
