@@ -95,13 +95,7 @@ extension ViewControllerMain: RcloneError {
                 process.terminate()
                 self.process = nil
             }
-            // Either error in single task or batch task
-            if self.singletask != nil {
-                self.singletask!.error()
-            }
-            if self.executebatch != nil {
-                self.executebatch!.error()
-            }
+            self.singletask?.error()
         })
     }
 }
@@ -179,13 +173,13 @@ extension ViewControllerMain: GetConfigurationsObject {
 
     // After a write, a reload is forced.
     func reloadconfigurationsobject() {
-        guard self.executebatch == nil else {
-            // Batchtask, check if task is completed
-            guard self.configurations!.getbatchQueue()?.batchruniscompleted() == false else {
+        guard self.configurations?.batchQueue == nil else {
+            if self.configurations!.batchQueue?.batchruniscompleted() == true {
                 self.createandreloadconfigurations()
                 return
+            } else {
+                return
             }
-            return
         }
         self.createandreloadconfigurations()
     }
@@ -193,14 +187,13 @@ extension ViewControllerMain: GetConfigurationsObject {
 
 extension ViewControllerMain: GetSchedulesObject {
     func reloadschedulesobject() {
-        // If batchtask scedules object
-        guard self.executebatch == nil else {
-            // Batchtask, check if task is completed
-            guard self.configurations!.getbatchQueue()?.batchruniscompleted() == false else {
-                self.createandreloadschedules()
-                return
-            }
+        guard self.configurations?.batchQueue == nil else {
+            if self.configurations!.batchQueue?.batchruniscompleted() == true {
+            self.createandreloadschedules()
             return
+        } else {
+            return
+            }
         }
         self.createandreloadschedules()
     }

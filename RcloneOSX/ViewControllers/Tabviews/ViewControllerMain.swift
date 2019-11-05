@@ -34,7 +34,6 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     var schedules: Schedules?
     // Reference to the taskobjects
     var singletask: SingleTask?
-    var executebatch: ExecuteBatch?
     var executetasknow: ExecuteTaskNow?
     // Reference to Process task
     var process: Process?
@@ -169,7 +168,6 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     func reset() {
         self.process = nil
         self.singletask = nil
-        self.executebatch = nil
         self.setNumbers(outputprocess: nil)
     }
 
