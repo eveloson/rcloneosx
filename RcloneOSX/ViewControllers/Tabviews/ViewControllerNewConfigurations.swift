@@ -159,7 +159,7 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Dela
             "batch": 0]
         dict.setValue(self.localCatalog.stringValue, forKey: "localCatalog")
         dict.setValue(self.offsiteCatalog.stringValue, forKey: "offsiteCatalog")
-        self.configurations!.addNewConfigurations(dict)
+        self.configurations!.addNewConfigurations(dict: dict)
         self.newconfigurations?.appendnewConfigurations(dict: dict)
         self.tabledata = self.newconfigurations!.getnewConfigurations()
         globalMainQueue.async(execute: { () -> Void in

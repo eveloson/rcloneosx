@@ -32,7 +32,7 @@ class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Ind
         config[self.index!].offsiteCatalog = self.offsiteCatalog.stringValue
         config[self.index!].offsiteServer = self.cloudService.stringValue
         config[self.index!].backupID = self.backupID.stringValue
-        self.configurations!.updateConfigurations(config[self.index!], index: self.index!)
+        self.configurations!.updateConfigurations(config: config[self.index!], index: self.index!)
         self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
     }
 
