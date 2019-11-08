@@ -21,7 +21,6 @@ class ViewControllerAbout: NSViewController, SetDismisser {
     var copyrigthstring: String = "Copyright © 2019 Thomas Evensen"
     var iconbystring: String = "Icon by: Zsolt Sándor"
 
-    var checkfornewversion: Checkfornewversion?
     // External resources as documents, download
     private var resource: Resources?
 
@@ -73,8 +72,7 @@ class ViewControllerAbout: NSViewController, SetDismisser {
     override func viewDidAppear() {
         super.viewDidAppear()
         self.downloadbutton.isEnabled = false
-        self.checkfornewversion = Checkfornewversion()
-        if let version = self.checkfornewversion!.rcloneOSXversion() {
+        if let version = Checkfornewversion().rcloneOSXversion() {
             self.version.stringValue = "RcloneOSX ver: " + version
         }
         self.thereisanewversion.stringValue = "You have the latest ..."
