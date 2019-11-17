@@ -2,7 +2,7 @@
 
 ![](icon/rcloneosx.png)
 
-[Plase read the Changelog](https://rsyncosx.github.io/RcloneChangelog).
+[Please read the Changelog](https://rsyncosx.github.io/RcloneChangelog).
 
 The project is a adapting [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) utilizing [rclone](https://rclone.org/) for **synchronizing** and **backup** of files to a number of cloud services. RcloneOSX utilizes `rclone copy`, `sync`, `move` and `check` commands.
 
