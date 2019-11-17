@@ -2,11 +2,11 @@
 
 ![](icon/rcloneosx.png)
 
-[The Changelog](https://rsyncosx.github.io/RcloneChangelog).
+[Plase read the Changelog](https://rsyncosx.github.io/RcloneChangelog).
 
 The project is a adapting [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) utilizing [rclone](https://rclone.org/) for **synchronizing** and **backup** of files to a number of cloud services. RcloneOSX utilizes `rclone copy`, `sync`, `move` and `check` commands.
 
-RcloneOSX is compiled with support for macOS El Capitan version 10.11 - macOS Catalina 10.15. The application is implemented in Swift 5 by using Xcode 11.
+RcloneOSX is compiled with support for **macOS El Capitan version 10.11 - macOS Catalina 10.15**. The application is implemented in Swift 5 by using Xcode 11.
 
 RcloneOSX require the `rclone` command line utility to be installed. If installed in other directory than `/usr/local/bin`, please change directory by user configuration in RcloneOSX. RcloneOSX checks if there is a rclone installed in the provided directory. To use RcloneOSX require utilize rclone to setup and add configurations.
 
@@ -20,13 +20,11 @@ The application icon is created by [Zsolt Sándor](https://github.com/graphis). 
 
 ### Signing and notarizing
 
-The app is signed with my Apple ID developer certificate and [notarized](https://support.apple.com/en-us/HT202491) by Apple. See [signing and notarizing](https://rsyncosx.github.io/Notarized) for info.
+The app is signed with my Apple ID developer certificate and [notarized](https://support.apple.com/en-us/HT202491) by Apple. See [signing and notarizing](https://rsyncosx.github.io/Notarized) for info. Signing and notarizing is required to run on macOS Catalina.
 
-**Important**: from macOS 10.15 Catalina, notarization is required by default for all software.
+### About bugs
 
-### Fighting bugs
-
-Fighting bugs are difficult. I am not able to test RcloneOSX for all possible user interactions and use. From time to time I discover new bugs. But I also need support from other users discovering bugs or not expected results. If you discover a bug **please** use the [issues](https://github.com/rsyncOSX/rcloneosx/issues) and report it.
+Fighting bugs are difficult. I am not able to test RcloneOSX for all possible user interactions and use. From time to time I discover new bugs. But I also need support from other users discovering bugs or not expected results. If you discover a bug please use the [issues](https://github.com/rsyncOSX/rcloneosx/issues) and report it.
 
 ### Main view
 
