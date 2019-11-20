@@ -306,6 +306,21 @@ extension ViewControllerMain: ViewOutputDetails {
     }
 }
 
+extension ViewControllerMain: UpdateProgress {
+    func processTermination() {
+        guard self.outputprocess?.getOutput()?.count ?? 0 > 0 else { return }
+        let size = self.remoterclonesize(input: self.outputprocess!.getOutput()![0])
+        guard size != nil else { return }
+        self.remoteinfonumber.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.decimal))
+        self.remoteinfosize.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.bytes/1024), number: NumberFormatter.Style.decimal))
+        self.working.stopAnimation(nil)
+    }
+
+    func fileHandler() {
+        //
+    }
+}
+
 enum Color {
     case red
     case white
