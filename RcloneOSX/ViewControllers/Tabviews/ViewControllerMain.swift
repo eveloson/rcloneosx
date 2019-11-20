@@ -100,7 +100,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
             self.outputprocess = OutputProcess()
             self.working.startAnimation(nil)
             self.estimating.isHidden = false
-            // _ = RcloneSize(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
+            _ = RcloneSize(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)
         } else {
             self.info(num: 1)
         }
