@@ -9,10 +9,9 @@
 import Foundation
 
 final class RcloneVersionString: ProcessCmd {
-
     var outputprocess: OutputProcess?
 
-    init () {
+    init() {
         super.init(command: nil, arguments: ["--version"])
         self.outputprocess = OutputProcess()
         if ViewControllerReference.shared.norclone == false {

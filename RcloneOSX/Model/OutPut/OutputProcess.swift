@@ -20,7 +20,6 @@ enum Trim {
 }
 
 final class OutputProcess {
-
     private var output: [String]?
     private var trimmedoutput: [String]?
     private var startIndex: Int?
@@ -52,13 +51,13 @@ final class OutputProcess {
     }
 
     // Add line from output
-    func addlinefromoutput (_ str: String) {
+    func addlinefromoutput(_ str: String) {
         if self.startIndex == nil {
             self.startIndex = 0
         } else {
             self.startIndex = self.output!.count + 1
         }
-        str.enumerateLines { (line, _) in
+        str.enumerateLines { line, _ in
             self.output!.append(line)
         }
     }
@@ -86,11 +85,11 @@ final class OutputProcess {
             self.endIndex = out.count
             self.maxNumber = self.endIndex!
         case .three:
-            let services = self.output!.filter({$0.contains("[") && $0.contains("]")})
+            let services = self.output!.filter { $0.contains("[") && $0.contains("]") }
             guard services.count > 0 else {
                 return [""]
             }
-            for i in 0  ..< services.count {
+            for i in 0 ..< services.count {
                 let service = String(services[i].dropLast().dropFirst())
                 out.append(service)
             }
@@ -99,7 +98,7 @@ final class OutputProcess {
         return out
     }
 
-    init () {
+    init() {
         self.output = [String]()
     }
- }
+}

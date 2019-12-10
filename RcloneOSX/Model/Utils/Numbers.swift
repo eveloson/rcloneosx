@@ -24,7 +24,6 @@ enum EnumNumbers {
 }
 
 final class Numbers: SetConfigurations {
-
     private var output: [String]?
     // numbers after dryrun and stats
     var totNum: Int?
@@ -39,7 +38,7 @@ final class Numbers: SetConfigurations {
     var time: String?
 
     // Get numbers from rclone (dry run)
-    func getTransferredNumbers (numbers: EnumNumbers) -> Int {
+    func getTransferredNumbers(numbers: EnumNumbers) -> Int {
         switch numbers {
         case .totalDirs:
             return self.totDir ?? 0
@@ -49,10 +48,10 @@ final class Numbers: SetConfigurations {
             return Int(self.transferNum ?? "0") ?? 0
         case .totalNumberSizebytes:
             let size = self.totNumSize ?? 0
-            return Int(size/1024 )
+            return Int(size / 1024)
         case .transferredNumberSizebytes:
             let size = Int(self.transferNumSize ?? "0") ?? 0
-            return Int(size/1024)
+            return Int(size / 1024)
         case .new:
             let num = self.newfiles ?? 0
             return Int(num)
@@ -63,14 +62,14 @@ final class Numbers: SetConfigurations {
     }
 
     private func prepareresult() {
-        let transferred = self.output!.filter({(($0).contains("Transferred:"))})
-        let elapsedtime = self.output!.filter({(($0).contains("Elapsed time:"))})
-        guard transferred.count >= 2 && elapsedtime.count >= 1  else { return }
+        let transferred = self.output!.filter { ($0.contains("Transferred:")) }
+        let elapsedtime = self.output!.filter { ($0.contains("Elapsed time:")) }
+        guard transferred.count >= 2, elapsedtime.count >= 1 else { return }
         let indextransferred = transferred.count
         let indexelapsed = elapsedtime.count
-        let filesizessplit = transferred[indextransferred-2].components(separatedBy: " ").filter {$0.isEmpty == false && $0 != "Transferred:"}
-        let filenumberssplit = transferred[indextransferred-1].components(separatedBy: " ").filter {$0.isEmpty == false}
-        let elapstedtimesplit = elapsedtime[indexelapsed-1].components(separatedBy: " ").filter {$0.isEmpty == false}
+        let filesizessplit = transferred[indextransferred - 2].components(separatedBy: " ").filter { $0.isEmpty == false && $0 != "Transferred:" }
+        let filenumberssplit = transferred[indextransferred - 1].components(separatedBy: " ").filter { $0.isEmpty == false }
+        let elapstedtimesplit = elapsedtime[indexelapsed - 1].components(separatedBy: " ").filter { $0.isEmpty == false }
         if filenumberssplit.count > 1 {
             if ViewControllerReference.shared.rclone143 ?? false {
                 // ["Transferred:","5","/","5","100%"]
@@ -98,10 +97,10 @@ final class Numbers: SetConfigurations {
         let size = self.transferNumSize ?? "0"
         let byte = self.transferNumSizeByte ?? "bytes"
         let time = self.time ?? "0"
-        return  num + " files," + " " + size + " " + byte  + " in " + time
+        return num + " files," + " " + size + " " + byte + " in " + time
     }
 
-    init (outputprocess: OutputProcess?) {
+    init(outputprocess: OutputProcess?) {
         guard outputprocess != nil else { return }
         self.output = outputprocess!.getOutput()
         self.prepareresult()

@@ -23,7 +23,7 @@ struct Resources {
     private var documents: String = "https://rsyncosx.github.io/RcloneIntro"
     private var urlPlist: String = "https://raw.githubusercontent.com/rsyncOSX/rcloneosx/master/versionRcloneOSX/versionRcloneOSX.plist"
     // Get the resource.
-    func getResource (resource: ResourceType) -> String {
+    func getResource(resource: ResourceType) -> String {
         switch resource {
         case .changelog:
             return self.changelog
@@ -33,5 +33,4 @@ struct Resources {
             return self.urlPlist
         }
     }
-
 }

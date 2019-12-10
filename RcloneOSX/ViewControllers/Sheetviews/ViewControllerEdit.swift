@@ -6,27 +6,26 @@
 //  Copyright © 2016 Thomas Evensen. All rights reserved.
 //
 
-import Foundation
 import Cocoa
+import Foundation
 
 class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Index, Delay {
-
-    @IBOutlet weak var localCatalog: NSTextField!
-    @IBOutlet weak var offsiteCatalog: NSTextField!
-    @IBOutlet weak var cloudService: NSComboBox!
-    @IBOutlet weak var backupID: NSTextField!
+    @IBOutlet var localCatalog: NSTextField!
+    @IBOutlet var offsiteCatalog: NSTextField!
+    @IBOutlet var cloudService: NSComboBox!
+    @IBOutlet var backupID: NSTextField!
 
     var index: Int?
     var outputprocess: OutputProcess?
     var services: GetCloudServices?
 
     // Close and dismiss view
-    @IBAction func close(_ sender: NSButton) {
+    @IBAction func close(_: NSButton) {
         self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
     }
 
     // Update configuration, save and dismiss view
-    @IBAction func update(_ sender: NSButton) {
+    @IBAction func update(_: NSButton) {
         var config: [Configuration] = self.configurations!.getConfigurations()
         config[self.index!].localCatalog = self.localCatalog.stringValue
         config[self.index!].offsiteCatalog = self.offsiteCatalog.stringValue

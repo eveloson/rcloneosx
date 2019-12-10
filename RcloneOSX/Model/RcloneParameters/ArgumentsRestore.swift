@@ -9,14 +9,13 @@
 import Foundation
 
 final class ArgumentsRestore: RcloneParameters {
-
     var config: Configuration?
 
     func argumentsrestore(dryRun: Bool, forDisplay: Bool, tmprestore: Bool) -> [String] {
         self.rclonecommand(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
         self.remoteparameter(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
         if tmprestore {
-           self.localCatalog = ViewControllerReference.shared.restorePath ?? ""
+            self.localCatalog = ViewControllerReference.shared.restorePath ?? ""
         }
         self.offsiteparameter(config: self.config!, forDisplay: forDisplay)
         self.appendparameter(parameter: self.localCatalog, forDisplay: forDisplay)
@@ -24,7 +23,7 @@ final class ArgumentsRestore: RcloneParameters {
             self.dryrunparameter(config: self.config!, forDisplay: forDisplay)
         }
         self.setParameters2To14(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
-        return self.arguments ?? [""] 
+        return self.arguments ?? [""]
     }
 
     init(config: Configuration?) {

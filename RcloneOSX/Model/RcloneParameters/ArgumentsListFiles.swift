@@ -9,7 +9,6 @@
 import Foundation
 
 final class ArgumentsListFiles: RcloneParameters {
-
     var config: Configuration?
 
     func argumentsrclonelistfile() -> [String] {

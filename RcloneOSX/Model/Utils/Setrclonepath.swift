@@ -10,7 +10,6 @@
 import Foundation
 
 struct Setrclonepath {
-
     weak var setinfoaboutrcloneDelegate: Setinfoaboutrclone?
 
     init() {

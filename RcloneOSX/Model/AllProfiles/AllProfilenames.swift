@@ -9,7 +9,6 @@
 import Foundation
 
 class AllProfilenames {
-
     var allprofiles: [String]?
 
     private func getprofilenames() {

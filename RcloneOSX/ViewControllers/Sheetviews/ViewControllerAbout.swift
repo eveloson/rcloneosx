@@ -6,17 +6,16 @@
 //  Copyright © 2016 Thomas Evensen. All rights reserved.
 //
 
-import Foundation
 import Cocoa
+import Foundation
 
 class ViewControllerAbout: NSViewController, SetDismisser {
-
-    @IBOutlet weak var version: NSTextField!
-    @IBOutlet weak var downloadbutton: NSButton!
-    @IBOutlet weak var thereisanewversion: NSTextField!
-    @IBOutlet weak var rcloneversionstring: NSTextField!
-    @IBOutlet weak var copyright: NSTextField!
-    @IBOutlet weak var iconby: NSTextField!
+    @IBOutlet var version: NSTextField!
+    @IBOutlet var downloadbutton: NSButton!
+    @IBOutlet var thereisanewversion: NSTextField!
+    @IBOutlet var rcloneversionstring: NSTextField!
+    @IBOutlet var copyright: NSTextField!
+    @IBOutlet var iconby: NSTextField!
 
     var copyrigthstring: String = "Copyright © 2019 Thomas Evensen"
     var iconbystring: String = "Icon by: Zsolt Sándor"
@@ -24,7 +23,7 @@ class ViewControllerAbout: NSViewController, SetDismisser {
     // External resources as documents, download
     private var resource: Resources?
 
-    @IBAction func dismiss(_ sender: NSButton) {
+    @IBAction func dismiss(_: NSButton) {
         if (self.presentingViewController as? ViewControllerMain) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
         } else if (self.presentingViewController as? ViewControllerNewConfigurations) != nil {
@@ -38,21 +37,21 @@ class ViewControllerAbout: NSViewController, SetDismisser {
         }
     }
 
-    @IBAction func changelog(_ sender: NSButton) {
+    @IBAction func changelog(_: NSButton) {
         if let resource = self.resource {
             NSWorkspace.shared.open(URL(string: resource.getResource(resource: .changelog))!)
         }
         self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
     }
 
-    @IBAction func documentation(_ sender: NSButton) {
+    @IBAction func documentation(_: NSButton) {
         if let resource = self.resource {
             NSWorkspace.shared.open(URL(string: resource.getResource(resource: .documents))!)
         }
         self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
     }
 
-    @IBAction func download(_ sender: NSButton) {
+    @IBAction func download(_: NSButton) {
         guard ViewControllerReference.shared.URLnewVersion != nil else {
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
             return
@@ -83,15 +82,14 @@ class ViewControllerAbout: NSViewController, SetDismisser {
         super.viewDidDisappear()
         self.downloadbutton.isEnabled = false
     }
-
 }
 
 extension ViewControllerAbout: NewVersionDiscovered {
     // Notifies if new version is discovered
     func notifyNewVersion() {
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.downloadbutton.isEnabled = true
             self.thereisanewversion.stringValue = "New version available: "
-        })
+        }
     }
 }

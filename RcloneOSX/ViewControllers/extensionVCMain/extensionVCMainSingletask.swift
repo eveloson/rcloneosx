@@ -7,31 +7,30 @@
 //
 //  swiftlint:disable line_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 extension ViewControllerMain: SingleTaskProcess {
-
     func getProcessReference(process: Process) {
         self.process = process
     }
 
     func presentViewProgress() {
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerProgress!)
-        })
+        }
     }
 
     func presentViewInformation(outputprocess: OutputProcess?) {
         self.outputprocess = outputprocess
         if self.appendnow() {
-            globalMainQueue.async(execute: { () -> Void in
+            globalMainQueue.async { () -> Void in
                 self.mainTableView.reloadData()
-            })
+            }
         } else {
-            globalMainQueue.async(execute: { () -> Void in
+            globalMainQueue.async { () -> Void in
                 self.presentAsSheet(self.viewControllerInformation!)
-            })
+            }
         }
     }
 
@@ -54,13 +53,13 @@ extension ViewControllerMain: SingleTaskProcess {
     // Function for getting numbers out of output object updated when
     // Process object executes the job.
     func setNumbers(outputprocess: OutputProcess?) {
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             guard outputprocess != nil else {
                 self.totalNumber.stringValue = ""
                 return
             }
             let number = Numbers(outputprocess: outputprocess)
             self.totalNumber.stringValue = number.stats()
-        })
+        }
     }
 }

@@ -9,7 +9,6 @@
 import Foundation
 
 final class EstimateremoteInformationOnetask: SetConfigurations {
-
     init(index: Int, outputprocess: OutputProcess?, updateprogress: UpdateProgress) {
         let taskDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         let outDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain

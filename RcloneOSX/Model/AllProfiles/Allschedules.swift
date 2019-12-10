@@ -6,11 +6,10 @@
 //
 // swiftlint:disable line_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 class Allschedules {
-
     // Configurations object
     private var allschedules: [ConfigurationSchedule]?
     private var allprofiles: [String]?

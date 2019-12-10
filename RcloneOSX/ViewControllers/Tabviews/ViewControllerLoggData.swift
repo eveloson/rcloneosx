@@ -8,75 +8,74 @@
 //
 // swiftlint:disable line_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 protocol ReadLoggdata: class {
     func readloggdata()
 }
 
 class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules, Delay, Index, SetDismisser, VcMain, Abort, Checkforrclone {
-
     private var scheduleloggdata: ScheduleLoggData?
     private var row: NSDictionary?
     private var filterby: Sortandfilter?
     private var index: Int?
     private var sortedascending: Bool = true
 
-    @IBOutlet weak var scheduletable: NSTableView!
-    @IBOutlet weak var search: NSSearchField!
-    @IBOutlet weak var numberOflogfiles: NSTextField!
-    @IBOutlet weak var sortdirection: NSButton!
-    @IBOutlet weak var selectedrows: NSTextField!
-    @IBOutlet weak var info: NSTextField!
-    @IBOutlet weak var selectbutton: NSButton!
+    @IBOutlet var scheduletable: NSTableView!
+    @IBOutlet var search: NSSearchField!
+    @IBOutlet var numberOflogfiles: NSTextField!
+    @IBOutlet var sortdirection: NSButton!
+    @IBOutlet var selectedrows: NSTextField!
+    @IBOutlet var info: NSTextField!
+    @IBOutlet var selectbutton: NSButton!
 
-    @IBAction func totinfo(_ sender: NSButton) {
-       guard self.checkforrclone() == false else { return }
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func totinfo(_: NSButton) {
+        guard self.checkforrclone() == false else { return }
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
-        })
+        }
     }
 
-    @IBAction func quickbackup(_ sender: NSButton) {
-       guard self.checkforrclone() == false else { return }
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func quickbackup(_: NSButton) {
+        guard self.checkforrclone() == false else { return }
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
-        })
+        }
     }
 
-    @IBAction func information(_ sender: NSToolbarItem) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func information(_: NSToolbarItem) {
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerInformation!)
-        })
+        }
     }
 
     // Abort button
-    @IBAction func abort(_ sender: NSButton) {
+    @IBAction func abort(_: NSButton) {
         self.abort()
     }
 
     // Userconfig
-    @IBAction func userconfiguration(_ sender: NSToolbarItem) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func userconfiguration(_: NSToolbarItem) {
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerUserconfiguration!)
-        })
+        }
     }
 
     // Selecting profiles
-    @IBAction func profiles(_ sender: NSButton) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func profiles(_: NSButton) {
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerProfile!)
-        })
+        }
     }
 
     // Selecting About
-    @IBAction func about (_ sender: NSButton) {
+    @IBAction func about(_: NSButton) {
         self.presentAsModalWindow(self.viewControllerAbout!)
     }
 
     // Selecting automatic backup
-    @IBAction func automaticbackup (_ sender: NSButton) {
+    @IBAction func automaticbackup(_: NSButton) {
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
@@ -89,7 +88,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
         }
     }
 
-    @IBAction func sortdirection(_ sender: NSButton) {
+    @IBAction func sortdirection(_: NSButton) {
         if self.sortedascending == true {
             self.sortedascending = false
             self.sortdirection.image = #imageLiteral(resourceName: "down")
@@ -109,7 +108,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
         })
     }
 
-    @IBAction func selectalllogs(_ sender: NSButton) {
+    @IBAction func selectalllogs(_: NSButton) {
         guard self.scheduleloggdata!.loggdata != nil else { return }
         for i in 0 ..< self.scheduleloggdata!.loggdata!.count {
             if self.scheduleloggdata!.loggdata![i].value(forKey: "deleteCellID") as? Int == 1 {
@@ -124,7 +123,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
         })
     }
 
-    @IBAction func deletealllogs(_ sender: NSButton) {
+    @IBAction func deletealllogs(_: NSButton) {
         let answer = Alerts.dialogOKCancel("Delete " + self.selectednumber() + " logrecords?", text: "Cancel or OK")
         if answer {
             self.deselectrow()
@@ -133,7 +132,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
     }
 
     private func selectednumber() -> String {
-        let number = self.scheduleloggdata!.loggdata!.filter({($0.value(forKey: "deleteCellID") as? Int)! == 1}).count
+        let number = self.scheduleloggdata!.loggdata!.filter { ($0.value(forKey: "deleteCellID") as? Int)! == 1 }.count
         return String(number)
     }
 
@@ -159,9 +158,9 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
             self.info(num: 0)
             self.scheduleloggdata = ScheduleLoggData(sortascending: self.sortedascending)
         }
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.scheduletable.reloadData()
-        })
+        }
     }
 
     override func viewDidDisappear() {
@@ -178,8 +177,7 @@ class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules,
 }
 
 extension ViewControllerLoggData: NSSearchFieldDelegate {
-
-    func controlTextDidChange(_ obj: Notification) {
+    func controlTextDidChange(_: Notification) {
         self.delayWithSeconds(0.25) {
             let filterstring = self.search.stringValue
             self.selectbutton.state = .off
@@ -187,24 +185,22 @@ extension ViewControllerLoggData: NSSearchFieldDelegate {
                 self.reloadtabledata()
             } else {
                 self.scheduleloggdata!.myownfilter(search: filterstring, filterby: self.filterby)
-                globalMainQueue.async(execute: { () -> Void in
+                globalMainQueue.async { () -> Void in
                     self.scheduletable.reloadData()
-                })
+                }
             }
         }
     }
 
-    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+    func searchFieldDidEndSearching(_: NSSearchField) {
         self.index = nil
         self.reloadtabledata()
         self.selectbutton.state = .off
     }
-
 }
 
 extension ViewControllerLoggData: NSTableViewDataSource {
-
-    func numberOfRows(in tableView: NSTableView) -> Int {
+    func numberOfRows(in _: NSTableView) -> Int {
         if self.scheduleloggdata == nil {
             self.numberOflogfiles.stringValue = "Number of logs:"
             self.selectedrows.stringValue = "Selected logs: 0"
@@ -218,8 +214,7 @@ extension ViewControllerLoggData: NSTableViewDataSource {
 }
 
 extension ViewControllerLoggData: NSTableViewDelegate {
-
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+    func tableView(_: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         guard self.scheduleloggdata != nil else { return nil }
         guard row < self.scheduleloggdata!.loggdata!.count else { return nil }
         let object: NSDictionary = self.scheduleloggdata!.loggdata![row]
@@ -260,12 +255,12 @@ extension ViewControllerLoggData: NSTableViewDelegate {
         } else {
             self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbydate(notsortedlist: self.scheduleloggdata?.loggdata, sortdirection: self.sortedascending)
         }
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.scheduletable.reloadData()
-        })
+        }
     }
 
-    func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
+    func tableView(_: NSTableView, setObjectValue _: Any?, for tableColumn: NSTableColumn?, row: Int) {
         if tableColumn!.identifier.rawValue == "deleteCellID" {
             var delete: Int = (self.scheduleloggdata?.loggdata![row].value(forKey: "deleteCellID") as? Int)!
             if delete == 0 { delete = 1 } else if delete == 1 { delete = 0 }
@@ -283,7 +278,6 @@ extension ViewControllerLoggData: NSTableViewDelegate {
 }
 
 extension ViewControllerLoggData: Reloadandrefresh {
-
     func reloadtabledata() {
         if let index = self.index {
             let hiddenID = self.configurations?.gethiddenID(index: index) ?? -1
@@ -292,17 +286,17 @@ extension ViewControllerLoggData: Reloadandrefresh {
         } else {
             self.scheduleloggdata = ScheduleLoggData(sortascending: self.sortedascending)
         }
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.scheduletable.reloadData()
-        })
+        }
     }
 }
 
 extension ViewControllerLoggData: OpenQuickBackup {
     func openquickbackup() {
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
-        })
+        }
     }
 }
 
@@ -313,7 +307,7 @@ extension ViewControllerLoggData: DismissViewController {
 }
 
 extension ViewControllerLoggData: NewProfile {
-    func newProfile(profile: String?) {
+    func newProfile(profile _: String?) {
         self.reloadtabledata()
     }
 }

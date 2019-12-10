@@ -7,15 +7,14 @@
 //
 //  swiftlint:disable line_length file_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 protocol Updateremotefilelist: class {
     func updateremotefilelist()
 }
 
 class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMain, Checkforrclone {
-
     var copyfiles: CopyFiles?
     var remotefilelist: Remotefilelist?
     var rcloneindex: Int?
@@ -25,65 +24,65 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
     var outputprocess: OutputProcess?
     private var maxcount: Int = 0
 
-    @IBOutlet weak var numberofrows: NSTextField!
-    @IBOutlet weak var server: NSTextField!
-    @IBOutlet weak var rcatalog: NSTextField!
-    @IBOutlet weak var info: NSTextField!
-    @IBOutlet weak var restoretableView: NSTableView!
-    @IBOutlet weak var rclonetableView: NSTableView!
-    @IBOutlet weak var commandString: NSTextField!
-    @IBOutlet weak var remoteCatalog: NSTextField!
-    @IBOutlet weak var restorecatalog: NSTextField!
-    @IBOutlet weak var working: NSProgressIndicator!
-    @IBOutlet weak var search: NSSearchField!
-    @IBOutlet weak var restorebutton: NSButton!
+    @IBOutlet var numberofrows: NSTextField!
+    @IBOutlet var server: NSTextField!
+    @IBOutlet var rcatalog: NSTextField!
+    @IBOutlet var info: NSTextField!
+    @IBOutlet var restoretableView: NSTableView!
+    @IBOutlet var rclonetableView: NSTableView!
+    @IBOutlet var commandString: NSTextField!
+    @IBOutlet var remoteCatalog: NSTextField!
+    @IBOutlet var restorecatalog: NSTextField!
+    @IBOutlet var working: NSProgressIndicator!
+    @IBOutlet var search: NSSearchField!
+    @IBOutlet var restorebutton: NSButton!
 
-    @IBAction func totinfo(_ sender: NSButton) {
-       guard self.checkforrclone() == false else { return }
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func totinfo(_: NSButton) {
+        guard self.checkforrclone() == false else { return }
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
-        })
+        }
     }
 
-    @IBAction func quickbackup(_ sender: NSButton) {
-       guard self.checkforrclone() == false else { return }
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func quickbackup(_: NSButton) {
+        guard self.checkforrclone() == false else { return }
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
-        })
+        }
     }
 
-    @IBAction func information(_ sender: NSToolbarItem) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func information(_: NSToolbarItem) {
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerInformation!)
-        })
+        }
     }
 
     // Userconfig
-    @IBAction func userconfiguration(_ sender: NSToolbarItem) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func userconfiguration(_: NSToolbarItem) {
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerUserconfiguration!)
-        })
+        }
     }
 
     // Selecting profiles
-    @IBAction func profiles(_ sender: NSButton) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func profiles(_: NSButton) {
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerProfile!)
-        })
+        }
     }
 
     // Selecting About
-    @IBAction func about (_ sender: NSButton) {
+    @IBAction func about(_: NSButton) {
         self.presentAsModalWindow(self.viewControllerAbout!)
     }
 
     // Selecting automatic backup
-    @IBAction func automaticbackup (_ sender: NSButton) {
+    @IBAction func automaticbackup(_: NSButton) {
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
     // Abort button
-    @IBAction func abort(_ sender: NSButton) {
+    @IBAction func abort(_: NSButton) {
         self.working.stopAnimation(nil)
         guard self.copyfiles != nil else { return }
         self.restorebutton.isEnabled = true
@@ -104,8 +103,8 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
     }
 
     // Do the work
-    @IBAction func restore(_ sender: NSButton) {
-        guard self.remoteCatalog.stringValue.isEmpty == false &&
+    @IBAction func restore(_: NSButton) {
+        guard self.remoteCatalog.stringValue.isEmpty == false,
             self.restorecatalog.stringValue.isEmpty == false else {
             self.info(num: 3)
             return
@@ -131,10 +130,10 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
             return
         }
         let hiddenID = self.configurations!.gethiddenID(index: index!)
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.server.stringValue = self.configurations!.getResourceConfiguration(hiddenID: hiddenID, resource: .offsiteServer)
             self.rcatalog.stringValue = self.configurations!.getResourceConfiguration(hiddenID: hiddenID, resource: .remoteCatalog)
-        })
+        }
     }
 
     override func viewDidLoad() {
@@ -154,9 +153,9 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
     override func viewDidAppear() {
         super.viewDidAppear()
         guard self.diddissappear == false else {
-            globalMainQueue.async(execute: { () -> Void in
+            globalMainQueue.async { () -> Void in
                 self.rclonetableView.reloadData()
-            })
+            }
             return
         }
         if let restorePath = ViewControllerReference.shared.restorePath {
@@ -165,9 +164,9 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
             self.restorecatalog.stringValue = ""
         }
         self.verifylocalCatalog()
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.rclonetableView.reloadData()
-        })
+        }
     }
 
     override func viewDidDisappear() {
@@ -175,7 +174,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
         self.diddissappear = true
     }
 
-    @objc(tableViewDoubleClick:) func tableViewDoubleClick(sender: AnyObject) {
+    @objc(tableViewDoubleClick:) func tableViewDoubleClick(sender _: AnyObject) {
         guard self.remoteCatalog.stringValue.isEmpty == false else { return }
         guard self.restorecatalog.stringValue.isEmpty == false else { return }
         let answer = Alerts.dialogOKCancel("Copy single files or directory", text: "Start restore?")
@@ -212,7 +211,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
             if let index = indexes.first {
                 guard self.restoretabledata != nil else { return }
                 self.remoteCatalog.stringValue = self.restoretabledata![index]
-                guard self.remoteCatalog.stringValue.isEmpty == false && self.restorecatalog.stringValue.isEmpty == false else { return }
+                guard self.remoteCatalog.stringValue.isEmpty == false, self.restorecatalog.stringValue.isEmpty == false else { return }
                 self.commandString.stringValue = self.copyfiles!.getCommandDisplayinView(remotefile: self.remoteCatalog.stringValue, localCatalog: self.restorecatalog.stringValue)
                 self.estimated = false
                 self.restorebutton.title = "Estimate"
@@ -240,32 +239,31 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
             } else {
                 self.rcloneindex = nil
                 self.restoretabledata = nil
-                globalMainQueue.async(execute: { () -> Void in
+                globalMainQueue.async { () -> Void in
                     self.restoretableView.reloadData()
-                })
+                }
             }
         }
     }
 }
 
 extension ViewControllerCopyFiles: NSSearchFieldDelegate {
-
     func controlTextDidChange(_ notification: Notification) {
         if (notification.object as? NSTextField)! == self.search {
             self.delayWithSeconds(0.25) {
                 if self.search.stringValue.isEmpty {
-                    globalMainQueue.async(execute: { () -> Void in
+                    globalMainQueue.async { () -> Void in
                         if let index = self.rcloneindex {
                             if let hiddenID = self.configurations!.getConfigurationsSyncandCopy()![index].value(forKey: "hiddenID") as? Int {
                                 self.remotefilelist = Remotefilelist(hiddenID: hiddenID)
                             }
                         }
-                    })
+                    }
                 } else {
-                    globalMainQueue.async(execute: { () -> Void in
-                        self.restoretabledata = self.restoretabledata!.filter({$0.contains(self.search.stringValue)})
+                    globalMainQueue.async { () -> Void in
+                        self.restoretabledata = self.restoretabledata!.filter { $0.contains(self.search.stringValue) }
                         self.restoretableView.reloadData()
-                    })
+                    }
                 }
             }
             self.verifylocalCatalog()
@@ -281,7 +279,7 @@ extension ViewControllerCopyFiles: NSSearchFieldDelegate {
         }
     }
 
-    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+    func searchFieldDidEndSearching(_: NSSearchField) {
         if let index = self.rcloneindex {
             if self.configurations!.getConfigurationsSyncandCopy()![index].value(forKey: "hiddenID") as? Int != nil {
                 self.working.startAnimation(nil)
@@ -291,7 +289,6 @@ extension ViewControllerCopyFiles: NSSearchFieldDelegate {
 }
 
 extension ViewControllerCopyFiles: NSTableViewDataSource {
-
     func numberOfRows(in tableView: NSTableView) -> Int {
         if tableView == self.restoretableView {
             guard self.restoretabledata != nil else {
@@ -307,7 +304,6 @@ extension ViewControllerCopyFiles: NSTableViewDataSource {
 }
 
 extension ViewControllerCopyFiles: NSTableViewDelegate {
-
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if tableView == self.restoretableView {
             guard self.restoretabledata != nil else { return nil }
@@ -329,7 +325,7 @@ extension ViewControllerCopyFiles: NSTableViewDelegate {
 }
 
 extension ViewControllerCopyFiles: UpdateProgress {
-   func processTermination() {
+    func processTermination() {
         self.maxcount = self.outputprocess?.getMaxcount() ?? 0
         if let vc = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess {
             vc.processTermination()
@@ -367,28 +363,28 @@ extension ViewControllerCopyFiles: TemporaryRestorePath {
 }
 
 extension ViewControllerCopyFiles: NewProfile {
-    func newProfile(profile: String?) {
-        self.restoretabledata  = nil
-        globalMainQueue.async(execute: { () -> Void in
+    func newProfile(profile _: String?) {
+        self.restoretabledata = nil
+        globalMainQueue.async { () -> Void in
             self.restoretableView.reloadData()
-        })
+        }
     }
 }
 
 extension ViewControllerCopyFiles: OpenQuickBackup {
     func openquickbackup() {
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
-        })
+        }
     }
 }
 
 extension ViewControllerCopyFiles: Updateremotefilelist {
     func updateremotefilelist() {
         self.restoretabledata = self.remotefilelist?.remotefilelist
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.restoretableView.reloadData()
-        })
+        }
         self.working.stopAnimation(nil)
         self.remotefilelist = nil
     }

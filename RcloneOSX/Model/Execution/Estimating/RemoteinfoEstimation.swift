@@ -7,8 +7,8 @@
 //
 // swiftlint:disable line_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 protocol SetRemoteInfo: class {
     func setremoteinfo(remoteinfotask: RemoteinfoEstimation?)
@@ -76,7 +76,7 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
         guard self.records != nil else { return }
         self.configurations?.quickbackuplist = [Int]()
         for i in 0 ..< self.records!.count {
-            if self.records![i].value( forKey: "select") as? Int == 1 {
+            if self.records![i].value(forKey: "select") as? Int == 1 {
                 self.configurations?.quickbackuplist!.append((self.records![i].value(forKey: "hiddenID") as? Int)!)
             }
         }
@@ -115,7 +115,6 @@ extension RemoteinfoEstimation: CountRemoteEstimatingNumberoftasks {
 }
 
 extension RemoteinfoEstimation: UpdateProgress {
-
     func processTermination() {
         self.count = self.stackoftasktobeestimated?.count
         if self.estimatefiles {
@@ -131,7 +130,7 @@ extension RemoteinfoEstimation: UpdateProgress {
                 let size = self.remoterclonesize(input: self.outputprocess?.getOutput()?[0] ?? "")
                 NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal)
                 let totalNumber = String(NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal))
-                let totalNumberSizebytes = String(NumberFormatter.localizedString(from: NSNumber(value: size?.bytes ?? 0/1024), number: NumberFormatter.Style.decimal))
+                let totalNumberSizebytes = String(NumberFormatter.localizedString(from: NSNumber(value: size?.bytes ?? 0 / 1024), number: NumberFormatter.Style.decimal))
                 let index = self.records!.count - 1
                 self.records![index].setValue(totalNumber, forKey: "totalNumber")
                 self.records![index].setValue(totalNumberSizebytes, forKey: "totalNumberSizebytes")

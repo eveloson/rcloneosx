@@ -15,7 +15,6 @@ protocol ErrorOutput: class {
 }
 
 class ProcessCmd: Delay {
-
     // Number of calculated files to be copied
     var calculatedNumberOfFiles: Int = 0
     // Variable for reference to Process
@@ -38,7 +37,7 @@ class ProcessCmd: Delay {
         self.updateDelegate = object
     }
 
-    func executeProcess (outputprocess: OutputProcess?) {
+    func executeProcess(outputprocess: OutputProcess?) {
         // Process
         let task = Process()
         if let command = self.command {
@@ -55,7 +54,7 @@ class ProcessCmd: Delay {
         outHandle.waitForDataInBackgroundAndNotify()
         // Observator for reading data from pipe, observer is removed when Process terminates
         self.notifications_datahandle = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable,
-                            object: nil, queue: nil) { _ in
+                                                                               object: nil, queue: nil) { _ in
             let data = outHandle.availableData
             if data.count > 0 {
                 if let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
@@ -69,12 +68,12 @@ class ProcessCmd: Delay {
                         }
                     }
                 }
-            outHandle.waitForDataInBackgroundAndNotify()
+                outHandle.waitForDataInBackgroundAndNotify()
             }
         }
         // Observator Process termination, observer is removed when Process terminates
         self.notifications_termination = NotificationCenter.default.addObserver(forName: Process.didTerminateNotification,
-                            object: task, queue: nil) { _ in
+                                                                                object: task, queue: nil) { _ in
             self.delayWithSeconds(0.5) {
                 self.termination = true
                 self.updateDelegate?.processTermination()

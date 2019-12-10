@@ -10,8 +10,8 @@
 //  let str = "/Rclone/" + serialNumber + "/config.plist"
 //
 
-import Foundation
 import Cocoa
+import Foundation
 
 enum WhatToReadWrite {
     case schedule
@@ -21,7 +21,6 @@ enum WhatToReadWrite {
 }
 
 class ReadWriteDictionary {
-
     // Name set for schedule, configuration or config
     private var plistname: String?
     // key in objectForKey, e.g key for reading what
@@ -64,7 +63,7 @@ class ReadWriteDictionary {
     // Function for reading data from persistent store
     func readNSDictionaryFromPersistentStore() -> [NSDictionary]? {
         var data = [NSDictionary]()
-        guard self.filename != nil && self.key != nil else { return nil }
+        guard self.filename != nil, self.key != nil else { return nil }
         let dictionary = NSDictionary(contentsOfFile: self.filename!)
         let items: Any? = dictionary?.object(forKey: self.key!)
         guard items != nil else { return nil }
@@ -82,11 +81,11 @@ class ReadWriteDictionary {
     func writeNSDictionaryToPersistentStorage(array: [NSDictionary]) -> Bool {
         let dictionary = NSDictionary(object: array, forKey: self.key! as NSCopying)
         guard self.filename != nil else { return false }
-        return  dictionary.write(toFile: self.filename!, atomically: true)
+        return dictionary.write(toFile: self.filename!, atomically: true)
     }
 
     // Set preferences for which data to read or write
-    private func setpreferences (_ whattoreadwrite: WhatToReadWrite) {
+    private func setpreferences(_ whattoreadwrite: WhatToReadWrite) {
         self.whattoreadwrite = whattoreadwrite
         switch self.whattoreadwrite! {
         case .schedule:
@@ -109,5 +108,4 @@ class ReadWriteDictionary {
         self.setpreferences(whattoreadwrite)
         self.setnameandpath()
     }
-
 }

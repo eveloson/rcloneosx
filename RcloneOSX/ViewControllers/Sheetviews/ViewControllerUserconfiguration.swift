@@ -7,28 +7,27 @@
 //
 // swiftlint:disable line_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser, Delay, ChangeTemporaryRestorePath {
-
     var dirty: Bool = false
     weak var reloadconfigurationsDelegate: Createandreloadconfigurations?
     var oldmarknumberofdayssince: Double?
     var reload: Bool = false
 
-    @IBOutlet weak var version143rclone: NSButton!
-    @IBOutlet weak var rclonePath: NSTextField!
-    @IBOutlet weak var detailedlogging: NSButton!
-    @IBOutlet weak var noRclone: NSTextField!
-    @IBOutlet weak var restorePath: NSTextField!
-    @IBOutlet weak var minimumlogging: NSButton!
-    @IBOutlet weak var fulllogging: NSButton!
-    @IBOutlet weak var nologging: NSButton!
-    @IBOutlet weak var marknumberofdayssince: NSTextField!
-    @IBOutlet weak var savebutton: NSButton!
+    @IBOutlet var version143rclone: NSButton!
+    @IBOutlet var rclonePath: NSTextField!
+    @IBOutlet var detailedlogging: NSButton!
+    @IBOutlet var noRclone: NSTextField!
+    @IBOutlet var restorePath: NSTextField!
+    @IBOutlet var minimumlogging: NSButton!
+    @IBOutlet var fulllogging: NSButton!
+    @IBOutlet var nologging: NSButton!
+    @IBOutlet var marknumberofdayssince: NSTextField!
+    @IBOutlet var savebutton: NSButton!
 
-    @IBAction func toggleDetailedlogging(_ sender: NSButton) {
+    @IBAction func toggleDetailedlogging(_: NSButton) {
         if self.detailedlogging.state == .on {
             ViewControllerReference.shared.detailedlogging = true
         } else {
@@ -37,7 +36,7 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
         self.setdirty()
     }
 
-    @IBAction func close(_ sender: NSButton) {
+    @IBAction func close(_: NSButton) {
         if self.dirty {
             // Before closing save changed configuration
             _ = Setrclonepath(path: self.rclonePath.stringValue)
@@ -49,7 +48,6 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
                 self.reloadconfigurationsDelegate?.createandreloadconfigurations()
             }
             self.changetemporaryrestorepath()
-
         }
         if (self.presentingViewController as? ViewControllerMain) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
@@ -65,7 +63,7 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
         _ = RcloneVersionString()
     }
 
-    @IBAction func logging(_ sender: NSButton) {
+    @IBAction func logging(_: NSButton) {
         if self.fulllogging.state == .on {
             ViewControllerReference.shared.fulllogging = true
             ViewControllerReference.shared.minimumlogging = false
@@ -79,7 +77,7 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
         self.setdirty()
     }
 
-    @IBAction func setversion143rclone(_ sender: NSButton) {
+    @IBAction func setversion143rclone(_: NSButton) {
         if self.version143rclone.state == .on {
             ViewControllerReference.shared.rclone143 = true
         } else {
@@ -204,7 +202,6 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
 }
 
 extension ViewControllerUserconfiguration: NSTextFieldDelegate {
-
     func controlTextDidChange(_ notification: Notification) {
         delayWithSeconds(0.5) {
             self.setdirty()

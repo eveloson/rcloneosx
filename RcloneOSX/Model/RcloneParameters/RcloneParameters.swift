@@ -9,7 +9,6 @@
 import Foundation
 
 class RcloneParameters {
-
     var arguments: [String]?
     var localCatalog: String?
     var offsiteCatalog: String?
@@ -18,13 +17,13 @@ class RcloneParameters {
     var remoteargs: String?
 
     // Brute force, check every parameter, not special elegant, but it works
-    func rclonecommand(config: Configuration, dryRun: Bool, forDisplay: Bool) {
+    func rclonecommand(config: Configuration, dryRun _: Bool, forDisplay: Bool) {
         if config.parameter1 != nil {
             self.appendparameter(parameter: config.parameter1!, forDisplay: forDisplay)
         }
     }
 
-    func setParameters2To14(config: Configuration, dryRun: Bool, forDisplay: Bool) {
+    func setParameters2To14(config: Configuration, dryRun _: Bool, forDisplay: Bool) {
         if config.parameter2 != nil {
             self.appendparameter(parameter: config.parameter2!, forDisplay: forDisplay)
         }
@@ -62,12 +61,12 @@ class RcloneParameters {
             if config.parameter14! == SuffixstringsRcloneParameters().suffixstringdate {
                 self.appendparameter(parameter: self.setdatesuffixlocalhost(), forDisplay: forDisplay)
             } else {
-                 self.appendparameter(parameter: config.parameter14!, forDisplay: forDisplay)
+                self.appendparameter(parameter: config.parameter14!, forDisplay: forDisplay)
             }
         }
     }
 
-    func remoteparameter(config: Configuration, dryRun: Bool, forDisplay: Bool) {
+    func remoteparameter(config: Configuration, dryRun _: Bool, forDisplay _: Bool) {
         self.localCatalog = config.localCatalog
         self.offsiteCatalog = config.offsiteCatalog
         self.offsiteServer = config.offsiteServer
@@ -82,33 +81,33 @@ class RcloneParameters {
 
     func offsiteparameter(config: Configuration, forDisplay: Bool) {
         if self.offsiteServer!.isEmpty {
-            if forDisplay {self.arguments!.append(" ")}
+            if forDisplay { self.arguments!.append(" ") }
             self.arguments!.append(self.offsiteCatalog!)
         } else {
-            if forDisplay {self.arguments!.append(" ")}
+            if forDisplay { self.arguments!.append(" ") }
             self.arguments!.append(remoteargs!)
             if config.localCatalog.isEmpty == true {
-                if forDisplay {self.arguments!.append(" ")}
+                if forDisplay { self.arguments!.append(" ") }
                 self.arguments!.append(self.offsiteCatalog ?? "")
             }
-            if forDisplay {self.arguments!.append(" ")}
+            if forDisplay { self.arguments!.append(" ") }
         }
     }
 
     func setdatesuffixlocalhost() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "-yyyy-MM-dd"
-        return  "--suffix=" + formatter.string(from: Date())
+        return "--suffix=" + formatter.string(from: Date())
     }
 
     func dryrunparameter(config: Configuration, forDisplay: Bool) {
         let dryrun: String = config.dryrun
-        if forDisplay {self.arguments!.append(" ")}
+        if forDisplay { self.arguments!.append(" ") }
         self.arguments!.append(dryrun)
-        if forDisplay {self.arguments!.append(" ")}
+        if forDisplay { self.arguments!.append(" ") }
     }
 
-    func appendparameter (parameter: String?, forDisplay: Bool) {
+    func appendparameter(parameter: String?, forDisplay: Bool) {
         if parameter != nil {
             guard parameter?.count ?? -1 > 0 else { return }
             self.arguments?.append(parameter!)
@@ -118,7 +117,7 @@ class RcloneParameters {
         }
     }
 
-    init () {
+    init() {
         self.arguments = [String]()
     }
 }

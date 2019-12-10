@@ -23,5 +23,6 @@ struct SuffixstringsRcloneParameters {
         ("--exclude-from", 1),
         ("--no-traverse", 0),
         ("--no-gzip-encoding", 0),
-        ("--suffix", 1)]
+        ("--suffix", 1),
+    ]
 }

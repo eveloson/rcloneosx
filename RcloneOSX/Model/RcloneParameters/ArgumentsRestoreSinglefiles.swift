@@ -9,7 +9,6 @@
 import Foundation
 
 final class ArgumentsRestoreSinglefiles: RcloneParameters {
-
     var config: Configuration?
 
     func argumentsrclonerestore(dryRun: Bool, forDisplay: Bool) -> [String] {

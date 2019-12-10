@@ -66,7 +66,6 @@ extension FileerrorMessage {
 }
 
 class Files: ReportFileerror {
-
     var whatroot: WhichRoot?
     var rootpath: String?
     // config path either
@@ -93,7 +92,7 @@ class Files: ReportFileerror {
                 for i in 0 ..< fileURLs.count where fileURLs[i].hasDirectoryPath {
                     let path = fileURLs[i].pathComponents
                     let i = path.count
-                    array.append(path[i-1])
+                    array.append(path[i - 1])
                 }
                 return array
             }
@@ -118,9 +117,9 @@ class Files: ReportFileerror {
     }
 
     // Function for getting fileURLs for a given path
-    func getfileURLs (path: String) -> [URL]? {
+    func getfileURLs(path: String) -> [URL]? {
         let fileManager = FileManager.default
-        if let filepath = URL.init(string: path) {
+        if let filepath = URL(string: path) {
             do {
                 let files = try fileManager.contentsOfDirectory(at: filepath, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
                 return files
@@ -134,7 +133,7 @@ class Files: ReportFileerror {
         }
     }
 
-    init (whatroot: WhichRoot, configpath: String) {
+    init(whatroot: WhichRoot, configpath: String) {
         self.configpath = configpath
         self.whatroot = whatroot
         self.setrootpath()

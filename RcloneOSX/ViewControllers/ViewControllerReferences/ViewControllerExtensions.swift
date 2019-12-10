@@ -7,8 +7,8 @@
 //
 // swiftlint:disable line_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 protocol VcMain {
     var storyboard: NSStoryboard? { get }
@@ -117,6 +117,7 @@ extension VcMain {
 protocol DismissViewController: class {
     func dismiss_view(viewcontroller: NSViewController)
 }
+
 protocol SetDismisser {
     var dismissDelegateMain: DismissViewController? { get }
     var dismissDelegateNewConfigurations: DismissViewController? { get }
@@ -129,20 +130,24 @@ extension SetDismisser {
     var dismissDelegateMain: DismissViewController? {
         return ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
     }
+
     var dismissDelegateCopyFiles: DismissViewController? {
         return ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles
     }
+
     var dismissDelegateNewConfigurations: DismissViewController? {
         return ViewControllerReference.shared.getvcref(viewcontroller: .vcnewconfigurations) as? ViewControllerNewConfigurations
     }
+
     var dismissDelegateLoggData: DismissViewController? {
         return ViewControllerReference.shared.getvcref(viewcontroller: .vcloggdata) as? ViewControllerLoggData
     }
+
     var dismissDelegateRestore: DismissViewController? {
-           return ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
+        return ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
     }
 
-    func dismissview(viewcontroller: NSViewController, vcontroller: ViewController) {
+    func dismissview(viewcontroller _: NSViewController, vcontroller: ViewController) {
         if vcontroller == .vctabmain {
             self.dismissDelegateMain?.dismiss_view(viewcontroller: (self as? NSViewController)!)
         } else if vcontroller == .vccopyfiles {
@@ -163,7 +168,7 @@ protocol DeselectRowTable: class {
 }
 
 protocol Deselect {
-    var deselectDelegateMain: DeselectRowTable? {get}
+    var deselectDelegateMain: DeselectRowTable? { get }
 }
 
 extension Deselect {
@@ -177,7 +182,7 @@ extension Deselect {
 }
 
 protocol Index {
-     func index() -> Int?
+    func index() -> Int?
 }
 
 extension Index {
@@ -192,7 +197,6 @@ protocol Delay {
 }
 
 extension Delay {
-
     func delayWithSeconds(_ seconds: Double, completion: @escaping () -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
             completion()
@@ -212,7 +216,7 @@ extension Abort {
 }
 
 protocol GetOutput: class {
-    func getoutput () -> [String]
+    func getoutput() -> [String]
 }
 
 protocol OutPut {
@@ -264,6 +268,7 @@ extension ChangeTemporaryRestorePath {
 protocol Createandreloadconfigurations: class {
     func createandreloadconfigurations()
 }
+
 // Protocol for sorting
 protocol Sorting {
     func sortbydate(notsortedlist: [NSMutableDictionary]?, sortdirection: Bool) -> [NSMutableDictionary]?
@@ -329,7 +334,7 @@ protocol Remoterclonesize: class {
 extension Remoterclonesize {
     func remoterclonesize(input: String) -> Size? {
         let data: Data = input.data(using: String.Encoding.utf8)!
-        guard let size = try? JSONDecoder().decode(Size.self, from: data) else { return nil}
+        guard let size = try? JSONDecoder().decode(Size.self, from: data) else { return nil }
         return size
     }
 }

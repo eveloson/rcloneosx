@@ -5,11 +5,10 @@
 //  Copyright © 2016 Thomas Evensen. All rights reserved.
 //
 
-import Foundation
 import Cocoa
+import Foundation
 
 class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Delay, VcMain, Checkforrclone {
-
     var newconfigurations: NewConfigurations?
     var tabledata: [NSMutableDictionary]?
     let copycommand: String = ViewControllerReference.shared.copy
@@ -23,74 +22,74 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Dela
     var diddissappear: Bool = false
     var services: GetCloudServices?
 
-    @IBOutlet weak var viewParameter4: NSTextField!
-    @IBOutlet weak var localCatalog: NSTextField!
-    @IBOutlet weak var offsiteCatalog: NSTextField!
-    @IBOutlet weak var backupID: NSTextField!
-    @IBOutlet weak var empty: NSTextField!
-    @IBOutlet weak var profilInfo: NSTextField!
-    @IBOutlet weak var newTableView: NSTableView!
-    @IBOutlet weak var cloudService: NSComboBox!
+    @IBOutlet var viewParameter4: NSTextField!
+    @IBOutlet var localCatalog: NSTextField!
+    @IBOutlet var offsiteCatalog: NSTextField!
+    @IBOutlet var backupID: NSTextField!
+    @IBOutlet var empty: NSTextField!
+    @IBOutlet var profilInfo: NSTextField!
+    @IBOutlet var newTableView: NSTableView!
+    @IBOutlet var cloudService: NSComboBox!
 
-    @IBAction func totinfo(_ sender: NSButton) {
-       guard self.checkforrclone() == false else { return }
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func totinfo(_: NSButton) {
+        guard self.checkforrclone() == false else { return }
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
-        })
+        }
     }
 
-    @IBAction func quickbackup(_ sender: NSButton) {
-       guard self.checkforrclone() == false else { return }
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func quickbackup(_: NSButton) {
+        guard self.checkforrclone() == false else { return }
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
-        })
+        }
     }
 
-    @IBAction func information(_ sender: NSToolbarItem) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func information(_: NSToolbarItem) {
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerInformation!)
-        })
+        }
     }
 
     // Userconfig
-    @IBAction func userconfiguration(_ sender: NSToolbarItem) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func userconfiguration(_: NSToolbarItem) {
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerUserconfiguration!)
-        })
+        }
     }
 
     // Selecting profiles
-    @IBAction func profiles(_ sender: NSButton) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func profiles(_: NSButton) {
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerProfile!)
-        })
+        }
     }
 
     // Selecting About
-    @IBAction func about (_ sender: NSButton) {
+    @IBAction func about(_: NSButton) {
         self.presentAsModalWindow(self.viewControllerAbout!)
     }
 
     // Selecting automatic backup
-    @IBAction func automaticbackup (_ sender: NSButton) {
+    @IBAction func automaticbackup(_: NSButton) {
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
-    @IBAction func cleartable(_ sender: NSButton) {
+    @IBAction func cleartable(_: NSButton) {
         self.newconfigurations = nil
         self.newconfigurations = NewConfigurations()
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.newTableView.reloadData()
             self.setFields()
-        })
+        }
     }
 
-    @IBOutlet weak var copyradio: NSButton!
-    @IBOutlet weak var syncradio: NSButton!
-    @IBOutlet weak var moveradio: NSButton!
-    @IBOutlet weak var checkradio: NSButton!
+    @IBOutlet var copyradio: NSButton!
+    @IBOutlet var syncradio: NSButton!
+    @IBOutlet var moveradio: NSButton!
+    @IBOutlet var checkradio: NSButton!
 
-    @IBAction func choosecommand(_ sender: NSButton) {
+    @IBAction func choosecommand(_: NSButton) {
         if self.copyradio.state == .on {
             self.rclonecommand = self.copycommand
         } else if self.syncradio.state == .on {
@@ -141,7 +140,7 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Dela
         self.syncradio.state = .on
     }
 
-    @IBAction func addConfig(_ sender: NSButton) {
+    @IBAction func addConfig(_: NSButton) {
         guard self.cloudService.stringValue.isEmpty == false else {
             self.empty.isHidden = false
             return
@@ -156,30 +155,28 @@ class ViewControllerNewConfigurations: NSViewController, SetConfigurations, Dela
             "parameter2": self.verbose,
             "dryrun": self.dryrun,
             "dateRun": "",
-            "batch": 0]
+            "batch": 0,
+        ]
         dict.setValue(self.localCatalog.stringValue, forKey: "localCatalog")
         dict.setValue(self.offsiteCatalog.stringValue, forKey: "offsiteCatalog")
         self.configurations!.addNewConfigurations(dict: dict)
         self.newconfigurations?.appendnewConfigurations(dict: dict)
         self.tabledata = self.newconfigurations!.getnewConfigurations()
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.newTableView.reloadData()
-        })
+        }
         self.setFields()
     }
 }
 
 extension ViewControllerNewConfigurations: NSTableViewDataSource {
-
-    func numberOfRows(in tableView: NSTableView) -> Int {
+    func numberOfRows(in _: NSTableView) -> Int {
         return self.newconfigurations?.newConfigurationsCount() ?? 0
     }
-
 }
 
 extension ViewControllerNewConfigurations: NSTableViewDelegate {
-
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+    func tableView(_: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         guard self.newconfigurations?.getnewConfigurations() != nil else {
             return nil
         }
@@ -187,13 +184,12 @@ extension ViewControllerNewConfigurations: NSTableViewDelegate {
         return object[tableColumn!.identifier] as? String
     }
 
-    func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
+    func tableView(_: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
         self.tabledata![row].setObject(object!, forKey: (tableColumn?.identifier)! as NSCopying)
     }
 }
 
 extension ViewControllerNewConfigurations: DismissViewController {
-
     func dismiss_view(viewcontroller: NSViewController) {
         self.dismiss(viewcontroller)
     }
@@ -201,18 +197,18 @@ extension ViewControllerNewConfigurations: DismissViewController {
 
 extension ViewControllerNewConfigurations: SetProfileinfo {
     func setprofile(profile: String, color: NSColor) {
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.profilInfo.stringValue = profile
             self.profilInfo.textColor = color
-        })
+        }
     }
 }
 
 extension ViewControllerNewConfigurations: OpenQuickBackup {
     func openquickbackup() {
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
-        })
+        }
     }
 }
 

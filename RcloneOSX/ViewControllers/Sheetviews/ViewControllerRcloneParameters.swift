@@ -8,8 +8,8 @@
 //
 //  swiftlint:disable line_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 // protocol for returning if userparams is updated or not
 protocol RcloneUserParams: class {
@@ -23,32 +23,31 @@ protocol GetSelecetedIndex: class {
 }
 
 class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDismisser, Index {
-
     // var parameters: RcloneParameters?
     weak var userparamsupdatedDelegate: RcloneUserParams?
     var comboBoxValues = [String]()
     var diddissappear: Bool = false
 
-    @IBOutlet weak var param1: NSTextField!
-    @IBOutlet weak var param2: NSTextField!
+    @IBOutlet var param1: NSTextField!
+    @IBOutlet var param2: NSTextField!
     // user selected parameter
-    @IBOutlet weak var param8: NSTextField!
-    @IBOutlet weak var param9: NSTextField!
-    @IBOutlet weak var param10: NSTextField!
-    @IBOutlet weak var param11: NSTextField!
-    @IBOutlet weak var param12: NSTextField!
-    @IBOutlet weak var param13: NSTextField!
-    @IBOutlet weak var param14: NSTextField!
+    @IBOutlet var param8: NSTextField!
+    @IBOutlet var param9: NSTextField!
+    @IBOutlet var param10: NSTextField!
+    @IBOutlet var param11: NSTextField!
+    @IBOutlet var param12: NSTextField!
+    @IBOutlet var param13: NSTextField!
+    @IBOutlet var param14: NSTextField!
     // Comboboxes
-    @IBOutlet weak var combo8: NSComboBox!
-    @IBOutlet weak var combo9: NSComboBox!
-    @IBOutlet weak var combo10: NSComboBox!
-    @IBOutlet weak var combo11: NSComboBox!
-    @IBOutlet weak var combo12: NSComboBox!
-    @IBOutlet weak var combo13: NSComboBox!
-    @IBOutlet weak var combo14: NSComboBox!
+    @IBOutlet var combo8: NSComboBox!
+    @IBOutlet var combo9: NSComboBox!
+    @IBOutlet var combo10: NSComboBox!
+    @IBOutlet var combo11: NSComboBox!
+    @IBOutlet var combo12: NSComboBox!
+    @IBOutlet var combo13: NSComboBox!
+    @IBOutlet var combo14: NSComboBox!
 
-    @IBAction func close(_ sender: NSButton) {
+    @IBAction func close(_: NSButton) {
         self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
     }
 
@@ -100,7 +99,7 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
     }
 
     // Function for saving changed or new parameters for one configuration.
-    @IBAction func update(_ sender: NSButton) {
+    @IBAction func update(_: NSButton) {
         var configurations: [Configuration] = self.configurations!.getConfigurations()
         guard configurations.count > 0 else { return }
         if let index = self.index() {
@@ -143,8 +142,8 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
         }
     }
 
-    @IBOutlet weak var backupbutton: NSButton!
-    @IBAction func backup(_ sender: NSButton) {
+    @IBOutlet var backupbutton: NSButton!
+    @IBAction func backup(_: NSButton) {
         switch self.backupbutton.state {
         case .on:
             let hiddenID = self.configurations!.gethiddenID(index: (self.index())!)
@@ -152,24 +151,24 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
             let offsiteServer = self.configurations!.getResourceConfiguration(hiddenID: hiddenID, resource: .offsiteServer)
             let backup = offsiteServer + ":" + remoteCatalog + "_backup"
             self.param13.stringValue = backup
-            self.initcombox(combobox: self.combo13, index: (ComboboxRcloneParameters(config: nil).indexandvaluercloneparameter(parameter: "--backup-dir").0))
+            self.initcombox(combobox: self.combo13, index: ComboboxRcloneParameters(config: nil).indexandvaluercloneparameter(parameter: "--backup-dir").0)
         case .off:
-            self.initcombox(combobox: self.combo13, index: (0))
+            self.initcombox(combobox: self.combo13, index: 0)
             self.param13.stringValue = ""
-        default : break
+        default: break
         }
     }
 
-    @IBOutlet weak var suffixdatebutton: NSButton!
-    @IBAction func suffixdate(_ sender: NSButton) {
+    @IBOutlet var suffixdatebutton: NSButton!
+    @IBAction func suffixdate(_: NSButton) {
         switch self.suffixdatebutton.state {
         case .on:
             self.param14.stringValue = SuffixstringsRcloneParameters().suffixstringdate
-            self.initcombox(combobox: self.combo14, index: (ComboboxRcloneParameters(config: nil).indexandvaluercloneparameter(parameter: "--suffix").0))
+            self.initcombox(combobox: self.combo14, index: ComboboxRcloneParameters(config: nil).indexandvaluercloneparameter(parameter: "--suffix").0)
         case .off:
-            self.initcombox(combobox: self.combo14, index: (0))
+            self.initcombox(combobox: self.combo14, index: 0)
             self.param14.stringValue = ""
-        default : break
+        default: break
         }
     }
 }

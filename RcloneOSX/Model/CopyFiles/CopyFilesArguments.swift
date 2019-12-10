@@ -16,7 +16,6 @@ enum Enumscopyfiles {
 }
 
 final class CopyFilesArguments: SetConfigurations {
-
     private var arguments: [String]?
     private var argDisplaydryRun: [String]?
     private var argdryRun: [String]?
@@ -48,13 +47,13 @@ final class CopyFilesArguments: SetConfigurations {
                 arguments += self.argDisplaydryRun![i] + "/" + self.remotefile!
                 arguments += " " + self.localCatalog! + " "
             } else {
-               arguments += self.argDisplaydryRun![i]
+                arguments += self.argDisplaydryRun![i]
             }
         }
         return arguments
     }
 
-    init (task: Enumscopyfiles, config: Configuration, remotefile: String?, localCatalog: String?) {
+    init(task: Enumscopyfiles, config: Configuration, remotefile: String?, localCatalog: String?) {
         self.remotefile = remotefile
         self.localCatalog = localCatalog
         let index = self.configurations?.getIndex(hiddenID: config.hiddenID)

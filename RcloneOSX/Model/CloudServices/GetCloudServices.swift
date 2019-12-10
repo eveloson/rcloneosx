@@ -13,7 +13,6 @@ protocol Reloadcloudservices: class {
 }
 
 final class GetCloudServices: ProcessCmd {
-
     private var outputprocess: OutputProcess?
     var cloudservices: [String]?
     weak var reloadcloudservicesDelegate: Reloadcloudservices?

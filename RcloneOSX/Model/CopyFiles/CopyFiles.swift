@@ -11,7 +11,6 @@
 import Foundation
 
 final class CopyFiles: SetConfigurations {
-
     private var index: Int?
     private var config: Configuration?
     private var commandDisplay: String?
@@ -50,10 +49,9 @@ final class CopyFiles: SetConfigurations {
         return self.commandDisplay ?? " "
     }
 
-    init (hiddenID: Int) {
+    init(hiddenID: Int) {
         self.sendprocess = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         self.index = self.configurations?.getIndex(hiddenID: hiddenID)
         self.config = self.configurations!.getConfigurations()[self.index!]
     }
-
-  }
+}

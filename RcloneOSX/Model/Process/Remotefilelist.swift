@@ -11,7 +11,6 @@
 import Foundation
 
 class Remotefilelist: ProcessCmd, SetConfigurations {
-
     var outputprocess: OutputProcess?
     var config: Configuration?
     var remotefilelist: [String]?

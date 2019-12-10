@@ -14,7 +14,6 @@ struct Size: Decodable {
 }
 
 class RcloneSize: SetConfigurations {
-
     init(index: Int, outputprocess: OutputProcess?, updateprogress: UpdateProgress) {
         let taskDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         let cloudservice = self.configurations!.getConfigurations()[index].offsiteServer

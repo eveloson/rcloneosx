@@ -8,11 +8,10 @@
 //
 // swiftlint:disable line_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 class Schedules: ScheduleWriteLoggData {
-
     // Return reference to Schedule data
     // self.Schedule is privat data
     func getSchedule() -> [ConfigurationSchedule] {
@@ -40,7 +39,7 @@ class Schedules: ScheduleWriteLoggData {
 
     // Test if Schedule record in memory is set to delete or not
     private func delete(dict: NSDictionary) {
-         for i in 0 ..< self.schedules!.count {
+        for i in 0 ..< self.schedules!.count {
             if dict.value(forKey: "hiddenID") as? Int == self.schedules![i].hiddenID {
                 if dict.value(forKey: "dateStop") as? String == self.schedules![i].dateStop ||
                     self.schedules![i].dateStop == nil &&

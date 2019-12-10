@@ -16,14 +16,13 @@ protocol Count: class {
 }
 
 class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDismisser, Abort {
-
     var count: Double = 0
     var maxcount: Double = 0
     var calculatedNumberOfFiles: Int?
     weak var countDelegate: Count?
-    @IBOutlet weak var abort: NSButton!
+    @IBOutlet var abort: NSButton!
 
-    @IBAction func abort(_ sender: NSButton) {
+    @IBAction func abort(_: NSButton) {
         switch self.countDelegate {
         case is ViewControllerMain:
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
@@ -37,7 +36,7 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
         self.abort()
     }
 
-    @IBOutlet weak var progress: NSProgressIndicator!
+    @IBOutlet var progress: NSProgressIndicator!
 
     override func viewDidAppear() {
         super.viewDidAppear()
@@ -77,7 +76,6 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
 }
 
 extension ViewControllerProgressProcess: UpdateProgress {
-
     func processTermination() {
         self.stopProgressbar()
         switch self.countDelegate {
@@ -96,5 +94,4 @@ extension ViewControllerProgressProcess: UpdateProgress {
         guard self.countDelegate != nil else { return }
         self.updateProgressbar(Double(self.countDelegate!.inprogressCount()))
     }
-
 }
