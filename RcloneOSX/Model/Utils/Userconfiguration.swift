@@ -11,7 +11,6 @@ import Foundation
 
 // Reading userconfiguration from file into rcloneOSX
 final class Userconfiguration {
-
     weak var rclonechangedDelegate: RcloneIsChanged?
 
     private func readUserconfiguration(dict: NSDictionary) {
@@ -72,7 +71,7 @@ final class Userconfiguration {
         }
     }
 
-    init (userconfigrcloneOSX: [NSDictionary]) {
+    init(userconfigrcloneOSX: [NSDictionary]) {
         if userconfigrcloneOSX.count > 0 {
             self.readUserconfiguration(dict: userconfigrcloneOSX[0])
         }

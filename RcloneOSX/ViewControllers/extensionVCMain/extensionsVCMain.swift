@@ -7,14 +7,14 @@
 //
 // swiftlint:disable file_length line_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 // Get output from rclone command
 extension ViewControllerMain: GetOutput {
     // Get information from rclone output.
     func getoutput() -> [String] {
-       return (self.outputprocess?.trimoutput(trim: .two)) ?? []
+        return (self.outputprocess?.trimoutput(trim: .two)) ?? []
     }
 }
 
@@ -22,9 +22,9 @@ extension ViewControllerMain: GetOutput {
 extension ViewControllerMain: Reloadandrefresh {
     // Refresh tableView in main
     func reloadtabledata() {
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.mainTableView.reloadData()
-        })
+        }
     }
 }
 
@@ -56,9 +56,9 @@ extension ViewControllerMain: RcloneIsChanged {
 // Uuups, new version is discovered
 extension ViewControllerMain: NewVersionDiscovered {
     func notifyNewVersion() {
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.info(num: 5)
-        })
+        }
     }
 }
 
@@ -66,10 +66,10 @@ extension ViewControllerMain: NewVersionDiscovered {
 extension ViewControllerMain: DismissViewController {
     func dismiss_view(viewcontroller: NSViewController) {
         self.dismiss(viewcontroller)
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.mainTableView.reloadData()
             self.displayProfile()
-        })
+        }
         self.setinfoaboutrclone()
     }
 }
@@ -86,7 +86,7 @@ extension ViewControllerMain: DeselectRowTable {
 extension ViewControllerMain: RcloneError {
     func rcloneerror() {
         // Set on or off in user configuration
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.seterrorinfo(info: "Error")
             self.showrclonecommandmainview()
             self.deselect()
@@ -96,14 +96,14 @@ extension ViewControllerMain: RcloneError {
                 self.process = nil
             }
             self.singletask?.error()
-        })
+        }
     }
 }
 
 // If, for any reason, handling files or directory throws an error
 extension ViewControllerMain: Fileerror {
-    func errormessage(errorstr: String, errortype: Fileerrortype ) {
-        globalMainQueue.async(execute: { () -> Void in
+    func errormessage(errorstr: String, errortype: Fileerrortype) {
+        globalMainQueue.async { () -> Void in
             if errortype == .openlogfile {
                 self.rcloneCommand.stringValue = self.errordescription(errortype: errortype)
             } else if errortype == .filesize {
@@ -112,7 +112,7 @@ extension ViewControllerMain: Fileerror {
                 self.seterrorinfo(info: "Error")
                 self.rcloneCommand.stringValue = self.errordescription(errortype: errortype) + "\n" + errorstr
             }
-        })
+        }
     }
 }
 
@@ -129,7 +129,7 @@ extension ViewControllerMain: Abort {
             // Create workqueu and add abort
             self.seterrorinfo(info: "Abort")
             self.rcloneCommand.stringValue = ""
-            if self.configurations!.remoteinfoestimation != nil && self.configurations?.estimatedlist != nil {
+            if self.configurations!.remoteinfoestimation != nil, self.configurations?.estimatedlist != nil {
                 self.configurations!.remoteinfoestimation = nil
             }
         } else {
@@ -189,10 +189,10 @@ extension ViewControllerMain: GetSchedulesObject {
     func reloadschedulesobject() {
         guard self.configurations?.batchQueue == nil else {
             if self.configurations!.batchQueue?.batchruniscompleted() == true {
-            self.createandreloadschedules()
-            return
-        } else {
-            return
+                self.createandreloadschedules()
+                return
+            } else {
+                return
             }
         }
         self.createandreloadschedules()
@@ -229,9 +229,9 @@ extension ViewControllerMain: Createandreloadconfigurations {
     // func createandreloadconfigurations()
 }
 
-extension  ViewControllerMain: GetHiddenID {
+extension ViewControllerMain: GetHiddenID {
     func gethiddenID() -> Int {
-       guard self.index != nil else { return -1 }
+        guard self.index != nil else { return -1 }
         if let hiddenID = self.configurations?.gethiddenID(index: self.index!) {
             return hiddenID
         } else {
@@ -257,9 +257,9 @@ extension ViewControllerMain: NewProfile {
 
 extension ViewControllerMain: OpenQuickBackup {
     func openquickbackup() {
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
-        })
+        }
     }
 }
 
@@ -286,7 +286,6 @@ extension ViewControllerMain: Count {
 }
 
 extension ViewControllerMain: ViewOutputDetails {
-
     func getalloutput() -> [String] {
         return self.outputprocess?.getrawOutput() ?? []
     }
@@ -298,9 +297,9 @@ extension ViewControllerMain: ViewOutputDetails {
     }
 
     func appendnow() -> Bool {
-         if ViewControllerReference.shared.getvcref(viewcontroller: .vcalloutput) != nil {
+        if ViewControllerReference.shared.getvcref(viewcontroller: .vcalloutput) != nil {
             return true
-         } else {
+        } else {
             return false
         }
     }
@@ -312,7 +311,7 @@ extension ViewControllerMain: UpdateProgress {
         let size = self.remoterclonesize(input: self.outputprocess!.getOutput()![0])
         guard size != nil else { return }
         self.remoteinfonumber.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.decimal))
-        self.remoteinfosize.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.bytes/1024), number: NumberFormatter.Style.decimal))
+        self.remoteinfosize.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.bytes / 1024), number: NumberFormatter.Style.decimal))
         self.working.stopAnimation(nil)
     }
 
@@ -333,7 +332,6 @@ protocol Setcolor: class {
 }
 
 extension Setcolor {
-
     private func isDarkMode(view: NSView) -> Bool {
         if #available(OSX 10.14, *) {
             return view.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua

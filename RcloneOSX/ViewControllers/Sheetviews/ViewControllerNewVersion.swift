@@ -7,26 +7,25 @@
 //
 //  swiftlint:disable line_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 class ViewControllerNewVersion: NSViewController, SetDismisser {
-
     private var resource: Resources?
     var waitToClose: Timer?
     var closeIn: Timer?
     var seconds: Int?
 
-    @IBOutlet weak var reminder: NSButton!
-    @IBOutlet weak var closeinseconds: NSTextField!
+    @IBOutlet var reminder: NSButton!
+    @IBOutlet var closeinseconds: NSTextField!
 
-    @IBAction func changelogg(_ sender: NSButton) {
+    @IBAction func changelogg(_: NSButton) {
         if let resource = self.resource {
             NSWorkspace.shared.open(URL(string: resource.getResource(resource: .changelog))!)
         }
     }
 
-    @IBAction func download(_ sender: NSButton) {
+    @IBAction func download(_: NSButton) {
         guard ViewControllerReference.shared.URLnewVersion != nil else {
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
             return
@@ -43,9 +42,10 @@ class ViewControllerNewVersion: NSViewController, SetDismisser {
     @objc private func closeView() {
         self.waitToClose?.invalidate()
         self.closeIn?.invalidate()
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)    }
+        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+    }
 
-    @IBAction func dismiss(_ sender: NSButton) {
+    @IBAction func dismiss(_: NSButton) {
         self.waitToClose?.invalidate()
         self.closeIn?.invalidate()
         self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
@@ -63,5 +63,4 @@ class ViewControllerNewVersion: NSViewController, SetDismisser {
         self.closeIn = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(setSecondsView), userInfo: nil, repeats: true)
         self.closeinseconds.stringValue = "Close automatically in: 2 seconds"
     }
-
 }

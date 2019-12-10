@@ -10,7 +10,6 @@
 import Foundation
 
 class RemoteinfonumbersOnetask {
-
     var transferredNumber: String?
     var transferredNumberSizebytes: String?
     var totalNumber: String?
@@ -26,7 +25,8 @@ class RemoteinfonumbersOnetask {
             "totalNumber": self.totalNumber ?? "",
             "totalNumberSizebytes": self.totalNumberSizebytes ?? "",
             "totalDirs": self.totalDirs ?? "",
-            "newfiles": self.newfiles ?? ""]
+            "newfiles": self.newfiles ?? "",
+        ]
         dict.setValue(self.deletefiles ?? "", forKey: "deletefiles")
         dict.setValue(0, forKey: "backup")
         return dict

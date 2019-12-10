@@ -7,8 +7,8 @@
 //
 // swiftlint:disable cyclomatic_complexity
 
-import Foundation
 import Cocoa
+import Foundation
 
 enum ViewController {
     case vctabmain
@@ -27,9 +27,8 @@ enum ViewController {
 }
 
 class ViewControllerReference {
-
     // Creates a singelton of this class
-    class var  shared: ViewControllerReference {
+    class var shared: ViewControllerReference {
         struct Singleton {
             static let instance = ViewControllerReference()
         }
@@ -77,7 +76,7 @@ class ViewControllerReference {
     // If rclone version 1.43 or more
     var rclone143: Bool?
     // filsize logfile warning
-    var logfilesize: Int = 100000
+    var logfilesize: Int = 100_000
     // Mac serialnumer
     var macserialnumber: String?
     // Reference to main View

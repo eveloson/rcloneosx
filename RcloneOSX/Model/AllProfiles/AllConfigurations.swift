@@ -38,9 +38,9 @@ class AllConfigurations: Sorting {
 
     private func setConfigurationsDataSourcecountBackupSnapshot() {
         guard self.allconfigurations != nil else { return }
-        var configurations: [Configuration] = self.allconfigurations!.filter({return ($0.task == ViewControllerReference.shared.sync ||
-            $0.task == ViewControllerReference.shared.copy ||
-            $0.task == ViewControllerReference.shared.move)})
+        var configurations: [Configuration] = self.allconfigurations!.filter { ($0.task == ViewControllerReference.shared.sync ||
+                $0.task == ViewControllerReference.shared.copy ||
+                $0.task == ViewControllerReference.shared.move) }
         var data = [NSMutableDictionary]()
         for i in 0 ..< configurations.count {
             if configurations[i].offsiteServer.isEmpty == true {
@@ -57,7 +57,7 @@ class AllConfigurations: Sorting {
                 "dateExecuted": configurations[i].dateRun!,
                 "daysID": configurations[i].dayssincelastbackup ?? "",
                 "markdays": configurations[i].markdays,
-                "selectCellID": 0
+                "selectCellID": 0,
             ]
             data.append(row)
         }
@@ -66,14 +66,14 @@ class AllConfigurations: Sorting {
 
     // Function for filter
     func myownfilter(search: String?, filterby: Sortandfilter?) {
-        guard search != nil && self.allconfigurationsasdictionary != nil && filterby != nil else { return }
-        globalDefaultQueue.async(execute: {() -> Void in
+        guard search != nil, self.allconfigurationsasdictionary != nil, filterby != nil else { return }
+        globalDefaultQueue.async { () -> Void in
             let valueforkey = self.filterbystring(filterby: filterby!)
-            let filtereddata = self.allconfigurationsasdictionary?.filter({
+            let filtereddata = self.allconfigurationsasdictionary?.filter {
                 ($0.value(forKey: valueforkey) as? String)?.contains(search ?? "") ?? false
-            })
+            }
             self.allconfigurationsasdictionary = filtereddata
-        })
+        }
     }
 
     init() {

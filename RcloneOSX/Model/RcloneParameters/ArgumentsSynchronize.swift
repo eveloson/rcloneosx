@@ -9,7 +9,6 @@
 import Foundation
 
 final class ArgumentsSynchronize: RcloneParameters {
-
     var config: Configuration?
 
     func argumentssynchronize(dryRun: Bool, forDisplay: Bool) -> [String] {
@@ -21,12 +20,11 @@ final class ArgumentsSynchronize: RcloneParameters {
             self.dryrunparameter(config: self.config!, forDisplay: forDisplay)
         }
         self.setParameters2To14(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
-        return self.arguments ?? [""] 
+        return self.arguments ?? [""]
     }
 
     init(config: Configuration?) {
         super.init()
         self.config = config
     }
-
 }

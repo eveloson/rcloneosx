@@ -9,7 +9,6 @@
 import Foundation
 
 final class CompleteQuickbackupTask: SetConfigurations, SetSchedules {
-
     private var index: Int?
     private var hiddenID: Int?
     // Function for update result of quickbacuptask the job
@@ -20,7 +19,7 @@ final class CompleteQuickbackupTask: SetConfigurations, SetSchedules {
         self.schedulesDelegate?.reloadschedulesobject()
     }
 
-    init (dict: NSDictionary) {
+    init(dict: NSDictionary) {
         self.hiddenID = (dict.value(forKey: "hiddenID") as? Int)!
         self.index = self.configurations!.getIndex(hiddenID: hiddenID ?? -1)
     }

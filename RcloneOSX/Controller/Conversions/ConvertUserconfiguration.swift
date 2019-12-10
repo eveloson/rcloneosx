@@ -10,7 +10,6 @@
 import Foundation
 
 struct ConvertUserconfiguration {
-
     var userconfiguration: [NSMutableDictionary]?
 
     init() {
@@ -62,7 +61,8 @@ struct ConvertUserconfiguration {
             "minimumlogging": minimumlogging! as Int,
             "fulllogging": fulllogging! as Int,
             "marknumberofdayssince": marknumberofdayssince ?? "5.0",
-            "rclone143": rclone143! as Int]
+            "rclone143": rclone143! as Int,
+        ]
 
         if rclonePath != nil {
             dict.setObject(rclonePath!, forKey: "rclonePath" as NSCopying)

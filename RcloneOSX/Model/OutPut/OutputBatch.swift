@@ -9,10 +9,9 @@
 import Foundation
 
 class OutputBatch {
-
     var output: [String]?
 
-    func getOutput () -> [String] {
+    func getOutput() -> [String] {
         return self.output ?? [""]
     }
 
@@ -20,5 +19,4 @@ class OutputBatch {
         self.output = nil
         self.output = [String]()
     }
-
 }

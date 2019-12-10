@@ -13,11 +13,10 @@
 //
 // swiftlint:disable line_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 class Configurations: ReloadTable, SetSchedules {
-
     // reference to Process, used for kill in executing task
     var process: Process?
     private var profile: String?
@@ -79,12 +78,12 @@ class Configurations: ReloadTable, SetSchedules {
     /// - parameter none: none
     /// - returns : Array of NSMutableDictionary
     func getConfigurationsSyncandCopy() -> [NSMutableDictionary]? {
-        let configurations: [Configuration] = self.configurations!.filter({return ($0.task == ViewControllerReference.shared.copy || $0.task == ViewControllerReference.shared.sync )})
+        let configurations: [Configuration] = self.configurations!.filter { ($0.task == ViewControllerReference.shared.copy || $0.task == ViewControllerReference.shared.sync) }
         var data = [NSMutableDictionary]()
         for i in 0 ..< configurations.count {
             let row: NSMutableDictionary = ConvertOneConfig(config: self.configurations![i]).dict
             if self.quickbackuplist != nil {
-                let quickbackup = self.quickbackuplist!.filter({$0 == configurations[i].hiddenID})
+                let quickbackup = self.quickbackuplist!.filter { $0 == configurations[i].hiddenID }
                 if quickbackup.count > 0 {
                     row.setValue(1, forKey: "selectCellID")
                 }
@@ -97,7 +96,7 @@ class Configurations: ReloadTable, SetSchedules {
     /// Function returns all Configurations marked for backup.
     /// - returns : array of Configurations
     func getConfigurationsBatch() -> [Configuration] {
-        return self.configurations!.filter({return ($0.task == ViewControllerReference.shared.copy || $0.task == ViewControllerReference.shared.sync) && ($0.batch == 1)})
+        return self.configurations!.filter { ($0.task == ViewControllerReference.shared.copy || $0.task == ViewControllerReference.shared.sync) && ($0.batch == 1) }
     }
 
     /// Function computes arguments for rclone, either arguments for
@@ -178,7 +177,7 @@ class Configurations: ReloadTable, SetSchedules {
     /// then saves updated Configurations from memory to persistent store
     /// - parameter config: updated configuration
     /// - parameter index: index to Configuration to replace by config
-    func updateConfigurations (config: Configuration, index: Int) {
+    func updateConfigurations(config: Configuration, index: Int) {
         self.configurations![index] = config
         _ = PersistentStorageConfiguration(profile: self.profile).saveconfigInMemoryToPersistentStore()
     }
@@ -198,7 +197,7 @@ class Configurations: ReloadTable, SetSchedules {
     /// and stores Configuration i memory to
     /// persisten store
     /// - parameter index: index of Configuration to toogle batch on/off
-    func togglebatch (_ index: Int) {
+    func togglebatch(_ index: Int) {
         if self.configurations![index].batch == 1 {
             self.configurations![index].batch = 0
         } else {
@@ -234,7 +233,7 @@ class Configurations: ReloadTable, SetSchedules {
     }
 
     func getResourceConfiguration(hiddenID: Int, resource: ResourceInConfiguration) -> String {
-        let result = self.configurations!.filter({return ($0.hiddenID == hiddenID)})
+        let result = self.configurations!.filter { ($0.hiddenID == hiddenID) }
         guard result.count > 0 else { return "" }
         switch resource {
         case .localCatalog:

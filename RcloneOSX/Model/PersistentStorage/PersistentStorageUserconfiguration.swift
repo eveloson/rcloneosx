@@ -9,7 +9,6 @@
 import Foundation
 
 final class PersistentStorageUserconfiguration: ReadWriteDictionary {
-
     // Saving user configuration
     func saveuserconfiguration() {
         if let array: [NSDictionary] = ConvertUserconfiguration().userconfiguration {
@@ -17,19 +16,19 @@ final class PersistentStorageUserconfiguration: ReadWriteDictionary {
         }
     }
 
-    //func read userconfiguration
+    // func read userconfiguration
     func readuserconfiguration() -> [NSDictionary]? {
         return self.readNSDictionaryFromPersistentStore()
     }
 
     // Writing configuration to persistent store
     // Configuration is [NSDictionary]
-    private func writeToStore (array: [NSDictionary]) {
+    private func writeToStore(array: [NSDictionary]) {
         // Getting the object just for the write method, no read from persistent store
         _ = self.writeNSDictionaryToPersistentStorage(array: array)
     }
 
-    init () {
+    init() {
         super.init(whattoreadwrite: .userconfig, profile: nil, configpath: ViewControllerReference.shared.configpath)
     }
 }

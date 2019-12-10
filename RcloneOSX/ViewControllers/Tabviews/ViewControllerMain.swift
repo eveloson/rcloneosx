@@ -4,30 +4,29 @@
 //
 //  swiftlint:disable line_length type_body_length
 
-import Foundation
 import Cocoa
+import Foundation
 
 class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, FileerrorMessage, Remoterclonesize, Setcolor, Checkforrclone {
-
-    @IBOutlet weak var mainTableView: NSTableView!
+    @IBOutlet var mainTableView: NSTableView!
     // Progressbar indicating work
-    @IBOutlet weak var working: NSProgressIndicator!
-    @IBOutlet weak var estimating: NSTextField!
+    @IBOutlet var working: NSProgressIndicator!
+    @IBOutlet var estimating: NSTextField!
     // Displays the rcloneCommand
-    @IBOutlet weak var rcloneCommand: NSTextField!
+    @IBOutlet var rcloneCommand: NSTextField!
     // If On result of Dryrun is presented before
     // executing the real run
-    @IBOutlet weak var dryRunOrRealRun: NSTextField!
+    @IBOutlet var dryRunOrRealRun: NSTextField!
     // total number of files in remote volume
-    @IBOutlet weak var totalNumber: NSTextField!
+    @IBOutlet var totalNumber: NSTextField!
     // total size of files in remote volume
     // Showing info about profile
-    @IBOutlet weak var profilInfo: NSTextField!
+    @IBOutlet var profilInfo: NSTextField!
     // Showing info about double clik or not
-    @IBOutlet weak var rcloneversionshort: NSTextField!
-    @IBOutlet weak var remoteinfonumber: NSTextField!
-    @IBOutlet weak var remoteinfosize: NSTextField!
-    @IBOutlet weak var info: NSTextField!
+    @IBOutlet var rcloneversionshort: NSTextField!
+    @IBOutlet var remoteinfonumber: NSTextField!
+    @IBOutlet var remoteinfosize: NSTextField!
+    @IBOutlet var info: NSTextField!
 
     // Configurations object
     var configurations: Configurations?
@@ -42,59 +41,59 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     // Getting output from rclone
     var outputprocess: OutputProcess?
 
-    @IBAction func totinfo(_ sender: NSButton) {
+    @IBAction func totinfo(_: NSButton) {
         guard self.checkforrclone() == false else { return }
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
-        })
+        }
     }
 
-    @IBAction func quickbackup(_ sender: NSButton) {
+    @IBAction func quickbackup(_: NSButton) {
         guard self.checkforrclone() == false else { return }
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
-        })
+        }
     }
 
-    @IBAction func information(_ sender: NSToolbarItem) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func information(_: NSToolbarItem) {
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerInformation!)
-        })
+        }
     }
 
     // Abort button
-    @IBAction func abort(_ sender: NSButton) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func abort(_: NSButton) {
+        globalMainQueue.async { () -> Void in
             self.abortOperations()
             self.process = nil
-        })
+        }
     }
 
     // Userconfig
-    @IBAction func userconfiguration(_ sender: NSToolbarItem) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func userconfiguration(_: NSToolbarItem) {
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerUserconfiguration!)
-        })
+        }
     }
 
     // Selecting profiles
-    @IBAction func profiles(_ sender: NSButton) {
-        globalMainQueue.async(execute: { () -> Void in
+    @IBAction func profiles(_: NSButton) {
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerProfile!)
-        })
+        }
     }
 
     // Selecting About
-    @IBAction func about (_ sender: NSButton) {
+    @IBAction func about(_: NSButton) {
         self.presentAsModalWindow(self.viewControllerAbout!)
     }
 
     // Selecting automatic backup
-    @IBAction func automaticbackup (_ sender: NSButton) {
+    @IBAction func automaticbackup(_: NSButton) {
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
-    @IBAction func getremoteinfo(_ sender: NSButton) {
+    @IBAction func getremoteinfo(_: NSButton) {
         guard self.checkforrclone() == false else { return }
         if self.index != nil {
             self.outputprocess = OutputProcess()
@@ -106,29 +105,29 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         }
     }
 
-    @IBAction func edit(_ sender: NSButton) {
+    @IBAction func edit(_: NSButton) {
         self.reset()
         guard self.index != nil else {
             self.info(num: 1)
             return
         }
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.editViewController!)
-        })
+        }
     }
 
-    @IBAction func rcloneparams(_ sender: NSButton) {
+    @IBAction func rcloneparams(_: NSButton) {
         self.reset()
         guard self.index != nil else {
             self.info(num: 1)
             return
         }
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerRcloneParams!)
-        })
+        }
     }
 
-    @IBAction func delete(_ sender: NSButton) {
+    @IBAction func delete(_: NSButton) {
         guard self.index != nil else {
             self.info(num: 1)
             return
@@ -171,24 +170,24 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         self.setNumbers(outputprocess: nil)
     }
 
-    @IBAction func executetasknow(_ sender: NSButton) {
+    @IBAction func executetasknow(_: NSButton) {
         guard self.checkforrclone() == false else { return }
         guard self.index != nil else {
             self.info(num: 1)
             return
         }
         guard self.configurations!.getConfigurations()[self.index!].task != ViewControllerReference.shared.move ||
-        self.configurations!.getConfigurations()[self.index!].task != ViewControllerReference.shared.check else {
+            self.configurations!.getConfigurations()[self.index!].task != ViewControllerReference.shared.check else {
             return
         }
-         self.executetasknow = ExecuteTaskNow(index: self.index!)
+        self.executetasknow = ExecuteTaskNow(index: self.index!)
     }
 
     // Function for display rclone command
     // Either --dry-run or real run
-    @IBOutlet weak var displaysynccommand: NSButton!
-    @IBOutlet weak var displayRealRun: NSButton!
-    @IBAction func displayRcloneCommand(_ sender: NSButton) {
+    @IBOutlet var displaysynccommand: NSButton!
+    @IBOutlet var displayRealRun: NSButton!
+    @IBAction func displayRcloneCommand(_: NSButton) {
         self.showrclonecommandmainview()
     }
 
@@ -230,22 +229,22 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
             _ = Checkfornewversion()
         }
         if self.configurations!.configurationsDataSourcecount() > 0 {
-            globalMainQueue.async(execute: { () -> Void in
+            globalMainQueue.async { () -> Void in
                 self.mainTableView.reloadData()
-            })
+            }
         }
         self.rcloneischanged()
         self.displayProfile()
     }
 
     // Execute tasks by double click in table
-    @objc(tableViewDoubleClick:) func tableViewDoubleClick(sender: AnyObject) {
+    @objc(tableViewDoubleClick:) func tableViewDoubleClick(sender _: AnyObject) {
         self.executeSingleTask()
     }
 
     // Single task can be activated by double click from table
     func executeSingleTask() {
-       guard self.checkforrclone() == false else { return }
+        guard self.checkforrclone() == false else { return }
         guard self.index != nil else { return }
         guard self.singletask != nil else {
             // Dry run
@@ -257,13 +256,13 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         self.singletask?.executeSingleTask()
     }
 
-    @IBAction func executeBatch(_ sender: NSToolbarItem) {
-       guard self.checkforrclone() == false else { return }
+    @IBAction func executeBatch(_: NSToolbarItem) {
+        guard self.checkforrclone() == false else { return }
         self.setNumbers(outputprocess: nil)
         self.deselect()
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerBatch!)
-        })
+        }
     }
 
     // Function for setting profile
@@ -276,7 +275,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
             self.profilInfo.stringValue = "Profile: default"
             self.profilInfo.textColor = setcolor(nsviewcontroller: self, color: .green)
         }
-        localprofileinfo = ViewControllerReference.shared.getvcref(viewcontroller: .vcnewconfigurations ) as? ViewControllerNewConfigurations
+        localprofileinfo = ViewControllerReference.shared.getvcref(viewcontroller: .vcnewconfigurations) as? ViewControllerNewConfigurations
         localprofileinfo?.setprofile(profile: self.profilInfo.stringValue, color: self.profilInfo.textColor!)
         self.showrclonecommandmainview()
     }
@@ -292,7 +291,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         guard size != nil else { return }
         NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.decimal)
         self.remoteinfonumber.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.decimal))
-        self.remoteinfosize.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.bytes/1024), number: NumberFormatter.Style.decimal))
+        self.remoteinfosize.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.bytes / 1024), number: NumberFormatter.Style.decimal))
     }
 
     func createandreloadschedules() {
@@ -322,9 +321,9 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
             self.configurations = nil
             self.configurations = Configurations(profile: nil)
         }
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.mainTableView.reloadData()
-        })
+        }
         if let reloadDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcallprofiles) as? ViewControllerAllProfiles {
             reloadDelegate.reloadtable()
         }

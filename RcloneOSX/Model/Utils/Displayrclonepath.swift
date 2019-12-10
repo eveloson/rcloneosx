@@ -18,7 +18,6 @@ protocol Setinfoaboutrclone: class {
 }
 
 final class Displayrclonepath: SetConfigurations {
-
     var rclonepath: String?
 
     init(index: Int, display: RclonecommandDisplay) {
