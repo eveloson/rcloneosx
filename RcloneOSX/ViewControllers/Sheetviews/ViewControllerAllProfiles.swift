@@ -41,9 +41,9 @@ class ViewControllerAllProfiles: NSViewController, Delay {
         default:
             self.allprofiles?.allconfigurationsasdictionary = self.allprofiles!.sortbystring(notsortedlist: self.allprofiles?.allconfigurationsasdictionary, sortby: self.filterby!, sortdirection: self.sortascending)
         }
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.mainTableView.reloadData()
-        })
+        }
     }
 
     override func viewDidLoad() {
