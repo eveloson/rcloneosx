@@ -213,9 +213,9 @@ extension ViewControllerBatch: UpdateProgress {
         if self.batchisrunning == false {
             self.updateProgressbar()
         }
-        globalMainQueue.async(execute: { () -> Void in
+        globalMainQueue.async { () -> Void in
             self.mainTableView.reloadData()
-        })
+        }
     }
 
     func fileHandler() {
