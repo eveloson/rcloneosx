@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Reloadcloudservices: class {
+protocol Reloadcloudservices: AnyObject {
     func reloadcloudservices()
 }
 

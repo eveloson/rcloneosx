@@ -114,7 +114,7 @@ extension VcMain {
 }
 
 // Protocol for dismissing a viewcontroller
-protocol DismissViewController: class {
+protocol DismissViewController: AnyObject {
     func dismiss_view(viewcontroller: NSViewController)
 }
 
@@ -163,7 +163,7 @@ extension SetDismisser {
 }
 
 // Protocol for deselecting rowtable
-protocol DeselectRowTable: class {
+protocol DeselectRowTable: AnyObject {
     func deselect()
 }
 
@@ -215,7 +215,7 @@ extension Abort {
     }
 }
 
-protocol GetOutput: class {
+protocol GetOutput: AnyObject {
     func getoutput() -> [String]
 }
 
@@ -233,7 +233,7 @@ extension OutPut {
     }
 }
 
-protocol RcloneIsChanged: class {
+protocol RcloneIsChanged: AnyObject {
     func rcloneischanged()
 }
 
@@ -248,7 +248,7 @@ extension NewRclone {
     }
 }
 
-protocol TemporaryRestorePath: class {
+protocol TemporaryRestorePath: AnyObject {
     func temporaryrestorepath()
 }
 
@@ -265,7 +265,7 @@ extension ChangeTemporaryRestorePath {
     }
 }
 
-protocol Createandreloadconfigurations: class {
+protocol Createandreloadconfigurations: AnyObject {
     func createandreloadconfigurations()
 }
 
@@ -327,7 +327,7 @@ extension Sorting {
     }
 }
 
-protocol Remoterclonesize: class {
+protocol Remoterclonesize: AnyObject {
     func remoterclonesize(input: String) -> Size?
 }
 

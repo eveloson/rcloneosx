@@ -11,7 +11,7 @@
 import Cocoa
 import Foundation
 
-protocol ReadLoggdata: class {
+protocol ReadLoggdata: AnyObject {
     func readloggdata()
 }
 
