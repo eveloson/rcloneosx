@@ -10,7 +10,7 @@
 import Cocoa
 import Foundation
 
-protocol Updateremotefilelist: class {
+protocol Updateremotefilelist: AnyObject {
     func updateremotefilelist()
 }
 

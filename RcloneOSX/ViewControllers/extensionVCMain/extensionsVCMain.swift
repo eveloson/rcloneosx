@@ -327,7 +327,7 @@ enum Color {
     case black
 }
 
-protocol Setcolor: class {
+protocol Setcolor: AnyObject {
     func setcolor(nsviewcontroller: NSViewController, color: Color) -> NSColor
 }
 
@@ -366,7 +366,7 @@ extension Setcolor {
     }
 }
 
-protocol Checkforrclone: class {
+protocol Checkforrclone: AnyObject {
     func checkforrclone() -> Bool
 }
 
@@ -392,7 +392,7 @@ extension ViewControllerMain: SendProcessreference {
 }
 
 // Protocol for start,stop, complete progressviewindicator
-protocol StartStopProgressIndicator: class {
+protocol StartStopProgressIndicator: AnyObject {
     func start()
     func stop()
     func complete()
@@ -400,22 +400,22 @@ protocol StartStopProgressIndicator: class {
 
 // Protocol for either completion of work or update progress when Process discovers a
 // process termination and when filehandler discover data
-protocol UpdateProgress: class {
+protocol UpdateProgress: AnyObject {
     func processTermination()
     func fileHandler()
 }
 
-protocol ViewOutputDetails: class {
+protocol ViewOutputDetails: AnyObject {
     func reloadtable()
     func appendnow() -> Bool
     func getalloutput() -> [String]
 }
 
 // Protocol for getting the hiddenID for a configuration
-protocol GetHiddenID: class {
+protocol GetHiddenID: AnyObject {
     func gethiddenID() -> Int
 }
 
-protocol SetProfileinfo: class {
+protocol SetProfileinfo: AnyObject {
     func setprofile(profile: String, color: NSColor)
 }

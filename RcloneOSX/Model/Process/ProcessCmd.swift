@@ -10,7 +10,7 @@
 
 import Foundation
 
-protocol ErrorOutput: class {
+protocol ErrorOutput: AnyObject {
     func erroroutput()
 }
 

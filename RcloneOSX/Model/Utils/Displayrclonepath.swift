@@ -13,7 +13,7 @@ enum RclonecommandDisplay {
     case restore
 }
 
-protocol Setinfoaboutrclone: class {
+protocol Setinfoaboutrclone: AnyObject {
     func setinfoaboutrclone()
 }
 

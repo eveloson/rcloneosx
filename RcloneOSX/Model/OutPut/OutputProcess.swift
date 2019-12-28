@@ -9,7 +9,7 @@
 
 import Foundation
 
-protocol RcloneError: class {
+protocol RcloneError: AnyObject {
     func rcloneerror()
 }
 
