@@ -6,7 +6,7 @@
 
 The project is a adapting [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) utilizing [rclone](https://rclone.org/) for **synchronizing** and **backup** of files to a number of cloud services. RcloneOSX utilizes `rclone copy`, `sync`, `move` and `check` commands.
 
-RcloneOSX is compiled with support for **macOS El Capitan version 10.11 - macOS Catalina 10.15**. The application is implemented in Swift 5 by using Xcode 11.
+RcloneOSX is compiled with support for **macOS El Capitan version 10.11 - macOS Catalina 10.15**. The application is implemented in pure Swift 5 (Cocoa and Foundation).
 
 RcloneOSX require the `rclone` command line utility to be installed. If installed in other directory than `/usr/local/bin`, please change directory by user configuration in RcloneOSX. RcloneOSX checks if there is a rclone installed in the provided directory. To use RcloneOSX require utilize rclone to setup and add configurations.
 
