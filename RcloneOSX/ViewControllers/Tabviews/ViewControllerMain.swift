@@ -27,6 +27,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     @IBOutlet var remoteinfonumber: NSTextField!
     @IBOutlet var remoteinfosize: NSTextField!
     @IBOutlet var info: NSTextField!
+    @IBOutlet var profilepopupbutton: NSPopUpButton!
 
     // Configurations object
     var configurations: Configurations?
@@ -235,6 +236,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         }
         self.rcloneischanged()
         self.displayProfile()
+        self.initpopupbutton(button: self.profilepopupbutton)
     }
 
     // Execute tasks by double click in table
@@ -327,5 +329,22 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         if let reloadDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcallprofiles) as? ViewControllerAllProfiles {
             reloadDelegate.reloadtable()
         }
+    }
+
+    private func initpopupbutton(button: NSPopUpButton) {
+        var profilestrings: [String]?
+        profilestrings = CatalogProfile().getDirectorysStrings()
+        profilestrings?.insert(NSLocalizedString("Default profile", comment: "default profile"), at: 0)
+        button.removeAllItems()
+        button.addItems(withTitles: profilestrings ?? [])
+        button.selectItem(at: 0)
+    }
+
+    @IBAction func selectprofile(_: NSButton) {
+        var profile = self.profilepopupbutton.titleOfSelectedItem
+        if profile == NSLocalizedString("Default profile", comment: "default profile") {
+            profile = nil
+        }
+        _ = Selectprofile(profile: profile)
     }
 }
