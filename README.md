@@ -16,7 +16,7 @@ I am not an advanced user of `rclone` and my use of RcloneOSX is **synchronizing
 
 ### Where to start utilizing RcloneOSX
 
-To start utilizing RcloneOSX first of all add configurations by command line `rclone config`. When RcloneOSX starts it pick up configurations added by rclone. Rclone configurations must be stored in standard configuration catalog e.g. `/Users/thomas/.config/rclone` and **not** encrypted config.
+To start utilizing RcloneOSX first of all add configurations by command line `rclone config`. When RcloneOSX starts it pick up configurations added by rclone. Rclone configurations must be stored in standard configuration catalog e.g. `/Users/thomas/.config/rclone` and **not** encrypted.
 
 After adding configurations start RcloneOSX and go to Add tab. Add catalogs and you are ready for synchronizing.
 
