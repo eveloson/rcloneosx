@@ -143,18 +143,12 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
         guard self.diddissappear == false else { return }
         self.restorebutton.isEnabled = false
         self.estimatebutton.isEnabled = false
-        self.settmp()
+        self.setrestorepath()
     }
 
     override func viewDidDisappear() {
         super.viewDidDisappear()
         self.diddissappear = true
-    }
-
-    private func settmp() {
-        let setuserconfig: String = NSLocalizedString(" ... set in User configuration ...", comment: "Restore")
-        self.tmprestore.stringValue = ViewControllerReference.shared.restorePath ?? setuserconfig
-        if (ViewControllerReference.shared.restorePath ?? "").isEmpty == true {}
     }
 
     private func setNumbers(outputprocess: OutputProcess?) {
@@ -199,12 +193,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
         return work
     }
 
-    @IBAction func toggletmprestore(_: NSButton) {
-        self.estimatebutton.isEnabled = true
-        self.restorebutton.isEnabled = false
-        self.workqueue = nil
-    }
-
     // setting which table row is selected
     func tableViewSelectionDidChange(_ notification: Notification) {
         let myTableViewFromNotification = (notification.object as? NSTableView)!
@@ -216,7 +204,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
             self.estimatebutton.isEnabled = false
             self.index = nil
         }
-        self.restorebutton.isEnabled = false
+        self.setrestorepath()
         self.workqueue = nil
         self.gotit.isHidden = true
     }
@@ -292,9 +280,14 @@ extension ViewControllerRestore: Count {
     }
 }
 
-extension ViewControllerRestore: TemporaryRestorePath {
-    func temporaryrestorepath() {
-        self.settmp()
+extension ViewControllerRestore: Setrestorepath {
+    func setrestorepath() {
+        let setuserconfig: String = NSLocalizedString(" ... set in User configuration ...", comment: "Restore")
+        self.tmprestore.stringValue = ViewControllerReference.shared.restorePath ?? setuserconfig
+        if (ViewControllerReference.shared.restorePath ?? "").isEmpty == true {
+            self.restorebutton.isEnabled = false
+            self.estimatebutton.isEnabled = false
+        }
     }
 }
 

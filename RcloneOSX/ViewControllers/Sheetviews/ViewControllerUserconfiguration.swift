@@ -10,7 +10,7 @@
 import Cocoa
 import Foundation
 
-class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser, Delay, ChangeTemporaryRestorePath {
+class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser, Delay, ChangeRestorePath {
     var dirty: Bool = false
     weak var reloadconfigurationsDelegate: Createandreloadconfigurations?
     var oldmarknumberofdayssince: Double?
@@ -47,7 +47,7 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
             if self.reload {
                 self.reloadconfigurationsDelegate?.createandreloadconfigurations()
             }
-            self.changetemporaryrestorepath()
+            self.changerestorepath()
         }
         if (self.presentingViewController as? ViewControllerMain) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)

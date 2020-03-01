@@ -248,20 +248,20 @@ extension NewRclone {
     }
 }
 
-protocol TemporaryRestorePath: AnyObject {
-    func temporaryrestorepath()
+protocol Setrestorepath: AnyObject {
+    func setrestorepath()
 }
 
-protocol ChangeTemporaryRestorePath {
-    func changetemporaryrestorepath()
+protocol ChangeRestorePath {
+    func changerestorepath()
 }
 
-extension ChangeTemporaryRestorePath {
-    func changetemporaryrestorepath() {
+extension ChangeRestorePath {
+    func changerestorepath() {
         let view = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles
-        view?.temporaryrestorepath()
+        view?.setrestorepath()
         let view2 = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
-        view2?.temporaryrestorepath()
+        view2?.setrestorepath()
     }
 }
 

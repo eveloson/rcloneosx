@@ -351,8 +351,8 @@ extension ViewControllerCopyFiles: DismissViewController {
     }
 }
 
-extension ViewControllerCopyFiles: TemporaryRestorePath {
-    func temporaryrestorepath() {
+extension ViewControllerCopyFiles: Setrestorepath {
+    func setrestorepath() {
         if let restorePath = ViewControllerReference.shared.restorePath {
             self.restorecatalog.stringValue = restorePath
         } else {
