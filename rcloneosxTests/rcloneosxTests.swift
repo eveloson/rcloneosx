@@ -22,7 +22,7 @@ class RcloneosxTests: XCTestCase, SetConfigurations {
     }
 
     func testnumberofargumentstorsync() {
-        let count = self.configurations?.arguments4rclone(index: 0, argtype: .argdryRun).count
+        let count = self.configurations?.arguments4rclone(index: 0, argtype: .argdryrun).count
         XCTAssertEqual(count, 6, "Should be equal to 6")
     }
 
@@ -35,7 +35,7 @@ class RcloneosxTests: XCTestCase, SetConfigurations {
         let arguments = ["sync", "/Users/thomas/Documents", "localencrypt:",
                          "--dry-run", "--verbose",
                          "--exclude-from=/Users/thomas/excludersync/exclude_rclone.txt"]
-        XCTAssertEqual(arguments, self.configurations?.arguments4rclone(index: 0, argtype: .argdryRun),
+        XCTAssertEqual(arguments, self.configurations?.arguments4rclone(index: 0, argtype: .argdryrun),
                        "Arguments should be equal")
     }
 
@@ -57,14 +57,14 @@ class RcloneosxTests: XCTestCase, SetConfigurations {
     func testargumentsdryrun3() {
         let arguments = ["sync", "/Users/thomas/Source", "local:/Users/thomas/Destination",
                          "--dry-run", "--verbose"]
-        XCTAssertEqual(arguments, self.configurations?.arguments4rclone(index: 3, argtype: .argdryRun),
+        XCTAssertEqual(arguments, self.configurations?.arguments4rclone(index: 3, argtype: .argdryrun),
                        "Arguments should be equal")
     }
 
     func testargumentsrestore3() {
         let arguments = ["sync", "local:/Users/thomas/Destination", "/Users/thomas/Source",
                          "--dry-run", "--verbose"]
-        XCTAssertEqual(arguments, self.configurations?.arguments4restore(index: 3, argtype: .argdryRun),
+        XCTAssertEqual(arguments, self.configurations?.arguments4restore(index: 3, argtype: .argdryrun),
                        "Arguments should be equal")
     }
 

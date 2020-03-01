@@ -45,7 +45,7 @@ final class SingleTask: SetSchedules, SetConfigurations {
         case .estimatesinglerun:
             if let index = self.index {
                 self.indicatorDelegate?.startIndicator()
-                if let arguments = self.configurations?.arguments4rclone(index: index, argtype: .argdryRun) {
+                if let arguments = self.configurations?.arguments4rclone(index: index, argtype: .argdryrun) {
                     let process = Rclone(arguments: arguments)
                     self.outputprocess = OutputProcess()
                     process.setdelegate(object: self)

@@ -15,7 +15,7 @@ final class RestoreTask: SetConfigurations {
         setprocessDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         if dryrun {
             if tmprestore {
-                self.arguments = self.configurations!.arguments4tmprestore(index: index, argtype: .argdryRun)
+                self.arguments = self.configurations!.arguments4tmprestore(index: index, argtype: .argdryrun)
                 // We have to check if remote (offsite) catalog is empty or not
                 let config = self.configurations!.getConfigurations()[index]
                 if config.offsiteCatalog.isEmpty {
@@ -23,7 +23,7 @@ final class RestoreTask: SetConfigurations {
                 }
             } else {
                 // Do a restore from destination to source
-                self.arguments = self.configurations!.arguments4restore(index: index, argtype: .argdryRun)
+                self.arguments = self.configurations!.arguments4restore(index: index, argtype: .argdryrun)
             }
         } else {
             if tmprestore {

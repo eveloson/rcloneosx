@@ -62,7 +62,7 @@ final class RestorefilesArguments: SetConfigurations {
             case .restorerclone:
                 self.arguments = self.configurations?.arguments4rclone(index: index!, argtype: .argrestore)
                 self.argdryRun = self.configurations?.arguments4rclone(index: index!, argtype: .argrestoredryrun)
-                self.argDisplaydryRun = self.configurations?.arguments4rclone(index: index!, argtype: .argrestoreDisplaydryRun)
+                self.argDisplaydryRun = self.configurations?.arguments4rclone(index: index!, argtype: .argrestoredisplaydryrun)
             case .listrclone:
                 self.arguments = self.configurations?.arguments4rclone(index: index!, argtype: .arglistfiles)
             }

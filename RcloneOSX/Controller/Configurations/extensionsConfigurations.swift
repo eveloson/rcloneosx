@@ -62,11 +62,11 @@ extension ReloadTable {
 // Used to select argument
 enum ArgumentsRclone {
     case arg
-    case argdryRun
+    case argdryrun
     case arglistfiles
     case argrestore
     case argrestoredryrun
-    case argrestoreDisplaydryRun
+    case argrestoredisplaydryrun
 }
 
 // Enum which resource to return

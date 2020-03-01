@@ -109,7 +109,7 @@ class Configurations: ReloadTable, SetSchedules {
         switch argtype {
         case .arg:
             return allarguments.arg ?? []
-        case .argdryRun:
+        case .argdryrun:
             return allarguments.argdryRun ?? []
         case .arglistfiles:
             return allarguments.argslistRemotefiles ?? []
@@ -117,7 +117,7 @@ class Configurations: ReloadTable, SetSchedules {
             return allarguments.argsRestorefiles ?? []
         case .argrestoredryrun:
             return allarguments.argsRestorefilesdryRun ?? []
-        case .argrestoreDisplaydryRun:
+        case .argrestoredisplaydryrun:
             return allarguments.argsRestorefilesdryRunDisplay ?? []
         }
     }
@@ -127,7 +127,7 @@ class Configurations: ReloadTable, SetSchedules {
         switch argtype {
         case .arg:
             return allarguments.tmprestore ?? []
-        case .argdryRun:
+        case .argdryrun:
             return allarguments.tmprestoredryRun ?? []
         default:
             return []
@@ -139,7 +139,7 @@ class Configurations: ReloadTable, SetSchedules {
         switch argtype {
         case .arg:
             return allarguments.restore ?? []
-        case .argdryRun:
+        case .argdryrun:
             return allarguments.restoredryRun ?? []
         default:
             return []
