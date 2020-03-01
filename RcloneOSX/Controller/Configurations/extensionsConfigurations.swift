@@ -65,7 +65,7 @@ enum ArgumentsRclone {
     case argdryRun
     case arglistfiles
     case argrestore
-    case argrestoredryRun
+    case argrestoredryrun
     case argrestoreDisplaydryRun
 }
 

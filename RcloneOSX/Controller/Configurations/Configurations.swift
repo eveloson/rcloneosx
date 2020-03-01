@@ -115,7 +115,7 @@ class Configurations: ReloadTable, SetSchedules {
             return allarguments.argslistRemotefiles ?? []
         case .argrestore:
             return allarguments.argsRestorefiles ?? []
-        case .argrestoredryRun:
+        case .argrestoredryrun:
             return allarguments.argsRestorefilesdryRun ?? []
         case .argrestoreDisplaydryRun:
             return allarguments.argsRestorefilesdryRunDisplay ?? []

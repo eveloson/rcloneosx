@@ -15,7 +15,7 @@ protocol Updateremotefilelist: AnyObject {
 }
 
 class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMain, Checkforrclone {
-    var copyfiles: CopyFiles?
+    var copyfiles: Restorefiles?
     var remotefilelist: Remotefilelist?
     var rcloneindex: Int?
     var estimated: Bool = false
@@ -232,7 +232,7 @@ class ViewControllerCopyFiles: NSViewController, SetConfigurations, Delay, VcMai
                 self.remoteCatalog.stringValue = ""
                 self.rcloneindex = index
                 let hiddenID = self.configurations!.getConfigurationsSyncandCopy()![index].value(forKey: "hiddenID") as? Int ?? -1
-                self.copyfiles = CopyFiles(hiddenID: hiddenID)
+                self.copyfiles = Restorefiles(hiddenID: hiddenID)
                 self.remotefilelist = Remotefilelist(hiddenID: hiddenID)
                 self.working.startAnimation(nil)
                 self.displayRemoteserver(index: index)

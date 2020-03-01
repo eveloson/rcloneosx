@@ -33,8 +33,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		E8B9506A23183D5E00C743D5 /* CopyFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B9506823183D5D00C743D5 /* CopyFiles.swift */; };
-		E8B9506B23183D5E00C743D5 /* CopyFilesArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B9506923183D5D00C743D5 /* CopyFilesArguments.swift */; };
+		E8B9506A23183D5E00C743D5 /* Restorefiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B9506823183D5D00C743D5 /* Restorefiles.swift */; };
+		E8B9506B23183D5E00C743D5 /* RestorefilesArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B9506923183D5D00C743D5 /* RestorefilesArguments.swift */; };
 		E905FE64209836C60008450C /* RcloneSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E905FE63209836C60008450C /* RcloneSize.swift */; };
 		E9062E732097192D00D65748 /* ViewControllerRemoteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9062E722097192D00D65748 /* ViewControllerRemoteInfo.swift */; };
 		E907D343230D6A4900DC938F /* RemoteinfoEstimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E907D342230D6A4900DC938F /* RemoteinfoEstimation.swift */; };
@@ -151,8 +151,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E8B9506823183D5D00C743D5 /* CopyFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyFiles.swift; sourceTree = "<group>"; };
-		E8B9506923183D5D00C743D5 /* CopyFilesArguments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyFilesArguments.swift; sourceTree = "<group>"; };
+		E8B9506823183D5D00C743D5 /* Restorefiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restorefiles.swift; sourceTree = "<group>"; };
+		E8B9506923183D5D00C743D5 /* RestorefilesArguments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestorefilesArguments.swift; sourceTree = "<group>"; };
 		E905FE63209836C60008450C /* RcloneSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RcloneSize.swift; sourceTree = "<group>"; };
 		E9062E722097192D00D65748 /* ViewControllerRemoteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerRemoteInfo.swift; sourceTree = "<group>"; };
 		E907D342230D6A4900DC938F /* RemoteinfoEstimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteinfoEstimation.swift; sourceTree = "<group>"; };
@@ -524,10 +524,11 @@
 		E960CB531FB092E70008D12E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E9F38118240C20350083E2D8 /* ProcessArguments */,
 				E9BC41E12065175B001DBCC6 /* AllProfiles */,
 				E931186A1FC2BCA4007D1C1B /* Logging */,
 				E9DD810A1FBF3AFE0080FEAD /* OutPut */,
-				E9DD81091FBF3A450080FEAD /* CopyFiles */,
+				E9DD81091FBF3A450080FEAD /* Restorefiles */,
 				E9D1F1A01FB49D870099D25C /* CloudServices */,
 				E9482D2D1FB0B37500AFBB0D /* Schedule */,
 				E9482D2C1FB0B36B00AFBB0D /* Configuration */,
@@ -623,13 +624,12 @@
 			path = CloudServices;
 			sourceTree = "<group>";
 		};
-		E9DD81091FBF3A450080FEAD /* CopyFiles */ = {
+		E9DD81091FBF3A450080FEAD /* Restorefiles */ = {
 			isa = PBXGroup;
 			children = (
-				E8B9506823183D5D00C743D5 /* CopyFiles.swift */,
-				E8B9506923183D5D00C743D5 /* CopyFilesArguments.swift */,
+				E8B9506823183D5D00C743D5 /* Restorefiles.swift */,
 			);
-			path = CopyFiles;
+			path = Restorefiles;
 			sourceTree = "<group>";
 		};
 		E9DD810A1FBF3AFE0080FEAD /* OutPut */ = {
@@ -639,6 +639,14 @@
 				E960CAB61FB091D30008D12E /* OutputProcess.swift */,
 			);
 			path = OutPut;
+			sourceTree = "<group>";
+		};
+		E9F38118240C20350083E2D8 /* ProcessArguments */ = {
+			isa = PBXGroup;
+			children = (
+				E8B9506923183D5D00C743D5 /* RestorefilesArguments.swift */,
+			);
+			path = ProcessArguments;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -881,13 +889,13 @@
 				E931186C1FC2BCC1007D1C1B /* Logging.swift in Sources */,
 				E960CB401FB091DE0008D12E /* ViewControllerRcloneParameters.swift in Sources */,
 				E9733E7922BCCC8400A5A8F9 /* Selectprofile.swift in Sources */,
-				E8B9506A23183D5E00C743D5 /* CopyFiles.swift in Sources */,
+				E8B9506A23183D5E00C743D5 /* Restorefiles.swift in Sources */,
 				E9338716230E9C0F00FE1B50 /* ExecuteTaskNow.swift in Sources */,
 				E9E4DCCD21195F7600BB3F93 /* Allschedules.swift in Sources */,
 				E9198C39211DC5EC0071DB3A /* ViewControllerAllOutput.swift in Sources */,
 				E960CB291FB091DE0008D12E /* ExecuteBatch.swift in Sources */,
 				E9B8B02522B107070063024E /* Getrclonepath.swift in Sources */,
-				E8B9506B23183D5E00C743D5 /* CopyFilesArguments.swift in Sources */,
+				E8B9506B23183D5E00C743D5 /* RestorefilesArguments.swift in Sources */,
 				E960CB331FB091DE0008D12E /* PersistentStorageUserconfiguration.swift in Sources */,
 				E960CB3E1FB091DE0008D12E /* Schedules.swift in Sources */,
 				E960CB351FB091DE0008D12E /* Checkfornewversion.swift in Sources */,

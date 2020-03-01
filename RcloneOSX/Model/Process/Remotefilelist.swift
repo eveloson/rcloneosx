@@ -21,7 +21,7 @@ class Remotefilelist: ProcessCmd, SetConfigurations {
         let index = self.configurations?.getIndex(hiddenID: hiddenID) ?? -1
         self.config = self.configurations!.getConfigurations()[index]
         self.outputprocess = OutputProcess()
-        self.arguments = CopyFilesArguments(task: .listrclone, config: self.config!, remotefile: nil, localCatalog: nil).getArguments()
+        self.arguments = RestorefilesArguments(task: .listrclone, config: self.config!, remotefile: nil, localCatalog: nil).getArguments()
         self.command = nil
         self.updateDelegate = self
         self.setremotefilelistDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles

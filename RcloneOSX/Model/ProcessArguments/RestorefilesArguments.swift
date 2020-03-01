@@ -10,12 +10,12 @@
 
 import Foundation
 
-enum Enumscopyfiles {
+enum Enumrestorefiles {
     case restorerclone
     case listrclone
 }
 
-final class CopyFilesArguments: SetConfigurations {
+final class RestorefilesArguments: SetConfigurations {
     private var arguments: [String]?
     private var argDisplaydryRun: [String]?
     private var argdryRun: [String]?
@@ -53,17 +53,19 @@ final class CopyFilesArguments: SetConfigurations {
         return arguments
     }
 
-    init(task: Enumscopyfiles, config: Configuration, remotefile: String?, localCatalog: String?) {
-        self.remotefile = remotefile
-        self.localCatalog = localCatalog
-        let index = self.configurations?.getIndex(hiddenID: config.hiddenID)
-        switch task {
-        case .restorerclone:
-            self.arguments = self.configurations?.arguments4rclone(index: index!, argtype: .argrestore)
-            self.argdryRun = self.configurations?.arguments4rclone(index: index!, argtype: .argrestoredryRun)
-            self.argDisplaydryRun = self.configurations?.arguments4rclone(index: index!, argtype: .argrestoreDisplaydryRun)
-        case .listrclone:
-            self.arguments = self.configurations?.arguments4rclone(index: index!, argtype: .arglistfiles)
+    init(task: Enumrestorefiles, config: Configuration?, remotefile: String?, localCatalog: String?) {
+        if let config = config {
+            self.remotefile = remotefile
+            self.localCatalog = localCatalog
+            let index = self.configurations?.getIndex(hiddenID: config.hiddenID)
+            switch task {
+            case .restorerclone:
+                self.arguments = self.configurations?.arguments4rclone(index: index!, argtype: .argrestore)
+                self.argdryRun = self.configurations?.arguments4rclone(index: index!, argtype: .argrestoredryrun)
+                self.argDisplaydryRun = self.configurations?.arguments4rclone(index: index!, argtype: .argrestoreDisplaydryRun)
+            case .listrclone:
+                self.arguments = self.configurations?.arguments4rclone(index: index!, argtype: .arglistfiles)
+            }
         }
     }
 }
