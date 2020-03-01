@@ -10,7 +10,7 @@
 
 import Foundation
 
-final class CopyFiles: SetConfigurations {
+final class Restorefiles: SetConfigurations {
     private var index: Int?
     private var config: Configuration?
     private var commandDisplay: String?
@@ -31,9 +31,9 @@ final class CopyFiles: SetConfigurations {
         var arguments: [String]?
         guard self.config != nil else { return }
         if dryrun {
-            arguments = CopyFilesArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getArgumentsdryRun()
+            arguments = RestorefilesArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getArgumentsdryRun()
         } else {
-            arguments = CopyFilesArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getArguments()
+            arguments = RestorefilesArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getArguments()
         }
         self.outputprocess = OutputProcess()
         self.process = ProcessCmd(command: nil, arguments: arguments)
@@ -45,7 +45,7 @@ final class CopyFiles: SetConfigurations {
     func getCommandDisplayinView(remotefile: String, localCatalog: String) -> String {
         guard self.config != nil else { return "" }
         guard self.index != nil else { return "" }
-        self.commandDisplay = CopyFilesArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getcommandDisplay()
+        self.commandDisplay = RestorefilesArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getcommandDisplay()
         return self.commandDisplay ?? " "
     }
 
