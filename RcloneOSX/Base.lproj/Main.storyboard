@@ -184,7 +184,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="rcloneosx" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-373" y="-454"/>
+            <point key="canvasLocation" x="-885" y="-482"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="GeT-NB-lhy">
@@ -346,7 +346,7 @@
                 </windowController>
                 <customObject id="Rv5-yv-lsc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-394" y="-84"/>
+            <point key="canvasLocation" x="-273" y="-417"/>
         </scene>
         <!--Tab View Controller-->
         <scene sceneID="Hwe-jL-WAZ">
@@ -2355,93 +2355,6 @@ DQ
             </objects>
             <point key="canvasLocation" x="-1956" y="1692"/>
         </scene>
-        <!--New version-->
-        <scene sceneID="F2C-eN-Zcw">
-            <objects>
-                <viewController title="New version" storyboardIdentifier="StoryboardnewVersionID" id="E4i-DW-PcT" customClass="ViewControllerNewVersion" customModule="rcloneosx" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="5ny-Tx-yXY">
-                        <rect key="frame" x="0.0" y="0.0" width="413" height="144"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cPL-1Q-s4R">
-                                <rect key="frame" x="18" y="111" width="377" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="New version available" id="9Zv-nL-VVC">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vHD-RB-Khj">
-                                <rect key="frame" x="101" y="52" width="75" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="roundTextured" title="Download" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Q6F-3P-fJy">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="download:" target="E4i-DW-PcT" id="oPh-R4-VqZ"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BWu-w3-9SS">
-                                <rect key="frame" x="247" y="52" width="80" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="roundTextured" title="Changelog" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRU-rs-ycW">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="changelogg:" target="E4i-DW-PcT" id="9C7-Z7-ISb"/>
-                                </connections>
-                            </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVx-lo-yej">
-                                <rect key="frame" x="18" y="87" width="377" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="(for your own safety, please verify the shasum after download)" id="HPC-E0-3iO">
-                                    <font key="font" size="13" name="TimesNewRomanPSMT"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gzO-Zj-bjl">
-                                <rect key="frame" x="98" y="21" width="230" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Close automatically in: " id="21H-Ns-bTh">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMh-KL-1X7">
-                                <rect key="frame" x="324" y="14" width="75" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cgs-kn-d7O">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="dismiss:" target="E4i-DW-PcT" id="y7W-g5-jiY"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                    </view>
-                    <connections>
-                        <outlet property="closeinseconds" destination="gzO-Zj-bjl" id="2Gi-ox-Znl"/>
-                    </connections>
-                </viewController>
-                <customObject id="tTk-AH-S9E" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1317" y="2182"/>
-        </scene>
         <!--View Controller Profile-->
         <scene sceneID="Ifs-65-j1l">
             <objects>
@@ -3625,7 +3538,7 @@ DQ
                 </viewController>
                 <customObject id="JXa-Qa-bGo" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="560" y="184.5"/>
+            <point key="canvasLocation" x="-1187" y="109"/>
         </scene>
         <!--Logs-->
         <scene sceneID="LvT-7J-u8e">
@@ -4167,7 +4080,7 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <box fixedFrame="YES" title="Restore to tmp catalog" translatesAutoresizingMaskIntoConstraints="NO" id="3hg-gp-Gk4">
+                            <box fixedFrame="YES" title="Restore catalog" translatesAutoresizingMaskIntoConstraints="NO" id="3hg-gp-Gk4">
                                 <rect key="frame" x="781" y="16" width="304" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="AIL-Qh-rQS">
@@ -4183,17 +4096,6 @@ DQ
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                             </box>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SNe-XI-6NQ">
-                                <rect key="frame" x="978" y="55" width="95" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Select tmp: " bezelStyle="regularSquare" imagePosition="right" state="on" inset="2" id="F4e-Ln-sH1">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="toggletmprestore:" target="BOc-qK-ti2" id="kif-bl-7tv"/>
-                                </connections>
-                            </button>
                             <scrollView fixedFrame="YES" borderType="groove" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="AVS-Gb-8Gb">
                                 <rect key="frame" x="20" y="20" width="756" height="365"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -4332,7 +4234,6 @@ DQ
                         <outlet property="gotit" destination="f9q-gT-hng" id="bQR-7V-2X1"/>
                         <outlet property="restorebutton" destination="Ky9-gC-UfI" id="puQ-Z8-qDg"/>
                         <outlet property="restoretable" destination="n2k-Sj-oPg" id="jur-nf-Zrh"/>
-                        <outlet property="selecttmptorestore" destination="SNe-XI-6NQ" id="vwT-0G-Exi"/>
                         <outlet property="tmprestore" destination="2M8-b4-fYB" id="pUd-Lc-yyx"/>
                         <outlet property="totalNumber" destination="jrt-Ff-crt" id="H8n-tV-cL7"/>
                         <outlet property="totalNumberSizebytes" destination="4kd-st-qYK" id="8p2-N5-Fm0"/>
@@ -4348,18 +4249,18 @@ DQ
         <scene sceneID="c2Q-I2-MbT">
             <objects>
                 <viewController title="All output" id="aqQ-Xa-aOg" customClass="ViewControllerAllOutput" customModule="rcloneosx" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="EyG-hR-cTd">
-                        <rect key="frame" x="0.0" y="0.0" width="840" height="394"/>
+                    <view key="view" id="EyG-hR-cTd">
+                        <rect key="frame" x="0.0" y="0.0" width="840" height="371"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tvg-tG-A4K">
-                                <rect key="frame" x="20" y="20" width="800" height="239"/>
+                                <rect key="frame" x="20" y="20" width="800" height="331"/>
                                 <clipView key="contentView" id="NTB-w9-9Se">
-                                    <rect key="frame" x="1" y="0.0" width="798" height="238"/>
+                                    <rect key="frame" x="1" y="0.0" width="798" height="330"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="automatic" headerView="FqJ-r3-W02" viewBased="YES" id="5cn-Ow-2Tv">
-                                            <rect key="frame" x="0.0" y="0.0" width="798" height="215"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="798" height="307"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -4421,10 +4322,10 @@ DQ
                             </scrollView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Tvg-tG-A4K" secondAttribute="trailing" constant="20" id="Ijd-Q3-vl9"/>
-                            <constraint firstItem="Tvg-tG-A4K" firstAttribute="leading" secondItem="EyG-hR-cTd" secondAttribute="leading" constant="20" id="OCV-vW-NNc"/>
-                            <constraint firstItem="Tvg-tG-A4K" firstAttribute="top" secondItem="EyG-hR-cTd" secondAttribute="top" constant="20" id="Pz0-pP-bKY"/>
-                            <constraint firstAttribute="bottom" secondItem="Tvg-tG-A4K" secondAttribute="bottom" constant="20" id="fb5-o1-abt"/>
+                            <constraint firstItem="Tvg-tG-A4K" firstAttribute="top" secondItem="EyG-hR-cTd" secondAttribute="top" constant="20" id="9Da-rP-TJi"/>
+                            <constraint firstItem="Tvg-tG-A4K" firstAttribute="leading" secondItem="EyG-hR-cTd" secondAttribute="leading" constant="20" id="ETp-Q3-CcV"/>
+                            <constraint firstAttribute="trailing" secondItem="Tvg-tG-A4K" secondAttribute="trailing" constant="20" id="Jnd-uR-IAk"/>
+                            <constraint firstAttribute="bottom" secondItem="Tvg-tG-A4K" secondAttribute="bottom" constant="20" id="yD9-jb-6vb"/>
                         </constraints>
                     </view>
                     <connections>
@@ -4433,7 +4334,7 @@ DQ
                 </viewController>
                 <customObject id="UZV-9V-UKD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1189" y="103"/>
+            <point key="canvasLocation" x="551" y="137"/>
         </scene>
     </scenes>
     <resources>

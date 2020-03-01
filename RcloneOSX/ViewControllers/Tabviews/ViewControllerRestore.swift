@@ -27,7 +27,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
     @IBOutlet var totalNumberSizebytes: NSTextField!
     @IBOutlet var restorebutton: NSButton!
     @IBOutlet var tmprestore: NSTextField!
-    @IBOutlet var selecttmptorestore: NSButton!
     @IBOutlet var estimatebutton: NSButton!
 
     var outputprocess: OutputProcess?
@@ -105,16 +104,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
                     self.presentAsSheet(self.viewControllerProgress!)
                 }
                 self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
-                switch self.selecttmptorestore.state {
-                case .on:
-                    _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: false,
-                                    tmprestore: true, updateprogress: self)
-                case .off:
-                    _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: false,
-                                    tmprestore: true, updateprogress: self)
-                default:
-                    return
-                }
+                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: false, updateprogress: self)
             }
         }
     }
@@ -164,11 +154,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
     private func settmp() {
         let setuserconfig: String = NSLocalizedString(" ... set in User configuration ...", comment: "Restore")
         self.tmprestore.stringValue = ViewControllerReference.shared.restorePath ?? setuserconfig
-        if (ViewControllerReference.shared.restorePath ?? "").isEmpty == true {
-            self.selecttmptorestore.state = .off
-        } else {
-            self.selecttmptorestore.state = .on
-        }
+        if (ViewControllerReference.shared.restorePath ?? "").isEmpty == true {}
     }
 
     private func setNumbers(outputprocess: OutputProcess?) {
@@ -188,13 +174,9 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
             self.working.startAnimation(nil)
             self.outputprocess = OutputProcess()
             self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
-            if ViewControllerReference.shared.restorePath != nil && self.selecttmptorestore.state == .on {
+            if ViewControllerReference.shared.restorePath != nil {
                 _ = self.removework()
-                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, tmprestore: true, updateprogress: self)
-            } else {
-                self.selecttmptorestore.state = .off
-                _ = self.removework()
-                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, tmprestore: false, updateprogress: self)
+                _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, updateprogress: self)
             }
         }
     }
@@ -266,7 +248,6 @@ extension ViewControllerRestore: UpdateProgress {
         case .localinfoandnumbertosync:
             self.setNumbers(outputprocess: self.outputprocess)
             guard ViewControllerReference.shared.restorePath != nil else { return }
-            self.selecttmptorestore.isEnabled = true
             self.working.stopAnimation(nil)
             self.restorebutton.isEnabled = true
             self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
