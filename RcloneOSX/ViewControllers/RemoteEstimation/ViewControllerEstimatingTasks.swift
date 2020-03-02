@@ -69,7 +69,7 @@ class ViewControllerEstimatingTasks: NSViewController, Abort, SetConfigurations,
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
         } else if (self.presentingViewController as? ViewControllerNewConfigurations) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vcnewconfigurations)
-        } else if (self.presentingViewController as? ViewControllerCopyFiles) != nil {
+        } else if (self.presentingViewController as? ViewControllerRestoreFiles) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
         } else if (self.presentingViewController as? ViewControllerLoggData) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vcloggdata)
@@ -105,8 +105,8 @@ extension ViewControllerEstimatingTasks: StartStopProgressIndicator {
             openDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         } else if (self.presentingViewController as? ViewControllerNewConfigurations) != nil {
             openDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcnewconfigurations) as? ViewControllerNewConfigurations
-        } else if (self.presentingViewController as? ViewControllerCopyFiles) != nil {
-            openDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles
+        } else if (self.presentingViewController as? ViewControllerRestoreFiles) != nil {
+            openDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerRestoreFiles
         } else if (self.presentingViewController as? ViewControllerLoggData) != nil {
             openDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcloggdata) as? ViewControllerLoggData
         }

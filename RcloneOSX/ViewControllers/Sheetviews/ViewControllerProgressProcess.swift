@@ -26,7 +26,7 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
         switch self.countDelegate {
         case is ViewControllerMain:
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
-        case is ViewControllerCopyFiles:
+        case is ViewControllerRestoreFiles:
             self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
         case is ViewControllerRestore:
             self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
@@ -43,8 +43,8 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
         ViewControllerReference.shared.setvcref(viewcontroller: .vcprogressview, nsviewcontroller: self)
         if let pvc = (self.presentingViewController as? ViewControllerMain)?.singletask {
             self.countDelegate = pvc
-        } else if (self.presentingViewController as? ViewControllerCopyFiles) != nil {
-            self.countDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerCopyFiles
+        } else if (self.presentingViewController as? ViewControllerRestoreFiles) != nil {
+            self.countDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerRestoreFiles
         } else if (self.presentingViewController as? ViewControllerRestore) != nil {
             self.countDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
         }
@@ -81,7 +81,7 @@ extension ViewControllerProgressProcess: UpdateProgress {
         switch self.countDelegate {
         case is ViewControllerMain:
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
-        case is ViewControllerCopyFiles:
+        case is ViewControllerRestoreFiles:
             self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
         case is ViewControllerRestore:
             self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
