@@ -18,13 +18,13 @@ final class RestoreTask: SetConfigurations {
             // We have to check if remote (offsite) catalog is empty or not
             let config = self.configurations?.getConfigurations()[index]
             if (config?.offsiteCatalog ?? "").isEmpty {
-                self.arguments?.insert(ViewControllerReference.shared.restorePath ?? "", at: 2)
+                self.arguments?.insert(ViewControllerReference.shared.restorefilespath ?? "", at: 2)
             }
         } else {
             self.arguments = self.configurations?.arguments4tmprestore(index: index, argtype: .arg)
             let config = self.configurations!.getConfigurations()[index]
             if config.offsiteCatalog.isEmpty {
-                self.arguments?.insert(ViewControllerReference.shared.restorePath ?? "", at: 2)
+                self.arguments?.insert(ViewControllerReference.shared.restorefilespath ?? "", at: 2)
             }
         }
         guard arguments != nil else { return }

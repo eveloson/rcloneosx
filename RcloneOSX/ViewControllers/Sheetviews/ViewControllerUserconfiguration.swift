@@ -143,12 +143,12 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
         if self.restorePath.stringValue.isEmpty == false {
             if restorePath.stringValue.hasSuffix("/") == false {
                 restorePath.stringValue += "/"
-                ViewControllerReference.shared.restorePath = restorePath.stringValue
+                ViewControllerReference.shared.restorefilespath = restorePath.stringValue
             } else {
-                ViewControllerReference.shared.restorePath = restorePath.stringValue
+                ViewControllerReference.shared.restorefilespath = restorePath.stringValue
             }
         } else {
-            ViewControllerReference.shared.restorePath = nil
+            ViewControllerReference.shared.restorefilespath = nil
         }
         self.dirty = true
     }
@@ -182,8 +182,8 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
         } else {
             self.rclonePath.stringValue = ""
         }
-        if ViewControllerReference.shared.restorePath != nil {
-            self.restorePath.stringValue = ViewControllerReference.shared.restorePath!
+        if ViewControllerReference.shared.restorefilespath != nil {
+            self.restorePath.stringValue = ViewControllerReference.shared.restorefilespath!
         } else {
             self.restorePath.stringValue = ""
         }

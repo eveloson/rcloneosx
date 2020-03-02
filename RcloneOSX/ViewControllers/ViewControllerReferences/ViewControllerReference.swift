@@ -47,8 +47,8 @@ class ViewControllerReference {
     var norclone: Bool = false
     // Detailed logging
     var detailedlogging: Bool = true
-    // Temporary path for restore
-    var restorePath: String?
+    // Path for restore
+    var restorefilespath: String?
     // Reference to the Operation object
     // Reference is set in when Scheduled task is executed
     var completeoperation: CompleteQuickbackupTask?

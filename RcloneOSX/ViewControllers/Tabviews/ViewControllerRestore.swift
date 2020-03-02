@@ -168,7 +168,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesi
             self.working.startAnimation(nil)
             self.outputprocess = OutputProcess()
             self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
-            if ViewControllerReference.shared.restorePath != nil {
+            if ViewControllerReference.shared.restorefilespath != nil {
                 _ = self.removework()
                 _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, updateprogress: self)
             }
@@ -235,7 +235,7 @@ extension ViewControllerRestore: UpdateProgress {
             self.setremoteinfo()
         case .localinfoandnumbertosync:
             self.setNumbers(outputprocess: self.outputprocess)
-            guard ViewControllerReference.shared.restorePath != nil else { return }
+            guard ViewControllerReference.shared.restorefilespath != nil else { return }
             self.working.stopAnimation(nil)
             self.restorebutton.isEnabled = true
             self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
@@ -283,8 +283,8 @@ extension ViewControllerRestore: Count {
 extension ViewControllerRestore: Setrestorepath {
     func setrestorepath() {
         let setuserconfig: String = NSLocalizedString(" ... set in User configuration ...", comment: "Restore")
-        self.tmprestore.stringValue = ViewControllerReference.shared.restorePath ?? setuserconfig
-        if (ViewControllerReference.shared.restorePath ?? "").isEmpty == true {
+        self.tmprestore.stringValue = ViewControllerReference.shared.restorefilespath ?? setuserconfig
+        if (ViewControllerReference.shared.restorefilespath ?? "").isEmpty == true {
             self.restorebutton.isEnabled = false
             self.estimatebutton.isEnabled = false
         }
