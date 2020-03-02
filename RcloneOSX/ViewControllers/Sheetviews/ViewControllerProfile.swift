@@ -62,11 +62,11 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
         } else if (self.presentingViewController as? ViewControllerNewConfigurations) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vcnewconfigurations)
-        } else if (self.presentingViewController as? ViewControllerRestoreFiles) != nil {
+        } else if (self.presentingViewController as? ViewControllerRestore) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
         } else if (self.presentingViewController as? ViewControllerLoggData) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vcloggdata)
-        } else if (self.presentingViewController as? ViewControllerRestore) != nil {
+        } else if (self.presentingViewController as? ViewControllerRestoreOrg) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
         }
     }

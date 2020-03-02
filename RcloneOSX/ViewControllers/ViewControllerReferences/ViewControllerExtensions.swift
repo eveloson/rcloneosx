@@ -132,7 +132,7 @@ extension SetDismisser {
     }
 
     var dismissDelegateCopyFiles: DismissViewController? {
-        return ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerRestoreFiles
+        return ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerRestore
     }
 
     var dismissDelegateNewConfigurations: DismissViewController? {
@@ -144,7 +144,7 @@ extension SetDismisser {
     }
 
     var dismissDelegateRestore: DismissViewController? {
-        return ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
+        return ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestoreOrg
     }
 
     func dismissview(viewcontroller _: NSViewController, vcontroller: ViewController) {
@@ -258,9 +258,9 @@ protocol ChangeRestorePath {
 
 extension ChangeRestorePath {
     func changerestorepath() {
-        let view = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerRestoreFiles
+        let view = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerRestore
         view?.setrestorepath()
-        let view2 = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
+        let view2 = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestoreOrg
         view2?.setrestorepath()
     }
 }

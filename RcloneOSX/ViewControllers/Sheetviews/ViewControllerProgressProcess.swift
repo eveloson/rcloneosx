@@ -26,9 +26,9 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
         switch self.countDelegate {
         case is ViewControllerMain:
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
-        case is ViewControllerRestoreFiles:
-            self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
         case is ViewControllerRestore:
+            self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
+        case is ViewControllerRestoreOrg:
             self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
         default:
             return
@@ -43,10 +43,10 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
         ViewControllerReference.shared.setvcref(viewcontroller: .vcprogressview, nsviewcontroller: self)
         if let pvc = (self.presentingViewController as? ViewControllerMain)?.singletask {
             self.countDelegate = pvc
-        } else if (self.presentingViewController as? ViewControllerRestoreFiles) != nil {
-            self.countDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerRestoreFiles
         } else if (self.presentingViewController as? ViewControllerRestore) != nil {
-            self.countDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
+            self.countDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerRestore
+        } else if (self.presentingViewController as? ViewControllerRestoreOrg) != nil {
+            self.countDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestoreOrg
         }
         self.initiateProgressbar()
         self.abort.isEnabled = true
@@ -81,9 +81,9 @@ extension ViewControllerProgressProcess: UpdateProgress {
         switch self.countDelegate {
         case is ViewControllerMain:
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
-        case is ViewControllerRestoreFiles:
-            self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
         case is ViewControllerRestore:
+            self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
+        case is ViewControllerRestoreOrg:
             self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
         default:
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
