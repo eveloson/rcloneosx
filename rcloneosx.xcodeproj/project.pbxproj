@@ -50,6 +50,7 @@
 		E92B18B72096F4DE001DBFAF /* RemoteinfonumbersOnetask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B18B52096F4DE001DBFAF /* RemoteinfonumbersOnetask.swift */; };
 		E92B18B92096F643001DBFAF /* ViewControllerEstimatingTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B18B82096F643001DBFAF /* ViewControllerEstimatingTasks.swift */; };
 		E92B18BB2096F83F001DBFAF /* EstimateremoteInformationOnetask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92B18BA2096F83F001DBFAF /* EstimateremoteInformationOnetask.swift */; };
+		E9303CA6240DA64100EEB686 /* extensionRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9303CA5240DA64100EEB686 /* extensionRestore.swift */; };
 		E931186C1FC2BCC1007D1C1B /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = E931186B1FC2BCC1007D1C1B /* Logging.swift */; };
 		E9338716230E9C0F00FE1B50 /* ExecuteTaskNow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9338715230E9C0F00FE1B50 /* ExecuteTaskNow.swift */; };
 		E93A8CA420C3BD9B00DFA836 /* extensionsVCMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A8CA320C3BD9B00DFA836 /* extensionsVCMain.swift */; };
@@ -166,6 +167,7 @@
 		E92B18B52096F4DE001DBFAF /* RemoteinfonumbersOnetask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteinfonumbersOnetask.swift; sourceTree = "<group>"; };
 		E92B18B82096F643001DBFAF /* ViewControllerEstimatingTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerEstimatingTasks.swift; sourceTree = "<group>"; };
 		E92B18BA2096F83F001DBFAF /* EstimateremoteInformationOnetask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateremoteInformationOnetask.swift; sourceTree = "<group>"; };
+		E9303CA5240DA64100EEB686 /* extensionRestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionRestore.swift; sourceTree = "<group>"; };
 		E931186B1FC2BCC1007D1C1B /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Logging.swift; path = RcloneOSX/Model/Logging/Logging.swift; sourceTree = SOURCE_ROOT; };
 		E9338715230E9C0F00FE1B50 /* ExecuteTaskNow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecuteTaskNow.swift; sourceTree = "<group>"; };
 		E93A8CA320C3BD9B00DFA836 /* extensionsVCMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionsVCMain.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 			children = (
 				E9C2029B211BFD8A005E3B11 /* ViewControllerRestoreOrg.swift */,
 				E9A795891FBF285300AF8A5F /* ViewControllerRestore.swift */,
+				E9303CA4240DA60800EEB686 /* extensionRestore */,
 				E960CAEF1FB091DB0008D12E /* ViewControllerLoggData.swift */,
 				E960CAFE1FB091DD0008D12E /* ViewControllerMain.swift */,
 				E960CAE61FB091DA0008D12E /* ViewControllerNewConfigurations.swift */,
@@ -345,6 +348,14 @@
 				E907D342230D6A4900DC938F /* RemoteinfoEstimation.swift */,
 			);
 			path = Estimating;
+			sourceTree = "<group>";
+		};
+		E9303CA4240DA60800EEB686 /* extensionRestore */ = {
+			isa = PBXGroup;
+			children = (
+				E9303CA5240DA64100EEB686 /* extensionRestore.swift */,
+			);
+			path = extensionRestore;
 			sourceTree = "<group>";
 		};
 		E931186A1FC2BCA4007D1C1B /* Logging */ = {
@@ -833,6 +844,7 @@
 				E93A8CA420C3BD9B00DFA836 /* extensionsVCMain.swift in Sources */,
 				E960CB411FB091DE0008D12E /* ConfigurationSchedule.swift in Sources */,
 				E92B18BB2096F83F001DBFAF /* EstimateremoteInformationOnetask.swift in Sources */,
+				E9303CA6240DA64100EEB686 /* extensionRestore.swift in Sources */,
 				E960CB341FB091DE0008D12E /* ViewControllerNewConfigurations.swift in Sources */,
 				E9C2029C211BFD8A005E3B11 /* ViewControllerRestoreOrg.swift in Sources */,
 				E93D9E0923695B7A007074D1 /* ArgumentsRestoreSinglefiles.swift in Sources */,
