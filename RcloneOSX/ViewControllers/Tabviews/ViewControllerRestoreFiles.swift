@@ -29,8 +29,8 @@ class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, Vc
     @IBOutlet var info: NSTextField!
     @IBOutlet var restoretableView: NSTableView!
     @IBOutlet var rclonetableView: NSTableView!
-    @IBOutlet var commandString: NSTextField!
-    @IBOutlet var remoteCatalog: NSTextField!
+    @IBOutlet var commandstring: NSTextField!
+    @IBOutlet var remotesource: NSTextField!
     @IBOutlet var restorepath: NSTextField!
     @IBOutlet var working: NSProgressIndicator!
     @IBOutlet var search: NSSearchField!
@@ -95,35 +95,53 @@ class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, Vc
         case 1:
             self.info.stringValue = "...Set it in user config..."
         case 2:
-            self.info.stringValue = "Not a remote task, use Finder to copy files..."
-        case 3:
-            self.info.stringValue = "Local or remote catalog cannot be empty..."
+            self.info.stringValue = "Choose a remote resource..."
         default:
             self.info.stringValue = ""
         }
     }
 
-    // Do the work
     @IBAction func restore(_: NSButton) {
-        guard self.remoteCatalog.stringValue.isEmpty == false,
-            self.restorepath.stringValue.isEmpty == false else {
-            self.info(num: 3)
+        self.restorebutton.isEnabled = false
+        switch self.fullrestorebutton.state {
+        case .on:
+            return
+        case .off:
+            guard self.remotesource.stringValue.isEmpty == false,
+                self.restorepath.stringValue.isEmpty == false else {
+                self.info(num: 2)
+                return
+            }
+            self.working.startAnimation(nil)
+            self.presentAsSheet(self.viewControllerProgress!)
+            self.restorefiles?.executecopyfiles(remotefile: remotesource!.stringValue, localCatalog: restorepath!.stringValue, dryrun: false, updateprogress: self)
+        default:
             return
         }
-        self.working.startAnimation(nil)
-        self.presentAsSheet(self.viewControllerProgress!)
-        self.restorefiles?.executecopyfiles(remotefile: remoteCatalog!.stringValue, localCatalog: restorepath!.stringValue, dryrun: false, updateprogress: self)
     }
 
     @IBAction func estimate(_: NSButton) {
-        guard self.remoteCatalog.stringValue.isEmpty == false,
-            self.restorepath.stringValue.isEmpty == false else {
-            self.info(num: 3)
+        self.estimatebutton.isEnabled = false
+        switch self.fullrestorebutton.state {
+        case .on:
+            return
+        case .off:
+            guard self.remotesource.stringValue.isEmpty == false,
+                self.restorepath.stringValue.isEmpty == false else {
+                self.info(num: 2)
+                return
+            }
+            self.working.startAnimation(nil)
+            self.restorefiles?.executecopyfiles(remotefile: remotesource!.stringValue, localCatalog: restorepath!.stringValue, dryrun: true, updateprogress: self)
+            self.outputprocess = self.restorefiles?.outputprocess
+        default:
             return
         }
-        self.working.startAnimation(nil)
-        self.restorefiles?.executecopyfiles(remotefile: remoteCatalog!.stringValue, localCatalog: restorepath!.stringValue, dryrun: true, updateprogress: self)
-        self.outputprocess = self.restorefiles?.outputprocess
+    }
+
+    @IBAction func togglefullrestore(_: NSButton) {
+        self.estimatebutton.isEnabled = true
+        self.restorebutton.isEnabled = false
     }
 
     private func displayRemoteserver(index: Int?) {
@@ -149,7 +167,7 @@ class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, Vc
         self.working.usesThreadedAnimation = true
         self.search.delegate = self
         self.restorepath.delegate = self
-        self.remoteCatalog.delegate = self
+        self.remotesource.delegate = self
         self.restoretableView.doubleAction = #selector(self.tableViewDoubleClick(sender:))
     }
 
@@ -161,8 +179,9 @@ class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, Vc
             }
             return
         }
+        self.restorebutton.isEnabled = false
+        self.fullrestorebutton.state = .off
         self.setrestorepath()
-        self.verifyrestorepath()
         globalMainQueue.async { () -> Void in
             self.rclonetableView.reloadData()
         }
@@ -174,22 +193,13 @@ class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, Vc
     }
 
     @objc(tableViewDoubleClick:) func tableViewDoubleClick(sender _: AnyObject) {
-        guard self.remoteCatalog.stringValue.isEmpty == false else { return }
+        guard self.remotesource.stringValue.isEmpty == false else { return }
         guard self.restorepath.stringValue.isEmpty == false else { return }
         let answer = Alerts.dialogOKCancel("Copy single files or directory", text: "Start restore?")
         if answer {
             self.estimatebutton.isEnabled = false
             self.working.startAnimation(nil)
-            self.restorefiles!.executecopyfiles(remotefile: self.remoteCatalog!.stringValue, localCatalog: self.restorepath!.stringValue, dryrun: false, updateprogress: self)
-        }
-    }
-
-    private func verifyrestorepath() {
-        let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: self.restorepath.stringValue) == false {
-            self.info(num: 1)
-        } else {
-            self.info(num: 0)
+            self.restorefiles!.executecopyfiles(remotefile: self.remotesource!.stringValue, localCatalog: self.restorepath!.stringValue, dryrun: false, updateprogress: self)
         }
     }
 
@@ -209,10 +219,9 @@ class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, Vc
             let indexes = myTableViewFromNotification.selectedRowIndexes
             if let index = indexes.first {
                 guard self.restoretabledata != nil else { return }
-                self.remoteCatalog.stringValue = self.restoretabledata![index]
-                guard self.remoteCatalog.stringValue.isEmpty == false, self.restorepath.stringValue.isEmpty == false else { return }
-                self.commandString.stringValue = self.restorefiles!.getCommandDisplayinView(remotefile: self.remoteCatalog.stringValue, localCatalog: self.restorepath.stringValue)
-                self.estimatebutton.isEnabled = true
+                self.remotesource.stringValue = self.restoretabledata![index]
+                guard self.remotesource.stringValue.isEmpty == false, self.restorepath.stringValue.isEmpty == false else { return }
+                self.commandstring.stringValue = self.restorefiles!.getCommandDisplayinView(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue)
             }
         } else {
             let indexes = myTableViewFromNotification.selectedRowIndexes
@@ -220,12 +229,9 @@ class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, Vc
                 guard self.inprogress() == false else {
                     self.working.stopAnimation(nil)
                     guard self.restorefiles != nil else { return }
-                    self.estimatebutton.isEnabled = true
                     self.restorefiles?.abort()
                     return
                 }
-                self.estimatebutton.isEnabled = false
-                self.remoteCatalog.stringValue = ""
                 self.rcloneindex = index
                 let hiddenID = self.configurations!.getConfigurationsSyncandCopy()![index].value(forKey: "hiddenID") as? Int ?? -1
                 self.restorefiles = Restorefiles(hiddenID: hiddenID)
@@ -262,13 +268,10 @@ extension ViewControllerRestoreFiles: NSSearchFieldDelegate {
                     }
                 }
             }
-            self.verifyrestorepath()
         } else {
             self.delayWithSeconds(0.25) {
-                self.verifyrestorepath()
-                self.estimatebutton.isEnabled = true
-                guard self.remoteCatalog.stringValue.count > 0 else { return }
-                self.commandString.stringValue = self.restorefiles?.getCommandDisplayinView(remotefile: self.remoteCatalog.stringValue, localCatalog: self.restorepath.stringValue) ?? ""
+                guard self.remotesource.stringValue.count > 0 else { return }
+                self.commandstring.stringValue = self.restorefiles?.getCommandDisplayinView(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue) ?? ""
             }
         }
     }
@@ -348,7 +351,12 @@ extension ViewControllerRestoreFiles: DismissViewController {
 extension ViewControllerRestoreFiles: Setrestorepath {
     func setrestorepath() {
         self.restorepath.stringValue = ViewControllerReference.shared.restorefilespath ?? "...Set in user config..."
-        self.verifyrestorepath()
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: self.restorepath.stringValue) == false {
+            self.info(num: 1)
+        } else {
+            self.info(num: 0)
+        }
     }
 }
 
