@@ -5,13 +5,20 @@
 //  Created by Thomas Evensen on 12/09/2016.
 //  Copyright © 2016 Thomas Evensen. All rights reserved.
 //
-//  swiftlint:disable line_length
+//  swiftlint:disable line_length file_length
 
 import Cocoa
 import Foundation
 
 protocol Updateremotefilelist: AnyObject {
     func updateremotefilelist()
+}
+
+enum Work {
+    case localinfoandnumbertosync
+    case getremotenumbers
+    case setremotenumbers
+    case restore
 }
 
 class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, VcMain, Checkforrclone {
@@ -22,6 +29,7 @@ class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, Vc
     var diddissappear: Bool = false
     var outputprocess: OutputProcess?
     private var maxcount: Int = 0
+    var workqueue: [Work]?
 
     @IBOutlet var numberofrows: NSTextField!
     @IBOutlet var server: NSTextField!
@@ -37,6 +45,7 @@ class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, Vc
     @IBOutlet var estimatebutton: NSButton!
     @IBOutlet var restorebutton: NSButton!
     @IBOutlet var fullrestorebutton: NSButton!
+    @IBOutlet var restorefilesbutton: NSButton!
 
     @IBAction func totinfo(_: NSButton) {
         guard self.checkforrclone() == false else { return }
@@ -199,7 +208,7 @@ class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, Vc
         if answer {
             self.estimatebutton.isEnabled = false
             self.working.startAnimation(nil)
-            self.restorefiles!.executecopyfiles(remotefile: self.remotesource!.stringValue, localCatalog: self.restorepath!.stringValue, dryrun: false, updateprogress: self)
+            self.restorefiles?.executecopyfiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue, dryrun: false, updateprogress: self)
         }
     }
 
@@ -219,9 +228,10 @@ class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, Vc
             let indexes = myTableViewFromNotification.selectedRowIndexes
             if let index = indexes.first {
                 guard self.restoretabledata != nil else { return }
-                self.remotesource.stringValue = self.restoretabledata![index]
+                self.remotesource.stringValue = self.restoretabledata?[index] ?? ""
+                self.estimatebutton.isEnabled = true
                 guard self.remotesource.stringValue.isEmpty == false, self.restorepath.stringValue.isEmpty == false else { return }
-                self.commandstring.stringValue = self.restorefiles!.getCommandDisplayinView(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue)
+                self.commandstring.stringValue = self.restorefiles?.getCommandDisplayinView(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue) ?? ""
             }
         } else {
             let indexes = myTableViewFromNotification.selectedRowIndexes
@@ -233,11 +243,12 @@ class ViewControllerRestoreFiles: NSViewController, SetConfigurations, Delay, Vc
                     return
                 }
                 self.rcloneindex = index
-                let hiddenID = self.configurations!.getConfigurationsSyncandCopy()![index].value(forKey: "hiddenID") as? Int ?? -1
-                self.restorefiles = Restorefiles(hiddenID: hiddenID)
-                self.remotefilelist = Remotefilelist(hiddenID: hiddenID)
-                self.working.startAnimation(nil)
-                self.displayRemoteserver(index: index)
+                if let hiddenID = self.configurations?.getConfigurationsSyncandCopy()?[index].value(forKey: "hiddenID") as? Int {
+                    self.restorefiles = Restorefiles(hiddenID: hiddenID)
+                    self.remotefilelist = Remotefilelist(hiddenID: hiddenID)
+                    self.working.startAnimation(nil)
+                    self.displayRemoteserver(index: index)
+                }
             } else {
                 self.rcloneindex = nil
                 self.restoretabledata = nil
@@ -288,12 +299,8 @@ extension ViewControllerRestoreFiles: NSSearchFieldDelegate {
 extension ViewControllerRestoreFiles: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         if tableView == self.restoretableView {
-            guard self.restoretabledata != nil else {
-                self.numberofrows.stringValue = "Number of remote files: 0"
-                return 0
-            }
-            self.numberofrows.stringValue = "Number of remote files: " + String(self.restoretabledata!.count)
-            return self.restoretabledata!.count
+            self.numberofrows.stringValue = "Number of remote files: " + String(self.restoretabledata?.count ?? 0)
+            return self.restoretabledata?.count ?? 0
         } else {
             return self.configurations?.getConfigurationsSyncandCopy()?.count ?? 0
         }
@@ -322,7 +329,47 @@ extension ViewControllerRestoreFiles: NSTableViewDelegate {
 }
 
 extension ViewControllerRestoreFiles: UpdateProgress {
+    private func removework() -> Work? {
+        // Initialize
+        guard self.workqueue != nil else {
+            self.workqueue = [Work]()
+            self.workqueue?.append(.setremotenumbers)
+            self.workqueue?.append(.getremotenumbers)
+            self.workqueue?.append(.localinfoandnumbertosync)
+            return nil
+        }
+        guard self.workqueue!.count > 1 else {
+            let work = self.workqueue?[0] ?? .restore
+            return work
+        }
+        let index = self.workqueue!.count - 1
+        let work = self.workqueue!.remove(at: index)
+        return work
+    }
+
     func processTermination() {
+        switch self.fullrestorebutton.state {
+        case .on:
+            self.processTerminationfullrestore()
+        case .off:
+            self.processTerminationrestorefiles()
+        default:
+            return
+        }
+    }
+
+    func fileHandler() {
+        switch self.fullrestorebutton.state {
+        case .on:
+            self.fileHandlerfullrestore()
+        case .off:
+            self.fileHandelerrestorefiles()
+        default:
+            return
+        }
+    }
+
+    func processTerminationrestorefiles() {
         self.maxcount = self.outputprocess?.getMaxcount() ?? 0
         if let vc = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess {
             vc.processTermination()
@@ -335,7 +382,43 @@ extension ViewControllerRestoreFiles: UpdateProgress {
         self.working.stopAnimation(nil)
     }
 
-    func fileHandler() {
+    func processTerminationfullrestore() {
+        switch self.removework() ?? .localinfoandnumbertosync {
+        case .getremotenumbers:
+            self.maxcount = self.outputprocess?.getMaxcount() ?? 0
+        // self.setNumbers(outputprocess: self.outputprocess)
+        // self.getremotenumbers()
+        case .setremotenumbers:
+            return
+        // self.setremoteinfo()
+        case .localinfoandnumbertosync:
+            // self.setNumbers(outputprocess: self.outputprocess)
+            guard ViewControllerReference.shared.restorefilespath != nil else { return }
+            self.working.stopAnimation(nil)
+            self.restorebutton.isEnabled = true
+        // self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
+        // self.gotit.stringValue = "Got it..."
+        case .restore:
+            if let vc = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess {
+                vc.processTermination()
+            }
+            // self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
+            // self.gotit.stringValue = "Got it..."
+        }
+    }
+
+    func fileHandelerrestorefiles() {
+        if let vc = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess {
+            vc.fileHandler()
+        }
+    }
+
+    func fileHandlerfullrestore() {
+        weak var outputeverythingDelegate: ViewOutputDetails?
+        outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
+        if outputeverythingDelegate?.appendnow() ?? false {
+            outputeverythingDelegate?.reloadtable()
+        }
         if let vc = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess {
             vc.fileHandler()
         }

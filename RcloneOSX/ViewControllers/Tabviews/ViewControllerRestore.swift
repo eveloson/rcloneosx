@@ -10,13 +10,6 @@
 import Cocoa
 import Foundation
 
-enum Work {
-    case localinfoandnumbertosync
-    case getremotenumbers
-    case setremotenumbers
-    case restore
-}
-
 class ViewControllerRestore: NSViewController, SetConfigurations, Remoterclonesize, Setcolor, VcMain, Checkforrclone, Abort {
     @IBOutlet var restoretable: NSTableView!
     @IBOutlet var working: NSProgressIndicator!
