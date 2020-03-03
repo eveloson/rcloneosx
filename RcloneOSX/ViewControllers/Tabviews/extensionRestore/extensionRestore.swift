@@ -32,7 +32,7 @@ extension ViewControllerRestore: NSSearchFieldDelegate {
         } else {
             self.delayWithSeconds(0.25) {
                 guard self.remotesource.stringValue.count > 0 else { return }
-                self.commandstring.stringValue = self.restorefiles?.getCommandDisplayinView(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue) ?? ""
+                self.commandstring.stringValue = self.restorefiles?.getcommandrestorefiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue) ?? ""
             }
         }
     }

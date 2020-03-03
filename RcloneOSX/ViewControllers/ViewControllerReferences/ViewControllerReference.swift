@@ -83,8 +83,6 @@ class ViewControllerReference {
     var initialstart: Int = 0
 
     private var viewControllertabMain: NSViewController?
-    // Reference to Copy files
-    private var viewControllerCopyFiles: NSViewController?
     // Reference to the New tasks
     private var viewControllerNewConfigurations: NSViewController?
     // Which profile to use, if default nil
@@ -122,8 +120,6 @@ class ViewControllerReference {
             return self.viewControllerBatch
         case .vcprogressview:
             return self.viewControllerProgressView
-        case .vcrestore:
-            return self.viewControllerCopyFiles
         case .vcquickbackup:
             return self.viewControllerQuickBatch
         case .vcallprofiles:
@@ -153,8 +149,6 @@ class ViewControllerReference {
             self.viewControllerBatch = nsviewcontroller
         case .vcprogressview:
             self.viewControllerProgressView = nsviewcontroller
-        case .vcrestore:
-            self.viewControllerCopyFiles = nsviewcontroller
         case .vcquickbackup:
             self.viewControllerQuickBatch = nsviewcontroller
         case .vcallprofiles:

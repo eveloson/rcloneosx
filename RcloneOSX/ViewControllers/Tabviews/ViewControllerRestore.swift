@@ -24,6 +24,7 @@ enum Work {
 class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain, Checkforrclone, Abort, Remoterclonesize, Setcolor {
     var restorefiles: Restorefiles?
     var remotefilelist: Remotefilelist?
+    var restoretask: RestoreTask?
     var rcloneindex: Int?
     var restoretabledata: [String]?
     var diddissappear: Bool = false
@@ -132,7 +133,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                         self.presentAsSheet(self.viewControllerProgress!)
                     }
                     self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
-                    _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: false, updateprogress: self)
+                    self.restoretask = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: false, updateprogress: self)
                 }
             }
         case .off:
@@ -163,7 +164,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
                 if ViewControllerReference.shared.restorefilespath != nil {
                     _ = self.removework()
-                    _ = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, updateprogress: self)
+                    self.restoretask = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, updateprogress: self)
                 }
             }
         case .off:
@@ -173,7 +174,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 return
             }
             self.working.startAnimation(nil)
-            self.restorefiles?.executecopyfiles(remotefile: remotesource!.stringValue, localCatalog: restorepath!.stringValue, dryrun: true, updateprogress: self)
+            self.restorefiles?.executecopyfiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue, dryrun: true, updateprogress: self)
             self.outputprocess = self.restorefiles?.outputprocess
         default:
             return
@@ -184,6 +185,9 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         self.estimatebutton.isEnabled = true
         self.restorebutton.isEnabled = false
         self.commandstring.stringValue = ""
+        self.restorefiles = nil
+        self.remotefilelist = nil
+        self.workqueue = nil
     }
 
     override func viewDidLoad() {
@@ -253,7 +257,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 self.remotesource.stringValue = self.restoretabledata?[index] ?? ""
                 self.estimatebutton.isEnabled = true
                 guard self.remotesource.stringValue.isEmpty == false, self.restorepath.stringValue.isEmpty == false else { return }
-                self.commandstring.stringValue = self.restorefiles?.getCommandDisplayinView(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue) ?? ""
+                self.commandstring.stringValue = self.restorefiles?.getcommandrestorefiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue) ?? ""
             }
         } else {
             let indexes = myTableViewFromNotification.selectedRowIndexes
@@ -266,6 +270,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 }
                 self.rcloneindex = index
                 if let hiddenID = self.configurations?.getConfigurationsSyncandCopy()?[index].value(forKey: "hiddenID") as? Int {
+                    guard self.restorefilesbutton.state == .on else { return }
                     self.restorefiles = Restorefiles(hiddenID: hiddenID)
                     self.remotefilelist = Remotefilelist(hiddenID: hiddenID)
                     self.working.startAnimation(nil)
