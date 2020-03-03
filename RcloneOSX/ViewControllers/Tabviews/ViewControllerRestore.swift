@@ -47,6 +47,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     @IBOutlet var restorebutton: NSButton!
     @IBOutlet var fullrestorebutton: NSButton!
     @IBOutlet var restorefilesbutton: NSButton!
+    @IBOutlet var profilepopupbutton: NSPopUpButton!
 
     @IBAction func totinfo(_: NSButton) {
         guard self.checkforrclone() == false else { return }
@@ -226,6 +227,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         globalMainQueue.async { () -> Void in
             self.rclonetableView.reloadData()
         }
+        self.initpopupbutton(button: self.profilepopupbutton)
     }
 
     override func viewDidDisappear() {
@@ -315,5 +317,22 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             let infotask = RemoteinfonumbersOnetask(outputprocess: outputprocess)
             self.info.stringValue = infotask.transferredNumber ?? "0"
         }
+    }
+
+    private func initpopupbutton(button: NSPopUpButton) {
+        var profilestrings: [String]?
+        profilestrings = CatalogProfile().getDirectorysStrings()
+        profilestrings?.insert(NSLocalizedString("Default profile", comment: "default profile"), at: 0)
+        button.removeAllItems()
+        button.addItems(withTitles: profilestrings ?? [])
+        button.selectItem(at: 0)
+    }
+
+    @IBAction func selectprofile(_: NSButton) {
+        var profile = self.profilepopupbutton.titleOfSelectedItem
+        if profile == NSLocalizedString("Default profile", comment: "default profile") {
+            profile = nil
+        }
+        _ = Selectprofile(profile: profile)
     }
 }

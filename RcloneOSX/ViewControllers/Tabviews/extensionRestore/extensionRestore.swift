@@ -145,18 +145,23 @@ extension ViewControllerRestore: UpdateProgress {
             guard ViewControllerReference.shared.restorefilespath != nil else { return }
             self.working.stopAnimation(nil)
             self.restorebutton.isEnabled = true
-        // self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
-        // self.gotit.stringValue = "Got it..."
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
+            self.info.stringValue = "Got it..."
         case .restore:
             if let vc = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess {
                 vc.processTermination()
             }
-            // self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
-            // self.gotit.stringValue = "Got it..."
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
+            self.info.stringValue = "Got it..."
         }
     }
 
     func fileHandelerrestorefiles() {
+        weak var outputeverythingDelegate: ViewOutputDetails?
+        outputeverythingDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
+        if outputeverythingDelegate?.appendnow() ?? false {
+            outputeverythingDelegate?.reloadtable()
+        }
         if let vc = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess {
             vc.fileHandler()
         }
@@ -197,6 +202,7 @@ extension ViewControllerRestore: NewProfile {
         self.restoretabledata = nil
         globalMainQueue.async { () -> Void in
             self.restoretableView.reloadData()
+            self.rclonetableView.reloadData()
         }
     }
 }

@@ -1221,7 +1221,7 @@
             <objects>
                 <viewController title="Details about files" storyboardIdentifier="StoryboardInformationID" id="ceM-Kt-SJU" customClass="ViewControllerInformation" customModule="rcloneosx" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="KBL-J8-CuF">
-                        <rect key="frame" x="0.0" y="0.0" width="696" height="262"/>
+                        <rect key="frame" x="0.0" y="0.0" width="696" height="238"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ju4-SV-jK8">
@@ -1238,13 +1238,13 @@ DQ
                                 </connections>
                             </button>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKB-vU-qrp">
-                                <rect key="frame" x="20" y="61" width="656" height="37"/>
+                                <rect key="frame" x="20" y="61" width="656" height="157"/>
                                 <clipView key="contentView" id="fsy-MR-0hH">
-                                    <rect key="frame" x="1" y="0.0" width="654" height="36"/>
+                                    <rect key="frame" x="1" y="0.0" width="654" height="156"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="19" rowSizeStyle="automatic" headerView="miE-cF-Mpr" viewBased="YES" id="Iah-yC-nuy">
-                                            <rect key="frame" x="0.0" y="0.0" width="654" height="21"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="654" height="133"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2500,13 +2500,13 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4X9-KY-aBa">
-                                <rect key="frame" x="20" y="61" width="656" height="106"/>
+                                <rect key="frame" x="20" y="61" width="656" height="60"/>
                                 <clipView key="contentView" id="HKd-3b-GtA">
-                                    <rect key="frame" x="1" y="0.0" width="654" height="105"/>
+                                    <rect key="frame" x="1" y="0.0" width="654" height="59"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" headerView="T8q-fs-lHu" viewBased="YES" id="PdL-Om-6AF">
-                                            <rect key="frame" x="0.0" y="0.0" width="654" height="82"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="654" height="36"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2773,7 +2773,7 @@ DQ
                                 </view>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5NX-85-zH5">
-                                <rect key="frame" x="795" y="378" width="187" height="17"/>
+                                <rect key="frame" x="795" y="376" width="187" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Number of remote files: 0 " id="98g-gR-DSr">
                                     <font key="font" metaFont="message" size="11"/>
@@ -3009,6 +3009,24 @@ DQ
                                     <action selector="restore:" target="lhw-tZ-aSZ" id="PYI-5s-BW5"/>
                                 </connections>
                             </button>
+                            <popUpButton id="rQk-fM-xfL">
+                                <rect key="frame" x="981" y="376" width="91" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="bevel" title="Item 1" bezelStyle="rounded" alignment="right" lineBreakMode="truncatingTail" state="on" transparent="YES" imageScaling="proportionallyDown" inset="2" selectedItem="dpa-J8-Dgy" id="I26-vX-ujQ">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" size="11" name="HelveticaNeue"/>
+                                    <menu key="menu" id="U4V-P6-Pzt">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="dpa-J8-Dgy"/>
+                                            <menuItem title="Item 2" id="t88-PU-LpV"/>
+                                            <menuItem title="Item 3" id="T7F-nV-wg2"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="selectprofile:" target="lhw-tZ-aSZ" id="WmY-fb-vnM"/>
+                                </connections>
+                            </popUpButton>
                         </subviews>
                     </view>
                     <connections>
@@ -3017,6 +3035,7 @@ DQ
                         <outlet property="fullrestorebutton" destination="6Ci-mq-rOP" id="vbi-3W-Eht"/>
                         <outlet property="info" destination="Kne-Bx-bDl" id="g1t-ec-nio"/>
                         <outlet property="numberofrows" destination="5NX-85-zH5" id="kDR-Bf-PSC"/>
+                        <outlet property="profilepopupbutton" destination="rQk-fM-xfL" id="Ii6-gN-eX4"/>
                         <outlet property="rcatalog" destination="eLe-mY-uNw" id="2B2-iY-ad5"/>
                         <outlet property="rclonetableView" destination="kZV-bb-ShA" id="HpS-Mm-7pA"/>
                         <outlet property="remotesource" destination="oH0-fk-pfL" id="EUd-fs-lM7"/>
