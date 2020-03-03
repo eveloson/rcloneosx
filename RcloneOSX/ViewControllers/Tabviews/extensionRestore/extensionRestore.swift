@@ -145,14 +145,12 @@ extension ViewControllerRestore: UpdateProgress {
             guard ViewControllerReference.shared.restorefilespath != nil else { return }
             self.working.stopAnimation(nil)
             self.restorebutton.isEnabled = true
-            self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
-            self.info.stringValue = "Got it..."
+            self.info(num: 5)
         case .restore:
             if let vc = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess {
                 vc.processTermination()
             }
-            self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
-            self.info.stringValue = "Got it..."
+            self.info(num: 5)
         }
     }
 

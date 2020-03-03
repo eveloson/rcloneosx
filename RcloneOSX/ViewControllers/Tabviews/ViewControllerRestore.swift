@@ -107,9 +107,20 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     func info(num: Int) {
         switch num {
         case 1:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .red)
             self.info.stringValue = "...Set it in user config..."
         case 2:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .red)
             self.info.stringValue = "Choose a remote resource..."
+        case 3:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
+            self.info.stringValue = "Getting info, please wait..."
+        case 4:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
+            self.info.stringValue = "Executing restore..."
+        case 5:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
+            self.info.stringValue = "Got it..."
         default:
             self.info.stringValue = ""
         }
@@ -124,8 +135,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 if let index = self.rcloneindex {
                     self.workqueue = [Work]()
                     self.workqueue?.append(.restore)
-                    self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
-                    self.info.stringValue = "Executing restore..."
+                    self.info(num: 4)
                     self.restorebutton.isEnabled = false
                     self.estimatebutton.isEnabled = false
                     self.outputprocess = OutputProcess()
@@ -156,8 +166,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         case .on:
             if let index = self.rcloneindex {
                 _ = self.removework()
-                self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
-                self.info.stringValue = "Getting info, please wait..."
+                self.info(num: 3)
                 self.estimatebutton.isEnabled = false
                 self.working.startAnimation(nil)
                 self.outputprocess = OutputProcess()
@@ -289,11 +298,10 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         guard self.outputprocess?.getOutput()?.count ?? 0 > 0 else { return }
         let size = self.remoterclonesize(input: self.outputprocess!.getOutput()![0])
         guard size != nil else { return }
+        self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
         self.info.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.decimal)) + " " + String(NumberFormatter.localizedString(from: NSNumber(value: size!.bytes / 1024), number: NumberFormatter.Style.decimal))
         self.working.stopAnimation(nil)
         self.restorebutton.isEnabled = true
-        self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
-        self.info.stringValue = "Got it..."
     }
 
     func getremotenumbers() {
@@ -307,6 +315,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     func setnumbers(outputprocess: OutputProcess?) {
         globalMainQueue.async { () -> Void in
             let infotask = RemoteinfonumbersOnetask(outputprocess: outputprocess)
+            self.info.textColor = self.setcolor(nsviewcontroller: self, color: .green)
             self.info.stringValue = infotask.transferredNumber ?? "0"
         }
     }
