@@ -21,7 +21,7 @@ enum Work {
     case restore
 }
 
-class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain, Checkforrclone, Abort, Remoterclonesize {
+class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain, Checkforrclone, Abort, Remoterclonesize, Setcolor {
     var restorefiles: Restorefiles?
     var remotefilelist: Remotefilelist?
     var rcloneindex: Int?
@@ -31,12 +31,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     var maxcount: Int = 0
     var workqueue: [Work]?
     weak var sendprocess: SendProcessreference?
-
-    //
-    @IBOutlet var transferredNumber: NSTextField!
-    @IBOutlet var totalNumber: NSTextField!
-    @IBOutlet var totalNumberSizebytes: NSTextField!
-    //
 
     @IBOutlet var numberofrows: NSTextField!
     @IBOutlet var server: NSTextField!
@@ -128,8 +122,8 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 if let index = self.rcloneindex {
                     self.workqueue = [Work]()
                     self.workqueue?.append(.restore)
-                    // self.gotit.textColor = setcolor(nsviewcontroller: self, color: .white)
-                    // self.gotit.stringValue = "Executing restore..."
+                    self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
+                    self.info.stringValue = "Executing restore..."
                     self.restorebutton.isEnabled = false
                     self.estimatebutton.isEnabled = false
                     self.outputprocess = OutputProcess()
@@ -160,9 +154,8 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         case .on:
             if let index = self.rcloneindex {
                 _ = self.removework()
-                // self.gotit.textColor = setcolor(nsviewcontroller: self, color: .white)
-                // self.gotit.stringValue = "Getting info, please wait..."
-                // self.gotit.isHidden = false
+                self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
+                self.info.stringValue = "Getting info, please wait..."
                 self.estimatebutton.isEnabled = false
                 self.working.startAnimation(nil)
                 self.outputprocess = OutputProcess()
@@ -302,12 +295,11 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         guard self.outputprocess?.getOutput()?.count ?? 0 > 0 else { return }
         let size = self.remoterclonesize(input: self.outputprocess!.getOutput()![0])
         guard size != nil else { return }
-        self.totalNumber.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.decimal))
-        self.totalNumberSizebytes.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.bytes / 1024), number: NumberFormatter.Style.decimal))
+        self.info.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.decimal)) + " " + String(NumberFormatter.localizedString(from: NSNumber(value: size!.bytes / 1024), number: NumberFormatter.Style.decimal))
         self.working.stopAnimation(nil)
         self.restorebutton.isEnabled = true
-        // self.gotit.textColor = setcolor(nsviewcontroller: self, color: .green)
-        // self.gotit.stringValue = "Got it..."
+        self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
+        self.info.stringValue = "Got it..."
     }
 
     func getremotenumbers() {
@@ -318,10 +310,10 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         }
     }
 
-    func setNumbers(outputprocess: OutputProcess?) {
+    func setnumbers(outputprocess: OutputProcess?) {
         globalMainQueue.async { () -> Void in
             let infotask = RemoteinfonumbersOnetask(outputprocess: outputprocess)
-            self.transferredNumber.stringValue = infotask.transferredNumber!
+            self.info.stringValue = infotask.transferredNumber ?? "0"
         }
     }
 }

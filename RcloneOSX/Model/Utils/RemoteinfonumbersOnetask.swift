@@ -9,7 +9,7 @@
 
 import Foundation
 
-class RemoteinfonumbersOnetask {
+struct RemoteinfonumbersOnetask {
     var transferredNumber: String?
     var transferredNumberSizebytes: String?
     var totalNumber: String?
