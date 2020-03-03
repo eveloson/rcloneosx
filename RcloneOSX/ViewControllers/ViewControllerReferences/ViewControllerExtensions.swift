@@ -121,7 +121,6 @@ protocol DismissViewController: AnyObject {
 protocol SetDismisser {
     var dismissDelegateMain: DismissViewController? { get }
     var dismissDelegateNewConfigurations: DismissViewController? { get }
-    var dismissDelegateCopyFiles: DismissViewController? { get }
     var dismissDelegateLoggData: DismissViewController? { get }
     var dismissDelegateRestore: DismissViewController? { get }
 }
@@ -129,10 +128,6 @@ protocol SetDismisser {
 extension SetDismisser {
     var dismissDelegateMain: DismissViewController? {
         return ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
-    }
-
-    var dismissDelegateCopyFiles: DismissViewController? {
-        return ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerRestore
     }
 
     var dismissDelegateNewConfigurations: DismissViewController? {
@@ -144,14 +139,12 @@ extension SetDismisser {
     }
 
     var dismissDelegateRestore: DismissViewController? {
-        return ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestoreOrg
+        return ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
     }
 
     func dismissview(viewcontroller _: NSViewController, vcontroller: ViewController) {
         if vcontroller == .vctabmain {
             self.dismissDelegateMain?.dismiss_view(viewcontroller: (self as? NSViewController)!)
-        } else if vcontroller == .vccopyfiles {
-            self.dismissDelegateCopyFiles?.dismiss_view(viewcontroller: (self as? NSViewController)!)
         } else if vcontroller == .vcnewconfigurations {
             self.dismissDelegateNewConfigurations?.dismiss_view(viewcontroller: (self as? NSViewController)!)
         } else if vcontroller == .vcloggdata {
@@ -258,10 +251,8 @@ protocol ChangeRestorePath {
 
 extension ChangeRestorePath {
     func changerestorepath() {
-        let view = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerRestore
+        let view = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
         view?.setrestorepath()
-        let view2 = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestoreOrg
-        view2?.setrestorepath()
     }
 }
 

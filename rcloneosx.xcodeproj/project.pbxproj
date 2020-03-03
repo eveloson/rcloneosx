@@ -121,7 +121,6 @@
 		E9B8B02722B10B620063024E /* Norclone.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B8B02622B10B620063024E /* Norclone.swift */; };
 		E9BC41E3206517A5001DBCC6 /* AllConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BC41E2206517A5001DBCC6 /* AllConfigurations.swift */; };
 		E9BC41E52065184F001DBCC6 /* ViewControllerAllProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BC41E42065184E001DBCC6 /* ViewControllerAllProfiles.swift */; };
-		E9C2029C211BFD8A005E3B11 /* ViewControllerRestoreOrg.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C2029B211BFD8A005E3B11 /* ViewControllerRestoreOrg.swift */; };
 		E9C2029E211BFE1A005E3B11 /* RestoreTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C2029D211BFE1A005E3B11 /* RestoreTask.swift */; };
 		E9C68A152368AB2C00CBA2F5 /* rcloneosxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C68A142368AB2C00CBA2F5 /* rcloneosxTests.swift */; };
 		E9CB92351FEE29800047F9CA /* ViewControllerQuickBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB92341FEE29800047F9CA /* ViewControllerQuickBackup.swift */; };
@@ -241,7 +240,6 @@
 		E9B8B02622B10B620063024E /* Norclone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Norclone.swift; sourceTree = "<group>"; };
 		E9BC41E2206517A5001DBCC6 /* AllConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllConfigurations.swift; sourceTree = "<group>"; };
 		E9BC41E42065184E001DBCC6 /* ViewControllerAllProfiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerAllProfiles.swift; sourceTree = "<group>"; };
-		E9C2029B211BFD8A005E3B11 /* ViewControllerRestoreOrg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerRestoreOrg.swift; sourceTree = "<group>"; };
 		E9C2029D211BFE1A005E3B11 /* RestoreTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreTask.swift; sourceTree = "<group>"; };
 		E9C68A122368AB2C00CBA2F5 /* rcloneosxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rcloneosxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C68A142368AB2C00CBA2F5 /* rcloneosxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rcloneosxTests.swift; sourceTree = "<group>"; };
@@ -321,7 +319,6 @@
 		E9199F53231AF5680069EBBD /* Tabviews */ = {
 			isa = PBXGroup;
 			children = (
-				E9C2029B211BFD8A005E3B11 /* ViewControllerRestoreOrg.swift */,
 				E9A795891FBF285300AF8A5F /* ViewControllerRestore.swift */,
 				E9303CA4240DA60800EEB686 /* extensionRestore */,
 				E960CAEF1FB091DB0008D12E /* ViewControllerLoggData.swift */,
@@ -846,7 +843,6 @@
 				E92B18BB2096F83F001DBFAF /* EstimateremoteInformationOnetask.swift in Sources */,
 				E9303CA6240DA64100EEB686 /* extensionRestore.swift in Sources */,
 				E960CB341FB091DE0008D12E /* ViewControllerNewConfigurations.swift in Sources */,
-				E9C2029C211BFD8A005E3B11 /* ViewControllerRestoreOrg.swift in Sources */,
 				E93D9E0923695B7A007074D1 /* ArgumentsRestoreSinglefiles.swift in Sources */,
 				E97CDF2722780C9F007E9F4B /* ConvertConfigurations.swift in Sources */,
 				E960CB431FB091DE0008D12E /* PersistentStorageScheduling.swift in Sources */,

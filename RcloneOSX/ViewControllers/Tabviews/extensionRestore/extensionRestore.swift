@@ -88,7 +88,7 @@ extension ViewControllerRestore: UpdateProgress {
             self.workqueue?.append(.localinfoandnumbertosync)
             return nil
         }
-        guard self.workqueue!.count > 1 else {
+        guard (self.workqueue?.count ?? 0) > 1 else {
             let work = self.workqueue?[0] ?? .restore
             return work
         }

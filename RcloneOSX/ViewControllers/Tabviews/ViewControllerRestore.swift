@@ -183,24 +183,12 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     @IBAction func togglefullrestore(_: NSButton) {
         self.estimatebutton.isEnabled = true
         self.restorebutton.isEnabled = false
-    }
-
-    private func displayRemoteserver(index: Int?) {
-        guard index != nil else {
-            self.server.stringValue = ""
-            self.rcatalog.stringValue = ""
-            return
-        }
-        let hiddenID = self.configurations!.gethiddenID(index: index!)
-        globalMainQueue.async { () -> Void in
-            self.server.stringValue = self.configurations!.getResourceConfiguration(hiddenID: hiddenID, resource: .offsiteServer)
-            self.rcatalog.stringValue = self.configurations!.getResourceConfiguration(hiddenID: hiddenID, resource: .remoteCatalog)
-        }
+        self.commandstring.stringValue = ""
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ViewControllerReference.shared.setvcref(viewcontroller: .vccopyfiles, nsviewcontroller: self)
+        ViewControllerReference.shared.setvcref(viewcontroller: .vcrestore, nsviewcontroller: self)
         self.restoretableView.delegate = self
         self.restoretableView.dataSource = self
         self.rclonetableView.delegate = self
@@ -281,7 +269,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                     self.restorefiles = Restorefiles(hiddenID: hiddenID)
                     self.remotefilelist = Remotefilelist(hiddenID: hiddenID)
                     self.working.startAnimation(nil)
-                    self.displayRemoteserver(index: index)
                 }
             } else {
                 self.rcloneindex = nil

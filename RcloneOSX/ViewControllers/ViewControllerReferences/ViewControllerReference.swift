@@ -17,12 +17,11 @@ enum ViewController {
     case vcabout
     case vcbatch
     case vcprogressview
-    case vccopyfiles
+    case vcrestore
     case vcquickbackup
     case vcallprofiles
     case vcestimatingtasks
     case vcremoteinfo
-    case vcrestore
     case vcalloutput
 }
 
@@ -123,7 +122,7 @@ class ViewControllerReference {
             return self.viewControllerBatch
         case .vcprogressview:
             return self.viewControllerProgressView
-        case .vccopyfiles:
+        case .vcrestore:
             return self.viewControllerCopyFiles
         case .vcquickbackup:
             return self.viewControllerQuickBatch
@@ -154,7 +153,7 @@ class ViewControllerReference {
             self.viewControllerBatch = nsviewcontroller
         case .vcprogressview:
             self.viewControllerProgressView = nsviewcontroller
-        case .vccopyfiles:
+        case .vcrestore:
             self.viewControllerCopyFiles = nsviewcontroller
         case .vcquickbackup:
             self.viewControllerQuickBatch = nsviewcontroller

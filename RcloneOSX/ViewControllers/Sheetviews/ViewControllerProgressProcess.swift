@@ -27,8 +27,6 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
         case is ViewControllerMain:
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
         case is ViewControllerRestore:
-            self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
-        case is ViewControllerRestoreOrg:
             self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
         default:
             return
@@ -44,9 +42,7 @@ class ViewControllerProgressProcess: NSViewController, SetConfigurations, SetDis
         if let pvc = (self.presentingViewController as? ViewControllerMain)?.singletask {
             self.countDelegate = pvc
         } else if (self.presentingViewController as? ViewControllerRestore) != nil {
-            self.countDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vccopyfiles) as? ViewControllerRestore
-        } else if (self.presentingViewController as? ViewControllerRestoreOrg) != nil {
-            self.countDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestoreOrg
+            self.countDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
         }
         self.initiateProgressbar()
         self.abort.isEnabled = true
@@ -82,8 +78,6 @@ extension ViewControllerProgressProcess: UpdateProgress {
         case is ViewControllerMain:
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
         case is ViewControllerRestore:
-            self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
-        case is ViewControllerRestoreOrg:
             self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
         default:
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
