@@ -198,6 +198,7 @@ extension ViewControllerRestore: Setrestorepath {
 extension ViewControllerRestore: NewProfile {
     func newProfile(profile _: String?) {
         self.restoretabledata = nil
+        self.reset()
         globalMainQueue.async { () -> Void in
             self.restoretableView.reloadData()
             self.rclonetableView.reloadData()

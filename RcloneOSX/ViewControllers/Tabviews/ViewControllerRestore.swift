@@ -34,8 +34,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     weak var sendprocess: SendProcessreference?
 
     @IBOutlet var numberofrows: NSTextField!
-    @IBOutlet var server: NSTextField!
-    @IBOutlet var rcatalog: NSTextField!
     @IBOutlet var info: NSTextField!
     @IBOutlet var restoretableView: NSTableView!
     @IBOutlet var rclonetableView: NSTableView!
@@ -121,6 +119,9 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         case 5:
             self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
             self.info.stringValue = "Got it..."
+        case 6:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .red)
+            self.info.stringValue = "Select a restore type..."
         default:
             self.info.stringValue = ""
         }
@@ -179,7 +180,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         case .off:
             guard self.remotesource.stringValue.isEmpty == false,
                 self.restorepath.stringValue.isEmpty == false else {
-                self.info(num: 2)
+                self.info(num: 6)
                 return
             }
             self.working.startAnimation(nil)
@@ -191,11 +192,16 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     }
 
     @IBAction func togglefullrestore(_: NSButton) {
+        self.reset()
+    }
+
+    func reset() {
         self.estimatebutton.isEnabled = true
         self.restorebutton.isEnabled = false
         self.commandstring.stringValue = ""
         self.restorefiles = nil
         self.remotefilelist = nil
+        self.restoretask = nil
         self.workqueue = nil
     }
 
@@ -297,9 +303,10 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     func setremoteinfo() {
         guard self.outputprocess?.getOutput()?.count ?? 0 > 0 else { return }
         let size = self.remoterclonesize(input: self.outputprocess!.getOutput()![0])
-        guard size != nil else { return }
+        let numberoffiles = String(NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal))
+        let sizeoffiles = String(NumberFormatter.localizedString(from: NSNumber(value: size?.bytes ?? 0 / 1024), number: NumberFormatter.Style.decimal))
         self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
-        self.info.stringValue = String(NumberFormatter.localizedString(from: NSNumber(value: size!.count), number: NumberFormatter.Style.decimal)) + " " + String(NumberFormatter.localizedString(from: NSNumber(value: size!.bytes / 1024), number: NumberFormatter.Style.decimal))
+        self.info.stringValue = "Number of files: " + numberoffiles + " wiht size (Kb): " + sizeoffiles
         self.working.stopAnimation(nil)
         self.restorebutton.isEnabled = true
     }
