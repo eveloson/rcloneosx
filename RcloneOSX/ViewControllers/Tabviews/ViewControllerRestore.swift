@@ -122,12 +122,16 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         case 6:
             self.info.textColor = setcolor(nsviewcontroller: self, color: .red)
             self.info.stringValue = "Select a restore type..."
+        case 7:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .red)
+            self.info.stringValue = "Wait, in process of getting remote filelist..."
         default:
             self.info.stringValue = ""
         }
     }
 
     @IBAction func restore(_: NSButton) {
+        guard self.fullrestorebutton.state == .on || self.restorefilesbutton.state == .on else { return }
         self.restorebutton.isEnabled = false
         switch self.fullrestorebutton.state {
         case .on:
@@ -162,6 +166,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     }
 
     @IBAction func estimate(_: NSButton) {
+        guard self.fullrestorebutton.state == .on || self.restorefilesbutton.state == .on else { return }
         self.estimatebutton.isEnabled = false
         switch self.fullrestorebutton.state {
         case .on:
@@ -178,14 +183,13 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 }
             }
         case .off:
-            guard self.remotesource.stringValue.isEmpty == false,
-                self.restorepath.stringValue.isEmpty == false else {
-                self.info(num: 6)
-                return
+            if self.rcloneindex != nil {
+                self.working.startAnimation(nil)
+                self.restorefiles?.executecopyfiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue, dryrun: true, updateprogress: self)
+                self.outputprocess = self.restorefiles?.outputprocess
+            } else {
+                self.info(num: 2)
             }
-            self.working.startAnimation(nil)
-            self.restorefiles?.executecopyfiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue, dryrun: true, updateprogress: self)
-            self.outputprocess = self.restorefiles?.outputprocess
         default:
             return
         }
@@ -196,13 +200,23 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     }
 
     func reset() {
-        self.estimatebutton.isEnabled = true
+        if self.restorefilesbutton.state == .on || self.fullrestorebutton.state == .on {
+            self.estimatebutton.isEnabled = true
+        } else {
+            self.estimatebutton.isEnabled = false
+        }
         self.restorebutton.isEnabled = false
         self.commandstring.stringValue = ""
+        self.info.stringValue = ""
         self.restorefiles = nil
         self.remotefilelist = nil
         self.restoretask = nil
         self.workqueue = nil
+        self.rcloneindex = nil
+        self.restoretabledata = nil
+        globalMainQueue.async { () -> Void in
+            self.restoretableView.reloadData()
+        }
     }
 
     override func viewDidLoad() {
@@ -278,9 +292,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             let indexes = myTableViewFromNotification.selectedRowIndexes
             if let index = indexes.first {
                 guard self.inprogress() == false else {
-                    self.working.stopAnimation(nil)
-                    guard self.restorefiles != nil else { return }
-                    self.restorefiles?.abort()
+                    self.info(num: 7)
                     return
                 }
                 self.rcloneindex = index
@@ -291,11 +303,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                     self.working.startAnimation(nil)
                 }
             } else {
-                self.rcloneindex = nil
-                self.restoretabledata = nil
-                globalMainQueue.async { () -> Void in
-                    self.restoretableView.reloadData()
-                }
+                self.reset()
             }
         }
     }
