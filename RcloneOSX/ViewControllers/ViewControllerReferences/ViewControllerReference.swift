@@ -17,12 +17,11 @@ enum ViewController {
     case vcabout
     case vcbatch
     case vcprogressview
-    case vccopyfiles
+    case vcrestore
     case vcquickbackup
     case vcallprofiles
     case vcestimatingtasks
     case vcremoteinfo
-    case vcrestore
     case vcalloutput
 }
 
@@ -47,8 +46,8 @@ class ViewControllerReference {
     var norclone: Bool = false
     // Detailed logging
     var detailedlogging: Bool = true
-    // Temporary path for restore
-    var restorePath: String?
+    // Path for restore
+    var restorefilespath: String?
     // Reference to the Operation object
     // Reference is set in when Scheduled task is executed
     var completeoperation: CompleteQuickbackupTask?
@@ -84,8 +83,6 @@ class ViewControllerReference {
     var initialstart: Int = 0
 
     private var viewControllertabMain: NSViewController?
-    // Reference to Copy files
-    private var viewControllerCopyFiles: NSViewController?
     // Reference to the New tasks
     private var viewControllerNewConfigurations: NSViewController?
     // Which profile to use, if default nil
@@ -123,8 +120,6 @@ class ViewControllerReference {
             return self.viewControllerBatch
         case .vcprogressview:
             return self.viewControllerProgressView
-        case .vccopyfiles:
-            return self.viewControllerCopyFiles
         case .vcquickbackup:
             return self.viewControllerQuickBatch
         case .vcallprofiles:
@@ -154,8 +149,6 @@ class ViewControllerReference {
             self.viewControllerBatch = nsviewcontroller
         case .vcprogressview:
             self.viewControllerProgressView = nsviewcontroller
-        case .vccopyfiles:
-            self.viewControllerCopyFiles = nsviewcontroller
         case .vcquickbackup:
             self.viewControllerQuickBatch = nsviewcontroller
         case .vcallprofiles:

@@ -11,7 +11,6 @@
 import Foundation
 
 final class Restorefiles: SetConfigurations {
-    private var index: Int?
     private var config: Configuration?
     private var commandDisplay: String?
     var process: ProcessCmd?
@@ -23,17 +22,16 @@ final class Restorefiles: SetConfigurations {
     }
 
     func abort() {
-        guard self.process != nil else { return }
-        self.process!.abortProcess()
+        self.process?.abortProcess()
     }
 
     func executecopyfiles(remotefile: String, localCatalog: String, dryrun: Bool, updateprogress: UpdateProgress) {
         var arguments: [String]?
         guard self.config != nil else { return }
         if dryrun {
-            arguments = RestorefilesArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getArgumentsdryRun()
+            arguments = RestorefilesArguments(task: .restorerclone, config: self.config, remotefile: remotefile, localCatalog: localCatalog).getArgumentsdryRun()
         } else {
-            arguments = RestorefilesArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getArguments()
+            arguments = RestorefilesArguments(task: .restorerclone, config: self.config, remotefile: remotefile, localCatalog: localCatalog).getArguments()
         }
         self.outputprocess = OutputProcess()
         self.process = ProcessCmd(command: nil, arguments: arguments)
@@ -42,16 +40,16 @@ final class Restorefiles: SetConfigurations {
         self.process!.executeProcess(outputprocess: self.outputprocess)
     }
 
-    func getCommandDisplayinView(remotefile: String, localCatalog: String) -> String {
+    func getcommandrestorefiles(remotefile: String, localCatalog: String) -> String {
         guard self.config != nil else { return "" }
-        guard self.index != nil else { return "" }
-        self.commandDisplay = RestorefilesArguments(task: .restorerclone, config: self.config!, remotefile: remotefile, localCatalog: localCatalog).getcommandDisplay()
+        self.commandDisplay = RestorefilesArguments(task: .restorerclone, config: self.config, remotefile: remotefile, localCatalog: localCatalog).getcommandDisplay()
         return self.commandDisplay ?? " "
     }
 
     init(hiddenID: Int) {
         self.sendprocess = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
-        self.index = self.configurations?.getIndex(hiddenID: hiddenID)
-        self.config = self.configurations!.getConfigurations()[self.index!]
+        if let index = self.configurations?.getIndex(hiddenID: hiddenID) {
+            self.config = self.configurations?.getConfigurations()[index]
+        }
     }
 }

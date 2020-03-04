@@ -10,7 +10,7 @@
 import Cocoa
 import Foundation
 
-class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser, Delay, ChangeTemporaryRestorePath {
+class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser, Delay, ChangeRestorePath {
     var dirty: Bool = false
     weak var reloadconfigurationsDelegate: Createandreloadconfigurations?
     var oldmarknumberofdayssince: Double?
@@ -47,18 +47,16 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
             if self.reload {
                 self.reloadconfigurationsDelegate?.createandreloadconfigurations()
             }
-            self.changetemporaryrestorepath()
+            self.changerestorepath()
         }
         if (self.presentingViewController as? ViewControllerMain) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
         } else if (self.presentingViewController as? ViewControllerNewConfigurations) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vcnewconfigurations)
-        } else if (self.presentingViewController as? ViewControllerCopyFiles) != nil {
-            self.dismissview(viewcontroller: self, vcontroller: .vccopyfiles)
-        } else if (self.presentingViewController as? ViewControllerLoggData) != nil {
-            self.dismissview(viewcontroller: self, vcontroller: .vcloggdata)
         } else if (self.presentingViewController as? ViewControllerRestore) != nil {
             self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
+        } else if (self.presentingViewController as? ViewControllerLoggData) != nil {
+            self.dismissview(viewcontroller: self, vcontroller: .vcloggdata)
         }
         _ = RcloneVersionString()
     }
@@ -143,12 +141,12 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
         if self.restorePath.stringValue.isEmpty == false {
             if restorePath.stringValue.hasSuffix("/") == false {
                 restorePath.stringValue += "/"
-                ViewControllerReference.shared.restorePath = restorePath.stringValue
+                ViewControllerReference.shared.restorefilespath = restorePath.stringValue
             } else {
-                ViewControllerReference.shared.restorePath = restorePath.stringValue
+                ViewControllerReference.shared.restorefilespath = restorePath.stringValue
             }
         } else {
-            ViewControllerReference.shared.restorePath = nil
+            ViewControllerReference.shared.restorefilespath = nil
         }
         self.dirty = true
     }
@@ -182,8 +180,8 @@ class ViewControllerUserconfiguration: NSViewController, NewRclone, SetDismisser
         } else {
             self.rclonePath.stringValue = ""
         }
-        if ViewControllerReference.shared.restorePath != nil {
-            self.restorePath.stringValue = ViewControllerReference.shared.restorePath!
+        if ViewControllerReference.shared.restorefilespath != nil {
+            self.restorePath.stringValue = ViewControllerReference.shared.restorefilespath!
         } else {
             self.restorePath.stringValue = ""
         }

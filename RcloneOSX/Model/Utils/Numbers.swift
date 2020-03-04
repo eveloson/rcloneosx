@@ -101,8 +101,8 @@ final class Numbers: SetConfigurations {
     }
 
     init(outputprocess: OutputProcess?) {
-        guard outputprocess != nil else { return }
-        self.output = outputprocess!.getOutput()
+        self.output = outputprocess?.getOutput()
+        guard self.output != nil else { return }
         self.prepareresult()
     }
 }

@@ -45,8 +45,8 @@ struct ConvertUserconfiguration {
         if ViewControllerReference.shared.rclonePath != nil {
             rclonePath = ViewControllerReference.shared.rclonePath!
         }
-        if ViewControllerReference.shared.restorePath != nil {
-            restorePath = ViewControllerReference.shared.restorePath!
+        if ViewControllerReference.shared.restorefilespath != nil {
+            restorePath = ViewControllerReference.shared.restorefilespath!
         }
         if ViewControllerReference.shared.rclone143 != nil {
             rclone143 = 1
