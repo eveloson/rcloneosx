@@ -79,10 +79,10 @@ extension ViewControllerRestore: NSTableViewDelegate {
 }
 
 extension ViewControllerRestore: UpdateProgress {
-    func removework() -> Work? {
+    func removework() -> Workfullrestore? {
         // Initialize
         guard self.workqueue != nil else {
-            self.workqueue = [Work]()
+            self.workqueue = [Workfullrestore]()
             self.workqueue?.append(.setremotenumbers)
             self.workqueue?.append(.getremotenumbers)
             self.workqueue?.append(.localinfoandnumbertosync)
