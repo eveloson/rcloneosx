@@ -14,7 +14,7 @@ protocol Updateremotefilelist: AnyObject {
     func updateremotefilelist()
 }
 
-enum Work {
+enum Workfullrestore {
     case localinfoandnumbertosync
     case getremotenumbers
     case setremotenumbers
@@ -30,7 +30,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     var diddissappear: Bool = false
     var outputprocess: OutputProcess?
     var maxcount: Int = 0
-    var workqueue: [Work]?
+    var workqueue: [Workfullrestore]?
     weak var sendprocess: SendProcessreference?
 
     @IBOutlet var numberofrows: NSTextField!
@@ -138,7 +138,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             let answer = Alerts.dialogOKCancel("Do you REALLY want to start a RESTORE ?", text: "Cancel or OK")
             if answer {
                 if let index = self.rcloneindex {
-                    self.workqueue = [Work]()
+                    self.workqueue = [Workfullrestore]()
                     self.workqueue?.append(.restore)
                     self.info(num: 4)
                     self.restorebutton.isEnabled = false
@@ -200,11 +200,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     }
 
     func reset() {
-        if self.restorefilesbutton.state == .on || self.fullrestorebutton.state == .on {
-            self.estimatebutton.isEnabled = true
-        } else {
-            self.estimatebutton.isEnabled = false
-        }
+        self.estimatebutton.isEnabled = false
         self.restorebutton.isEnabled = false
         self.commandstring.stringValue = ""
         self.info.stringValue = ""
@@ -249,7 +245,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             self.rclonetableView.reloadData()
         }
         self.initpopupbutton(button: self.profilepopupbutton)
-        self.restorefilesbutton.state = .on
     }
 
     override func viewDidDisappear() {
@@ -298,7 +293,10 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 }
                 self.rcloneindex = index
                 if let hiddenID = self.configurations?.getConfigurationsSyncandCopy()?[index].value(forKey: "hiddenID") as? Int {
-                    guard self.restorefilesbutton.state == .on else { return }
+                    guard self.restorefilesbutton.state == .on else {
+                        self.estimatebutton.isEnabled = true
+                        return
+                    }
                     self.restorefiles = Restorefiles(hiddenID: hiddenID)
                     self.remotefilelist = Remotefilelist(hiddenID: hiddenID)
                     self.working.startAnimation(nil)
