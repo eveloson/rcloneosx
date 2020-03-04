@@ -40,6 +40,8 @@ Estimation of task for sync completed.
 ![](images/main2.png)
 Sync of task in action.
 ![](images/main3.png)
+Logs.
+![](images/main4.png)
 
 ### Compile
 
