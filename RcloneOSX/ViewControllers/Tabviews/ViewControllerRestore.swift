@@ -183,7 +183,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 }
             }
         case .off:
-            if self.rcloneindex != nil {
+            if self.rcloneindex != nil, self.restorepath.stringValue.isEmpty == false, self.remotesource.stringValue.isEmpty == false {
                 self.working.startAnimation(nil)
                 self.restorefiles?.executecopyfiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue, dryrun: true, updateprogress: self)
                 self.outputprocess = self.restorefiles?.outputprocess
@@ -249,6 +249,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             self.rclonetableView.reloadData()
         }
         self.initpopupbutton(button: self.profilepopupbutton)
+        self.restorefilesbutton.state = .on
     }
 
     override func viewDidDisappear() {
