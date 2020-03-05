@@ -14,6 +14,10 @@ Rclone is *rsync for cloud storage*. Even if `rclone` and `rsync` are somewhat e
 
 I am not an advanced user of `rclone` and my use of RcloneOSX is **synchronizing** my GitHub catalogs to Dropbox and OneNote for test. Rclone has lot more functions than just synchronizing data. There are no plans to implement more functions into RcloneOSX.
 
+### Screenshots
+
+Here are [some samples of screenshots](https://github.com/rsyncOSX/rcloneosx/blob/next-version/Views/Views.md).
+
 ### Where to start utilizing RcloneOSX
 
 To start utilizing RcloneOSX first of all add configurations by command line `rclone config`. When RcloneOSX starts it pick up configurations added by rclone. Rclone configurations must be stored in standard configuration catalog e.g. `/Users/thomas/.config/rclone` and **not** encrypted.
@@ -32,16 +36,7 @@ The application icon is created by [Zsolt Sándor](https://github.com/graphis). 
 
 The app is signed with my Apple ID developer certificate and [notarized](https://support.apple.com/en-us/HT202491) by Apple. See [signing and notarizing](https://rsyncosx.github.io/Notarized) for info. Signing and notarizing is required to run on macOS Catalina.
 
-### Main view
 
-The main view of RcloneOSX.
-![](images/main1.png)
-Estimation of task for sync completed.
-![](images/main2.png)
-Sync of task in action.
-![](images/main3.png)
-Logs.
-![](images/main4.png)
 
 ### Compile
 
