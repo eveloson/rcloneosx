@@ -34,7 +34,7 @@ The app is signed with my Apple ID developer certificate and [notarized](https:/
 
 ### Screenshots
 
-Here are some samples of screenshots.
+Here are [some samples of screenshots](https://github.com/rsyncOSX/rcloneosx/blob/next-version/Views/Views.md).
 
 ### Compile
 
