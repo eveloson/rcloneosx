@@ -32,16 +32,9 @@ The application icon is created by [Zsolt Sándor](https://github.com/graphis). 
 
 The app is signed with my Apple ID developer certificate and [notarized](https://support.apple.com/en-us/HT202491) by Apple. See [signing and notarizing](https://rsyncosx.github.io/Notarized) for info. Signing and notarizing is required to run on macOS Catalina.
 
-### Main view
+### Screenshots
 
-The main view of RcloneOSX.
-![](images/main1.png)
-Estimation of task for sync completed.
-![](images/main2.png)
-Sync of task in action.
-![](images/main3.png)
-Logs.
-![](images/main4.png)
+Here are some samples of screenshots.
 
 ### Compile
 
