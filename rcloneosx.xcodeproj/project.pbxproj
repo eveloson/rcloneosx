@@ -366,6 +366,7 @@
 		E9482D1E1FB0AEAB00AFBB0D /* RcloneParameters */ = {
 			isa = PBXGroup;
 			children = (
+				E8B9506923183D5D00C743D5 /* RestorefilesArguments.swift */,
 				E960CAC01FB091D40008D12E /* RcloneParameters.swift */,
 				E980F9AA23660BE700B2C3CF /* ComboboxRcloneParameters.swift */,
 				E980F9AC23660C5600B2C3CF /* SuffixstringsRcloneParameters.swift */,
@@ -527,7 +528,6 @@
 		E960CB531FB092E70008D12E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E9F38118240C20350083E2D8 /* ProcessArguments */,
 				E9BC41E12065175B001DBCC6 /* AllProfiles */,
 				E931186A1FC2BCA4007D1C1B /* Logging */,
 				E9DD810A1FBF3AFE0080FEAD /* OutPut */,
@@ -641,14 +641,6 @@
 				E960CAB61FB091D30008D12E /* OutputProcess.swift */,
 			);
 			path = OutPut;
-			sourceTree = "<group>";
-		};
-		E9F38118240C20350083E2D8 /* ProcessArguments */ = {
-			isa = PBXGroup;
-			children = (
-				E8B9506923183D5D00C743D5 /* RestorefilesArguments.swift */,
-			);
-			path = ProcessArguments;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
