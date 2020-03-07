@@ -426,6 +426,7 @@
 		E9482D251FB0B0BC00AFBB0D /* Process */ = {
 			isa = PBXGroup;
 			children = (
+				E8B9506823183D5D00C743D5 /* Restorefiles.swift */,
 				E960CAB81FB091D30008D12E /* Rclone.swift */,
 				E960CACB1FB091D50008D12E /* ProcessCmd.swift */,
 				E954F7D41FF411A6003DF6C0 /* RcloneVersionString.swift */,
@@ -531,7 +532,6 @@
 				E9BC41E12065175B001DBCC6 /* AllProfiles */,
 				E931186A1FC2BCA4007D1C1B /* Logging */,
 				E9DD810A1FBF3AFE0080FEAD /* OutPut */,
-				E9DD81091FBF3A450080FEAD /* Restorefiles */,
 				E9D1F1A01FB49D870099D25C /* CloudServices */,
 				E9482D2D1FB0B37500AFBB0D /* Schedule */,
 				E9482D2C1FB0B36B00AFBB0D /* Configuration */,
@@ -625,14 +625,6 @@
 				E9D1F1A11FB49DB60099D25C /* GetCloudServices.swift */,
 			);
 			path = CloudServices;
-			sourceTree = "<group>";
-		};
-		E9DD81091FBF3A450080FEAD /* Restorefiles */ = {
-			isa = PBXGroup;
-			children = (
-				E8B9506823183D5D00C743D5 /* Restorefiles.swift */,
-			);
-			path = Restorefiles;
 			sourceTree = "<group>";
 		};
 		E9DD810A1FBF3AFE0080FEAD /* OutPut */ = {

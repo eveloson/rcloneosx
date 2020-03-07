@@ -10,7 +10,7 @@ import Foundation
 
 final class RestoreTask: SetConfigurations {
     var arguments: [String]?
-    init(index: Int, outputprocess: OutputProcess?, dryrun: Bool, updateprogress: UpdateProgress?) {
+    init(index: Int, outputprocess _: OutputProcess?, dryrun: Bool, updateprogress: UpdateProgress?) {
         weak var setprocessDelegate: SendProcessreference?
         setprocessDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         if dryrun {
@@ -28,7 +28,8 @@ final class RestoreTask: SetConfigurations {
         }
         let process = Rclone(arguments: self.arguments)
         process.setdelegate(object: updateprogress!)
-        process.executeProcess(outputprocess: outputprocess)
+        // process.executeProcess(outputprocess: outputprocess)
         setprocessDelegate?.sendprocessreference(process: process.getProcess()!)
+        print(arguments!)
     }
 }
