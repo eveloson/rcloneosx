@@ -231,6 +231,13 @@ extension ViewControllerRestore: Count {
     }
 
     func inprogressCount() -> Int {
-        return self.restorefiles?.outputprocess?.count() ?? 0
+        switch self.fullrestorebutton.state {
+        case .on:
+            return self.outputprocess?.count() ?? 0
+        case .off:
+            return self.restorefiles?.outputprocess?.count() ?? 0
+        default:
+            return 0
+        }
     }
 }
