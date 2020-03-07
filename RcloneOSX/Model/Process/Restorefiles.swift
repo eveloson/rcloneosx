@@ -11,8 +11,8 @@
 import Foundation
 
 final class Restorefiles: SetConfigurations {
-    private var config: Configuration?
-    private var commandDisplay: String?
+    var config: Configuration?
+    var commandDisplay: String?
     var process: ProcessCmd?
     var outputprocess: OutputProcess?
     weak var sendprocess: SendProcessreference?

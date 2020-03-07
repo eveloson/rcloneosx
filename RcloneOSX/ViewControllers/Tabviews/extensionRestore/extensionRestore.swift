@@ -136,12 +136,10 @@ extension ViewControllerRestore: UpdateProgress {
         switch self.removework() ?? .localinfoandnumbertosync {
         case .getremotenumbers:
             self.maxcount = self.outputprocess?.getMaxcount() ?? 0
-            self.setnumbers(outputprocess: self.outputprocess)
             self.getremotenumbers()
         case .setremotenumbers:
             self.setremoteinfo()
         case .localinfoandnumbertosync:
-            self.setnumbers(outputprocess: self.outputprocess)
             guard ViewControllerReference.shared.restorefilespath != nil else { return }
             self.working.stopAnimation(nil)
             self.restorebutton.isEnabled = true
