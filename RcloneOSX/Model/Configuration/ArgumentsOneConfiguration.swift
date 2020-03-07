@@ -48,8 +48,8 @@ struct ArgumentsOneConfiguration {
         self.tmprestoredryRun = ArgumentsRestore(config: config).argumentsrestore(dryRun: true, forDisplay: false, tmprestore: true)
         self.argslistRemotefiles = ArgumentsListFiles(config: config).argumentsrclonelistfile()
         // Restore single files or catalogs
-        self.argsRestorefiles = ArgumentsRestoreSinglefiles(config: config).argumentsrclonerestore(dryRun: false, forDisplay: false)
-        self.argsRestorefilesdryRun = ArgumentsRestoreSinglefiles(config: config).argumentsrclonerestore(dryRun: true, forDisplay: false)
-        self.argsRestorefilesdryRunDisplay = ArgumentsRestoreSinglefiles(config: config).argumentsrclonerestore(dryRun: true, forDisplay: true)
+        self.argsRestorefiles = ArgumentsRestoreSinglefiles(config: config).argumentsrclonerestoresinglefiles(dryRun: false, forDisplay: false)
+        self.argsRestorefilesdryRun = ArgumentsRestoreSinglefiles(config: config).argumentsrclonerestoresinglefiles(dryRun: true, forDisplay: false)
+        self.argsRestorefilesdryRunDisplay = ArgumentsRestoreSinglefiles(config: config).argumentsrclonerestoresinglefiles(dryRun: true, forDisplay: true)
     }
 }

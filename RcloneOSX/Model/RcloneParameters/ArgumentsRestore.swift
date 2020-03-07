@@ -12,7 +12,7 @@ final class ArgumentsRestore: RcloneParameters {
     var config: Configuration?
 
     func argumentsrestore(dryRun: Bool, forDisplay: Bool, tmprestore: Bool) -> [String] {
-        self.rclonecommand(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
+        self.rclonecommandrestore(dryRun: dryRun, forDisplay: forDisplay)
         self.remoteparameter(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
         if tmprestore {
             self.localCatalog = ViewControllerReference.shared.restorefilespath ?? ""

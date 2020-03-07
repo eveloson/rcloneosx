@@ -11,7 +11,7 @@ import Foundation
 final class ArgumentsRestoreSinglefiles: RcloneParameters {
     var config: Configuration?
 
-    func argumentsrclonerestore(dryRun: Bool, forDisplay: Bool) -> [String] {
+    func argumentsrclonerestoresinglefiles(dryRun: Bool, forDisplay: Bool) -> [String] {
         self.localCatalog = nil
         self.offsiteCatalog = self.config!.offsiteCatalog
         self.offsiteServer = self.config!.offsiteServer
