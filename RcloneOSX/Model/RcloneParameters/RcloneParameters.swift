@@ -23,6 +23,10 @@ class RcloneParameters {
         }
     }
 
+    func rclonecommandrestore(dryRun _: Bool, forDisplay: Bool) {
+        self.appendparameter(parameter: ViewControllerReference.shared.copy, forDisplay: forDisplay)
+    }
+
     func setParameters2To14(config: Configuration, dryRun _: Bool, forDisplay: Bool) {
         if config.parameter2 != nil {
             self.appendparameter(parameter: config.parameter2!, forDisplay: forDisplay)

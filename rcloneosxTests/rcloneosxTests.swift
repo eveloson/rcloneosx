@@ -62,15 +62,27 @@ class RcloneosxTests: XCTestCase, SetConfigurations {
     }
 
     func testargumentsrestore3() {
-        let arguments = ["sync", "local:/Users/thomas/Destination", "/Users/thomas/Source",
+        let arguments = ["copy", "local:/Users/thomas/Destination", "/Users/thomas/Source",
                          "--dry-run", "--verbose"]
         XCTAssertEqual(arguments, self.configurations?.arguments4restore(index: 3, argtype: .argdryrun),
                        "Arguments should be equal")
     }
 
     func testargumentsrestoretmp3() {
-        let arguments = ["sync", "local:/Users/thomas/Destination", "/temporaryrestore", "--verbose"]
+        let arguments = ["copy", "local:/Users/thomas/Destination", "/temporaryrestore", "--verbose"]
         XCTAssertEqual(arguments, self.configurations?.arguments4tmprestore(index: 3, argtype: .arg),
+                       "Arguments should be equal")
+    }
+
+    func testargumentsrestoretmp4() {
+        let arguments = ["copy", "localencrypt:", "/temporaryrestore", "--verbose", "--exclude-from=/Users/thomas/excludersync/exclude_rclone.txt"]
+        XCTAssertEqual(arguments, self.configurations?.arguments4tmprestore(index: 0, argtype: .arg),
+                       "Arguments should be equal")
+    }
+
+    func testargumentsrestoretmp5() {
+        let arguments = ["copy", "dropbox:GitHuB", "/temporaryrestore", "--verbose", "--exclude-from=/Users/thomas/excludersync/exclude_rclone.txt", "--backup-dir=dropbox:GitHuB_backup"]
+        XCTAssertEqual(arguments, self.configurations?.arguments4tmprestore(index: 1, argtype: .arg),
                        "Arguments should be equal")
     }
 }
