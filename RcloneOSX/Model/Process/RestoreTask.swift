@@ -10,6 +10,16 @@ import Foundation
 
 final class RestoreTask: SetConfigurations {
     var arguments: [String]?
+
+    func getcommandfullrestore() -> String? {
+        var arguments: String?
+        arguments = self.arguments![0]
+        for i in 1 ..< (self.arguments?.count ?? 0) {
+            arguments = arguments! + " " + self.arguments![i]
+        }
+        return arguments
+    }
+
     init(index: Int, outputprocess: OutputProcess?, dryrun: Bool, updateprogress: UpdateProgress?) {
         weak var setprocessDelegate: SendProcessreference?
         setprocessDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain

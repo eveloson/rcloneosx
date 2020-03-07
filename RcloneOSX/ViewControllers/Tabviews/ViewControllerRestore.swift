@@ -180,6 +180,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 if ViewControllerReference.shared.restorefilespath != nil {
                     _ = self.removework()
                     self.restoretask = RestoreTask(index: index, outputprocess: self.outputprocess, dryrun: true, updateprogress: self)
+                    self.commandstring.stringValue = self.restoretask?.getcommandfullrestore() ?? ""
                 }
             }
         case .off:
@@ -323,14 +324,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             self.outputprocess = OutputProcess()
             self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
             _ = RcloneSize(index: index, outputprocess: self.outputprocess, updateprogress: self)
-        }
-    }
-
-    func setnumbers(outputprocess: OutputProcess?) {
-        globalMainQueue.async { () -> Void in
-            let infotask = RemoteinfonumbersOnetask(outputprocess: outputprocess)
-            self.info.textColor = self.setcolor(nsviewcontroller: self, color: .green)
-            self.info.stringValue = infotask.transferredNumber ?? "0"
         }
     }
 
