@@ -24,7 +24,7 @@ protocol SingleTaskProcess: AnyObject {
     func terminateProgressProcess()
     func seterrorinfo(info: String)
     func setNumbers(outputprocess: OutputProcess?)
-    func getProcessReference(process: Process)
+    func getProcessReference(process: Process?)
 }
 
 final class SingleTask: SetSchedules, SetConfigurations {

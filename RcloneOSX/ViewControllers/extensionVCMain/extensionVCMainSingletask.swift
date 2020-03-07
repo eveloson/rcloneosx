@@ -11,7 +11,7 @@ import Cocoa
 import Foundation
 
 extension ViewControllerMain: SingleTaskProcess {
-    func getProcessReference(process: Process) {
+    func getProcessReference(process: Process?) {
         self.process = process
     }
 

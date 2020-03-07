@@ -37,8 +37,7 @@ final class Restorefiles: SetConfigurations {
         self.process = ProcessCmd(command: nil, arguments: arguments)
         self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
         self.process?.setupdateDelegate(object: updateprogress)
-        // self.process?.executeProcess(outputprocess: self.outputprocess)
-        print(arguments!)
+        self.process?.executeProcess(outputprocess: self.outputprocess)
     }
 
     func getcommandrestorefiles(remotefile: String, localCatalog: String) -> String {
