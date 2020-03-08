@@ -128,6 +128,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     }
 
     @IBAction func restore(_: NSButton) {
+        guard self.setrestorepath() == true else { return }
         guard self.fullrestorebutton.state == .on || self.restorefilesbutton.state == .on else { return }
         self.restorebutton.isEnabled = false
         switch self.fullrestorebutton.state {
@@ -163,6 +164,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     }
 
     @IBAction func estimate(_: NSButton) {
+        guard self.setrestorepath() == true else { return }
         guard self.fullrestorebutton.state == .on || self.restorefilesbutton.state == .on else { return }
         self.estimatebutton.isEnabled = false
         switch self.fullrestorebutton.state {
@@ -243,7 +245,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         }
         self.restorebutton.isEnabled = false
         self.fullrestorebutton.state = .off
-        self.setrestorepath()
+        _ = self.setrestorepath()
         globalMainQueue.async { () -> Void in
             self.rclonetableView.reloadData()
         }
@@ -256,6 +258,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     }
 
     @objc(tableViewDoubleClick:) func tableViewDoubleClick(sender _: AnyObject) {
+        guard self.setrestorepath() == true else { return }
         guard self.remotesource.stringValue.isEmpty == false else { return }
         guard self.restorepath.stringValue.isEmpty == false else { return }
         let answer = Alerts.dialogOKCancel("Copy single files or directory", text: "Start restore?")

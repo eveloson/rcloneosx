@@ -242,7 +242,7 @@ extension NewRclone {
 }
 
 protocol Setrestorepath: AnyObject {
-    func setrestorepath()
+    func setrestorepath() -> Bool
 }
 
 protocol ChangeRestorePath {
@@ -252,7 +252,7 @@ protocol ChangeRestorePath {
 extension ChangeRestorePath {
     func changerestorepath() {
         let view = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
-        view?.setrestorepath()
+        _ = view?.setrestorepath()
     }
 }
 

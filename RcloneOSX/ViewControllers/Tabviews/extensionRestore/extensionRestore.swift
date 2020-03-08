@@ -158,13 +158,15 @@ extension ViewControllerRestore: DismissViewController {
 }
 
 extension ViewControllerRestore: Setrestorepath {
-    func setrestorepath() {
+    func setrestorepath() -> Bool {
         self.restorepath.stringValue = ViewControllerReference.shared.restorefilespath ?? "...Set in user config..."
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: self.restorepath.stringValue) == false {
             self.info(num: 1)
+            return false
         } else {
             self.info(num: 0)
+            return true
         }
     }
 }
