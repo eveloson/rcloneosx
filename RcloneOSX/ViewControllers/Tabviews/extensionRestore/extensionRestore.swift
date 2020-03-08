@@ -79,24 +79,6 @@ extension ViewControllerRestore: NSTableViewDelegate {
 }
 
 extension ViewControllerRestore: UpdateProgress {
-    func removework() -> Workfullrestore? {
-        // Initialize
-        guard self.workqueue != nil else {
-            self.workqueue = [Workfullrestore]()
-            self.workqueue?.append(.setremotenumbers)
-            self.workqueue?.append(.getremotenumbers)
-            self.workqueue?.append(.localinfoandnumbertosync)
-            return nil
-        }
-        guard (self.workqueue?.count ?? 0) > 1 else {
-            let work = self.workqueue?[0] ?? .restore
-            return work
-        }
-        let index = self.workqueue!.count - 1
-        let work = self.workqueue!.remove(at: index)
-        return work
-    }
-
     func processTermination() {
         switch self.fullrestorebutton.state {
         case .on:
@@ -133,22 +115,16 @@ extension ViewControllerRestore: UpdateProgress {
     }
 
     func processTerminationfullrestore() {
-        switch self.removework() ?? .localinfoandnumbertosync {
-        case .getremotenumbers:
-            self.maxcount = self.outputprocess?.getMaxcount() ?? 0
-            self.getremotenumbers()
-        case .setremotenumbers:
+        if self.restoretask == nil {
             self.setremoteinfo()
-        case .localinfoandnumbertosync:
-            guard ViewControllerReference.shared.restorefilespath != nil else { return }
             self.working.stopAnimation(nil)
             self.restorebutton.isEnabled = true
-            self.info(num: 5)
-        case .restore:
+        } else {
             if let vc = ViewControllerReference.shared.getvcref(viewcontroller: .vcprogressview) as? ViewControllerProgressProcess {
                 vc.processTermination()
             }
             self.info(num: 5)
+            self.restoretask = nil
         }
     }
 
