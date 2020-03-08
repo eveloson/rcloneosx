@@ -17,12 +17,12 @@ final class Restorefiles: SetConfigurations {
     var outputprocess: OutputProcess?
     weak var sendprocess: SendProcessreference?
 
-    func getOutput() -> [String] {
-        return self.outputprocess?.getOutput() ?? []
+    func getProcess() -> Process? {
+        return self.process?.getProcess()
     }
 
-    func abort() {
-        self.process?.abortProcess()
+    func getOutput() -> [String] {
+        return self.outputprocess?.getOutput() ?? []
     }
 
     func executecopyfiles(remotefile: String, localCatalog: String, dryrun: Bool, updateprogress: UpdateProgress) {

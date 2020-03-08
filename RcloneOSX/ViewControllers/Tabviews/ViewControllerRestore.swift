@@ -24,6 +24,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     var outputprocess: OutputProcess?
     var maxcount: Int = 0
     weak var sendprocess: SendProcessreference?
+    var process: Process?
 
     @IBOutlet var numberofrows: NSTextField!
     @IBOutlet var info: NSTextField!
@@ -87,11 +88,11 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     // Abort button
     @IBAction func abort(_: NSButton) {
         self.working.stopAnimation(nil)
-        self.restorefiles?.abort()
         self.estimatebutton.isEnabled = true
         self.restorebutton.isEnabled = false
         self.restoretask = nil
         self.restorefiles = nil
+        self.process?.terminate()
         self.abort()
     }
 
@@ -155,6 +156,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             self.working.startAnimation(nil)
             self.presentAsSheet(self.viewControllerProgress!)
             self.restorefiles?.executecopyfiles(remotefile: remotesource!.stringValue, localCatalog: restorepath!.stringValue, dryrun: false, updateprogress: self)
+            self.process = self.restorefiles?.getProcess()
         default:
             return
         }
@@ -177,6 +179,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 self.working.startAnimation(nil)
                 self.restorefiles?.executecopyfiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue, dryrun: true, updateprogress: self)
                 self.outputprocess = self.restorefiles?.outputprocess
+                self.process = self.restorefiles?.getProcess()
             } else {
                 self.info(num: 2)
             }
@@ -190,10 +193,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             if self.restorefilesbutton.state == .on {
                 if let hiddenID = self.configurations?.getConfigurationsSyncandCopy()?[index].value(forKey: "hiddenID") as? Int {
                     guard self.restorefilesbutton.state == .on else { return }
-                    self.info(num: 8)
-                    self.restorefiles = Restorefiles(hiddenID: hiddenID)
-                    self.remotefilelist = Remotefilelist(hiddenID: hiddenID)
-                    self.working.startAnimation(nil)
+                    self.getremotefilelist(hiddenID: hiddenID)
                 }
             } else {
                 self.estimatebutton.isEnabled = true
@@ -263,6 +263,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             self.estimatebutton.isEnabled = false
             self.working.startAnimation(nil)
             self.restorefiles?.executecopyfiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue, dryrun: false, updateprogress: self)
+            self.process = self.restorefiles?.getProcess()
         }
     }
 
@@ -300,15 +301,20 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                         self.estimatebutton.isEnabled = true
                         return
                     }
-                    self.info(num: 8)
-                    self.restorefiles = Restorefiles(hiddenID: hiddenID)
-                    self.remotefilelist = Remotefilelist(hiddenID: hiddenID)
-                    self.working.startAnimation(nil)
+                    self.getremotefilelist(hiddenID: hiddenID)
                 }
             } else {
                 self.reset()
             }
         }
+    }
+
+    private func getremotefilelist(hiddenID: Int) {
+        self.info(num: 8)
+        self.restorefiles = Restorefiles(hiddenID: hiddenID)
+        self.remotefilelist = Remotefilelist(hiddenID: hiddenID)
+        self.process = self.remotefilelist?.getProcess()
+        self.working.startAnimation(nil)
     }
 
     func setremoteinfo() {
