@@ -118,7 +118,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             self.info.stringValue = "Executing restore..."
         case 5:
             self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
-            self.info.stringValue = "Got it..."
+            self.info.stringValue = "Restore completed..."
         case 6:
             self.info.textColor = setcolor(nsviewcontroller: self, color: .red)
             self.info.stringValue = "Select a restore type..."
