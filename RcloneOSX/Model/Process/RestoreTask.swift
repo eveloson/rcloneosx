@@ -13,8 +13,8 @@ final class RestoreTask: SetConfigurations {
 
     func getcommandfullrestore() -> String? {
         var arguments: String?
-        arguments = self.arguments![0]
-        for i in 1 ..< (self.arguments?.count ?? 0) {
+        arguments = Getrclonepath().rclonepath ?? "" + " "
+        for i in 0 ..< (self.arguments?.count ?? 0) {
             arguments = arguments! + " " + self.arguments![i]
         }
         return arguments

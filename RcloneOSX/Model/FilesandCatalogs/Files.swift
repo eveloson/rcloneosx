@@ -9,11 +9,6 @@
 
 import Foundation
 
-enum WhichRoot {
-    case profileRoot
-    case sshRoot
-}
-
 enum Fileerrortype {
     case openlogfile
     case writelogfile
@@ -66,25 +61,19 @@ extension FileerrorMessage {
 }
 
 class Files: ReportFileerror {
-    var whatroot: WhichRoot?
     var rootpath: String?
     // config path either
     // ViewControllerReference.shared.configpath or RcloneReference.shared.configpath
     private var configpath: String?
 
     private func setrootpath() {
-        switch self.whatroot! {
-        case .profileRoot:
-            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
-            let docuDir = (paths.firstObject as? String)!
-            if ViewControllerReference.shared.macserialnumber == nil {
-                ViewControllerReference.shared.macserialnumber = Macserialnumber().getMacSerialNumber() ?? ""
-            }
-            let profilePath = docuDir + self.configpath! + (ViewControllerReference.shared.macserialnumber ?? "")
-            self.rootpath = profilePath
-        case .sshRoot:
-            self.rootpath = NSHomeDirectory() + "/.ssh/"
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
+        let docuDir = (paths.firstObject as? String)!
+        if ViewControllerReference.shared.macserialnumber == nil {
+            ViewControllerReference.shared.macserialnumber = Macserialnumber().getMacSerialNumber() ?? ""
         }
+        let profilePath = docuDir + self.configpath! + (ViewControllerReference.shared.macserialnumber ?? "")
+        self.rootpath = profilePath
     }
 
     // Function for returning profiles as array of Strings
@@ -136,9 +125,8 @@ class Files: ReportFileerror {
         }
     }
 
-    init(whatroot: WhichRoot, configpath: String) {
+    init(configpath: String) {
         self.configpath = configpath
-        self.whatroot = whatroot
         self.setrootpath()
     }
 }

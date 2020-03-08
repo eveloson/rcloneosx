@@ -283,7 +283,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 self.remotesource.stringValue = self.restoretabledata?[index] ?? ""
                 self.estimatebutton.isEnabled = true
                 guard self.remotesource.stringValue.isEmpty == false, self.restorepath.stringValue.isEmpty == false else { return }
-                self.commandstring.stringValue = self.restorefiles?.getcommandrestorefiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue) ?? ""
+                self.commandstring.stringValue = (Getrclonepath().rclonepath ?? "") + " " + (self.restorefiles?.getcommandrestorefiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue) ?? "")
             }
         } else {
             let indexes = myTableViewFromNotification.selectedRowIndexes
