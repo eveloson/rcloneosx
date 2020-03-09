@@ -302,6 +302,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 if let hiddenID = self.configurations?.getConfigurationsSyncandCopy()?[index].value(forKey: "hiddenID") as? Int {
                     guard self.restorefilesbutton.state == .on else {
                         self.estimatebutton.isEnabled = true
+                        self.restorebutton.isEnabled = false
                         return
                     }
                     self.getremotefilelist(hiddenID: hiddenID)
