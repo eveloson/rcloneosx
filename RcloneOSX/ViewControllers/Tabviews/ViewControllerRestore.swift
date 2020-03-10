@@ -303,6 +303,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                     guard self.restorefilesbutton.state == .on else {
                         self.estimatebutton.isEnabled = true
                         self.restorebutton.isEnabled = false
+                        self.commandstring.stringValue = RestoreTask(index: index).getcommandfullrestore() ?? ""
                         return
                     }
                     self.getremotefilelist(hiddenID: hiddenID)
