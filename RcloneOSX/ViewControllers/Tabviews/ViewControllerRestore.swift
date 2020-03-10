@@ -328,7 +328,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         let numberoffiles = String(NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal))
         let sizeoffiles = String(NumberFormatter.localizedString(from: NSNumber(value: size?.bytes ?? 0 / 1024), number: NumberFormatter.Style.decimal))
         self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
-        self.info.stringValue = "Number of files: " + numberoffiles + " wiht size (Kb): " + sizeoffiles
+        self.info.stringValue = "Number of files: " + numberoffiles + " with size (Kb): " + sizeoffiles
         self.working.stopAnimation(nil)
         self.restorebutton.isEnabled = true
     }
