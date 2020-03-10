@@ -33,4 +33,12 @@ final class RestoreTask: SetConfigurations {
         process.executeProcess(outputprocess: outputprocess)
         setprocessDelegate?.sendprocessreference(process: process.getProcess())
     }
+
+    init(index: Int) {
+        self.arguments = self.configurations?.arguments4tmprestore(index: index, argtype: .arg)
+        let config = self.configurations?.getConfigurations()[index]
+        if (config?.offsiteCatalog ?? "").isEmpty {
+            self.arguments?.insert(ViewControllerReference.shared.restorefilespath ?? "", at: 2)
+        }
+    }
 }
