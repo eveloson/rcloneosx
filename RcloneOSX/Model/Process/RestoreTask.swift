@@ -24,9 +24,9 @@ final class RestoreTask: SetConfigurations {
         weak var setprocessDelegate: SendProcessreference?
         setprocessDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         self.arguments = self.configurations?.arguments4tmprestore(index: index, argtype: .arg)
-        let config = self.configurations?.getConfigurations()[index]
-        if (config?.offsiteCatalog ?? "").isEmpty {
-            self.arguments?.insert(ViewControllerReference.shared.restorefilespath ?? "", at: 2)
+        guard (self.arguments?.count ?? 0) > 3 else { return }
+        if (self.arguments?[2] ?? "") == ViewControllerReference.shared.tmprestore {
+            self.arguments?[2] = ViewControllerReference.shared.restorefilespath ?? ""
         }
         let process = Rclone(arguments: self.arguments)
         process.setdelegate(object: updateprogress)
@@ -36,9 +36,9 @@ final class RestoreTask: SetConfigurations {
 
     init(index: Int) {
         self.arguments = self.configurations?.arguments4tmprestore(index: index, argtype: .arg)
-        let config = self.configurations?.getConfigurations()[index]
-        if (config?.offsiteCatalog ?? "").isEmpty {
-            self.arguments?.insert(ViewControllerReference.shared.restorefilespath ?? "", at: 2)
+        guard (self.arguments?.count ?? 0) > 3 else { return }
+        if (self.arguments?[2] ?? "") == ViewControllerReference.shared.tmprestore {
+            self.arguments?[2] = ViewControllerReference.shared.restorefilespath ?? ""
         }
     }
 }
