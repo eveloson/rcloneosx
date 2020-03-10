@@ -15,7 +15,7 @@ final class ArgumentsRestore: RcloneParameters {
         self.rclonecommandrestore(dryRun: dryRun, forDisplay: forDisplay)
         self.remoteparameter(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
         if tmprestore {
-            self.localCatalog = ViewControllerReference.shared.restorefilespath ?? ""
+            self.localCatalog = ViewControllerReference.shared.restorefilespath ?? ViewControllerReference.shared.tmprestore
         }
         self.offsiteparameter(config: self.config!, forDisplay: forDisplay)
         self.appendparameter(parameter: self.localCatalog, forDisplay: forDisplay)

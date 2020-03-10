@@ -48,6 +48,8 @@ class ViewControllerReference {
     var detailedlogging: Bool = true
     // Path for restore
     var restorefilespath: String?
+    // Placeholder for tmp restore
+    var tmprestore: String = "tobereplaced"
     // Reference to the Operation object
     // Reference is set in when Scheduled task is executed
     var completeoperation: CompleteQuickbackupTask?
