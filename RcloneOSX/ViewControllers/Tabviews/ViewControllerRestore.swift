@@ -17,7 +17,7 @@ protocol Updateremotefilelist: AnyObject {
 class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain, Checkforrclone, Abort, Remoterclonesize, Setcolor {
     var restorefiles: Restorefiles?
     var remotefilelist: Remotefilelist?
-    var restoretask: RestoreTask?
+    var restoretask: FullrestoreTask?
     var index: Int?
     var restoretabledata: [String]?
     var diddissappear: Bool = false
@@ -144,7 +144,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                         self.presentAsSheet(self.viewControllerProgress!)
                     }
                     self.sendprocess?.sendoutputprocessreference(outputprocess: self.outputprocess)
-                    self.restoretask = RestoreTask(index: index, outputprocess: self.outputprocess, updateprogress: self)
+                    self.restoretask = FullrestoreTask(index: index, outputprocess: self.outputprocess, updateprogress: self)
                     self.commandstring.stringValue = self.restoretask?.getcommandfullrestore() ?? ""
                 }
             }
@@ -303,7 +303,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                     guard self.restorefilesbutton.state == .on else {
                         self.estimatebutton.isEnabled = true
                         self.restorebutton.isEnabled = false
-                        self.commandstring.stringValue = RestoreTask(index: index).getcommandfullrestore() ?? ""
+                        self.commandstring.stringValue = FullrestoreTask(index: index).getcommandfullrestore() ?? ""
                         return
                     }
                     self.getremotefilelist(hiddenID: hiddenID)
