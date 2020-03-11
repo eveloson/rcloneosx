@@ -121,7 +121,7 @@
 		E9B8B02722B10B620063024E /* Norclone.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B8B02622B10B620063024E /* Norclone.swift */; };
 		E9BC41E3206517A5001DBCC6 /* AllConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BC41E2206517A5001DBCC6 /* AllConfigurations.swift */; };
 		E9BC41E52065184F001DBCC6 /* ViewControllerAllProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BC41E42065184E001DBCC6 /* ViewControllerAllProfiles.swift */; };
-		E9C2029E211BFE1A005E3B11 /* RestoreTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C2029D211BFE1A005E3B11 /* RestoreTask.swift */; };
+		E9C2029E211BFE1A005E3B11 /* FullrestoreTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C2029D211BFE1A005E3B11 /* FullrestoreTask.swift */; };
 		E9C68A152368AB2C00CBA2F5 /* rcloneosxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C68A142368AB2C00CBA2F5 /* rcloneosxTests.swift */; };
 		E9CB92351FEE29800047F9CA /* ViewControllerQuickBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB92341FEE29800047F9CA /* ViewControllerQuickBackup.swift */; };
 		E9CB92381FEE2A8D0047F9CA /* QuickBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CB92371FEE2A8D0047F9CA /* QuickBackup.swift */; };
@@ -240,7 +240,7 @@
 		E9B8B02622B10B620063024E /* Norclone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Norclone.swift; sourceTree = "<group>"; };
 		E9BC41E2206517A5001DBCC6 /* AllConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllConfigurations.swift; sourceTree = "<group>"; };
 		E9BC41E42065184E001DBCC6 /* ViewControllerAllProfiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerAllProfiles.swift; sourceTree = "<group>"; };
-		E9C2029D211BFE1A005E3B11 /* RestoreTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreTask.swift; sourceTree = "<group>"; };
+		E9C2029D211BFE1A005E3B11 /* FullrestoreTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullrestoreTask.swift; sourceTree = "<group>"; };
 		E9C68A122368AB2C00CBA2F5 /* rcloneosxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rcloneosxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C68A142368AB2C00CBA2F5 /* rcloneosxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rcloneosxTests.swift; sourceTree = "<group>"; };
 		E9C68A162368AB2C00CBA2F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -431,7 +431,7 @@
 				E960CACB1FB091D50008D12E /* ProcessCmd.swift */,
 				E954F7D41FF411A6003DF6C0 /* RcloneVersionString.swift */,
 				E905FE63209836C60008450C /* RcloneSize.swift */,
-				E9C2029D211BFE1A005E3B11 /* RestoreTask.swift */,
+				E9C2029D211BFE1A005E3B11 /* FullrestoreTask.swift */,
 				E9AEF87D22B3EB210065C1D7 /* Remotefilelist.swift */,
 			);
 			path = Process;
@@ -883,7 +883,7 @@
 				E960CB331FB091DE0008D12E /* PersistentStorageUserconfiguration.swift in Sources */,
 				E960CB3E1FB091DE0008D12E /* Schedules.swift in Sources */,
 				E960CB351FB091DE0008D12E /* Checkfornewversion.swift in Sources */,
-				E9C2029E211BFE1A005E3B11 /* RestoreTask.swift in Sources */,
+				E9C2029E211BFE1A005E3B11 /* FullrestoreTask.swift in Sources */,
 				E923D4C82130595F00C6BE92 /* Dateandtime.swift in Sources */,
 				E960CB1D1FB091DE0008D12E /* ViewControllerUserconfiguration.swift in Sources */,
 				E980F9AD23660C5600B2C3CF /* SuffixstringsRcloneParameters.swift in Sources */,
