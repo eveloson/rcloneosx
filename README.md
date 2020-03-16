@@ -4,6 +4,8 @@
 
 [Please read the Changelog](https://rsyncosx.github.io/RcloneChangelog).
 
+For the moment there is no active development of RcloneOSX. I will continue to compile RcloneOSX for new versions of macOS and fix serious bugs. My main effort in the future is to continue development of [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) and [RsyncGUI](https://github.com/rsyncOSX/RsyncGUI). 
+
 The project is a adapting [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) utilizing [rclone](https://rclone.org/) for **synchronizing** and **backup** of files to a number of cloud services. RcloneOSX utilizes `rclone copy`, `sync`, `move` and `check` commands.
 
 RcloneOSX is compiled with support for **macOS El Capitan version 10.11 - macOS Catalina 10.15**. The application is implemented in pure Swift 5 (Cocoa and Foundation).
@@ -12,7 +14,7 @@ RcloneOSX require the `rclone` command line utility to be installed. If installe
 
 Rclone is *rsync for cloud storage*. Even if `rclone` and `rsync` are somewhat equal they are also very different. RcloneOSX is built upon the ideas from [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX). It is not possible to clone all functions in RsyncOSX to RcloneOSX. I spend most of my time developing [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX). From time to time some functions are ported to RcloneOSX from RsyncOSX.
 
-I am not an advanced user of `rclone` and my use of RcloneOSX is **synchronizing** my GitHub catalogs to Dropbox and OneNote for test. Rclone has lot more functions than just synchronizing data. There are no plans to implement more functions into RcloneOSX.
+I am not an advanced user of `rclone` and my use of RcloneOSX is **synchronizing** my GitHub catalogs to Dropbox, OneNote and Google for test. Rclone has lot more functions than just synchronizing data. There are no plans to implement more functions into RcloneOSX.
 
 ### Screenshots
 
