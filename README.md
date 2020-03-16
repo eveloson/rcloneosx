@@ -4,7 +4,7 @@
 
 [Please read the Changelog](https://rsyncosx.github.io/RcloneChangelog).
 
-For the moment there is no active development of RcloneOSX. I will continue to compile RcloneOSX for new versions of macOS and fix serious bugs. My main effort in the future is to continue development of [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) and [RsyncGUI](https://github.com/rsyncOSX/RsyncGUI). 
+For the moment there is <b>no active development</b> of RcloneOSX. I will continue to compile RcloneOSX for new versions of macOS and fix serious bugs. My main effort in the future is to continue development of [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) and [RsyncGUI](https://github.com/rsyncOSX/RsyncGUI). 
 
 The project is a adapting [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) utilizing [rclone](https://rclone.org/) for **synchronizing** and **backup** of files to a number of cloud services. RcloneOSX utilizes `rclone copy`, `sync`, `move` and `check` commands.
 
