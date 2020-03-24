@@ -284,8 +284,9 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
 
     @IBAction func executemultipleselectedrows(_: NSToolbarItem) {
         guard self.checkforrclone() == false else { return }
-        self.setNumbers(outputprocess: nil)
-        self.deselect()
+        self.multipeselection = true
+        self.configurations?.remoteinfoestimation = nil
+        self.configurations?.estimatedlist = nil
         globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         }
