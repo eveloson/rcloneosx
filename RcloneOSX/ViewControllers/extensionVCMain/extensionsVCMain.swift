@@ -420,3 +420,23 @@ extension Attributedestring {
         return attributedString
     }
 }
+
+// Get multiple selected indexes
+protocol GetMultipleSelectedIndexes: AnyObject {
+    func getindexes() -> [Int]
+    func multipleselection() -> Bool
+}
+
+extension ViewControllerMain: GetMultipleSelectedIndexes {
+    func multipleselection() -> Bool {
+        return self.multipeselection
+    }
+
+    func getindexes() -> [Int] {
+        if let indexes = self.indexes {
+            return indexes.map { $0 }
+        } else {
+            return []
+        }
+    }
+}

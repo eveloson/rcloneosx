@@ -27,6 +27,7 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
     weak var reloadtableDelegate: Reloadandrefresh?
     weak var enablebackupbuttonDelegate: EnableQuicbackupButton?
     weak var startstopProgressIndicatorDelegate: StartStopProgressIndicator?
+    weak var getmultipleselectedindexesDelegate: GetMultipleSelectedIndexes?
     var index: Int?
     var maxnumber: Int?
     var count: Int?
@@ -34,10 +35,22 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
 
     private func prepareandstartexecutetasks() {
         self.stackoftasktobeestimated = [Row]()
-        for i in 0 ..< self.configurations!.getConfigurations().count {
-            if self.configurations!.getConfigurations()[i].task == ViewControllerReference.shared.sync {
-                self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
-                self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
+        if self.getmultipleselectedindexesDelegate?.multipleselection() == false {
+            for i in 0 ..< (self.configurations?.getConfigurations().count ?? 0) {
+                if self.configurations!.getConfigurations()[i].task == ViewControllerReference.shared.sync {
+                    self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
+                    self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
+                }
+            }
+        } else {
+            let indexes = self.getmultipleselectedindexesDelegate?.getindexes()
+            for i in 0 ..< (indexes?.count ?? 0) {
+                if let index = indexes?[i] {
+                    if self.configurations!.getConfigurations()[index].task == ViewControllerReference.shared.sync {
+                        self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[index].hiddenID, index))
+                        self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[index].hiddenID, index))
+                    }
+                }
             }
         }
         self.maxnumber = self.stackoftasktobeestimated?.count
@@ -84,9 +97,9 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
     }
 
     init(viewcontroller: NSViewController?) {
-        // self.inbatch = false
         self.updateprogressDelegate = viewcontroller as? UpdateProgress
         self.startstopProgressIndicatorDelegate = viewcontroller as? StartStopProgressIndicator
+        self.getmultipleselectedindexesDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         self.prepareandstartexecutetasks()
         self.records = [NSMutableDictionary]()
         self.configurations!.estimatedlist = [NSMutableDictionary]()

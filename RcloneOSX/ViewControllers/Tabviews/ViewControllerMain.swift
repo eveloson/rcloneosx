@@ -39,11 +39,19 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     var process: Process?
     // Index to selected row, index is set when row is selected
     var index: Int?
+    // Indexes, multiple selection
+    var indexes: IndexSet?
+    var multipeselection: Bool = false
     // Getting output from rclone
     var outputprocess: OutputProcess?
 
     @IBAction func totinfo(_: NSButton) {
         guard self.checkforrclone() == false else { return }
+        if self.configurations?.setestimatedlistnil() == true {
+            self.configurations?.remoteinfoestimation = nil
+            self.configurations?.estimatedlist = nil
+        }
+        self.multipeselection = false
         globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerRemoteInfo!)
         }
@@ -51,6 +59,8 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
 
     @IBAction func quickbackup(_: NSButton) {
         guard self.checkforrclone() == false else { return }
+        self.configurations?.remoteinfoestimation = nil
+        self.configurations?.estimatedlist = nil
         globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerQuickBackup!)
         }
@@ -91,6 +101,12 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
 
     // Selecting automatic backup
     @IBAction func automaticbackup(_: NSButton) {
+        guard self.checkforrclone() == false else { return }
+        if self.configurations?.setestimatedlistnil() == true {
+            self.configurations?.remoteinfoestimation = nil
+            self.configurations?.estimatedlist = nil
+        }
+        self.multipeselection = false
         self.presentAsSheet(self.viewControllerEstimating!)
     }
 
@@ -212,6 +228,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         super.viewDidLoad()
         self.mainTableView.delegate = self
         self.mainTableView.dataSource = self
+        self.mainTableView.allowsMultipleSelection = true
         self.working.usesThreadedAnimation = true
         ViewControllerReference.shared.setvcref(viewcontroller: .vctabmain, nsviewcontroller: self)
         self.mainTableView.target = self
@@ -237,6 +254,13 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         self.rcloneischanged()
         self.displayProfile()
         self.initpopupbutton(button: self.profilepopupbutton)
+    }
+
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        self.multipeselection = false
+        self.configurations?.remoteinfoestimation = nil
+        self.configurations?.estimatedlist = nil
     }
 
     // Execute tasks by double click in table
