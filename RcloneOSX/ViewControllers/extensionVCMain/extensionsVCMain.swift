@@ -141,8 +141,6 @@ extension ViewControllerMain: Abort {
     }
 }
 
-// Extensions from here are used in either newSingleTask or newBatchTask
-
 extension ViewControllerMain: StartStopProgressIndicatorSingleTask {
     func startIndicatorExecuteTaskNow() {
         self.working.startAnimation(nil)
@@ -173,28 +171,12 @@ extension ViewControllerMain: GetConfigurationsObject {
 
     // After a write, a reload is forced.
     func reloadconfigurationsobject() {
-        guard self.configurations?.batchQueue == nil else {
-            if self.configurations!.batchQueue?.batchruniscompleted() == true {
-                self.createandreloadconfigurations()
-                return
-            } else {
-                return
-            }
-        }
         self.createandreloadconfigurations()
     }
 }
 
 extension ViewControllerMain: GetSchedulesObject {
     func reloadschedulesobject() {
-        guard self.configurations?.batchQueue == nil else {
-            if self.configurations!.batchQueue?.batchruniscompleted() == true {
-                self.createandreloadschedules()
-                return
-            } else {
-                return
-            }
-        }
         self.createandreloadschedules()
     }
 
@@ -418,4 +400,23 @@ protocol GetHiddenID: AnyObject {
 
 protocol SetProfileinfo: AnyObject {
     func setprofile(profile: String, color: NSColor)
+}
+
+// Dismiss view when rsync error
+protocol ReportonandhaltonError: AnyObject {
+    func reportandhaltonerror()
+}
+
+protocol Attributedestring: AnyObject {
+    func attributedstring(str: String, color: NSColor, align: NSTextAlignment) -> NSMutableAttributedString
+}
+
+extension Attributedestring {
+    func attributedstring(str: String, color: NSColor, align: NSTextAlignment) -> NSMutableAttributedString {
+        let attributedString = NSMutableAttributedString(string: str)
+        let range = (str as NSString).range(of: str)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+        attributedString.setAlignment(align, range: range)
+        return attributedString
+    }
 }

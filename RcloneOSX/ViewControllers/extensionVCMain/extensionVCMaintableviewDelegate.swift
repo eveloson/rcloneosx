@@ -52,7 +52,6 @@ extension ViewControllerMain: NSTableViewDelegate, Attributedestring {
         if self.process != nil {
             self.abortOperations()
         }
-        self.configurations!.togglebatch(row)
     }
 
     // setting which table row is selected

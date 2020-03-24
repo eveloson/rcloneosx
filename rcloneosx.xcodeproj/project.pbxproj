@@ -70,12 +70,10 @@
 		E960CB151FB091DE0008D12E /* ViewControllerAbout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAC71FB091D50008D12E /* ViewControllerAbout.swift */; };
 		E960CB191FB091DE0008D12E /* ProcessCmd.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CACB1FB091D50008D12E /* ProcessCmd.swift */; };
 		E960CB1D1FB091DE0008D12E /* ViewControllerUserconfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CACF1FB091D60008D12E /* ViewControllerUserconfiguration.swift */; };
-		E960CB1F1FB091DE0008D12E /* BatchTaskWorkQueu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAD11FB091D60008D12E /* BatchTaskWorkQueu.swift */; };
 		E960CB211FB091DE0008D12E /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAD31FB091D70008D12E /* Resources.swift */; };
 		E960CB251FB091DE0008D12E /* ViewControllerInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAD71FB091D80008D12E /* ViewControllerInformation.swift */; };
 		E960CB261FB091DE0008D12E /* ViewControllerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAD81FB091D80008D12E /* ViewControllerProfile.swift */; };
 		E960CB281FB091DE0008D12E /* ArgumentsOneConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CADA1FB091D80008D12E /* ArgumentsOneConfiguration.swift */; };
-		E960CB291FB091DE0008D12E /* ExecuteBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CADB1FB091D80008D12E /* ExecuteBatch.swift */; };
 		E960CB2B1FB091DE0008D12E /* SingleTaskWorkQueu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CADD1FB091D90008D12E /* SingleTaskWorkQueu.swift */; };
 		E960CB2C1FB091DE0008D12E /* Userconfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CADE1FB091D90008D12E /* Userconfiguration.swift */; };
 		E960CB2D1FB091DE0008D12E /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CADF1FB091D90008D12E /* Alerts.swift */; };
@@ -97,7 +95,6 @@
 		E960CB451FB091DE0008D12E /* CompleteQuickbackupTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAF71FB091DC0008D12E /* CompleteQuickbackupTask.swift */; };
 		E960CB461FB091DE0008D12E /* CatalogProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAF81FB091DD0008D12E /* CatalogProfile.swift */; };
 		E960CB491FB091DE0008D12E /* QuickbackupDispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAFB1FB091DD0008D12E /* QuickbackupDispatch.swift */; };
-		E960CB4A1FB091DE0008D12E /* ViewControllerBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAFC1FB091DD0008D12E /* ViewControllerBatch.swift */; };
 		E960CB4C1FB091DE0008D12E /* ViewControllerMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAFE1FB091DD0008D12E /* ViewControllerMain.swift */; };
 		E960CB4E1FB091DE0008D12E /* NewConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CB001FB091DE0008D12E /* NewConfigurations.swift */; };
 		E960CB501FB091DE0008D12E /* SingleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CB021FB091DE0008D12E /* SingleTask.swift */; };
@@ -187,12 +184,10 @@
 		E960CAC71FB091D50008D12E /* ViewControllerAbout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerAbout.swift; sourceTree = "<group>"; };
 		E960CACB1FB091D50008D12E /* ProcessCmd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessCmd.swift; sourceTree = "<group>"; };
 		E960CACF1FB091D60008D12E /* ViewControllerUserconfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerUserconfiguration.swift; sourceTree = "<group>"; };
-		E960CAD11FB091D60008D12E /* BatchTaskWorkQueu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BatchTaskWorkQueu.swift; sourceTree = "<group>"; };
 		E960CAD31FB091D70008D12E /* Resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		E960CAD71FB091D80008D12E /* ViewControllerInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerInformation.swift; sourceTree = "<group>"; };
 		E960CAD81FB091D80008D12E /* ViewControllerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerProfile.swift; sourceTree = "<group>"; };
 		E960CADA1FB091D80008D12E /* ArgumentsOneConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgumentsOneConfiguration.swift; sourceTree = "<group>"; };
-		E960CADB1FB091D80008D12E /* ExecuteBatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecuteBatch.swift; sourceTree = "<group>"; };
 		E960CADD1FB091D90008D12E /* SingleTaskWorkQueu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTaskWorkQueu.swift; sourceTree = "<group>"; };
 		E960CADE1FB091D90008D12E /* Userconfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Userconfiguration.swift; sourceTree = "<group>"; };
 		E960CADF1FB091D90008D12E /* Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
@@ -214,7 +209,6 @@
 		E960CAF71FB091DC0008D12E /* CompleteQuickbackupTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteQuickbackupTask.swift; sourceTree = "<group>"; };
 		E960CAF81FB091DD0008D12E /* CatalogProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogProfile.swift; sourceTree = "<group>"; };
 		E960CAFB1FB091DD0008D12E /* QuickbackupDispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickbackupDispatch.swift; sourceTree = "<group>"; };
-		E960CAFC1FB091DD0008D12E /* ViewControllerBatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerBatch.swift; sourceTree = "<group>"; };
 		E960CAFE1FB091DD0008D12E /* ViewControllerMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerMain.swift; sourceTree = "<group>"; };
 		E960CB001FB091DE0008D12E /* NewConfigurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewConfigurations.swift; sourceTree = "<group>"; };
 		E960CB021FB091DE0008D12E /* SingleTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTask.swift; sourceTree = "<group>"; };
@@ -274,20 +268,10 @@
 		E907D33F230D678600DC938F /* RemoteEstimation */ = {
 			isa = PBXGroup;
 			children = (
-				E960CAFC1FB091DD0008D12E /* ViewControllerBatch.swift */,
 				E9062E722097192D00D65748 /* ViewControllerRemoteInfo.swift */,
 				E92B18B82096F643001DBFAF /* ViewControllerEstimatingTasks.swift */,
 			);
 			path = RemoteEstimation;
-			sourceTree = "<group>";
-		};
-		E907D340230D685000DC938F /* Batch */ = {
-			isa = PBXGroup;
-			children = (
-				E960CAD11FB091D60008D12E /* BatchTaskWorkQueu.swift */,
-				E960CADB1FB091D80008D12E /* ExecuteBatch.swift */,
-			);
-			path = Batch;
 			sourceTree = "<group>";
 		};
 		E907D341230D685B00DC938F /* SingleTask */ = {
@@ -416,7 +400,6 @@
 			children = (
 				E92B18B32096F393001DBFAF /* Estimating */,
 				E907D341230D685B00DC938F /* SingleTask */,
-				E907D340230D685000DC938F /* Batch */,
 				E9CB92371FEE2A8D0047F9CA /* QuickBackup.swift */,
 				E9338715230E9C0F00FE1B50 /* ExecuteTaskNow.swift */,
 			);
@@ -810,7 +793,6 @@
 				E92B18B72096F4DE001DBFAF /* RemoteinfonumbersOnetask.swift in Sources */,
 				E960CB0F1FB091DE0008D12E /* ViewControllerExtensions.swift in Sources */,
 				E980F9B12366163200B2C3CF /* ArgumentsSynchronize.swift in Sources */,
-				E960CB1F1FB091DE0008D12E /* BatchTaskWorkQueu.swift in Sources */,
 				E914B77421311C1400FFE398 /* extensionsSchedules.swift in Sources */,
 				E960CB491FB091DE0008D12E /* QuickbackupDispatch.swift in Sources */,
 				E960CB2C1FB091DE0008D12E /* Userconfiguration.swift in Sources */,
@@ -821,7 +803,6 @@
 				E980F9A923660B0C00B2C3CF /* ArgumentsRestore.swift in Sources */,
 				E960CB381FB091DE0008D12E /* PersistentStorageConfiguration.swift in Sources */,
 				E9062E732097192D00D65748 /* ViewControllerRemoteInfo.swift in Sources */,
-				E960CB4A1FB091DE0008D12E /* ViewControllerBatch.swift in Sources */,
 				E93A8CA420C3BD9B00DFA836 /* extensionsVCMain.swift in Sources */,
 				E960CB411FB091DE0008D12E /* ConfigurationSchedule.swift in Sources */,
 				E92B18BB2096F83F001DBFAF /* EstimateremoteInformationOnetask.swift in Sources */,
@@ -877,7 +858,6 @@
 				E9338716230E9C0F00FE1B50 /* ExecuteTaskNow.swift in Sources */,
 				E9E4DCCD21195F7600BB3F93 /* Allschedules.swift in Sources */,
 				E9198C39211DC5EC0071DB3A /* ViewControllerAllOutput.swift in Sources */,
-				E960CB291FB091DE0008D12E /* ExecuteBatch.swift in Sources */,
 				E9B8B02522B107070063024E /* Getrclonepath.swift in Sources */,
 				E8B9506B23183D5E00C743D5 /* RestorefilesArguments.swift in Sources */,
 				E960CB331FB091DE0008D12E /* PersistentStorageUserconfiguration.swift in Sources */,

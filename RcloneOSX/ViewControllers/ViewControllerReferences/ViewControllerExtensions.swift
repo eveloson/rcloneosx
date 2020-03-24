@@ -14,7 +14,6 @@ protocol VcMain {
     var storyboard: NSStoryboard? { get }
     var viewControllerInformation: NSViewController? { get }
     var viewControllerProgress: NSViewController? { get }
-    var viewControllerBatch: NSViewController? { get }
     var viewControllerUserconfiguration: NSViewController? { get }
     var viewControllerRcloneParams: NSViewController? { get }
     var newVersionViewController: NSViewController? { get }
@@ -39,13 +38,6 @@ extension VcMain {
     // self.presentViewControllerAsSheet(self.ViewControllerProgress)
     var viewControllerProgress: NSViewController? {
         return (self.storyboard?.instantiateController(withIdentifier: "StoryboardProgressID")
-            as? NSViewController)
-    }
-
-    // Batch process
-    // self.presentViewControllerAsSheet(self.ViewControllerBatch)
-    var viewControllerBatch: NSViewController? {
-        return (self.storyboard?.instantiateController(withIdentifier: "StoryboardBatchID")
             as? NSViewController)
     }
 
