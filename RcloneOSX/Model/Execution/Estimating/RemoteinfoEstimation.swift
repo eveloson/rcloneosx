@@ -30,21 +30,14 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
     var index: Int?
     var maxnumber: Int?
     var count: Int?
-    var inbatch: Bool?
     var estimatefiles: Bool = true
 
     private func prepareandstartexecutetasks() {
         self.stackoftasktobeestimated = [Row]()
         for i in 0 ..< self.configurations!.getConfigurations().count {
             if self.configurations!.getConfigurations()[i].task == ViewControllerReference.shared.sync {
-                if self.inbatch ?? false {
-                    if self.configurations!.getConfigurations()[i].batch == 1 {
-                        self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
-                    }
-                } else {
-                    self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
-                    self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
-                }
+                self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
+                self.stackoftasktobeestimated?.append((self.configurations!.getConfigurations()[i].hiddenID, i))
             }
         }
         self.maxnumber = self.stackoftasktobeestimated?.count
@@ -94,9 +87,6 @@ final class RemoteinfoEstimation: SetConfigurations, Remoterclonesize {
         // self.inbatch = false
         self.updateprogressDelegate = viewcontroller as? UpdateProgress
         self.startstopProgressIndicatorDelegate = viewcontroller as? StartStopProgressIndicator
-        if viewcontroller == ViewControllerReference.shared.getvcref(viewcontroller: .vcbatch) as? ViewControllerBatch {
-            self.inbatch = true
-        }
         self.prepareandstartexecutetasks()
         self.records = [NSMutableDictionary]()
         self.configurations!.estimatedlist = [NSMutableDictionary]()
@@ -125,16 +115,6 @@ extension RemoteinfoEstimation: UpdateProgress {
             record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteServer, forKey: "offsiteServer")
             self.records?.append(record)
             self.configurations?.estimatedlist?.append(record)
-        } else {
-            if self.inbatch ?? false == false {
-                let size = self.remoterclonesize(input: self.outputprocess?.getOutput()?[0] ?? "")
-                NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal)
-                let totalNumber = String(NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal))
-                let totalNumberSizebytes = String(NumberFormatter.localizedString(from: NSNumber(value: size?.bytes ?? 0 / 1024), number: NumberFormatter.Style.decimal))
-                let index = self.records!.count - 1
-                self.records![index].setValue(totalNumber, forKey: "totalNumber")
-                self.records![index].setValue(totalNumberSizebytes, forKey: "totalNumberSizebytes")
-            }
         }
         guard self.stackoftasktobeestimated?.count ?? 0 > 0 else {
             self.selectalltaskswithnumbers(deselect: false)
@@ -145,10 +125,6 @@ extension RemoteinfoEstimation: UpdateProgress {
         self.updateprogressDelegate?.processTermination()
         self.outputprocess = OutputProcess()
         self.index = self.stackoftasktobeestimated?.remove(at: 0).1
-        if self.inbatch ?? false {
-            // In batch, force another Estimateremote
-            self.estimatefiles = false
-        }
         if self.estimatefiles {
             self.estimatefiles = false
             _ = RcloneSize(index: self.index!, outputprocess: self.outputprocess, updateprogress: self)

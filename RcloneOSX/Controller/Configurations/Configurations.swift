@@ -27,8 +27,6 @@ class Configurations: ReloadTable, SetSchedules {
     private var argumentAllConfigurations: [ArgumentsOneConfiguration]?
     // Datasource for NSTableViews
     private var configurationsDataSource: [NSMutableDictionary]?
-    // Object for batchQueue data and operations
-    var batchQueue: BatchTaskWorkQueu?
     // backup list from remote info view
     var quickbackuplist: [Int]?
     // Estimated backup list, all backups
@@ -91,12 +89,6 @@ class Configurations: ReloadTable, SetSchedules {
             data.append(row)
         }
         return data
-    }
-
-    /// Function returns all Configurations marked for backup.
-    /// - returns : array of Configurations
-    func getConfigurationsBatch() -> [Configuration] {
-        return self.configurations!.filter { ($0.task == ViewControllerReference.shared.copy || $0.task == ViewControllerReference.shared.sync) && ($0.batch == 1) }
     }
 
     /// Function computes arguments for rclone, either arguments for
@@ -192,41 +184,6 @@ class Configurations: ReloadTable, SetSchedules {
         _ = PersistentStorageConfiguration(profile: self.profile).saveconfigInMemoryToPersistentStore()
     }
 
-    /// Function toggles Configurations for batch or no
-    /// batch. Function updates Configuration in memory
-    /// and stores Configuration i memory to
-    /// persisten store
-    /// - parameter index: index of Configuration to toogle batch on/off
-    func togglebatch(_ index: Int) {
-        if self.configurations![index].batch == 1 {
-            self.configurations![index].batch = 0
-        } else {
-            self.configurations![index].batch = 1
-        }
-        _ = PersistentStorageConfiguration(profile: self.profile).saveconfigInMemoryToPersistentStore()
-        self.reloadtable(vcontroller: .vctabmain)
-    }
-
-    /// Function return the reference to object holding data and methods
-    /// for batch execution of Configurations.
-    /// - returns : reference to to object holding data and methods
-    func getbatchQueue() -> BatchTaskWorkQueu? {
-        if self.batchQueue == nil {
-            self.batchQueue = BatchTaskWorkQueu(configurations: self)
-        }
-        return self.batchQueue
-    }
-
-    /// Function is getting the number of rows batchDataQueue
-    /// - returns : the number of rows
-    func batchQueuecount() -> Int {
-        return self.batchQueue?.getbatchtaskstodocount() ?? 0
-    }
-
-    func getbatchlist() -> [NSMutableDictionary]? {
-        return self.batchQueue?.data
-    }
-
     // Add new configurations
     func addNewConfigurations(dict: NSMutableDictionary) {
         _ = PersistentStorageConfiguration(profile: self.profile).newConfigurations(dict: dict)
@@ -295,7 +252,6 @@ class Configurations: ReloadTable, SetSchedules {
         self.configurations = [Configuration]()
         self.argumentAllConfigurations = nil
         self.configurationsDataSource = nil
-        self.batchQueue = nil
         self.profile = profile
         self.readconfigurations()
     }

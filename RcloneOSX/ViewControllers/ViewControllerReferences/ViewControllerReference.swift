@@ -15,7 +15,6 @@ enum ViewController {
     case vcloggdata
     case vcnewconfigurations
     case vcabout
-    case vcbatch
     case vcprogressview
     case vcrestore
     case vcquickbackup
@@ -91,8 +90,6 @@ class ViewControllerReference {
     private var viewControllerLoggData: NSViewController?
     // Reference to About
     private var viewControllerAbout: NSViewController?
-    //  Refereence to batchview
-    private var viewControllerBatch: NSViewController?
     // ProgressView single task
     private var viewControllerProgressView: NSViewController?
     // Quick batch
@@ -118,8 +115,6 @@ class ViewControllerReference {
             return self.viewControllerNewConfigurations
         case .vcabout:
             return self.viewControllerAbout
-        case .vcbatch:
-            return self.viewControllerBatch
         case .vcprogressview:
             return self.viewControllerProgressView
         case .vcquickbackup:
@@ -147,8 +142,6 @@ class ViewControllerReference {
             self.viewControllerNewConfigurations = nsviewcontroller
         case .vcabout:
             self.viewControllerAbout = nsviewcontroller
-        case .vcbatch:
-            self.viewControllerBatch = nsviewcontroller
         case .vcprogressview:
             self.viewControllerProgressView = nsviewcontroller
         case .vcquickbackup:

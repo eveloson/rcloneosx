@@ -258,12 +258,12 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
         self.singletask?.executeSingleTask()
     }
 
-    @IBAction func executeBatch(_: NSToolbarItem) {
+    @IBAction func executemultipleselectedrows(_: NSToolbarItem) {
         guard self.checkforrclone() == false else { return }
         self.setNumbers(outputprocess: nil)
         self.deselect()
         globalMainQueue.async { () -> Void in
-            self.presentAsSheet(self.viewControllerBatch!)
+            self.presentAsSheet(self.viewControllerRemoteInfo!)
         }
     }
 
