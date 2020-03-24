@@ -34,6 +34,14 @@ class Configurations: ReloadTable, SetSchedules {
     // remote info tasks
     var remoteinfoestimation: RemoteinfoEstimation?
 
+    func setestimatedlistnil() -> Bool {
+        if (self.estimatedlist?.count ?? 0) == (self.configurations?.count ?? 0) {
+            return false
+        } else {
+            return true
+        }
+    }
+
     /// Function for getting the profile
     func getProfile() -> String? {
         return self.profile

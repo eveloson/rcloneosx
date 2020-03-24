@@ -63,9 +63,11 @@ extension ViewControllerMain: NSTableViewDelegate, Attributedestring {
         let indexes = myTableViewFromNotification.selectedRowIndexes
         if let index = indexes.first {
             self.index = index
+            self.indexes = self.mainTableView.selectedRowIndexes
             self.setNumbers(outputprocess: nil)
         } else {
             self.index = nil
+            self.indexes = nil
         }
         self.reset()
         self.showrclonecommandmainview()
