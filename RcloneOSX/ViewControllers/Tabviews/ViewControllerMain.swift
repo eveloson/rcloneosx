@@ -166,15 +166,23 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
     func info(num: Int) {
         switch num {
         case 1:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
             self.info.stringValue = "Select a task...."
         case 2:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .red)
             self.info.stringValue = "Possible error logging..."
         case 3:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .red)
             self.info.stringValue = "No rclone in path..."
         case 4:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
             self.info.stringValue = "⌘A to abort or wait..."
         case 5:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
             self.info.stringValue = "New version is available - see About"
+        case 6:
+            self.info.textColor = setcolor(nsviewcontroller: self, color: .green)
+            self.info.stringValue = "Select one or more tasks..."
         default:
             self.info.stringValue = ""
         }
@@ -284,6 +292,10 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Filee
 
     @IBAction func executemultipleselectedrows(_: NSToolbarItem) {
         guard self.checkforrclone() == false else { return }
+        guard self.indexes != nil else {
+            self.info(num: 6)
+            return
+        }
         self.multipeselection = true
         self.configurations?.remoteinfoestimation = nil
         self.configurations?.estimatedlist = nil
