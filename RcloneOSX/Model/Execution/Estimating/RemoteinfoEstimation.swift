@@ -128,6 +128,16 @@ extension RemoteinfoEstimation: UpdateProgress {
             record.setValue(self.configurations?.getConfigurations()[self.index!].offsiteServer, forKey: "offsiteServer")
             self.records?.append(record)
             self.configurations?.estimatedlist?.append(record)
+        } else {
+            if let string = self.outputprocess?.getOutput()?[0] {
+                let size = self.remoterclonesize(input: string)
+                let numberoffiles = String(NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal))
+                let sizeoffiles = String(NumberFormatter.localizedString(from: NSNumber(value: size?.bytes ?? 0 / 1024), number: NumberFormatter.Style.decimal))
+                let index = self.records?.count ?? -1
+                guard index > -1 else { return }
+                self.records?[index - 1].setValue(numberoffiles, forKey: "totalNumber")
+                self.records?[index - 1].setValue(sizeoffiles, forKey: "totalNumberSizebytes")
+            }
         }
         guard self.stackoftasktobeestimated?.count ?? 0 > 0 else {
             self.selectalltaskswithnumbers(deselect: false)
