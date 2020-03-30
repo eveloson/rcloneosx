@@ -1,5 +1,7 @@
 ## RcloneOSX
 
+[![GitHub license](https://img.shields.io/github/license/rsyncOSX/rcloneosx)](https://github.com/rsyncOSX/rcloneosx/blob/master/Licence.MD) ![GitHub Releases](https://img.shields.io/github/downloads/rsyncosx/rcloneosx/v2.1.5/total) [![GitHub issues](https://img.shields.io/github/issues/rsyncOSX/rcloneosx)](https://github.com/rsyncOSX/rcloneosx/issues)
+
 ![](icon/rcloneosx.png)
 
 [Please read the Changelog](https://rsyncosx.github.io/RcloneChangelog).
