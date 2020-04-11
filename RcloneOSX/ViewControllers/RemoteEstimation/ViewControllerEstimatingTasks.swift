@@ -30,7 +30,10 @@ class ViewControllerEstimatingTasks: NSViewController, Abort, SetConfigurations,
     @IBOutlet var progress: NSProgressIndicator!
 
     @IBAction func abort(_: NSButton) {
-        self.abort()
+        if self.remoteinfotask?.stackoftasktobeestimated?.count ?? 0 > 0 {
+            self.remoteinfotask?.stackoftasktobeestimated = nil
+            self.abort()
+        }
         self.closeview()
     }
 
