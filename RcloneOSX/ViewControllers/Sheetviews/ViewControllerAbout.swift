@@ -42,13 +42,6 @@ class ViewControllerAbout: NSViewController, SetDismisser {
         self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
     }
 
-    @IBAction func documentation(_: NSButton) {
-        if let resource = self.resource {
-            NSWorkspace.shared.open(URL(string: resource.getResource(resource: .documents))!)
-        }
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
-    }
-
     @IBAction func download(_: NSButton) {
         guard ViewControllerReference.shared.URLnewVersion != nil else {
             self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
