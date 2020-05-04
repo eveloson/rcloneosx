@@ -3,26 +3,28 @@
 <plist version="1.0">
 <dict>
 	<key>1.9.0</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.5/RcloneOSX-2.1.5.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.9/rcloneosx.2.1.9.dmg</string>
 	<key>1.9.1</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.5/RcloneOSX-2.1.5.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.9/rcloneosx.2.1.9.dmg</string>
 	<key>1.9.2</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.5/RcloneOSX-2.1.5.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.9/rcloneosx.2.1.9.dmg</string>
 	<key>1.9.3</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.5/RcloneOSX-2.1.5.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.9/rcloneosx.2.1.9.dmg</string>
 	<key>1.9.4</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.5/RcloneOSX-2.1.5.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.9/rcloneosx.2.1.9.dmg</string>
 	<key>2.0.0</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.5/RcloneOSX-2.1.5.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.9/rcloneosx.2.1.9.dmg</string>
 	<key>2.0.1</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.5/RcloneOSX-2.1.5.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.9/rcloneosx.2.1.9.dmg</string>
 	<key>2.0.5</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.5/RcloneOSX-2.1.5.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.9/rcloneosx.2.1.9.dmg</string>
 	<key>2.0.6</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.5/RcloneOSX-2.1.5.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.9/rcloneosx.2.1.9.dmg</string>
 	<key>2.1.0</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.5/RcloneOSX-2.1.5.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.9/rcloneosx.2.1.9.dmg</string>
 	<key>2.1.1</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.5/RcloneOSX-2.1.5.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.9/rcloneosx.2.1.9.dmg</string>
+	<key>2.1.5</key>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.1.9/rcloneosx.2.1.9.dmg</string>
 </dict>
 </plist>
