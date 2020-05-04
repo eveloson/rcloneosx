@@ -80,6 +80,7 @@ final class OutputProcess {
                 if error {
                     self.errorDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
                     self.errorDelegate?.rcloneerror()
+                    _ = Logging(self, true)
                 }
             }
             self.endIndex = out.count

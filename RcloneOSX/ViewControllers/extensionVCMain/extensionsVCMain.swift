@@ -87,7 +87,8 @@ extension ViewControllerMain: RcloneError {
     func rcloneerror() {
         // Set on or off in user configuration
         globalMainQueue.async { () -> Void in
-            self.seterrorinfo(info: "Error")
+            self.seterrorinfo(info: "Rclone error")
+            self.info.stringValue = "See ~/Documents/rclonelog.txt"
             self.showrclonecommandmainview()
             self.deselect()
             // Abort any operations
@@ -105,13 +106,19 @@ extension ViewControllerMain: Fileerror {
     func errormessage(errorstr: String, errortype: Fileerrortype) {
         globalMainQueue.async { () -> Void in
             if errortype == .openlogfile {
-                self.rcloneCommand.stringValue = self.errordescription(errortype: errortype)
+                self.seterrorinfo(info: "Logfile warning")
+                self.outputprocess?.addlinefromoutput(self.errordescription(errortype: errortype))
+                self.info.stringValue = "Logfile: see ~See ~/Documents/rclonelog.txt"
             } else if errortype == .filesize {
-                self.rcloneCommand.stringValue = self.errordescription(errortype: errortype) + ": filesize = " + errorstr
+                self.seterrorinfo(info: "Logfile size")
+                self.outputprocess?.addlinefromoutput(self.errordescription(errortype: errortype) + ": filesize = " + errorstr)
+                self.info.stringValue = "Size logfile: see ~/Documents/rclonelog.txt"
             } else {
-                self.seterrorinfo(info: "Error")
-                self.rcloneCommand.stringValue = self.errordescription(errortype: errortype) + "\n" + errorstr
+                self.seterrorinfo(info: "Some error")
+                self.outputprocess?.addlinefromoutput(self.errordescription(errortype: errortype) + "\n" + errorstr)
+                self.info.stringValue = "Error: see ~/Documents/rclonelog.txt"
             }
+            _ = Logging(self.outputprocess, true)
         }
     }
 }

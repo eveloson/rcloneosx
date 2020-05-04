@@ -48,7 +48,7 @@ extension ViewControllerMain: NSTableViewDelegate, Attributedestring {
     }
 
     // Toggling batch
-    func tableView(_: NSTableView, setObjectValue _: Any?, for _: NSTableColumn?, row: Int) {
+    func tableView(_: NSTableView, setObjectValue _: Any?, for _: NSTableColumn?, row _: Int) {
         if self.process != nil {
             self.abortOperations()
         }

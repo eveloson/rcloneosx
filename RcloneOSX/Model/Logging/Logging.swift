@@ -12,14 +12,23 @@ import Foundation
 class Logging: ReportFileerror {
     var outputprocess: OutputProcess?
     var log: String?
+    var contentoflogfile: [String]?
     var filename: String?
     var fileURL: URL?
     var filesize: NSNumber?
 
+    private func setfilenamelogging() {
+        self.filename = ViewControllerReference.shared.logname
+        let DocumentDirURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        self.fileURL = DocumentDirURL?.appendingPathComponent(self.filename!).appendingPathExtension("txt")
+        self.filesize = try? FileManager.default.attributesOfItem(atPath: self.fileURL!.path)[FileAttributeKey.size] as? NSNumber ?? 0
+        ViewControllerReference.shared.fileURL = self.fileURL
+    }
+
     private func writeloggfile() {
         globalMainQueue.async { () -> Void in
             do {
-                try self.log!.write(to: self.fileURL!, atomically: true, encoding: String.Encoding.utf8)
+                try self.log?.write(to: self.fileURL!, atomically: true, encoding: String.Encoding.utf8)
                 if let filesize = self.filesize {
                     guard Int(truncating: filesize) < ViewControllerReference.shared.logfilesize else {
                         let size = Int(truncating: filesize)
@@ -56,7 +65,7 @@ class Logging: ReportFileerror {
         tmplogg.append(date)
         tmplogg.append("-------------------------------------------")
         tmplogg.append("\n")
-        for i in startindex ..< self.outputprocess!.getOutput()!.count {
+        for i in startindex ..< (self.outputprocess?.getOutput()?.count ?? 0) {
             tmplogg.append(self.outputprocess!.getOutput()![i])
         }
         if self.log == nil {
@@ -75,27 +84,48 @@ class Logging: ReportFileerror {
         let tmplogg: String = "\n" + "-------------------------------------------\n" + date + "\n"
             + "-------------------------------------------\n"
         if self.log == nil {
-            self.log = tmplogg + self.outputprocess!.getOutput()!.joined(separator: "\n")
+            self.log = tmplogg + (self.outputprocess?.getOutput() ?? [""]).joined(separator: "\n")
         } else {
-            self.log = self.log! + tmplogg + self.outputprocess!.getOutput()!.joined(separator: "\n")
+            self.log = self.log! + tmplogg + (self.outputprocess?.getOutput() ?? [""]).joined(separator: "\n")
         }
         self.writeloggfile()
     }
 
     init(outputprocess: OutputProcess?) {
-        guard ViewControllerReference.shared.fulllogging == true || ViewControllerReference.shared.minimumlogging == true else {
+        guard ViewControllerReference.shared.fulllogging == true ||
+            ViewControllerReference.shared.minimumlogging == true else {
             return
         }
         self.outputprocess = outputprocess
-        self.filename = ViewControllerReference.shared.logname
-        let DocumentDirURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        self.fileURL = DocumentDirURL?.appendingPathComponent(self.filename!).appendingPathExtension("txt")
-        self.filesize = try? FileManager.default.attributesOfItem(atPath: self.fileURL!.path)[FileAttributeKey.size] as? NSNumber ?? 0
-        ViewControllerReference.shared.fileURL = self.fileURL
+        self.setfilenamelogging()
         if ViewControllerReference.shared.fulllogging {
             self.fulllogging()
         } else {
             self.minimumlogging()
         }
+    }
+
+    init(_ outputprocess: OutputProcess?, _: Bool) {
+        self.outputprocess = outputprocess
+        self.setfilenamelogging()
+        self.fulllogging()
+    }
+
+    init() {
+        self.setfilenamelogging()
+        self.readloggfile()
+        self.contentoflogfile = [String]()
+        guard self.log != nil else { return }
+        self.contentoflogfile = self.log!.components(separatedBy: .newlines)
+    }
+}
+
+extension Logging: ViewOutputDetails {
+    func reloadtable() {}
+
+    func appendnow() -> Bool { return false }
+
+    func getalloutput() -> [String] {
+        return self.contentoflogfile ?? [""]
     }
 }
