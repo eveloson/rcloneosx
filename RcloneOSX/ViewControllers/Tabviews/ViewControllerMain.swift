@@ -7,7 +7,7 @@
 import Cocoa
 import Foundation
 
-class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, FileerrorMessage, Remoterclonesize, Setcolor, Checkforrclone {
+class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, ErrorMessage, Remoterclonesize, Setcolor, Checkforrclone {
     @IBOutlet var mainTableView: NSTableView!
     // Progressbar indicating work
     @IBOutlet var working: NSProgressIndicator!

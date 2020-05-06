@@ -10,7 +10,6 @@
 import Foundation
 
 enum Fileerrortype {
-    case openlogfile
     case writelogfile
     case profilecreatedirectory
     case profiledeletedirectory
@@ -19,35 +18,30 @@ enum Fileerrortype {
 
 // Protocol for reporting file errors
 protocol Fileerror: AnyObject {
-    func errormessage(errorstr: String, errortype: Fileerrortype)
+    func fileerrormessageandtype(errorstr: String, errortype: Fileerrortype)
 }
 
-protocol ReportFileerror {
+protocol FileErrors {
     var errorDelegate: Fileerror? { get }
 }
 
-extension ReportFileerror {
+extension FileErrors {
     var errorDelegate: Fileerror? {
         return ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
     }
 
-    func error(error: String, errortype: Fileerrortype) {
-        self.errorDelegate?.errormessage(errorstr: error, errortype: errortype)
+    func fileerror(error: String, errortype: Fileerrortype) {
+        self.errorDelegate?.fileerrormessageandtype(errorstr: error, errortype: errortype)
     }
 }
 
-protocol FileerrorMessage {
+protocol ErrorMessage {
     func errordescription(errortype: Fileerrortype) -> String
 }
 
-extension FileerrorMessage {
+extension ErrorMessage {
     func errordescription(errortype: Fileerrortype) -> String {
         switch errortype {
-        case .openlogfile:
-            guard ViewControllerReference.shared.fileURL != nil else {
-                return "No existing logfile, creating a new one"
-            }
-            return "No existing logfile, creating a new one: " + String(describing: ViewControllerReference.shared.fileURL!)
         case .writelogfile:
             return "Could not write to logfile"
         case .profilecreatedirectory:
@@ -60,7 +54,7 @@ extension FileerrorMessage {
     }
 }
 
-class Files: ReportFileerror {
+class Files: FileErrors {
     var rootpath: String?
     // config path either
     // ViewControllerReference.shared.configpath or RcloneReference.shared.configpath
@@ -102,7 +96,7 @@ class Files: ReportFileerror {
                     try fileManager.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
                 } catch let e {
                     let error = e as NSError
-                    self.error(error: error.description, errortype: .profilecreatedirectory)
+                    self.fileerror(error: error.description, errortype: .profilecreatedirectory)
                 }
             }
         }
@@ -117,7 +111,7 @@ class Files: ReportFileerror {
                 return files
             } catch let e {
                 let error = e as NSError
-                self.error(error: error.description, errortype: .profilecreatedirectory)
+                self.fileerror(error: error.description, errortype: .profilecreatedirectory)
                 return nil
             }
         } else {
