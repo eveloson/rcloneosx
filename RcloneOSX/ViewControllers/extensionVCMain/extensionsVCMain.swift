@@ -103,13 +103,10 @@ extension ViewControllerMain: RcloneError {
 
 // If, for any reason, handling files or directory throws an error
 extension ViewControllerMain: Fileerror {
-    func errormessage(errorstr: String, errortype: Fileerrortype) {
+    func fileerrormessageandtype(errorstr: String, errortype: Fileerrortype) {
         globalMainQueue.async { () -> Void in
-            if errortype == .openlogfile {
-                self.seterrorinfo(info: "Logfile warning")
-                self.outputprocess?.addlinefromoutput(self.errordescription(errortype: errortype))
-                self.info.stringValue = "Logfile: see ~See ~/Documents/rclonelog.txt"
-            } else if errortype == .filesize {
+            if self.outputprocess == nil { self.outputprocess = OutputProcess() }
+            if errortype == .filesize {
                 self.seterrorinfo(info: "Logfile size")
                 self.outputprocess?.addlinefromoutput(self.errordescription(errortype: errortype) + ": filesize = " + errorstr)
                 self.info.stringValue = "Size logfile: see ~/Documents/rclonelog.txt"
