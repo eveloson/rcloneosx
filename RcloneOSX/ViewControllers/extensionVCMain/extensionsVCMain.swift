@@ -108,13 +108,13 @@ extension ViewControllerMain: Fileerror {
             if self.outputprocess == nil { self.outputprocess = OutputProcess() }
             if errortype == .filesize {
                 self.seterrorinfo(info: "Logfile size")
-                self.outputprocess?.addlinefromoutput(self.errordescription(errortype: errortype) + ": filesize = " + errorstr)
-                self.info.stringValue = "Size logfile: see ~/Documents/rclonelog.txt"
+                self.info.stringValue = "Size logfile: " + errorstr
             } else {
                 self.seterrorinfo(info: "Some error")
                 self.outputprocess?.addlinefromoutput(self.errordescription(errortype: errortype) + "\n" + errorstr)
                 self.info.stringValue = "Error: see ~/Documents/rclonelog.txt"
             }
+            guard errortype != .filesize else { return }
             _ = Logging(self.outputprocess, true)
         }
     }

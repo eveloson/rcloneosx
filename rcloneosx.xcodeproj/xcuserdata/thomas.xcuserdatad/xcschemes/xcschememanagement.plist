@@ -22,7 +22,7 @@
 		<key>rcloneosx-dmg.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 		<key>rcloneosx.xcscheme</key>
 		<dict>
@@ -32,7 +32,7 @@
 		<key>rcloneosx.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
