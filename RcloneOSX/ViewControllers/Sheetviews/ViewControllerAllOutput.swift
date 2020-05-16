@@ -35,7 +35,7 @@ class ViewControllerAllOutput: NSViewController, Delay {
         ViewControllerReference.shared.setvcref(viewcontroller: .vcalloutput, nsviewcontroller: nil)
     }
 
-    @IBAction func pastetabeltomacospasteboard(_: NSButton) {
+    @IBAction func pastetabletomacospasteboard(_: NSButton) {
         let pasteboard = NSPasteboard.general
         pasteboard.clearContents()
         for i in 0 ..< (self.getoutputDelegate?.getalloutput().count ?? 0) {
@@ -53,6 +53,13 @@ class ViewControllerAllOutput: NSViewController, Delay {
 
     @IBAction func reloadoutput(_: NSButton) {
         self.getoutputDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
+        globalMainQueue.async { () -> Void in
+            self.outputtable.reloadData()
+        }
+    }
+
+    @IBAction func newcleanlogfile(_: NSButton) {
+        _ = Logging(nil, false)
         globalMainQueue.async { () -> Void in
             self.outputtable.reloadData()
         }
