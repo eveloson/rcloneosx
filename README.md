@@ -1,10 +1,8 @@
 ## RcloneOSX
 
+![](icon/rcloneosx.png) [The Changelog.](https://rsyncosx.netlify.app/post/rclonechangelog/)
+
 [![GitHub license](https://img.shields.io/github/license/rsyncOSX/rcloneosx)](https://github.com/rsyncOSX/rcloneosx/blob/master/Licence.MD) ![GitHub Releases](https://img.shields.io/github/downloads/rsyncosx/rcloneosx/v2.1.9/total) ![GitHub Releases](https://img.shields.io/github/downloads/rsyncosx/rcloneosx/v2.2.0/total) [![GitHub issues](https://img.shields.io/github/issues/rsyncOSX/rcloneosx)](https://github.com/rsyncOSX/rcloneosx/issues)
-
-![](icon/rcloneosx.png)
-
-[The Changelog.](https://rsyncosx.netlify.app/post/rclonechangelog/)
 
 For the moment there is <b>no active development</b> of RcloneOSX. I will continue to compile RcloneOSX for new versions of macOS and fix serious bugs. My main effort in the future is to continue development of [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) and [RsyncGUI](https://github.com/rsyncOSX/RsyncGUI).
 
@@ -42,6 +40,4 @@ The app is signed with my Apple ID developer certificate and [notarized](https:/
 
 ### Compile
 
-To compile the code, install Xcode and open the RcloneOSX project file. Before compiling, open in Xcode the `RcloneOSX/General` preference page (after opening the RcloneOSX project file) and replace your own credentials in `Signing`, or disable Signing.
-
-There are two ways to compile, either utilize `make` or compile by Xcode. `make release` will compile the `rcloneosx.app` and `make dmg` will make a dmg file to be released.  The build of dmg files are by utilizing [andreyvit](https://github.com/andreyvit/create-dmg) script for creating dmg and [syncthing-macos](https://github.com/syncthing/syncthing-macos) setup.
+There are some details [about how to compile](https://rsyncosx.netlify.app/post/compile/).
