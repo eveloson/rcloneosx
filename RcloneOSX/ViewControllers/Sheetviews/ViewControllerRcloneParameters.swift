@@ -48,7 +48,8 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
     @IBOutlet var combo14: NSComboBox!
 
     @IBAction func close(_: NSButton) {
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        // self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        self.view.window?.close()
     }
 
     override func viewDidLoad() {
@@ -121,7 +122,8 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
             self.configurations!.updateConfigurations(config: configurations[index], index: index)
             self.userparamsupdatedDelegate?.rcloneuserparamsupdated()
         }
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        // self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        self.view.window?.close()
     }
 
     // There are eight comboboxes

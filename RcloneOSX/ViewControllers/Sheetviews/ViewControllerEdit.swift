@@ -21,7 +21,8 @@ class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Ind
 
     // Close and dismiss view
     @IBAction func close(_: NSButton) {
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        // self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        self.view.window?.close()
     }
 
     // Update configuration, save and dismiss view
@@ -38,7 +39,8 @@ class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Ind
             config[index].backupID = self.backupID.stringValue
             self.configurations?.updateConfigurations(config: config[index], index: index)
         }
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        // self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        self.view.window?.close()
     }
 
     override func viewDidAppear() {
