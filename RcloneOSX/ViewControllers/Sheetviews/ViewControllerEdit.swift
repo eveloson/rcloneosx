@@ -21,18 +21,26 @@ class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Ind
 
     // Close and dismiss view
     @IBAction func close(_: NSButton) {
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        // self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        self.view.window?.close()
     }
 
     // Update configuration, save and dismiss view
     @IBAction func update(_: NSButton) {
-        var config: [Configuration] = self.configurations!.getConfigurations()
-        config[self.index!].localCatalog = self.localCatalog.stringValue
-        config[self.index!].offsiteCatalog = self.offsiteCatalog.stringValue
-        config[self.index!].offsiteServer = self.cloudService.stringValue
-        config[self.index!].backupID = self.backupID.stringValue
-        self.configurations!.updateConfigurations(config: config[self.index!], index: self.index!)
-        self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        if let index = self.index() {
+            var config: [Configuration] = self.configurations?.getConfigurations() ?? []
+            guard config.count > 0 else {
+                self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+                return
+            }
+            config[index].localCatalog = self.localCatalog.stringValue
+            config[index].offsiteCatalog = self.offsiteCatalog.stringValue
+            config[index].offsiteServer = self.cloudService.stringValue
+            config[index].backupID = self.backupID.stringValue
+            self.configurations?.updateConfigurations(config: config[index], index: index)
+        }
+        // self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
+        self.view.window?.close()
     }
 
     override func viewDidAppear() {
@@ -40,12 +48,15 @@ class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Ind
         self.localCatalog.stringValue = ""
         self.offsiteCatalog.stringValue = ""
         self.backupID.stringValue = ""
-        self.index = self.index()
-        let config: Configuration = self.configurations!.getConfigurations()[self.index!]
-        self.localCatalog.stringValue = config.localCatalog
-        self.offsiteCatalog.stringValue = config.offsiteCatalog
-        self.cloudService.stringValue = config.offsiteServer
-        self.backupID.stringValue = config.backupID
+        if let index = self.index() {
+            self.index = index
+            if let config = self.configurations?.getConfigurations()[index] {
+                self.localCatalog.stringValue = config.localCatalog
+                self.offsiteCatalog.stringValue = config.offsiteCatalog
+                self.cloudService.stringValue = config.offsiteServer
+                self.backupID.stringValue = config.backupID
+            }
+        }
         self.loadCloudServices()
     }
 
