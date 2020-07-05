@@ -59,6 +59,7 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
 
     override func viewDidAppear() {
         super.viewDidAppear()
+        ViewControllerReference.shared.setvcref(viewcontroller: .vcrcloneparameters, nsviewcontroller: self)
         guard self.diddissappear == false else { return }
         if let index = self.index() {
             // Create RcloneParameters object and load initial parameters
@@ -97,6 +98,7 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
     override func viewDidDisappear() {
         super.viewDidDisappear()
         self.diddissappear = true
+        ViewControllerReference.shared.setvcref(viewcontroller: .vcrcloneparameters, nsviewcontroller: nil)
     }
 
     // Function for saving changed or new parameters for one configuration.
