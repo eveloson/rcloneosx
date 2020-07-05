@@ -45,6 +45,7 @@ class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Ind
 
     override func viewDidAppear() {
         super.viewDidAppear()
+        ViewControllerReference.shared.setvcref(viewcontroller: .vcedit, nsviewcontroller: self)
         self.localCatalog.stringValue = ""
         self.offsiteCatalog.stringValue = ""
         self.backupID.stringValue = ""
@@ -58,6 +59,11 @@ class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Ind
             }
         }
         self.loadCloudServices()
+    }
+
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        ViewControllerReference.shared.setvcref(viewcontroller: .vcedit, nsviewcontroller: nil)
     }
 
     private func loadCloudServices() {

@@ -22,6 +22,8 @@ enum ViewController {
     case vcestimatingtasks
     case vcremoteinfo
     case vcalloutput
+    case vcedit
+    case vcrcloneparameters
 }
 
 class ViewControllerReference {
@@ -104,6 +106,10 @@ class ViewControllerReference {
     private var viewControllerRestore: NSViewController?
     // Alloutput
     private var viewControllerAlloutput: NSViewController?
+    // Edit
+    private var viewControllerEdit: NSViewController?
+    // Rclone parameters
+    private var viewControllerRcloneParameters: NSViewController?
 
     func getvcref(viewcontroller: ViewController) -> NSViewController? {
         switch viewcontroller {
@@ -129,6 +135,10 @@ class ViewControllerReference {
             return self.viewControllerRestore
         case .vcalloutput:
             return self.viewControllerAlloutput
+        case .vcedit:
+            return self.viewControllerEdit
+        case .vcrcloneparameters:
+            return self.viewControllerRcloneParameters
         }
     }
 
@@ -156,6 +166,10 @@ class ViewControllerReference {
             self.viewControllerRestore = nsviewcontroller
         case .vcalloutput:
             self.viewControllerAlloutput = nsviewcontroller
+        case .vcedit:
+            self.viewControllerEdit = nsviewcontroller
+        case .vcrcloneparameters:
+            self.viewControllerRcloneParameters = nsviewcontroller
         }
     }
 }
