@@ -171,6 +171,17 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Error
         self.process = nil
         self.singletask = nil
         self.setNumbers(outputprocess: nil)
+        // Close edit and parameters view if open
+        if let view = ViewControllerReference.shared.getvcref(viewcontroller: .vcrcloneparameters) as? ViewControllerRcloneParameters {
+            weak var closeview: ViewControllerRcloneParameters?
+            closeview = view
+            closeview?.closeview()
+        }
+        if let view = ViewControllerReference.shared.getvcref(viewcontroller: .vcedit) as? ViewControllerEdit {
+            weak var closeview: ViewControllerEdit?
+            closeview = view
+            closeview?.closeview()
+        }
     }
 
     @IBAction func executetasknow(_: NSButton) {
