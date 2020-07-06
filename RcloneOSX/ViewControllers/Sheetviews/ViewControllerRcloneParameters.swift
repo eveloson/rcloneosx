@@ -58,6 +58,12 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
 
     override func viewDidAppear() {
         super.viewDidAppear()
+        // Check if there is another view open, if yes close it..
+        if let view = ViewControllerReference.shared.getvcref(viewcontroller: .vcrcloneparameters) as? ViewControllerRcloneParameters {
+            weak var closeview: ViewControllerRcloneParameters?
+            closeview = view
+            closeview?.closeview()
+        }
         ViewControllerReference.shared.setvcref(viewcontroller: .vcrcloneparameters, nsviewcontroller: self)
         guard self.diddissappear == false else { return }
         if let index = self.index() {

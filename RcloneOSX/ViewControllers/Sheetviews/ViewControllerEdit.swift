@@ -48,6 +48,12 @@ class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Ind
 
     override func viewDidAppear() {
         super.viewDidAppear()
+        // Check if there is another view open, if yes close it..
+        if let view = ViewControllerReference.shared.getvcref(viewcontroller: .vcedit) as? ViewControllerEdit {
+            weak var closeview: ViewControllerEdit?
+            closeview = view
+            closeview?.closeview()
+        }
         ViewControllerReference.shared.setvcref(viewcontroller: .vcedit, nsviewcontroller: self)
         self.localCatalog.stringValue = ""
         self.offsiteCatalog.stringValue = ""
