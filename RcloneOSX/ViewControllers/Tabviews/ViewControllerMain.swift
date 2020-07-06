@@ -122,28 +122,6 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Error
         }
     }
 
-    @IBAction func edit(_: NSButton) {
-        self.reset()
-        guard self.index != nil else {
-            self.info(num: 1)
-            return
-        }
-        globalMainQueue.async { () -> Void in
-            self.presentAsSheet(self.editViewController!)
-        }
-    }
-
-    @IBAction func rcloneparams(_: NSButton) {
-        self.reset()
-        guard self.index != nil else {
-            self.info(num: 1)
-            return
-        }
-        globalMainQueue.async { () -> Void in
-            self.presentAsSheet(self.viewControllerRcloneParams!)
-        }
-    }
-
     @IBAction func delete(_: NSButton) {
         guard self.index != nil else {
             self.info(num: 1)
