@@ -25,5 +25,16 @@ final class Selectprofile {
         }
         self.restoreProfileDelegate?.newProfile(profile: nil)
         self.loggdataProfileDelegate?.newProfile(profile: nil)
+        // Close edit and parameters view if open
+        if let view = ViewControllerReference.shared.getvcref(viewcontroller: .vcrcloneparameters) as? ViewControllerRcloneParameters {
+            weak var closeview: ViewControllerRcloneParameters?
+            closeview = view
+            closeview?.closeview()
+        }
+        if let view = ViewControllerReference.shared.getvcref(viewcontroller: .vcedit) as? ViewControllerEdit {
+            weak var closeview: ViewControllerEdit?
+            closeview = view
+            closeview?.closeview()
+        }
     }
 }

@@ -48,7 +48,6 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
     @IBOutlet var combo14: NSComboBox!
 
     @IBAction func close(_: NSButton) {
-        // self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
         self.view.window?.close()
     }
 
@@ -59,6 +58,12 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
 
     override func viewDidAppear() {
         super.viewDidAppear()
+        // Check if there is another view open, if yes close it..
+        if let view = ViewControllerReference.shared.getvcref(viewcontroller: .vcrcloneparameters) as? ViewControllerRcloneParameters {
+            weak var closeview: ViewControllerRcloneParameters?
+            closeview = view
+            closeview?.closeview()
+        }
         ViewControllerReference.shared.setvcref(viewcontroller: .vcrcloneparameters, nsviewcontroller: self)
         guard self.diddissappear == false else { return }
         if let index = self.index() {
@@ -124,7 +129,6 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
             self.configurations!.updateConfigurations(config: configurations[index], index: index)
             self.userparamsupdatedDelegate?.rcloneuserparamsupdated()
         }
-        // self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
         self.view.window?.close()
     }
 
@@ -174,5 +178,11 @@ class ViewControllerRcloneParameters: NSViewController, SetConfigurations, SetDi
             self.param14.stringValue = ""
         default: break
         }
+    }
+}
+
+extension ViewControllerRcloneParameters: CloseEdit {
+    func closeview() {
+        self.view.window?.close()
     }
 }

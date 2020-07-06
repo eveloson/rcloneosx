@@ -9,6 +9,10 @@
 import Cocoa
 import Foundation
 
+protocol CloseEdit: Any {
+    func closeview()
+}
+
 class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Index, Delay {
     @IBOutlet var localCatalog: NSTextField!
     @IBOutlet var offsiteCatalog: NSTextField!
@@ -39,12 +43,17 @@ class ViewControllerEdit: NSViewController, SetConfigurations, SetDismisser, Ind
             config[index].backupID = self.backupID.stringValue
             self.configurations?.updateConfigurations(config: config[index], index: index)
         }
-        // self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
         self.view.window?.close()
     }
 
     override func viewDidAppear() {
         super.viewDidAppear()
+        // Check if there is another view open, if yes close it..
+        if let view = ViewControllerReference.shared.getvcref(viewcontroller: .vcedit) as? ViewControllerEdit {
+            weak var closeview: ViewControllerEdit?
+            closeview = view
+            closeview?.closeview()
+        }
         ViewControllerReference.shared.setvcref(viewcontroller: .vcedit, nsviewcontroller: self)
         self.localCatalog.stringValue = ""
         self.offsiteCatalog.stringValue = ""
@@ -76,5 +85,11 @@ extension ViewControllerEdit: Reloadcloudservices {
     func reloadcloudservices() {
         self.cloudService.addItems(withObjectValues: self.services?.cloudservices ?? [""])
         self.services = nil
+    }
+}
+
+extension ViewControllerEdit: CloseEdit {
+    func closeview() {
+        self.view.window?.close()
     }
 }
