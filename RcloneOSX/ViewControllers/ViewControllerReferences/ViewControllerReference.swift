@@ -84,6 +84,8 @@ class ViewControllerReference {
     // Reference to main View
     // Initial start
     var initialstart: Int = 0
+    // Reference to the active process
+    var process: Process?
 
     private var viewControllertabMain: NSViewController?
     // Reference to the New tasks

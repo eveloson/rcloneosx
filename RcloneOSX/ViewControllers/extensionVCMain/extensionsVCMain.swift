@@ -92,10 +92,7 @@ extension ViewControllerMain: RcloneError {
             self.showrclonecommandmainview()
             self.deselect()
             // Abort any operations
-            if let process = self.process {
-                process.terminate()
-                self.process = nil
-            }
+            _ = InterruptProcess()
             self.singletask?.error()
         }
     }
@@ -125,11 +122,10 @@ extension ViewControllerMain: Abort {
     // Abort any task, either single- or batch task
     func abortOperations() {
         // Terminates the running process
-        if let process = self.process {
-            process.terminate()
+        if ViewControllerReference.shared.process != nil {
+            _ = InterruptProcess()
             self.index = nil
             self.working.stopAnimation(nil)
-            self.process = nil
             // Create workqueu and add abort
             self.seterrorinfo(info: "Abort")
             self.rcloneCommand.stringValue = ""
@@ -139,7 +135,6 @@ extension ViewControllerMain: Abort {
         } else {
             self.working.stopAnimation(nil)
             self.rcloneCommand.stringValue = "Selection out of range - aborting"
-            self.process = nil
             self.index = nil
         }
     }
@@ -367,13 +362,9 @@ extension Checkforrclone {
     }
 }
 
-extension ViewControllerMain: SendProcessreference {
+extension ViewControllerMain: SendOutputProcessreference {
     func sendoutputprocessreference(outputprocess: OutputProcess?) {
         self.outputprocess = outputprocess
-    }
-
-    func sendprocessreference(process: Process?) {
-        self.process = process
     }
 }
 

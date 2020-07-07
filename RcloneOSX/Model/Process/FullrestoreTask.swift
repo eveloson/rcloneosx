@@ -21,8 +21,6 @@ final class FullrestoreTask: SetConfigurations {
     }
 
     init(index: Int, outputprocess: OutputProcess?, updateprogress: UpdateProgress?) {
-        weak var setprocessDelegate: SendProcessreference?
-        setprocessDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         self.arguments = self.configurations?.arguments4tmprestore(index: index, argtype: .arg)
         guard (self.arguments?.count ?? 0) > 3 else { return }
         if (self.arguments?[2] ?? "") == ViewControllerReference.shared.tmprestore {
@@ -31,7 +29,6 @@ final class FullrestoreTask: SetConfigurations {
         let process = Rclone(arguments: self.arguments)
         process.setdelegate(object: updateprogress)
         process.executeProcess(outputprocess: outputprocess)
-        setprocessDelegate?.sendprocessreference(process: process.getProcess())
     }
 
     init(index: Int) {

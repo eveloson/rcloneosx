@@ -11,10 +11,6 @@ import Cocoa
 import Foundation
 
 extension ViewControllerMain: SingleTaskProcess {
-    func getProcessReference(process: Process?) {
-        self.process = process
-    }
-
     func presentViewProgress() {
         globalMainQueue.async { () -> Void in
             self.presentAsSheet(self.viewControllerProgress!)

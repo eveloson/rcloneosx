@@ -24,13 +24,12 @@ protocol SingleTaskProcess: AnyObject {
     func terminateProgressProcess()
     func seterrorinfo(info: String)
     func setNumbers(outputprocess: OutputProcess?)
-    func getProcessReference(process: Process?)
 }
 
 final class SingleTask: SetSchedules, SetConfigurations {
     weak var indicatorDelegate: StartStopProgressIndicatorSingleTask?
     weak var singletaskDelegate: SingleTaskProcess?
-    weak var setprocessDelegate: SendProcessreference?
+    weak var setprocessDelegate: SendOutputProcessreference?
 
     private var index: Int?
     private var outputprocess: OutputProcess?
@@ -50,7 +49,6 @@ final class SingleTask: SetSchedules, SetConfigurations {
                     self.outputprocess = OutputProcess()
                     process.setdelegate(object: self)
                     process.executeProcess(outputprocess: self.outputprocess)
-                    self.setprocessDelegate?.sendprocessreference(process: process.getProcess())
                     self.setprocessDelegate?.sendoutputprocessreference(outputprocess: self.outputprocess)
                 }
             }
@@ -62,7 +60,6 @@ final class SingleTask: SetSchedules, SetConfigurations {
                     self.outputprocess = OutputProcess()
                     process.setdelegate(object: self)
                     process.executeProcess(outputprocess: self.outputprocess)
-                    self.setprocessDelegate?.sendprocessreference(process: process.getProcess())
                     self.setprocessDelegate?.sendoutputprocessreference(outputprocess: self.outputprocess)
                 }
             }
