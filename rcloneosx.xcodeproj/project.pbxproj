@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E84EB33624B47FDC000493AD /* InterruptProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84EB33524B47FDC000493AD /* InterruptProcess.swift */; };
 		E8B9506A23183D5E00C743D5 /* Restorefiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B9506823183D5D00C743D5 /* Restorefiles.swift */; };
 		E8B9506B23183D5E00C743D5 /* RestorefilesArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B9506923183D5D00C743D5 /* RestorefilesArguments.swift */; };
 		E905FE64209836C60008450C /* RcloneSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E905FE63209836C60008450C /* RcloneSize.swift */; };
@@ -113,6 +114,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E84EB33524B47FDC000493AD /* InterruptProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterruptProcess.swift; sourceTree = "<group>"; };
 		E8B9506823183D5D00C743D5 /* Restorefiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restorefiles.swift; sourceTree = "<group>"; };
 		E8B9506923183D5D00C743D5 /* RestorefilesArguments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestorefilesArguments.swift; sourceTree = "<group>"; };
 		E905FE63209836C60008450C /* RcloneSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RcloneSize.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				E905FE63209836C60008450C /* RcloneSize.swift */,
 				E9C2029D211BFE1A005E3B11 /* FullrestoreTask.swift */,
 				E9AEF87D22B3EB210065C1D7 /* Remotefilelist.swift */,
+				E84EB33524B47FDC000493AD /* InterruptProcess.swift */,
 			);
 			path = Process;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				E960CB091FB091DE0008D12E /* ViewControllerProgressProcess.swift in Sources */,
 				E92B18B72096F4DE001DBFAF /* RemoteinfonumbersOnetask.swift in Sources */,
 				E960CB0F1FB091DE0008D12E /* ViewControllerExtensions.swift in Sources */,
+				E84EB33624B47FDC000493AD /* InterruptProcess.swift in Sources */,
 				E980F9B12366163200B2C3CF /* ArgumentsSynchronize.swift in Sources */,
 				E914B77421311C1400FFE398 /* extensionsSchedules.swift in Sources */,
 				E960CB491FB091DE0008D12E /* QuickbackupDispatch.swift in Sources */,

@@ -47,17 +47,10 @@ extension ViewControllerMain: NSTableViewDelegate, Attributedestring {
         return nil
     }
 
-    // Toggling batch
-    func tableView(_: NSTableView, setObjectValue _: Any?, for _: NSTableColumn?, row _: Int) {
-        if self.process != nil {
-            self.abortOperations()
-        }
-    }
-
     // setting which table row is selected
     func tableViewSelectionDidChange(_ notification: Notification) {
         self.seterrorinfo(info: "")
-        if self.process != nil { self.abortOperations() }
+        if ViewControllerReference.shared.process != nil { self.abortOperations() }
         self.info(num: 0)
         let myTableViewFromNotification = (notification.object as? NSTableView)!
         let indexes = myTableViewFromNotification.selectedRowIndexes

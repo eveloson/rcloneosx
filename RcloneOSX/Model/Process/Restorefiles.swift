@@ -15,11 +15,7 @@ final class Restorefiles: SetConfigurations {
     var commandDisplay: String?
     var process: ProcessCmd?
     var outputprocess: OutputProcess?
-    weak var sendprocess: SendProcessreference?
-
-    func getProcess() -> Process? {
-        return self.process?.getProcess()
-    }
+    weak var sendprocess: SendOutputProcessreference?
 
     func getOutput() -> [String] {
         return self.outputprocess?.getOutput() ?? []

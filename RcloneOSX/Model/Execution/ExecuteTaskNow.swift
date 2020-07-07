@@ -10,7 +10,7 @@
 import Foundation
 
 final class ExecuteTaskNow: SetConfigurations {
-    weak var setprocessDelegate: SendProcessreference?
+    weak var setprocessDelegate: SendOutputProcessreference?
     weak var startstopindicators: StartStopProgressIndicatorSingleTask?
     var outputprocess: OutputProcess?
     var index: Int?
@@ -25,7 +25,6 @@ final class ExecuteTaskNow: SetConfigurations {
             process.setdelegate(object: self)
             process.executeProcess(outputprocess: self.outputprocess)
             self.startstopindicators?.startIndicatorExecuteTaskNow()
-            self.setprocessDelegate?.sendprocessreference(process: process.getProcess())
             self.setprocessDelegate?.sendoutputprocessreference(outputprocess: self.outputprocess)
         }
     }

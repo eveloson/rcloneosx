@@ -17,8 +17,6 @@ protocol ErrorOutput: AnyObject {
 class ProcessCmd: Delay {
     // Number of calculated files to be copied
     var calculatedNumberOfFiles: Int = 0
-    // Variable for reference to Process
-    var processReference: Process?
     // Message to calling class
     weak var updateDelegate: UpdateProgress?
     // Observers
@@ -40,6 +38,7 @@ class ProcessCmd: Delay {
     func executeProcess(outputprocess: OutputProcess?) {
         // Process
         let task = Process()
+        // If self.command != nil either alternativ path for rsync or other command than rsync to be executed
         if let command = self.command {
             task.launchPath = command
         } else {
@@ -53,44 +52,37 @@ class ProcessCmd: Delay {
         let outHandle = pipe.fileHandleForReading
         outHandle.waitForDataInBackgroundAndNotify()
         // Observator for reading data from pipe, observer is removed when Process terminates
-        self.notifications_datahandle = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable, object: nil, queue: nil) { _ in
+        self.notifications_datahandle = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable, object: nil, queue: nil) { [weak self] _ in
             let data = outHandle.availableData
             if data.count > 0 {
                 if let str = NSString(data: data, encoding: String.Encoding.utf8.rawValue) {
-                    if outputprocess != nil {
-                        outputprocess!.addlinefromoutput(str as String)
-                        self.calculatedNumberOfFiles = outputprocess!.count()
-                        // Send message about files
-                        self.updateDelegate?.fileHandler()
-                        if self.termination {
-                            self.possibleerrorDelegate?.erroroutput()
-                        }
+                    outputprocess?.addlinefromoutput(str as String)
+                    // Send message about files
+                    self?.updateDelegate?.fileHandler()
+                    if self?.termination ?? false {
+                        self?.possibleerrorDelegate?.erroroutput()
                     }
                 }
                 outHandle.waitForDataInBackgroundAndNotify()
             }
         }
         // Observator Process termination, observer is removed when Process terminates
-        self.notifications_termination = NotificationCenter.default.addObserver(forName: Process.didTerminateNotification, object: task, queue: nil) { _ in
+        self.notifications_termination = NotificationCenter.default.addObserver(forName: Process.didTerminateNotification, object: nil, queue: nil) { _ in
             self.delayWithSeconds(0.5) {
                 self.termination = true
                 self.updateDelegate?.processTermination()
+                // Must remove for deallocation
                 NotificationCenter.default.removeObserver(self.notifications_datahandle as Any)
                 NotificationCenter.default.removeObserver(self.notifications_termination as Any)
             }
         }
-        self.processReference = task
+        ViewControllerReference.shared.process = task
         task.launch()
-    }
-
-    // Get the reference to the Process object.
-    func getProcess() -> Process? {
-        return self.processReference
     }
 
     // Terminate Process, used when user Aborts task.
     func abortProcess() {
-        self.processReference?.terminate()
+        _ = InterruptProcess()
     }
 
     init(command: String?, arguments: [String]?) {

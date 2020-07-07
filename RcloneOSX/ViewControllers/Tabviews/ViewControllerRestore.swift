@@ -23,8 +23,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
     var diddissappear: Bool = false
     var outputprocess: OutputProcess?
     var maxcount: Int = 0
-    weak var sendprocess: SendProcessreference?
-    var process: Process?
+    weak var sendprocess: SendOutputProcessreference?
 
     @IBOutlet var numberofrows: NSTextField!
     @IBOutlet var info: NSTextField!
@@ -92,7 +91,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         self.restorebutton.isEnabled = false
         self.restoretask = nil
         self.restorefiles = nil
-        self.process?.terminate()
+        _ = InterruptProcess()
         self.abort()
     }
 
@@ -157,7 +156,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             self.working.startAnimation(nil)
             self.presentAsSheet(self.viewControllerProgress!)
             self.restorefiles?.executecopyfiles(remotefile: remotesource!.stringValue, localCatalog: restorepath!.stringValue, dryrun: false, updateprogress: self)
-            self.process = self.restorefiles?.getProcess()
         default:
             return
         }
@@ -181,7 +179,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
                 self.working.startAnimation(nil)
                 self.restorefiles?.executecopyfiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue, dryrun: true, updateprogress: self)
                 self.outputprocess = self.restorefiles?.outputprocess
-                self.process = self.restorefiles?.getProcess()
             } else {
                 self.info(num: 2)
             }
@@ -266,7 +263,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             self.estimatebutton.isEnabled = false
             self.working.startAnimation(nil)
             self.restorefiles?.executecopyfiles(remotefile: self.remotesource.stringValue, localCatalog: self.restorepath.stringValue, dryrun: false, updateprogress: self)
-            self.process = self.restorefiles?.getProcess()
         }
     }
 
@@ -318,7 +314,6 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
         self.info(num: 8)
         self.restorefiles = Restorefiles(hiddenID: hiddenID)
         self.remotefilelist = Remotefilelist(hiddenID: hiddenID)
-        self.process = self.remotefilelist?.getProcess()
         self.working.startAnimation(nil)
     }
 
