@@ -129,6 +129,8 @@ extension RemoteinfoEstimation: UpdateProgress {
             self.records?.append(record)
             self.configurations?.estimatedlist?.append(record)
         } else {
+            // Rclone seems to be hard to terminate..
+            guard ViewControllerReference.shared.process != nil else { return }
             if let string = self.outputprocess?.getOutput()?[0] {
                 let size = self.remoterclonesize(input: string)
                 let numberoffiles = String(NumberFormatter.localizedString(from: NSNumber(value: size?.count ?? 0), number: NumberFormatter.Style.decimal))
