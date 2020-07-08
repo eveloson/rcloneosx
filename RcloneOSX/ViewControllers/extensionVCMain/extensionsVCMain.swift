@@ -77,8 +77,10 @@ extension ViewControllerMain: DismissViewController {
 // Deselect a row
 extension ViewControllerMain: DeselectRowTable {
     func deselect() {
-        guard self.index != nil else { return }
-        self.mainTableView.deselectRow(self.index!)
+        if let index = self.index {
+            self.mainTableView.deselectRow(index)
+        }
+        ViewControllerReference.shared.process = nil
     }
 }
 
