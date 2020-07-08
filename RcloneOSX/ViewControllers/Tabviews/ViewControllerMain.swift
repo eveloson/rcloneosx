@@ -265,15 +265,16 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Error
     // Single task can be activated by double click from table
     func executeSingleTask() {
         guard self.checkforrclone() == false else { return }
-        guard self.index != nil else { return }
-        guard self.singletask != nil else {
-            // Dry run
-            self.singletask = SingleTask(index: self.index!)
+        if let index = self.index {
+            guard self.singletask != nil else {
+                // Dry run
+                self.singletask = SingleTask(index: index)
+                self.singletask?.executeSingleTask()
+                return
+            }
+            // Real run
             self.singletask?.executeSingleTask()
-            return
         }
-        // Real run
-        self.singletask?.executeSingleTask()
     }
 
     @IBAction func executemultipleselectedrows(_: NSToolbarItem) {

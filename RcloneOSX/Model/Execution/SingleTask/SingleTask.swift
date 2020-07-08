@@ -119,6 +119,8 @@ extension SingleTask: UpdateProgress {
                 self.workload = nil
             }
         }
+        // Reset process referance
+        ViewControllerReference.shared.process = nil
     }
 
     func fileHandler() {
