@@ -260,5 +260,6 @@ class Configurations: ReloadTable, SetSchedules {
         self.configurationsDataSource = nil
         self.profile = profile
         self.readconfigurations()
+        ViewControllerReference.shared.process = nil
     }
 }
