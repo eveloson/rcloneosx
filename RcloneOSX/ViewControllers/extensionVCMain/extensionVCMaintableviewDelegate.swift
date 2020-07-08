@@ -50,7 +50,7 @@ extension ViewControllerMain: NSTableViewDelegate, Attributedestring {
     // setting which table row is selected
     func tableViewSelectionDidChange(_ notification: Notification) {
         self.seterrorinfo(info: "")
-        if ViewControllerReference.shared.process != nil { self.abortOperations() }
+        if ViewControllerReference.shared.process != nil, self.index != nil { self.abortOperations() }
         self.info(num: 0)
         let myTableViewFromNotification = (notification.object as? NSTableView)!
         let indexes = myTableViewFromNotification.selectedRowIndexes
