@@ -9,9 +9,14 @@
 
 import Foundation
 
+protocol DeinitExecuteTaskNow: AnyObject {
+    func deinitexecutetasknow()
+}
+
 final class ExecuteTaskNow: SetConfigurations {
     weak var setprocessDelegate: SendOutputProcessreference?
     weak var startstopindicators: StartStopProgressIndicatorSingleTask?
+    weak var deinitDelegate: DeinitExecuteTaskNow?
     var outputprocess: OutputProcess?
     var index: Int?
 
@@ -19,6 +24,7 @@ final class ExecuteTaskNow: SetConfigurations {
         self.index = index
         self.setprocessDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         self.startstopindicators = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
+        self.deinitDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         if let arguments = self.configurations?.arguments4rclone(index: index, argtype: .arg) {
             let process = Rclone(arguments: arguments)
             self.outputprocess = OutputProcess()
@@ -33,7 +39,10 @@ final class ExecuteTaskNow: SetConfigurations {
 extension ExecuteTaskNow: UpdateProgress {
     func processTermination() {
         self.startstopindicators?.stopIndicator()
-        self.configurations!.setCurrentDateonConfiguration(index: self.index!, outputprocess: self.outputprocess)
+        if let index = self.index {
+         self.configurations?.setCurrentDateonConfiguration(index: index, outputprocess: self.outputprocess)
+        }
+        self.deinitDelegate?.deinitexecutetasknow()
     }
 
     func fileHandler() {
