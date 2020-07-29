@@ -9,13 +9,6 @@
 
 import Foundation
 
-enum Fileerrortype {
-    case writelogfile
-    case profilecreatedirectory
-    case profiledeletedirectory
-    case filesize
-}
-
 // Protocol for reporting file errors
 protocol Fileerror: AnyObject {
     func fileerrormessageandtype(errorstr: String, errortype: Fileerrortype)
@@ -54,22 +47,7 @@ extension ErrorMessage {
     }
 }
 
-class Files: FileErrors {
-    var rootpath: String?
-    // config path either
-    // ViewControllerReference.shared.configpath or RcloneReference.shared.configpath
-    private var configpath: String?
-
-    private func setrootpath() {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
-        let docuDir = (paths.firstObject as? String)!
-        if ViewControllerReference.shared.macserialnumber == nil {
-            ViewControllerReference.shared.macserialnumber = Macserialnumber().getMacSerialNumber() ?? ""
-        }
-        let profilePath = docuDir + self.configpath! + (ViewControllerReference.shared.macserialnumber ?? "")
-        self.rootpath = profilePath
-    }
-
+class Files: NamesandPaths, FileErrors {
     // Function for returning profiles as array of Strings
     func getDirectorysStrings() -> [String] {
         var array = [String]()
@@ -87,7 +65,7 @@ class Files: FileErrors {
     }
 
     // Func that creates directory if not created
-    func createDirectory() {
+    func createprofilecatalog() {
         let fileManager = FileManager.default
         if let path = self.rootpath {
             // Profile root
@@ -119,8 +97,7 @@ class Files: FileErrors {
         }
     }
 
-    init(configpath: String) {
-        self.configpath = configpath
-        self.setrootpath()
+    override init(configpath: String?) {
+        super.init(configpath: configpath)
     }
 }
