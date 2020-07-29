@@ -5,8 +5,8 @@
 //  Created by Thomas Evensen on 26.04.2017.
 //  Copyright © 2017 Thomas Evensen. All rights reserved.
 //
-// swiftlint:disable line_length
 
+import Files
 import Foundation
 
 // Protocol for reporting file errors
@@ -49,19 +49,19 @@ extension ErrorMessage {
 
 class Files: NamesandPaths, FileErrors {
     // Function for returning profiles as array of Strings
-    func getDirectorysStrings() -> [String] {
-        var array = [String]()
-        if let filePath = self.rootpath {
-            if let fileURLs = self.getfileURLs(path: filePath) {
-                for i in 0 ..< fileURLs.count where fileURLs[i].hasDirectoryPath {
-                    let path = fileURLs[i].pathComponents
-                    let i = path.count
-                    array.append(path[i - 1])
+    func getcatalogsasstringnames() -> [String]? {
+        if let atpath = self.rootpath {
+            var array = [String]()
+            do {
+                for folders in try Folder(path: atpath).subfolders {
+                    array.append(folders.name)
                 }
                 return array
+            } catch {
+                return nil
             }
         }
-        return array
+        return nil
     }
 
     // Func that creates directory if not created
@@ -77,23 +77,6 @@ class Files: NamesandPaths, FileErrors {
                     self.fileerror(error: error.description, errortype: .profilecreatedirectory)
                 }
             }
-        }
-    }
-
-    // Function for getting fileURLs for a given path
-    func getfileURLs(path: String) -> [URL]? {
-        let fileManager = FileManager.default
-        if let filepath = URL(string: path) {
-            do {
-                let files = try fileManager.contentsOfDirectory(at: filepath, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
-                return files
-            } catch let e {
-                let error = e as NSError
-                self.fileerror(error: error.description, errortype: .profilecreatedirectory)
-                return nil
-            }
-        } else {
-            return nil
         }
     }
 
