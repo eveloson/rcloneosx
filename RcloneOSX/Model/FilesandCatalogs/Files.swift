@@ -5,16 +5,9 @@
 //  Created by Thomas Evensen on 26.04.2017.
 //  Copyright © 2017 Thomas Evensen. All rights reserved.
 //
-// swiftlint:disable line_length
 
+import Files
 import Foundation
-
-enum Fileerrortype {
-    case writelogfile
-    case profilecreatedirectory
-    case profiledeletedirectory
-    case filesize
-}
 
 // Protocol for reporting file errors
 protocol Fileerror: AnyObject {
@@ -54,40 +47,25 @@ extension ErrorMessage {
     }
 }
 
-class Files: FileErrors {
-    var rootpath: String?
-    // config path either
-    // ViewControllerReference.shared.configpath or RcloneReference.shared.configpath
-    private var configpath: String?
-
-    private func setrootpath() {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as NSArray
-        let docuDir = (paths.firstObject as? String)!
-        if ViewControllerReference.shared.macserialnumber == nil {
-            ViewControllerReference.shared.macserialnumber = Macserialnumber().getMacSerialNumber() ?? ""
-        }
-        let profilePath = docuDir + self.configpath! + (ViewControllerReference.shared.macserialnumber ?? "")
-        self.rootpath = profilePath
-    }
-
+class Files: NamesandPaths, FileErrors {
     // Function for returning profiles as array of Strings
-    func getDirectorysStrings() -> [String] {
-        var array = [String]()
-        if let filePath = self.rootpath {
-            if let fileURLs = self.getfileURLs(path: filePath) {
-                for i in 0 ..< fileURLs.count where fileURLs[i].hasDirectoryPath {
-                    let path = fileURLs[i].pathComponents
-                    let i = path.count
-                    array.append(path[i - 1])
+    func getcatalogsasstringnames() -> [String]? {
+        if let atpath = self.rootpath {
+            var array = [String]()
+            do {
+                for folders in try Folder(path: atpath).subfolders {
+                    array.append(folders.name)
                 }
                 return array
+            } catch {
+                return nil
             }
         }
-        return array
+        return nil
     }
 
     // Func that creates directory if not created
-    func createDirectory() {
+    func createprofilecatalog() {
         let fileManager = FileManager.default
         if let path = self.rootpath {
             // Profile root
@@ -102,25 +80,7 @@ class Files: FileErrors {
         }
     }
 
-    // Function for getting fileURLs for a given path
-    func getfileURLs(path: String) -> [URL]? {
-        let fileManager = FileManager.default
-        if let filepath = URL(string: path) {
-            do {
-                let files = try fileManager.contentsOfDirectory(at: filepath, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
-                return files
-            } catch let e {
-                let error = e as NSError
-                self.fileerror(error: error.description, errortype: .profilecreatedirectory)
-                return nil
-            }
-        } else {
-            return nil
-        }
-    }
-
-    init(configpath: String) {
-        self.configpath = configpath
-        self.setrootpath()
+    override init(configpath: String?) {
+        super.init(configpath: configpath)
     }
 }

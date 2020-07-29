@@ -14,7 +14,6 @@ final class Selectprofile {
     weak var loggdataProfileDelegate: NewProfile?
 
     init(profile: String?) {
-        guard ViewControllerReference.shared.process == nil else { return }
         self.profile = profile
         self.newProfileDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         self.restoreProfileDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore

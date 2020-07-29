@@ -356,7 +356,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Error
 
     private func initpopupbutton(button: NSPopUpButton) {
         var profilestrings: [String]?
-        profilestrings = CatalogProfile().getDirectorysStrings()
+        profilestrings = CatalogProfile().getcatalogsasstringnames()
         profilestrings?.insert(NSLocalizedString("Default profile", comment: "default profile"), at: 0)
         button.removeAllItems()
         button.addItems(withTitles: profilestrings ?? [])
