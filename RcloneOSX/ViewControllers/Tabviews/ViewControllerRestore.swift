@@ -348,9 +348,11 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
 
     @IBAction func selectprofile(_: NSButton) {
         var profile = self.profilepopupbutton.titleOfSelectedItem
-        if profile == NSLocalizedString("Default profile", comment: "default profile") {
+        let selectedindex = self.profilepopupbutton.indexOfSelectedItem
+        if profile == "Default profile" {
             profile = nil
         }
-        _ = Selectprofile(profile: profile)
+        self.profilepopupbutton.selectItem(at: selectedindex)
+        _ = Selectprofile(profile: profile, selectedindex: selectedindex)
     }
 }

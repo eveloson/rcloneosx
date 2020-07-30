@@ -11,7 +11,8 @@ import Foundation
 
 // Protocol for adding new profiles
 protocol NewProfile: AnyObject {
-    func newProfile(profile: String?)
+    func newProfile(profile: String?, selectedindex: Int?)
+    func reloadprofilepopupbutton()
 }
 
 class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, Delay {
@@ -26,14 +27,14 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
     @IBOutlet var profilesTable: NSTableView!
 
     @IBAction func defaultProfile(_: NSButton) {
-        _ = Selectprofile(profile: nil)
+        _ = Selectprofile(profile: nil, selectedindex: nil)
         self.closeview()
     }
 
     @IBAction func deleteProfile(_: NSButton) {
         if let useprofile = self.useprofile {
             self.profile?.deleteProfileDirectory(profileName: useprofile)
-            _ = Selectprofile(profile: nil)
+            _ = Selectprofile(profile: nil, selectedindex: nil)
         }
         self.closeview()
     }
@@ -43,7 +44,7 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
         let newprofile = self.newprofile.stringValue
         guard newprofile.isEmpty == false else {
             if self.useprofile != nil {
-                _ = Selectprofile(profile: self.useprofile)
+                _ = Selectprofile(profile: self.useprofile, selectedindex: nil)
             }
             self.closeview()
             return
@@ -53,7 +54,7 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
             self.closeview()
             return
         }
-        _ = Selectprofile(profile: newprofile)
+        _ = Selectprofile(profile: newprofile, selectedindex: nil)
         self.closeview()
     }
 
@@ -89,7 +90,7 @@ class ViewControllerProfile: NSViewController, SetConfigurations, SetDismisser, 
     }
 
     @objc(tableViewDoubleClick:) func tableViewDoubleClick(sender _: AnyObject) {
-        _ = Selectprofile(profile: self.useprofile)
+        _ = Selectprofile(profile: self.useprofile, selectedindex: nil)
         self.closeview()
     }
 }

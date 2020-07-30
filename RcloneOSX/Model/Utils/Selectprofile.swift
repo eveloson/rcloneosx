@@ -13,18 +13,18 @@ final class Selectprofile {
     weak var restoreProfileDelegate: NewProfile?
     weak var loggdataProfileDelegate: NewProfile?
 
-    init(profile: String?) {
+    init(profile: String?, selectedindex: Int?) {
         self.profile = profile
         self.newProfileDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
         self.restoreProfileDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcrestore) as? ViewControllerRestore
         self.loggdataProfileDelegate = ViewControllerReference.shared.getvcref(viewcontroller: .vcloggdata) as? ViewControllerLoggData
         if self.profile == "Default profile" {
-            newProfileDelegate?.newProfile(profile: nil)
+            newProfileDelegate?.newProfile(profile: nil, selectedindex: selectedindex)
         } else {
-            newProfileDelegate?.newProfile(profile: self.profile)
+            newProfileDelegate?.newProfile(profile: self.profile, selectedindex: selectedindex)
         }
-        self.restoreProfileDelegate?.newProfile(profile: nil)
-        self.loggdataProfileDelegate?.newProfile(profile: nil)
+        self.restoreProfileDelegate?.newProfile(profile: nil, selectedindex: selectedindex)
+        self.loggdataProfileDelegate?.newProfile(profile: nil, selectedindex: selectedindex)
         // Close edit and parameters view if open
         if let view = ViewControllerReference.shared.getvcref(viewcontroller: .vcrcloneparameters) as? ViewControllerRcloneParameters {
             weak var closeview: ViewControllerRcloneParameters?
