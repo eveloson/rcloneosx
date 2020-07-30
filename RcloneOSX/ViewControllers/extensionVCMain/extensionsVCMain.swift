@@ -227,7 +227,12 @@ extension ViewControllerMain: GetHiddenID {
 // New profile is loaded.
 extension ViewControllerMain: NewProfile {
     // Function is called from profiles when new or default profiles is seleceted
-    func newProfile(profile: String?) {
+    func newProfile(profile: String?, selectedindex: Int?) {
+        if let index = selectedindex {
+            self.profilepopupbutton.selectItem(at: index)
+        } else {
+            self.initpopupbutton()
+        }
         self.reset()
         self.showrclonecommandmainview()
         self.deselect()
@@ -236,6 +241,12 @@ extension ViewControllerMain: NewProfile {
         self.schedules = self.createschedulesobject(profile: profile)
         self.displayProfile()
         self.reloadtabledata()
+    }
+
+    func reloadprofilepopupbutton() {
+        globalMainQueue.async { () -> Void in
+            self.displayProfile()
+        }
     }
 }
 

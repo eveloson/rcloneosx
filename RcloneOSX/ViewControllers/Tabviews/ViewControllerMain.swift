@@ -231,6 +231,7 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Error
         // configurations and schedules
         self.createandreloadconfigurations()
         self.createandreloadschedules()
+        self.initpopupbutton()
     }
 
     override func viewDidAppear() {
@@ -247,7 +248,6 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Error
         }
         self.rcloneischanged()
         self.displayProfile()
-        self.initpopupbutton(button: self.profilepopupbutton)
     }
 
     override func viewDidDisappear() {
@@ -294,9 +294,9 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Error
     // Function for setting profile
     func displayProfile() {
         weak var localprofileinfo: SetProfileinfo?
-        if let profile = self.configurations!.getProfile() {
+        if let profile = self.configurations?.getProfile() {
             self.profilInfo.stringValue = "Profile: " + profile
-            self.profilInfo.textColor = setcolor(nsviewcontroller: self, color: .black)
+            self.profilInfo.textColor = setcolor(nsviewcontroller: self, color: .white)
         } else {
             self.profilInfo.stringValue = "Profile: default"
             self.profilInfo.textColor = setcolor(nsviewcontroller: self, color: .green)
@@ -354,20 +354,22 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Error
         }
     }
 
-    private func initpopupbutton(button: NSPopUpButton) {
+    func initpopupbutton() {
         var profilestrings: [String]?
         profilestrings = CatalogProfile().getcatalogsasstringnames()
         profilestrings?.insert(NSLocalizedString("Default profile", comment: "default profile"), at: 0)
-        button.removeAllItems()
-        button.addItems(withTitles: profilestrings ?? [])
-        button.selectItem(at: 0)
+        self.profilepopupbutton.removeAllItems()
+        self.profilepopupbutton.addItems(withTitles: profilestrings ?? [])
+        self.profilepopupbutton.selectItem(at: 0)
     }
 
     @IBAction func selectprofile(_: NSButton) {
         var profile = self.profilepopupbutton.titleOfSelectedItem
-        if profile == NSLocalizedString("Default profile", comment: "default profile") {
+        let selectedindex = self.profilepopupbutton.indexOfSelectedItem
+        if profile == "Default profile" {
             profile = nil
         }
-        _ = Selectprofile(profile: profile)
+        self.profilepopupbutton.selectItem(at: selectedindex)
+        _ = Selectprofile(profile: profile, selectedindex: selectedindex)
     }
 }

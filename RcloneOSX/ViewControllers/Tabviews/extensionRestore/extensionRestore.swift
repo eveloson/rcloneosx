@@ -172,13 +172,17 @@ extension ViewControllerRestore: Setrestorepath {
 }
 
 extension ViewControllerRestore: NewProfile {
-    func newProfile(profile _: String?) {
+    func newProfile(profile _: String?, selectedindex _: Int?) {
         self.restoretabledata = nil
         self.reset()
         globalMainQueue.async { () -> Void in
             self.restoretableView.reloadData()
             self.rclonetableView.reloadData()
         }
+    }
+
+    func reloadprofilepopupbutton() {
+        //
     }
 }
 
