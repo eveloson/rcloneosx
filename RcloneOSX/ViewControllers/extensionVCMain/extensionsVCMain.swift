@@ -455,3 +455,13 @@ extension ViewControllerMain: DeinitExecuteTaskNow {
         self.executetasknow = nil
     }
 }
+
+extension ViewControllerMain: DisableEnablePopupSelectProfile {
+    func enableselectpopupprofile() {
+        self.profilepopupbutton.isEnabled = true
+    }
+
+    func disableselectpopupprofile() {
+        self.profilepopupbutton.isEnabled = false
+    }
+}
