@@ -24,7 +24,8 @@ struct ComboboxRcloneParameters {
     private func indexofrcloneparameter(argument: String) -> Int {
         var index: Int = -1
         loop: for i in 0 ..< SuffixstringsRcloneParameters().rcloneArguments.count where
-            argument == SuffixstringsRcloneParameters().rcloneArguments[i].0 {
+            argument == SuffixstringsRcloneParameters().rcloneArguments[i].0
+        {
             index = i
             break loop
         }

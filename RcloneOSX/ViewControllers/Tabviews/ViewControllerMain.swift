@@ -188,7 +188,8 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Error
             return
         }
         guard self.configurations!.getConfigurations()[self.index!].task != ViewControllerReference.shared.move ||
-            self.configurations!.getConfigurations()[self.index!].task != ViewControllerReference.shared.check else {
+            self.configurations!.getConfigurations()[self.index!].task != ViewControllerReference.shared.check
+        else {
             return
         }
         self.executetasknow = ExecuteTaskNow(index: self.index!)
