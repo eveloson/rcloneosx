@@ -11,14 +11,17 @@ import Foundation
 final class ArgumentsListFiles: RcloneParameters {
     var config: Configuration?
 
-    func argumentsrclonelistfile() -> [String] {
-        self.localCatalog = nil
-        self.offsiteCatalog = self.config!.offsiteCatalog
-        self.offsiteServer = self.config!.offsiteServer
-        self.remoteargs = self.offsiteServer! + ":" + self.offsiteCatalog!
-        self.appendparameter(parameter: "ls", forDisplay: false)
-        self.appendparameter(parameter: self.remoteargs!, forDisplay: false)
-        return self.arguments ?? [""]
+    func argumentsrclonelistfile() -> [String]? {
+        if let config = self.config {
+            self.localCatalog = nil
+            self.offsiteCatalog = config.offsiteCatalog
+            self.offsiteServer = config.offsiteServer
+            self.remoteargs = (self.offsiteServer ?? "") + ":" + (self.offsiteCatalog ?? "")
+            self.appendparameter(parameter: "ls", forDisplay: false)
+            self.appendparameter(parameter: self.remoteargs ?? "", forDisplay: false)
+            return self.arguments
+        }
+        return nil
     }
 
     init(config: Configuration?) {

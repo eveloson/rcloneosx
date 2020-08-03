@@ -24,10 +24,10 @@ class Schedules: ScheduleWriteLoggData {
     // - parameter hiddenID : hiddenID for task
     func deletescheduleonetask(hiddenID: Int) {
         var delete: Bool = false
-        for i in 0 ..< self.schedules!.count where self.schedules![i].hiddenID == hiddenID {
+        for i in 0 ..< (self.schedules?.count ?? 0) where self.schedules?[i].hiddenID == hiddenID {
             // Mark Schedules for delete
             // Cannot delete in memory, index out of bound is result
-            self.schedules![i].delete = true
+            self.schedules?[i].delete = true
             delete = true
         }
         if delete {
@@ -37,30 +37,15 @@ class Schedules: ScheduleWriteLoggData {
         }
     }
 
-    // Test if Schedule record in memory is set to delete or not
-    private func delete(dict: NSDictionary) {
-        for i in 0 ..< self.schedules!.count {
-            if dict.value(forKey: "hiddenID") as? Int == self.schedules![i].hiddenID {
-                if dict.value(forKey: "dateStop") as? String == self.schedules![i].dateStop ||
-                    self.schedules![i].dateStop == nil &&
-                    dict.value(forKey: "schedule") as? String == self.schedules![i].schedule &&
-                    dict.value(forKey: "dateStart") as? String == self.schedules![i].dateStart
-                {
-                    self.schedules![i].delete = true
-                    break
-                }
-            }
-        }
-    }
-
     // Function for reading all jobs for schedule and all history of past executions.
     // Schedules are stored in self.schedules. Schedules are sorted after hiddenID.
     private func readschedules() {
         let store: [ConfigurationSchedule]? = PersistentStorageScheduling(profile: self.profile).getScheduleandhistory(nolog: false)
-        guard store != nil else { return }
         var data = [ConfigurationSchedule]()
-        for i in 0 ..< store!.count where store![i].logrecords.isEmpty == false {
-            data.append(store![i])
+        for i in 0 ..< (store?.count ?? 0) where store?[i].logrecords.isEmpty == false {
+            if let store = store?[i] {
+                data.append(store)
+            }
         }
         // Sorting schedule after hiddenID
         data.sort { (schedule1, schedule2) -> Bool in

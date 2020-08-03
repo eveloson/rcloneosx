@@ -12,19 +12,22 @@ import Foundation
 final class ArgumentsRestore: RcloneParameters {
     var config: Configuration?
 
-    func argumentsrestore(dryRun: Bool, forDisplay: Bool, tmprestore: Bool) -> [String] {
-        self.rclonecommandrestore(dryRun: dryRun, forDisplay: forDisplay)
-        self.remoteparameter(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
-        if tmprestore {
-            self.localCatalog = ViewControllerReference.shared.restorefilespath ?? ViewControllerReference.shared.tmprestore
+    func argumentsrestore(dryRun: Bool, forDisplay: Bool, tmprestore: Bool) -> [String]? {
+        if let config = self.config {
+            self.rclonecommandrestore(dryRun: dryRun, forDisplay: forDisplay)
+            self.remoteparameter(config: config, dryRun: dryRun, forDisplay: forDisplay)
+            if tmprestore {
+                self.localCatalog = ViewControllerReference.shared.restorefilespath ?? ViewControllerReference.shared.tmprestore
+            }
+            self.offsiteparameter(config: config, forDisplay: forDisplay)
+            self.appendparameter(parameter: self.localCatalog, forDisplay: forDisplay)
+            if dryRun {
+                self.dryrunparameter(config: config, forDisplay: forDisplay)
+            }
+            self.setParameters2To14(config: config, dryRun: dryRun, forDisplay: forDisplay)
+            return self.arguments
         }
-        self.offsiteparameter(config: self.config!, forDisplay: forDisplay)
-        self.appendparameter(parameter: self.localCatalog, forDisplay: forDisplay)
-        if dryRun {
-            self.dryrunparameter(config: self.config!, forDisplay: forDisplay)
-        }
-        self.setParameters2To14(config: self.config!, dryRun: dryRun, forDisplay: forDisplay)
-        return self.arguments ?? [""]
+        return nil
     }
 
     init(config: Configuration?) {
