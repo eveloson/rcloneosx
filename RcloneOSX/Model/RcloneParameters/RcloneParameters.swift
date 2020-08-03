@@ -74,27 +74,33 @@ class RcloneParameters {
         self.localCatalog = config.localCatalog
         self.offsiteCatalog = config.offsiteCatalog
         self.offsiteServer = config.offsiteServer
-        if self.offsiteServer!.isEmpty == false {
-            if config.localCatalog.isEmpty == true {
-                self.remoteargs = self.offsiteServer! + ":"
-            } else {
-                self.remoteargs = self.offsiteServer! + ":" + self.offsiteCatalog!
+        if let offsiteServer = self.offsiteServer,
+            let offsiteCatalog = self.offsiteCatalog
+        {
+            if offsiteServer.isEmpty == false {
+                if config.localCatalog.isEmpty == true {
+                    self.remoteargs = offsiteServer + ":"
+                } else {
+                    self.remoteargs = offsiteServer + ":" + offsiteCatalog
+                }
             }
         }
     }
 
     func offsiteparameter(config: Configuration, forDisplay: Bool) {
-        if self.offsiteServer!.isEmpty {
-            if forDisplay { self.arguments!.append(" ") }
-            self.arguments!.append(self.offsiteCatalog!)
-        } else {
-            if forDisplay { self.arguments!.append(" ") }
-            self.arguments!.append(remoteargs!)
-            if config.localCatalog.isEmpty == true {
-                if forDisplay { self.arguments!.append(" ") }
-                self.arguments!.append(self.offsiteCatalog ?? "")
+        if let offsiteServer = self.offsiteServer {
+            if offsiteServer.isEmpty {
+                if forDisplay { self.arguments?.append(" ") }
+                self.arguments?.append(self.offsiteCatalog!)
+            } else {
+                if forDisplay { self.arguments?.append(" ") }
+                self.arguments?.append(remoteargs ?? "")
+                if config.localCatalog.isEmpty == true {
+                    if forDisplay { self.arguments?.append(" ") }
+                    self.arguments?.append(self.offsiteCatalog ?? "")
+                }
+                if forDisplay { self.arguments?.append(" ") }
             }
-            if forDisplay { self.arguments!.append(" ") }
         }
     }
 
@@ -106,9 +112,9 @@ class RcloneParameters {
 
     func dryrunparameter(config: Configuration, forDisplay: Bool) {
         let dryrun: String = config.dryrun
-        if forDisplay { self.arguments!.append(" ") }
+        if forDisplay { self.arguments?.append(" ") }
         self.arguments!.append(dryrun)
-        if forDisplay { self.arguments!.append(" ") }
+        if forDisplay { self.arguments?.append(" ") }
     }
 
     func appendparameter(parameter: String?, forDisplay: Bool) {

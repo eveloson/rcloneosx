@@ -44,7 +44,8 @@ class Schedules: ScheduleWriteLoggData {
                 if dict.value(forKey: "dateStop") as? String == self.schedules![i].dateStop ||
                     self.schedules![i].dateStop == nil &&
                     dict.value(forKey: "schedule") as? String == self.schedules![i].schedule &&
-                    dict.value(forKey: "dateStart") as? String == self.schedules![i].dateStart {
+                    dict.value(forKey: "dateStart") as? String == self.schedules![i].dateStart
+                {
                     self.schedules![i].delete = true
                     break
                 }
