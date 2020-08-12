@@ -219,17 +219,12 @@ class Configurations: ReloadTable, SetSchedules {
     }
 
     func getIndex(hiddenID: Int) -> Int {
-        var index: Int = -1
-        loop: for i in 0 ..< self.configurations!.count where self.configurations![i].hiddenID == hiddenID {
-            index = i
-            break loop
-        }
-        return index
+        return self.configurations?.firstIndex(where: { $0.hiddenID == hiddenID }) ?? -1
     }
 
     func gethiddenID(index: Int) -> Int {
-        guard index < (self.configurations?.count ?? -1) else { return -1 }
-        return self.configurations![index].hiddenID
+        guard index != -1, index < (self.configurations?.count ?? -1) else { return -1 }
+        return self.configurations?[index].hiddenID ?? -1
     }
 
     /// Function is reading all Configurations into memory from permanent store and
