@@ -22,14 +22,7 @@ struct ComboboxRcloneParameters {
 
     // Returns Int value of argument
     private func indexofrcloneparameter(argument: String) -> Int {
-        var index: Int = -1
-        loop: for i in 0 ..< SuffixstringsRcloneParameters().rcloneArguments.count where
-            argument == SuffixstringsRcloneParameters().rcloneArguments[i].0
-        {
-            index = i
-            break loop
-        }
-        return index
+        return SuffixstringsRcloneParameters().rcloneArguments.firstIndex(where: { $0.0 == argument }) ?? -1
     }
 
     // Split an rclone argument into argument and value
@@ -82,38 +75,39 @@ struct ComboboxRcloneParameters {
                 }
             }
         }
-        return (returnindex!, returnvalue!)
+        return (returnindex ?? 0, returnvalue ?? "")
     }
 
     func getParameter(rcloneparameternumber: Int) -> (Int, String) {
-        var indexandvalue: (Int, String)?
-        guard self.config != nil else { return (0, "") }
-        switch rcloneparameternumber {
-        case 8:
-            indexandvalue = self.indexandvaluercloneparameter(parameter: self.config!.parameter8)
-        case 9:
-            indexandvalue = self.indexandvaluercloneparameter(parameter: self.config!.parameter9)
-        case 10:
-            indexandvalue = self.indexandvaluercloneparameter(parameter: self.config!.parameter10)
-        case 11:
-            indexandvalue = self.indexandvaluercloneparameter(parameter: self.config!.parameter11)
-        case 12:
-            indexandvalue = self.indexandvaluercloneparameter(parameter: self.config!.parameter12)
-        case 13:
-            indexandvalue = self.indexandvaluercloneparameter(parameter: self.config!.parameter13)
-        case 14:
-            indexandvalue = self.indexandvaluercloneparameter(parameter: self.config!.parameter14)
-        default:
-            return (0, "")
+        if let config = self.config {
+            switch rcloneparameternumber {
+            case 8:
+                return self.indexandvaluercloneparameter(parameter: config.parameter8)
+            case 9:
+                return self.indexandvaluercloneparameter(parameter: config.parameter9)
+            case 10:
+                return self.indexandvaluercloneparameter(parameter: config.parameter10)
+            case 11:
+                return self.indexandvaluercloneparameter(parameter: config.parameter11)
+            case 12:
+                return self.indexandvaluercloneparameter(parameter: config.parameter12)
+            case 13:
+                return self.indexandvaluercloneparameter(parameter: config.parameter13)
+            case 14:
+                return self.indexandvaluercloneparameter(parameter: config.parameter14)
+            default:
+                return (0, "")
+            }
         }
-        return indexandvalue!
+
+        return (0, "")
     }
 
     init(config: Configuration?) {
         self.config = config
         self.comboBoxValues = [String]()
         for i in 0 ..< SuffixstringsRcloneParameters().rcloneArguments.count {
-            self.comboBoxValues!.append(SuffixstringsRcloneParameters().rcloneArguments[i].0)
+            self.comboBoxValues?.append(SuffixstringsRcloneParameters().rcloneArguments[i].0)
         }
     }
 }
