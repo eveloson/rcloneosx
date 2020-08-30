@@ -79,18 +79,19 @@ class NamesandPaths {
     // Set preferences for which data to read or write
     func setpreferencesforreadingplist(whattoreadwrite: WhatToReadWrite) {
         self.whattoreadwrite = whattoreadwrite
-        switch self.whattoreadwrite! {
+        switch self.whattoreadwrite ?? .none {
         case .schedule:
-            self.plistname = "/scheduleRsync.plist"
-            self.key = "Schedule"
+            self.plistname = ViewControllerReference.shared.scheduleplist
+            self.key = ViewControllerReference.shared.schedulekey
         case .configuration:
-            self.plistname = "/configRsync.plist"
-            self.key = "Catalogs"
+            self.plistname = ViewControllerReference.shared.configurationsplist
+            self.key = ViewControllerReference.shared.configurationskey
         case .userconfig:
-            self.plistname = "/config.plist"
-            self.key = "config"
+            self.plistname = ViewControllerReference.shared.userconfigplist
+            self.key = ViewControllerReference.shared.userconfigkey
         case .none:
             self.plistname = nil
+            self.key = nil
         }
     }
 
