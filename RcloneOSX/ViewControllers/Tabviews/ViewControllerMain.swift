@@ -221,6 +221,20 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Error
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Decide if:
+        // 1: First time start, use new profilepath
+        // 2: Old profilepath is copied to new, use new profilepath
+        // 3: Use old profilepath
+        // ViewControllerReference.shared.usenewconfigpath = true or false (default true)
+        _ = Neworoldprofilepath()
+        // Create base profile catalog
+        _ = CatalogProfile().createrootprofilecatalog()
+        // Read user configuration
+        if let userconfiguration = PersistentStorageUserconfiguration().readuserconfiguration() {
+            _ = Userconfiguration(userconfigrcloneOSX: userconfiguration)
+        } else {
+            _ = RcloneVersionString()
+        }
         self.mainTableView.delegate = self
         self.mainTableView.dataSource = self
         self.mainTableView.allowsMultipleSelection = true
