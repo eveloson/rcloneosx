@@ -16,24 +16,13 @@ class ViewControllerAbout: NSViewController, SetDismisser {
     @IBOutlet var rcloneversionstring: NSTextField!
     @IBOutlet var copyright: NSTextField!
     @IBOutlet var iconby: NSTextField!
+    @IBOutlet var configpath: NSTextField!
 
     var copyrigthstring: String = "Copyright © 2019 Thomas Evensen"
     var iconbystring: String = "Icon by: Zsolt Sándor"
 
     // External resources as documents, download
     private var resource: Resources?
-
-    @IBAction func dismiss(_: NSButton) {
-        if (self.presentingViewController as? ViewControllerMain) != nil {
-            self.dismissview(viewcontroller: self, vcontroller: .vctabmain)
-        } else if (self.presentingViewController as? ViewControllerNewConfigurations) != nil {
-            self.dismissview(viewcontroller: self, vcontroller: .vcnewconfigurations)
-        } else if (self.presentingViewController as? ViewControllerRestore) != nil {
-            self.dismissview(viewcontroller: self, vcontroller: .vcrestore)
-        } else if (self.presentingViewController as? ViewControllerLoggData) != nil {
-            self.dismissview(viewcontroller: self, vcontroller: .vcloggdata)
-        }
-    }
 
     @IBAction func changelog(_: NSButton) {
         if let resource = self.resource {
@@ -67,6 +56,7 @@ class ViewControllerAbout: NSViewController, SetDismisser {
         }
         self.thereisanewversion.stringValue = "You have the latest ..."
         self.rcloneversionstring.stringValue = ViewControllerReference.shared.rcloneversionstring ?? ""
+        self.configpath.stringValue = NamesandPaths().fullroot ?? ""
     }
 
     override func viewDidDisappear() {
