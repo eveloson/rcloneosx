@@ -60,4 +60,3 @@ class ViewControllerMove: NSViewController {
         super.viewDidAppear()
     }
 }
-
