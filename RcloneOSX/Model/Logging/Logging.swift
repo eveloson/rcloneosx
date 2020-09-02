@@ -32,13 +32,13 @@ class Logging: FileErrors {
                 if let filesize = self.filesize {
                     guard Int(truncating: filesize) < ViewControllerReference.shared.logfilesize else {
                         let size = Int(truncating: filesize)
-                        self.fileerror(error: String(size), errortype: .filesize)
+                        self.error(error: String(size), errortype: .filesize)
                         return
                     }
                 }
             } catch let e {
                 let error = e as NSError
-                self.fileerror(error: error.description, errortype: .writelogfile)
+                self.error(error: error.description, errortype: .writelogfile)
             }
         }
     }

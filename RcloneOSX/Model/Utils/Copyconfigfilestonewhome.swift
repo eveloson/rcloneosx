@@ -30,14 +30,14 @@ struct Copyconfigfilestonewhome: FileErrors {
                 originFolder = try Folder(path: oldpath)
             } catch let e {
                 let error = e as NSError
-                self.fileerror(error: error.description, errortype: .profilecreatedirectory)
+                self.error(error: error.description, errortype: .profilecreatedirectory)
                 return false
             }
             do {
                 targetFolder = try Folder(path: newpath)
             } catch let e {
                 let error = e as NSError
-                self.fileerror(error: error.description, errortype: .profilecreatedirectory)
+                self.error(error: error.description, errortype: .profilecreatedirectory)
                 return false
             }
             do {
@@ -46,7 +46,7 @@ struct Copyconfigfilestonewhome: FileErrors {
                 }
             } catch let e {
                 let error = e as NSError
-                self.fileerror(error: error.description, errortype: .profilecreatedirectory)
+                self.error(error: error.description, errortype: .profilecreatedirectory)
                 return false
             }
             // profile catalogs
@@ -55,14 +55,14 @@ struct Copyconfigfilestonewhome: FileErrors {
                     originFolder = try Folder(path: oldpath + "/" + (self.oldprofilecatalogs?[i] ?? ""))
                 } catch let e {
                     let error = e as NSError
-                    self.fileerror(error: error.description, errortype: .profilecreatedirectory)
+                    self.error(error: error.description, errortype: .profilecreatedirectory)
                     return false
                 }
                 do {
                     targetFolder = try Folder(path: newpath + "/" + (self.oldprofilecatalogs?[i] ?? ""))
                 } catch let e {
                     let error = e as NSError
-                    self.fileerror(error: error.description, errortype: .profilecreatedirectory)
+                    self.error(error: error.description, errortype: .profilecreatedirectory)
                     return false
                 }
                 do {
@@ -71,7 +71,7 @@ struct Copyconfigfilestonewhome: FileErrors {
                     }
                 } catch let e {
                     let error = e as NSError
-                    self.fileerror(error: error.description, errortype: .profilecreatedirectory)
+                    self.error(error: error.description, errortype: .profilecreatedirectory)
                     return false
                 }
             }

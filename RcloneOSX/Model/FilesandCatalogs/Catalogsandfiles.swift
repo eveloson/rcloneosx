@@ -23,7 +23,7 @@ extension FileErrors {
         return ViewControllerReference.shared.getvcref(viewcontroller: .vctabmain) as? ViewControllerMain
     }
 
-    func fileerror(error: String, errortype: Fileerrortype) {
+    func error(error: String, errortype: Fileerrortype) {
         self.errorDelegate?.fileerrormessageandtype(errorstr: error, errortype: errortype)
     }
 }

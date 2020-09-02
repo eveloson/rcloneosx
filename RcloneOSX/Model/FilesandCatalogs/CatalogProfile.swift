@@ -21,7 +21,7 @@ final class CatalogProfile: Catalogsandfiles {
                     return true
                 } catch let e {
                     let error = e as NSError
-                    self.fileerror(error: error.description, errortype: .profiledeletedirectory)
+                    self.error(error: error.description, errortype: .profiledeletedirectory)
                     return false
                 }
             } catch {
@@ -43,7 +43,7 @@ final class CatalogProfile: Catalogsandfiles {
                         try fileManager.removeItem(atPath: profileDirectory)
                     } catch let e {
                         let error = e as NSError
-                        self.fileerror(error: error.description, errortype: .profiledeletedirectory)
+                        self.error(error: error.description, errortype: .profiledeletedirectory)
                     }
                 }
             }
