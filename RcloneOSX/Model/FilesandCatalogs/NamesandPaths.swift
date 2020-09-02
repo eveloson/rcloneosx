@@ -23,7 +23,10 @@ enum Fileerrortype {
 }
 
 class NamesandPaths {
-    var rootpath: String?
+    // rootpath without macserialnumber
+    var fullrootnomacserial: String?
+    // rootpath with macserianlnumer
+    var fullroot: String?
     // Name set for schedule, configuration or config
     var plistname: String?
     // key in objectForKey, e.g key for reading what
@@ -54,24 +57,44 @@ class NamesandPaths {
         return ViewControllerReference.shared.macserialnumber
     }
 
-    func setrootpath() {
-        self.rootpath = (self.documentscatalog ?? "") + (self.configpath ?? "") + (self.macserialnumber ?? "")
+    var userHomeDirectoryPath: String? {
+        let pw = getpwuid(getuid())
+        if let home = pw?.pointee.pw_dir {
+            let homePath = FileManager.default.string(withFileSystemRepresentation: home, length: Int(strlen(home)))
+            return homePath
+        } else {
+            return nil
+        }
     }
 
+    func setrootpath() {
+        if ViewControllerReference.shared.usenewconfigpath == true {
+            self.fullroot = (self.userHomeDirectoryPath ?? "") + (self.configpath ?? "") + (self.macserialnumber ?? "")
+            self.fullrootnomacserial = (self.userHomeDirectoryPath ?? "") + (self.configpath ?? "")
+        } else {
+            self.fullroot = (self.documentscatalog ?? "") + (self.configpath ?? "") + (self.macserialnumber ?? "")
+            self.fullrootnomacserial = (self.documentscatalog ?? "") + (self.configpath ?? "")
+        }
+    }
+
+    // Set path and name for reading plist.files
     func setnameandpath() {
         let config = (self.configpath ?? "") + (self.macserialnumber ?? "")
         let plist = (self.plistname ?? "")
         if let profile = self.profile {
             // Use profile
-            let profilePath = CatalogProfile()
-            profilePath.createprofilecatalog()
-            self.filename = (self.documentscatalog ?? "") + config + "/" + profile + plist
+            if ViewControllerReference.shared.usenewconfigpath == true {
+                self.filename = (self.userHomeDirectoryPath ?? "") + config + "/" + profile + plist
+            } else {
+                self.filename = (self.documentscatalog ?? "") + config + "/" + profile + plist
+            }
             self.filepath = config + "/" + profile + "/"
         } else {
-            // no profile
-            let profilePath = CatalogProfile()
-            profilePath.createprofilecatalog()
-            self.filename = (self.documentscatalog ?? "") + config + plist
+            if ViewControllerReference.shared.usenewconfigpath == true {
+                self.filename = (self.userHomeDirectoryPath ?? "") + config + plist
+            } else {
+                self.filename = (self.documentscatalog ?? "") + config + plist
+            }
             self.filepath = config + "/"
         }
     }
@@ -79,28 +102,29 @@ class NamesandPaths {
     // Set preferences for which data to read or write
     func setpreferencesforreadingplist(whattoreadwrite: WhatToReadWrite) {
         self.whattoreadwrite = whattoreadwrite
-        switch self.whattoreadwrite! {
+        switch self.whattoreadwrite ?? .none {
         case .schedule:
-            self.plistname = "/scheduleRsync.plist"
-            self.key = "Schedule"
+            self.plistname = ViewControllerReference.shared.scheduleplist
+            self.key = ViewControllerReference.shared.schedulekey
         case .configuration:
-            self.plistname = "/configRsync.plist"
-            self.key = "Catalogs"
+            self.plistname = ViewControllerReference.shared.configurationsplist
+            self.key = ViewControllerReference.shared.configurationskey
         case .userconfig:
-            self.plistname = "/config.plist"
-            self.key = "config"
+            self.plistname = ViewControllerReference.shared.userconfigplist
+            self.key = ViewControllerReference.shared.userconfigkey
         case .none:
             self.plistname = nil
+            self.key = nil
         }
     }
 
-    init(configpath: String?) {
-        self.configpath = configpath
+    init() {
+        self.configpath = Configpath().configpath
         self.setrootpath()
     }
 
-    init(whattoreadwrite: WhatToReadWrite, profile: String?, configpath: String?) {
-        self.configpath = configpath
+    init(whattoreadwrite: WhatToReadWrite, profile: String?) {
+        self.configpath = Configpath().configpath
         self.profile = profile
         self.setpreferencesforreadingplist(whattoreadwrite: whattoreadwrite)
         self.setnameandpath()

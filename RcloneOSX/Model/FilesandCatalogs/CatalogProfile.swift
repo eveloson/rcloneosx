@@ -6,26 +6,25 @@
 //  Copyright © 2016 Thomas Evensen. All rights reserved.
 //
 
+import Files
 import Foundation
 
-final class CatalogProfile: Files {
+final class CatalogProfile: Catalogsandfiles {
     // Function for creating new profile directory
-    func createProfileDirectory(profileName: String) -> Bool {
-        let fileManager = FileManager.default
-        if let path = self.rootpath {
-            let profileDirectory = path + "/" + profileName
-            if fileManager.fileExists(atPath: profileDirectory) == false {
+    func createprofilecatalog(profile: String) -> Bool {
+        var rootpath: Folder?
+        if let path = self.fullroot {
+            do {
+                rootpath = try Folder(path: path)
                 do {
-                    try fileManager.createDirectory(atPath: profileDirectory,
-                                                    withIntermediateDirectories: true,
-                                                    attributes: nil)
+                    try rootpath?.createSubfolder(at: profile)
                     return true
                 } catch let e {
                     let error = e as NSError
-                    self.fileerror(error: error.description, errortype: .profilecreatedirectory)
+                    self.error(error: error.description, errortype: .profiledeletedirectory)
                     return false
                 }
-            } else {
+            } catch {
                 return false
             }
         }
@@ -35,7 +34,7 @@ final class CatalogProfile: Files {
     // Function for deleting profile
     func deleteProfileDirectory(profileName: String) {
         let fileManager = FileManager.default
-        if let path = self.rootpath {
+        if let path = self.fullroot {
             let profileDirectory = path + "/" + profileName
             if fileManager.fileExists(atPath: profileDirectory) == true {
                 let answer = Alerts.dialogOKCancel("Delete profile: " + profileName + "?", text: "Cancel or OK")
@@ -44,14 +43,14 @@ final class CatalogProfile: Files {
                         try fileManager.removeItem(atPath: profileDirectory)
                     } catch let e {
                         let error = e as NSError
-                        self.fileerror(error: error.description, errortype: .profiledeletedirectory)
+                        self.error(error: error.description, errortype: .profiledeletedirectory)
                     }
                 }
             }
         }
     }
 
-    init() {
-        super.init(configpath: ViewControllerReference.shared.configpath)
+    override init() {
+        super.init()
     }
 }

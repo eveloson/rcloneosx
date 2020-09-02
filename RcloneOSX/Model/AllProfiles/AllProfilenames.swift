@@ -12,10 +12,10 @@ class AllProfilenames {
     var allprofiles: [String]?
 
     private func getprofilenames() {
-        let profile = Files(configpath: ViewControllerReference.shared.configpath)
+        let profile = Catalogsandfiles()
         self.allprofiles = profile.getcatalogsasstringnames()
         guard self.allprofiles != nil else { return }
-        self.allprofiles!.append("Default profile")
+        self.allprofiles?.append("Default profile")
     }
 
     init() {

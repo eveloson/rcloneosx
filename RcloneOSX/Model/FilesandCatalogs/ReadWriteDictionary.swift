@@ -16,15 +16,13 @@ import Foundation
 class ReadWriteDictionary: NamesandPaths {
     // Function for reading data from persistent store
     func readNSDictionaryFromPersistentStore() -> [NSDictionary]? {
-        var data = [NSDictionary]()
-        guard self.filename != nil, self.key != nil else { return nil }
-        let dictionary = NSDictionary(contentsOfFile: self.filename!)
-        let items: Any? = dictionary?.object(forKey: self.key!)
-        guard items != nil else { return nil }
-        if let arrayofitems = items as? NSArray {
-            for i in 0 ..< arrayofitems.count {
-                if let item = arrayofitems[i] as? NSDictionary {
-                    data.append(item)
+        var data: [NSDictionary]?
+        let dictionary = NSDictionary(contentsOfFile: self.filename ?? "")
+        if let items = dictionary?.object(forKey: self.key ?? "") as? NSArray {
+            data = [NSDictionary]()
+            for i in 0 ..< items.count {
+                if let item = items[i] as? NSDictionary {
+                    data?.append(item)
                 }
             }
         }
@@ -33,12 +31,12 @@ class ReadWriteDictionary: NamesandPaths {
 
     // Function for write data to persistent store
     func writeNSDictionaryToPersistentStorage(array: [NSDictionary]) -> Bool {
-        let dictionary = NSDictionary(object: array, forKey: self.key! as NSCopying)
-        guard self.filename != nil else { return false }
-        return dictionary.write(toFile: self.filename!, atomically: true)
+        let dictionary = NSDictionary(object: array, forKey: (self.key ?? "") as NSCopying)
+        let write = dictionary.write(toFile: self.filename ?? "", atomically: true)
+        return write
     }
 
-    init(whattoreadwrite: WhatToReadWrite, profile: String?, configpath: String) {
-        super.init(whattoreadwrite: whattoreadwrite, profile: profile, configpath: configpath)
+    override init(whattoreadwrite: WhatToReadWrite, profile: String?) {
+        super.init(whattoreadwrite: whattoreadwrite, profile: profile)
     }
 }

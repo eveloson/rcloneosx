@@ -59,6 +59,16 @@ class ViewControllerReference {
     var usrbinrclone: String = "/usr/bin/rclone"
     var usrlocalbinrclone: String = "/usr/local/bin/rclone"
     var configpath: String = "/Rclone/"
+    // New RcloneOSX config files and path
+    var newconfigpath: String = "/.rcloneosx/"
+    var usenewconfigpath: Bool = true
+    // Plistnames and key
+    var scheduleplist: String = "/scheduleRsync.plist"
+    var schedulekey: String = "Schedule"
+    var configurationsplist: String = "/configRsync.plist"
+    var configurationskey: String = "Catalogs"
+    var userconfigplist: String = "/config.plist"
+    var userconfigkey: String = "config"
     // String commands
     var sync: String = "sync"
     var move: String = "move"
