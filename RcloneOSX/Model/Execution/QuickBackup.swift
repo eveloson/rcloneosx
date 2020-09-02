@@ -43,7 +43,7 @@ final class QuickBackup: SetConfigurations {
     }
 
     private func executetask(hiddenID: Int) {
-        let now: Date = Date()
+        let now = Date()
         let dateformatter = Dateandtime().setDateformat()
         let task: NSDictionary = [
             "start": now,

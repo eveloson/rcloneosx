@@ -17,7 +17,7 @@ public struct Alerts {
     }
 
     public static func dialogOKCancel(_ question: String, text: String) -> Bool {
-        let myPopup: NSAlert = NSAlert()
+        let myPopup = NSAlert()
         myPopup.messageText = question
         myPopup.informativeText = text
         myPopup.alertStyle = NSAlert.Style.warning

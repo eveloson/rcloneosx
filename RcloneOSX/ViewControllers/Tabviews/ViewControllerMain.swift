@@ -195,6 +195,11 @@ class ViewControllerMain: NSViewController, ReloadTable, Deselect, VcMain, Error
         self.executetasknow = ExecuteTaskNow(index: self.index!)
     }
 
+    @IBAction func moveconfig(_: NSButton) {
+        guard ViewControllerReference.shared.usenewconfigpath == false else { return }
+        self.presentAsModalWindow(self.viewControllerMove!)
+    }
+
     // Function for display rclone command
     // Either --dry-run or real run
     @IBOutlet var displaysynccommand: NSButton!
