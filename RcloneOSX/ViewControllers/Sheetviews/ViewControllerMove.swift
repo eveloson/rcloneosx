@@ -36,10 +36,14 @@ class ViewControllerMove: NSViewController {
     }
 
     @IBAction func preparemoveconfigfiles(_: NSButton) {
-        self.move?.createnewprofilecatalogs()
-        if self.move?.verifycatalogsnewprofiles() ?? false {
-            self.moveconfigfilesbutton.isEnabled = true
+        if self.move?.backupbeforemove() ?? false {
+            self.move?.createnewprofilecatalogs()
+            if self.move?.verifycatalogsnewprofiles() ?? false {
+                self.moveconfigfilesbutton.isEnabled = true
+            }
+        } else {
             self.preparebutton.isEnabled = false
+            self.moveconfigfilesbutton.isEnabled = false
         }
     }
 
