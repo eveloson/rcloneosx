@@ -71,3 +71,15 @@ struct Dateandtime {
         return dateformatter
     }
 }
+
+extension Date {
+    func shortlocalized_string_from_date() -> String {
+        // MM-dd-yyyy HH:mm
+        let dateformatter = DateFormatter()
+        dateformatter.formatterBehavior = .behavior10_4
+        dateformatter.dateStyle = .medium
+        dateformatter.timeStyle = .short
+        dateformatter.dateFormat = "MM-dd-yyyy:HH:mm"
+        return dateformatter.string(from: self)
+    }
+}
