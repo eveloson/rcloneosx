@@ -2,7 +2,7 @@
 
 ![](icon/rcloneosx.png) [The Changelog.](https://rsyncosx.netlify.app/post/rclonechangelog/)
 
-[![GitHub license](https://img.shields.io/github/license/rsyncOSX/rcloneosx)](https://github.com/rsyncOSX/rcloneosx/blob/master/Licence.MD) ![GitHub Releases](https://img.shields.io/github/downloads/rsyncosx/rcloneosx/v2.2.1/total) ![GitHub Releases](https://img.shields.io/github/downloads/rsyncosx/rcloneosx/v2.2.0/total) [![GitHub issues](https://img.shields.io/github/issues/rsyncOSX/rcloneosx)](https://github.com/rsyncOSX/rcloneosx/issues)
+[![GitHub license](https://img.shields.io/github/license/rsyncOSX/rcloneosx)](https://github.com/rsyncOSX/rcloneosx/blob/master/Licence.MD) ![GitHub Releases](https://img.shields.io/github/downloads/rsyncosx/rcloneosx/v2.2.5/total) ![GitHub Releases](https://img.shields.io/github/downloads/rsyncosx/rcloneosx/v2.2.1/total) [![GitHub issues](https://img.shields.io/github/issues/rsyncOSX/rcloneosx)](https://github.com/rsyncOSX/rcloneosx/issues)
 
 For the moment there is <b>no active development</b> of RcloneOSX. I will continue to compile RcloneOSX for new versions of macOS and fix serious bugs. My main effort in the future is to continue development of [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) and [RsyncGUI](https://github.com/rsyncOSX/RsyncGUI).
 
