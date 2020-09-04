@@ -3,22 +3,24 @@
 <plist version="1.0">
 <dict>
 	<key>2.0.0</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.1/rcloneosx.2.2.1.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.5/rcloneosx.2.2.5.dmg</string>
 	<key>2.0.1</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.1/rcloneosx.2.2.1.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.5/rcloneosx.2.2.5.dmg</string>
 	<key>2.0.5</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.1/rcloneosx.2.2.1.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.5/rcloneosx.2.2.5.dmg</string>
 	<key>2.0.6</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.1/rcloneosx.2.2.1.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.5/rcloneosx.2.2.5.dmg</string>
 	<key>2.1.0</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.1/rcloneosx.2.2.1.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.5/rcloneosx.2.2.5.dmg</string>
 	<key>2.1.1</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.1/rcloneosx.2.2.1.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.5/rcloneosx.2.2.5.dmg</string>
 	<key>2.1.5</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.1/rcloneosx.2.2.1.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.5/rcloneosx.2.2.5.dmg</string>
 	<key>2.1.9</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.1/rcloneosx.2.2.1.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.5/rcloneosx.2.2.5.dmg</string>
 	<key>2.2.0</key>
-	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.1/rcloneosx.2.2.1.dmg</string>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.5/rcloneosx.2.2.5.dmg</string>
+	<key>2.2.1</key>
+	<string>https://github.com/rsyncOSX/rcloneosx/releases/download/v2.2.5/rcloneosx.2.2.5.dmg</string>
 </dict>
 </plist>
