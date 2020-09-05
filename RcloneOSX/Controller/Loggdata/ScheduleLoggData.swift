@@ -21,13 +21,14 @@ enum Sortandfilter {
     case backupid
     case numberofdays
     case executedate
+    case none
 }
 
 final class ScheduleLoggData: SetConfigurations, SetSchedules, Sorting {
     var loggdata: [NSMutableDictionary]?
     private var scheduleConfiguration: [ConfigurationSchedule]?
 
-    func myownfilter(search: String?, filterby: Sortandfilter?) {
+    func filter(search: String?, filterby: Sortandfilter?) {
         guard search != nil, self.loggdata != nil, filterby != nil else { return }
         globalDefaultQueue.async { () -> Void in
             let valueforkey = self.filterbystring(filterby: filterby!)
@@ -37,7 +38,7 @@ final class ScheduleLoggData: SetConfigurations, SetSchedules, Sorting {
         }
     }
 
-    private func readAndSortAllLoggdata(hiddenID: Int?, sortascending: Bool) {
+    private func readandsortallloggdata(hiddenID: Int?, sortascending: Bool) {
         var data = [NSMutableDictionary]()
         if let input: [ConfigurationSchedule] = self.schedules?.getSchedule() {
             for i in 0 ..< input.count {
@@ -46,10 +47,10 @@ final class ScheduleLoggData: SetConfigurations, SetSchedules, Sorting {
                         let dict = input[i].logrecords[j]
                         let date = dict.value(forKey: "dateExecuted") as? String ?? ""
                         let logdetail: NSMutableDictionary = [
-                            "localCatalog": self.configurations!.getResourceConfiguration(hiddenID: hiddenID, resource: .localCatalog),
-                            "offsiteServer": self.configurations!.getResourceConfiguration(hiddenID: hiddenID, resource: .offsiteServer),
-                            "task": self.configurations!.getResourceConfiguration(hiddenID: hiddenID, resource: .task),
-                            "backupID": self.configurations!.getResourceConfiguration(hiddenID: hiddenID, resource: .backupid),
+                            "localCatalog": self.configurations?.getResourceConfiguration(hiddenID: hiddenID, resource: .localCatalog) ?? "",
+                            "offsiteServer": self.configurations?.getResourceConfiguration(hiddenID: hiddenID, resource: .offsiteServer) ?? "",
+                            "task": self.configurations?.getResourceConfiguration(hiddenID: hiddenID, resource: .task) ?? "",
+                            "backupID": self.configurations?.getResourceConfiguration(hiddenID: hiddenID, resource: .backupid) ?? "",
                             "dateExecuted": date,
                             "resultExecuted": dict.value(forKey: "resultExecuted") as? String ?? "",
                             "deleteCellID": dict.value(forKey: "deleteCellID") as? Int ?? 0,
@@ -97,13 +98,13 @@ final class ScheduleLoggData: SetConfigurations, SetSchedules, Sorting {
 
     init(sortascending: Bool) {
         if self.loggdata == nil {
-            self.readAndSortAllLoggdata(hiddenID: nil, sortascending: sortascending)
+            self.readandsortallloggdata(hiddenID: nil, sortascending: sortascending)
         }
     }
 
     init(hiddenID: Int, sortascending: Bool) {
         if self.loggdata == nil {
-            self.readAndSortAllLoggdata(hiddenID: hiddenID, sortascending: sortascending)
+            self.readandsortallloggdata(hiddenID: hiddenID, sortascending: sortascending)
         }
     }
 
