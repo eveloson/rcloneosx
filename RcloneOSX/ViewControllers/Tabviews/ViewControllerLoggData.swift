@@ -17,7 +17,7 @@ protocol ReadLoggdata: AnyObject {
 
 class ViewControllerLoggData: NSViewController, SetConfigurations, SetSchedules, Delay, Index, SetDismisser, VcMain, Abort, Checkforrclone {
     private var scheduleloggdata: ScheduleLoggData?
-    private var row: NSDictionary?
+    // private var row: NSDictionary?
     private var filterby: Sortandfilter?
     private var index: Int?
     private var sortedascending: Bool = true
@@ -184,7 +184,7 @@ extension ViewControllerLoggData: NSSearchFieldDelegate {
             if filterstring.isEmpty {
                 self.reloadtabledata()
             } else {
-                self.scheduleloggdata!.myownfilter(search: filterstring, filterby: self.filterby)
+                self.scheduleloggdata!.filter(search: filterstring, filterby: self.filterby)
                 globalMainQueue.async { () -> Void in
                     self.scheduletable.reloadData()
                 }
@@ -231,7 +231,6 @@ extension ViewControllerLoggData: NSTableViewDelegate {
         let indexes = myTableViewFromNotification.selectedRowIndexes
         if let index = indexes.first {
             self.index = index
-            self.row = self.scheduleloggdata?.loggdata![self.index!]
         }
         let column = myTableViewFromNotification.selectedColumn
         var sortbystring = true
@@ -251,9 +250,9 @@ extension ViewControllerLoggData: NSTableViewDelegate {
             return
         }
         if sortbystring {
-            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbystring(notsortedlist: self.scheduleloggdata?.loggdata, sortby: self.filterby!, sortdirection: self.sortedascending)
+            self.scheduleloggdata?.loggdata = self.scheduleloggdata?.sortbystring(notsortedlist: self.scheduleloggdata?.loggdata, sortby: self.filterby, sortdirection: self.sortedascending)
         } else {
-            self.scheduleloggdata?.loggdata = self.scheduleloggdata!.sortbydate(notsortedlist: self.scheduleloggdata?.loggdata, sortdirection: self.sortedascending)
+            self.scheduleloggdata?.loggdata = self.scheduleloggdata?.sortbydate(notsortedlist: self.scheduleloggdata?.loggdata, sortdirection: self.sortedascending)
         }
         globalMainQueue.async { () -> Void in
             self.scheduletable.reloadData()
