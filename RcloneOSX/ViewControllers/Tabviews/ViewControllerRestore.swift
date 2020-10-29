@@ -149,7 +149,7 @@ class ViewControllerRestore: NSViewController, SetConfigurations, Delay, VcMain,
             }
         case .off:
             guard self.remotesource.stringValue.isEmpty == false,
-                self.restorepath.stringValue.isEmpty == false
+                  self.restorepath.stringValue.isEmpty == false
             else {
                 self.info(num: 2)
                 return
