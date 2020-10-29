@@ -7,7 +7,7 @@
 
 import Cocoa
 
-public struct Alerts {
+public enum Alerts {
     public static func showInfo(_ info: String) {
         let alert = NSAlert()
         alert.messageText = info

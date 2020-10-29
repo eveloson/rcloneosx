@@ -29,7 +29,7 @@ enum ViewController {
 class ViewControllerReference {
     // Creates a singelton of this class
     class var shared: ViewControllerReference {
-        struct Singleton {
+        enum Singleton {
             static let instance = ViewControllerReference()
         }
         return Singleton.instance

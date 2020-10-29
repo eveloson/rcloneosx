@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E84EB33624B47FDC000493AD /* InterruptProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84EB33524B47FDC000493AD /* InterruptProcess.swift */; };
+		E8A5B78D254AA62500585320 /* Files in Frameworks */ = {isa = PBXBuildFile; productRef = E8A5B78C254AA62500585320 /* Files */; };
 		E8B9506A23183D5E00C743D5 /* Restorefiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B9506823183D5D00C743D5 /* Restorefiles.swift */; };
 		E8B9506B23183D5E00C743D5 /* RestorefilesArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B9506923183D5D00C743D5 /* RestorefilesArguments.swift */; };
 		E905FE64209836C60008450C /* RcloneSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E905FE63209836C60008450C /* RcloneSize.swift */; };
@@ -34,7 +35,6 @@
 		E9338716230E9C0F00FE1B50 /* ExecuteTaskNow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9338715230E9C0F00FE1B50 /* ExecuteTaskNow.swift */; };
 		E93A8CA420C3BD9B00DFA836 /* extensionsVCMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A8CA320C3BD9B00DFA836 /* extensionsVCMain.swift */; };
 		E93D9E0923695B7A007074D1 /* ArgumentsRestoreSinglefiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93D9E0823695B7A007074D1 /* ArgumentsRestoreSinglefiles.swift */; };
-		E9486B3D24D1C25800A27C3F /* Files in Frameworks */ = {isa = PBXBuildFile; productRef = E9486B3C24D1C25800A27C3F /* Files */; };
 		E954F7D51FF411A6003DF6C0 /* RcloneVersionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954F7D41FF411A6003DF6C0 /* RcloneVersionString.swift */; };
 		E95E8211222813C6000DF831 /* PersistentStorageAllprofilesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E8210222813C6000DF831 /* PersistentStorageAllprofilesAPI.swift */; };
 		E960CB041FB091DE0008D12E /* OutputProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = E960CAB61FB091D30008D12E /* OutputProcess.swift */; };
@@ -232,7 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9486B3D24D1C25800A27C3F /* Files in Frameworks */,
+				E8A5B78D254AA62500585320 /* Files in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,7 +623,7 @@
 			);
 			name = rcloneosx;
 			packageProductDependencies = (
-				E9486B3C24D1C25800A27C3F /* Files */,
+				E8A5B78C254AA62500585320 /* Files */,
 			);
 			productName = rcloneosx;
 			productReference = E99AA37F1FAFA28900C1E86A /* rcloneosx.app */;
@@ -684,7 +684,7 @@
 			);
 			mainGroup = E99AA3761FAFA28900C1E86A;
 			packageReferences = (
-				E9486B3B24D1C25800A27C3F /* XCRemoteSwiftPackageReference "Files" */,
+				E8A5B78B254AA62500585320 /* XCRemoteSwiftPackageReference "Files" */,
 			);
 			productRefGroup = E99AA3801FAFA28900C1E86A /* Products */;
 			projectDirPath = "";
@@ -1109,20 +1109,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E9486B3B24D1C25800A27C3F /* XCRemoteSwiftPackageReference "Files" */ = {
+		E8A5B78B254AA62500585320 /* XCRemoteSwiftPackageReference "Files" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rsyncOSX/Files";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.1.1;
+				minimumVersion = 4.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E9486B3C24D1C25800A27C3F /* Files */ = {
+		E8A5B78C254AA62500585320 /* Files */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E9486B3B24D1C25800A27C3F /* XCRemoteSwiftPackageReference "Files" */;
+			package = E8A5B78B254AA62500585320 /* XCRemoteSwiftPackageReference "Files" */;
 			productName = Files;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -75,7 +75,7 @@ class RcloneParameters {
         self.offsiteCatalog = config.offsiteCatalog
         self.offsiteServer = config.offsiteServer
         if let offsiteServer = self.offsiteServer,
-            let offsiteCatalog = self.offsiteCatalog
+           let offsiteCatalog = self.offsiteCatalog
         {
             if offsiteServer.isEmpty == false {
                 if config.localCatalog.isEmpty == true {
