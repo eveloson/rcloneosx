@@ -1,10 +1,8 @@
 ## RcloneOSX
 
-![](icon/rcloneosx.png) [The Changelog.](https://rsyncosx.netlify.app/post/rclonechangelog/)
+![](icon/rcloneosx.png)
 
-[![GitHub license](https://img.shields.io/github/license/rsyncOSX/rcloneosx)](https://github.com/rsyncOSX/rcloneosx/blob/master/Licence.MD) ![GitHub Releases](https://img.shields.io/github/downloads/rsyncosx/rcloneosx/v2.2.5/total) ![GitHub Releases](https://img.shields.io/github/downloads/rsyncosx/rcloneosx/v2.2.1/total) [![GitHub issues](https://img.shields.io/github/issues/rsyncOSX/rcloneosx)](https://github.com/rsyncOSX/rcloneosx/issues)
-
-For the moment there is <b>no active development</b> of RcloneOSX. I will continue to compile RcloneOSX for new versions of macOS and fix serious bugs. My main effort in the future is to continue development of [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) and [RsyncGUI](https://github.com/rsyncOSX/RsyncGUI).
+This project is **archived** and there will be no further development of RcloneOSX.
 
 The project is a adapting [RsyncOSX](https://github.com/rsyncOSX/RsyncOSX) utilizing [rclone](https://rclone.org/) for **synchronizing** and **backup** of files to a number of cloud services. RcloneOSX utilizes `rclone copy`, `sync`, `move` and `check` commands.
 
